@@ -1,11 +1,11 @@
-import type { LocalLoginDto, LocalLoginRequest } from '../api';
+import type { LocalLoginRequest, LocalLoginResponse } from '../api';
 import type { SnuttApi } from '../api/apis/api';
 import type { RepositoryResponse } from '../entities/response';
 
 export type AuthRepository = {
   signInWithIdPassword(
     args: LocalLoginRequest,
-  ): RepositoryResponse<LocalLoginDto>;
+  ): RepositoryResponse<LocalLoginResponse>;
 };
 
 export const impleAuthRepository = ({

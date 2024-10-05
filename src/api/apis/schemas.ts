@@ -7,18 +7,18 @@ export type LocalLoginRequest = {
 };
 
 // Response
-export type LocalLoginDto = {
+export type LocalLoginResponse = {
   user_id: string;
   token: string;
   message: string;
 };
 
-type NicknameDto = {
+type NicknameResponse = {
   nickname: string;
   tag: string;
 };
 
-export type UserDto = {
+export type UserResponse = {
   id: string;
   isAdmin: boolean;
   regDate: DateTime;
@@ -26,5 +26,5 @@ export type UserDto = {
   email?: string;
   localId: string;
   fbName?: string;
-  nickname: NicknameDto;
+  nickname: NicknameResponse;
 };

@@ -1,6 +1,6 @@
 // status와 data는 모든 응답에서 반복되므로
 // 따로 정의 후 extend를 사용하여 재사용
-// dto는 data 안에 삽입
+// response는 data 안에 삽입
 
 export type ResponseNecessary = {
   status: number;

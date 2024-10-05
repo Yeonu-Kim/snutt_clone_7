@@ -1,9 +1,9 @@
-import type { UserDto } from '../api';
+import type { UserResponse } from '../api';
 import type { SnuttApi } from '../api/apis/api';
 import type { RepositoryResponse } from '../entities/response';
 
 export type UserRepository = {
-  getUserInfo(_: { token: string }): RepositoryResponse<UserDto>;
+  getUserInfo(_: { token: string }): RepositoryResponse<UserResponse>;
 };
 
 export const impleUserRepository = ({
