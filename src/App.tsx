@@ -1,4 +1,5 @@
 import './reset.css';
+import './index.css';
 
 import type { CallParams } from './api';
 import { impleSnuttApi } from './api';
