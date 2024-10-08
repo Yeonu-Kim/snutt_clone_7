@@ -17,6 +17,13 @@ export const LandingLogin = () => {
       saveToken(response.data.token);
     } else alert(response.message);
   };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && id !== '' && password !== '') {
+      onClickButton().catch(() => {
+        console.error('error');
+      });
+    }
+  };
   return (
     <div className="LoginWrapper flex flex-col items-center min-h-screen px-4 sm:px-6 lg:px:8">
       <div className="LoginHeaderWrapper flex items-center justify-between w-full mt-4 pb-6">
@@ -36,6 +43,7 @@ export const LandingLogin = () => {
             onChange={(e) => {
               setId(e.target.value);
             }}
+            onKeyDown={handleKeyDown}
             placeholder="아이디를 입력하세요"
             className="p-3 border-b-2 border-gray-300 focus:outline-none focus:border-orange"
           />
@@ -51,6 +59,7 @@ export const LandingLogin = () => {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
+            onKeyDown={handleKeyDown}
             placeholder="비밀번호를 입력하세요"
             className="p-3 border-b-2 border-gray-300 focus:outline-none focus:border-orange"
           />
