@@ -1,56 +1,73 @@
 import { useState } from 'react';
 
-import { ServiceContext } from '../../context/ServiceContext';
-import { useGaurdContext } from '../../hooks/useGaurdContext';
+import { Login } from './landing-login';
 
 export const Landing = () => {
-  // 로그인 목업
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-
-  const { authService } = useGaurdContext(ServiceContext);
-
-  const onClickButton = async () => {
-    const response = await authService.signIn({ id, password });
-    if (response.type === 'success')
-      alert(`로그인 성공! 토큰은 ${response.data.token}입니다.`);
-    else alert(response.message);
-  };
+  const [mode, setMode] = useState<'LOGIN' | 'SIGNUP'>('LOGIN');
 
   return (
-    <div>
-      <h1>Login</h1>
-      <div>
-        <label htmlFor="id">ID:</label>
-        <input
-          type="text"
-          id="id"
-          value={id}
-          onChange={(e) => {
-            setId(e.target.value);
-          }}
-        />
+    <div
+      className="p-[100px]"
+      onClick={() => {
+        setMode('SIGNUP');
+      }}
+    >
+      <div id="container" className="relative w-[375px] h-[800px] bg-white">
+        <div
+          id="status-line"
+          className="w-full h-11 bg-white flex items-center font-semibold pl-5"
+        >
+          9:41 AM
+        </div>
+        <div
+          id="wrapper-feature"
+          className="mt-[232px] mb-[90px] w-full h-[434px] bg-white flex flex-col items-center"
+        >
+          <img
+            id="image-TimeTable"
+            src={`/TimeTable.png`}
+            className="w-[108px] h-[101px] mb-[136px]"
+          ></img>
+          <div
+            id="wrapper-button"
+            className="w-[311px] h-[72px] mb-[40px] gap-[15px] flex flex-col justify-center items-center"
+          >
+            <button
+              id="login"
+              className="w-[311px] h-[41px] bg-[#F58D3D] text-white"
+            >
+              로그인
+            </button>
+            <button id="signup" className="w-[311px] h-[17px]">
+              회원가입
+            </button>
+          </div>
+          <div
+            id="wrapper-SNS"
+            className="w-full h-[85px] flex flex-col justify-center items-center gap-[24px]"
+          >
+            <p>SNS 계정으로 계속하기</p>
+            <div
+              id="SNS-icon"
+              className="h-[44px] gap-[12px] flex justify-center"
+            >
+              <img src="/kakaotalkid.png" alt="kakaotalk" />
+              <img src="/googleid.png" alt="google" />
+              <img src="/facebookid.png" alt="facebook" />
+              <img src="/appleid.png" alt="apple" />
+            </div>
+          </div>
+        </div>
       </div>
+
       <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
+        {
+          {
+            LOGIN: <Login />,
+            SIGNUP: <div></div>,
+          }[mode]
+        }
       </div>
-      <button
-        onClick={() => {
-          onClickButton().catch(() => {
-            console.error('error');
-          });
-        }}
-      >
-        Submit
-      </button>
     </div>
   );
 };
