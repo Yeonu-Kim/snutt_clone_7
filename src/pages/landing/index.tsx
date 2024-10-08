@@ -26,6 +26,7 @@ export const Landing = () => {
           <img
             id="image-TimeTable"
             src={`/TimeTable.png`}
+            alt="timetable"
             className="w-[108px] h-[101px] mb-[136px]"
           ></img>
           <div
