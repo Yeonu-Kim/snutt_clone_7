@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
 import { ServiceContext } from '../../context/ServiceContext';
-import { useGaurdContext } from '../../hooks/useGaurdContext';
+import { useGuardContext } from '../../hooks/useGuardContext';
 
 export const Landing = () => {
   // 로그인 목업
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
-  const { authService } = useGaurdContext(ServiceContext);
+  const { authService } = useGuardContext(ServiceContext);
 
   const onClickButton = async () => {
     const response = await authService.signIn({ id, password });

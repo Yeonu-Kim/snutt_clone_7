@@ -5,17 +5,16 @@ import type { CallParams } from './api';
 import { impleSnuttApi } from './api';
 import { EnvContext } from './context/EnvContext';
 import { ServiceContext } from './context/ServiceContext';
-import { useGaurdContext } from './hooks/useGaurdContext';
+import { useGuardContext } from './hooks/useGuardContext';
 import { impleAuthRepository } from './infrastructure/impleAuthRepository';
 import { impleUserRepository } from './infrastructure/impleUserRepository';
-import { Landing } from './pages/landing';
 import { LandingLogin } from './pages/landing/landing-login';
 import { getAuthService } from './usecases/authServices';
 import { getUserService } from './usecases/userService';
 
 export const App = () => {
   // .env 파일 내역 불러오기
-  const ENV = useGaurdContext(EnvContext);
+  const ENV = useGuardContext(EnvContext);
 
   const call = async (content: CallParams) => {
     const response = await fetch(`${ENV.API_BASE_URL}/${content.path}`, {
@@ -54,7 +53,6 @@ export const App = () => {
 
   return (
     <ServiceContext.Provider value={services}>
-      <Landing />
       <LandingLogin />
     </ServiceContext.Provider>
   );
