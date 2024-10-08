@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 
 import { App } from './App';
 import { EnvContext } from './context/EnvContext';
-
 const root = document.getElementById('root');
 
 if (root === null) throw new Error('Root element not found');

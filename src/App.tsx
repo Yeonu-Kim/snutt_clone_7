@@ -1,4 +1,5 @@
 import './reset.css';
+import './index.css';
 
 import type { CallParams } from './api';
 import { impleSnuttApi } from './api';
@@ -8,6 +9,7 @@ import { useGaurdContext } from './hooks/useGaurdContext';
 import { impleAuthRepository } from './infrastructure/impleAuthRepository';
 import { impleUserRepository } from './infrastructure/impleUserRepository';
 import { Landing } from './pages/landing';
+import { LandingLogin } from './pages/landing/landing-login';
 import { getAuthService } from './usecases/authServices';
 import { getUserService } from './usecases/userService';
 
@@ -53,6 +55,7 @@ export const App = () => {
   return (
     <ServiceContext.Provider value={services}>
       <Landing />
+      <LandingLogin />
     </ServiceContext.Provider>
   );
 };
