@@ -1,15 +1,21 @@
 import './reset.css';
 import './index.css';
 
+import { useState } from 'react';
+
 import type { CallParams } from './api';
 import { impleSnuttApi } from './api';
 import { EnvContext } from './context/EnvContext';
 import { ServiceContext } from './context/ServiceContext';
+import { TokenManageContext } from './context/TokenManageContext';
 import { useGuardContext } from './hooks/useGuardContext';
 import { impleAuthRepository } from './infrastructure/impleAuthRepository';
+import { implTokenSessionStorageRepository } from './infrastructure/impleStorageRepository';
 import { impleUserRepository } from './infrastructure/impleUserRepository';
+import { Landing } from './pages/landing';
 import { LandingLogin } from './pages/landing/landing-login';
 import { getAuthService } from './usecases/authServices';
+import { getTokenService } from './usecases/tokenService';
 import { getUserService } from './usecases/userService';
 
 export const App = () => {
@@ -45,15 +51,32 @@ export const App = () => {
 
   const authService = getAuthService({ authRepository });
   const userService = getUserService({ userRepository });
-
+  const tokenService = getTokenService({
+    temporaryStorageRepository: implTokenSessionStorageRepository(),
+  });
   const services = {
     authService,
     userService,
+    tokenService,
+  };
+
+  const [token, setToken] = useState(tokenService.getToken());
+  const tokenContextValue = {
+    saveToken: (newToken: string) => {
+      setToken(newToken);
+      tokenService.saveToken(newToken);
+    },
+    clearToken: () => {
+      setToken(null);
+      tokenService.clearToken();
+    },
   };
 
   return (
     <ServiceContext.Provider value={services}>
-      <LandingLogin />
+      <TokenManageContext.Provider value={tokenContextValue}>
+        {token !== null ? <Landing /> : <LandingLogin />}
+      </TokenManageContext.Provider>
     </ServiceContext.Provider>
   );
 };

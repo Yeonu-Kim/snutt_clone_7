@@ -1,18 +1,21 @@
 import { useState } from 'react';
 
 import { ServiceContext } from '../../../context/ServiceContext';
+import { TokenManageContext } from '../../../context/TokenManageContext';
 import { useGuardContext } from '../../../hooks/useGuardContext';
 
 export const LandingLogin = () => {
+  const { saveToken } = useGuardContext(TokenManageContext);
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const { authService } = useGuardContext(ServiceContext);
   const onClickButton = async () => {
     const response = await authService.signIn({ id, password });
-    if (response.type === 'success')
+    if (response.type === 'success') {
       alert(`로그인 성공! 토큰은 ${response.data.token}입니다.`);
-    else alert(response.message);
+      saveToken(response.data.token);
+    } else alert(response.message);
   };
   return (
     <div className="LoginWrapper flex flex-col items-center min-h-screen px-4 sm:px-6 lg:px:8">
@@ -61,7 +64,7 @@ export const LandingLogin = () => {
           </a>
         </div>
         <button
-          className={`LoginButton rounded-md w-full h-[41px] ${id !== '' && password !== '' ? 'bg-orange text-white' : 'bg-gray-100'}`}
+          className={`LoginButton rounded-md w-full h-[41px] ${id !== '' && password !== '' ? 'bg-orange text-white cursor-pointer hover:800' : 'bg-gray-100 cursor-not-allowed'}`}
           onClick={() => {
             onClickButton().catch(() => {
               console.error('error');
