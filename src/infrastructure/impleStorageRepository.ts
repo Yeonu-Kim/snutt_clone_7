@@ -2,7 +2,6 @@ import { type getTokenService } from '../usecases/tokenService';
 
 const storageKey = {
   snuttToken: 'snutt_token',
-  timetableDisplayMode: 'timetable_display_mode',
 };
 
 type GetTokenServiceParams = Parameters<typeof getTokenService>[0];

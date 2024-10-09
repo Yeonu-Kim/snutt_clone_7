@@ -7,6 +7,7 @@ import type { CallParams } from './api';
 import { impleSnuttApi } from './api';
 import { EnvContext } from './context/EnvContext';
 import { ServiceContext } from './context/ServiceContext';
+import { TokenManageContext } from './context/TokenManageContext';
 import { useGuardContext } from './hooks/useGuardContext';
 import { impleAuthRepository } from './infrastructure/impleAuthRepository';
 import { implTokenSessionStorageRepository } from './infrastructure/impleStorageRepository';
@@ -75,18 +76,21 @@ export const App = () => {
 
   const authService = getAuthService({ authRepository });
   const userService = getUserService({ userRepository });
-  const tokenService = getTokenService({
-    temporaryStorageRepository: implTokenSessionStorageRepository(),
-  });
+
   const services = {
     authService,
     userService,
-    tokenService,
   };
+
+  // 토큰과 관련된 context는 따로 저장
+  const temporaryStorageRepository = implTokenSessionStorageRepository();
+  const tokenService = getTokenService({ temporaryStorageRepository });
 
   return (
     <ServiceContext.Provider value={services}>
-      <RouterProvider router={router} />
+      <TokenManageContext.Provider value={tokenService}>
+        <RouterProvider router={router} />
+      </TokenManageContext.Provider>
     </ServiceContext.Provider>
   );
 };

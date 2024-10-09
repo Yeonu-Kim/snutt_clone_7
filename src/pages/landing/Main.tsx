@@ -1,6 +1,10 @@
+import { TokenManageContext } from '../../context/TokenManageContext';
+import { useGuardContext } from '../../hooks/useGuardContext';
 export const Main = () => {
+  const { saveToken } = useGuardContext(TokenManageContext);
+
   const contaminateToken = () => {
-    localStorage.setItem('token', 'xxx');
+    saveToken('xxx');
   };
 
   return (
