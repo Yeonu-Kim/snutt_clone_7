@@ -1,10 +1,10 @@
-export type TokenService = {
+type TokenService = {
   getToken(): string | null;
   saveToken(token: string): void;
   clearToken(): void;
 };
 
-export type TokenRepository = {
+type TokenRepository = {
   getToken: () => string | null;
   saveToken: (token: string) => void;
   clearToken: () => void;
