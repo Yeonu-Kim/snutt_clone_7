@@ -2,7 +2,7 @@ import type { Context } from 'react';
 import { useContext } from 'react';
 
 // context 타입 체크 및 null 값 방지를 위해 사용
-export const useGaurdContext = <T extends Record<string, unknown>>(
+export const useGuardContext = <T extends Record<string, unknown>>(
   context: Context<T | null>,
 ): T => {
   const contextValue = useContext(context);

@@ -1,20 +1,50 @@
 import './reset.css';
 import './index.css';
 
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import type { CallParams } from './api';
 import { impleSnuttApi } from './api';
 import { EnvContext } from './context/EnvContext';
 import { ServiceContext } from './context/ServiceContext';
-import { useGaurdContext } from './hooks/useGaurdContext';
+import { useGuardContext } from './hooks/useGuardContext';
 import { impleAuthRepository } from './infrastructure/impleAuthRepository';
+import { implTokenSessionStorageRepository } from './infrastructure/impleStorageRepository';
 import { impleUserRepository } from './infrastructure/impleUserRepository';
-import { Landing } from './pages/landing';
+import { NotFound } from './pages/Error';
+import { LandingPage } from './pages/landing';
+import { SignInPage } from './pages/SignIn';
+import { SignUpPage } from './pages/SignUp';
 import { getAuthService } from './usecases/authServices';
+import { getTokenService } from './usecases/tokenService';
 import { getUserService } from './usecases/userService';
+
+const publicRoutes = [
+  {
+    path: '/',
+    element: <LandingPage />,
+  },
+  {
+    path: '/signin',
+    element: <SignInPage />,
+  },
+  {
+    path: '/signup',
+    element: <SignUpPage />,
+  },
+  {
+    path: '/*',
+    element: <NotFound />,
+  },
+];
+
+const routes = [...publicRoutes];
+
+const router = createBrowserRouter(routes);
 
 export const App = () => {
   // .env 파일 내역 불러오기
-  const ENV = useGaurdContext(EnvContext);
+  const ENV = useGuardContext(EnvContext);
 
   const call = async (content: CallParams) => {
     const response = await fetch(`${ENV.API_BASE_URL}/${content.path}`, {
@@ -45,15 +75,18 @@ export const App = () => {
 
   const authService = getAuthService({ authRepository });
   const userService = getUserService({ userRepository });
-
+  const tokenService = getTokenService({
+    temporaryStorageRepository: implTokenSessionStorageRepository(),
+  });
   const services = {
     authService,
     userService,
+    tokenService,
   };
 
   return (
     <ServiceContext.Provider value={services}>
-      <Landing />
+      <RouterProvider router={router} />
     </ServiceContext.Provider>
   );
 };
