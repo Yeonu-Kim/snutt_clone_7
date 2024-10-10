@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import type { CallParams } from './api';
 import { impleSnuttApi } from './api';
 import { AuthProtectedRoute } from './components/Auth';
+import { PATH, ROUTE_TYPE } from './constants/route';
 import { EnvContext } from './context/EnvContext';
 import { ServiceContext } from './context/ServiceContext';
 import { TokenAuthContext } from './context/TokenAuthContext';
@@ -30,42 +31,43 @@ import { getUserService } from './usecases/userService';
 
 const routes = [
   {
-    path: '/signin',
+    path: PATH.SIGNIN,
     element: <SignInPage />,
-    type: 'all',
+    type: ROUTE_TYPE.ALL,
   },
   {
-    path: '/signup',
+    path: PATH.SIGNUP,
     element: <SignUpPage />,
-    type: 'all',
+    type: ROUTE_TYPE.ALL,
   },
   {
-    path: '/',
+    path: PATH.INDEX,
     element: (
       <AuthProtectedRoute>
         <MainPage />
       </AuthProtectedRoute>
     ),
-    type: 'signin',
+    type: ROUTE_TYPE.SIGNIN,
   },
   {
     path: '/*',
     element: <LandingPage />,
-    type: 'unsignin',
+    type: ROUTE_TYPE.UNSIGNIN,
   },
   {
     path: '/*',
     element: <NotFoundPage />,
-    type: 'signin',
+    type: ROUTE_TYPE.SIGNIN,
   },
 ];
 
 const UnSignInRoutes = routes.filter(
-  (route) => route.type === 'all' || route.type === 'unsignin',
+  (route) =>
+    route.type === ROUTE_TYPE.ALL || route.type === ROUTE_TYPE.UNSIGNIN,
 );
 
 const SignInRoutes = routes.filter(
-  (route) => route.type === 'all' || route.type === 'signin',
+  (route) => route.type === ROUTE_TYPE.ALL || route.type === ROUTE_TYPE.SIGNIN,
 );
 
 const UnSignInRouter = createBrowserRouter(UnSignInRoutes);
