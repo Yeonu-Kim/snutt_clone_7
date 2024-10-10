@@ -1,21 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
 export const Landing = () => {
-  // const router = createBrowserRouter([
-  //   {
-  //     path: '/',
-  //     element: <LandingMain />,
-  //   },
-  //   {
-  //     path: '/login',
-  //     element: <div></div>, // 로그인 컴포넌트로 교체하기
-  //   },
-  //   {
-  //     path: '/signup',
-  //     element: <div></div> // 회원가입 컴포넌트로 교체하기
-  //   },
-  // ])
-
   return (
     <div className="p-[100px]">
       <LandingMain />
