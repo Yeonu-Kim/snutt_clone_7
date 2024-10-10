@@ -25,32 +25,19 @@ import { getAuthService } from './usecases/authServices';
 import { getTokenService } from './usecases/tokenService';
 import { getUserService } from './usecases/userService';
 
-const publicRoutes = [
-  {
-    path: '/signin',
-    element: <SignInPage />,
-  },
-  {
-    path: '/signup',
-    element: <SignUpPage />,
-  },
-  {
-    path: '/*',
-    element: <LandingPage />,
-  },
-];
-
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용
 
-const privateRoutes = [
+const routes = [
   {
     path: '/signin',
     element: <SignInPage />,
+    type: 'all',
   },
   {
     path: '/signup',
     element: <SignUpPage />,
+    type: 'all',
   },
   {
     path: '/',
@@ -59,15 +46,30 @@ const privateRoutes = [
         <MainPage />
       </AuthProtectedRoute>
     ),
+    type: 'signin',
+  },
+  {
+    path: '/*',
+    element: <LandingPage />,
+    type: 'unsignin',
   },
   {
     path: '/*',
     element: <NotFoundPage />,
+    type: 'signin',
   },
 ];
 
-const publicRouter = createBrowserRouter(publicRoutes);
-const privateRouter = createBrowserRouter(privateRoutes);
+const UnSignInRoutes = routes.filter(
+  (route) => route.type === 'all' || route.type === 'unsignin',
+);
+
+const SignInRoutes = routes.filter(
+  (route) => route.type === 'all' || route.type === 'signin',
+);
+
+const UnSignInRouter = createBrowserRouter(UnSignInRoutes);
+const SignInRouter = createBrowserRouter(SignInRoutes);
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -79,7 +81,7 @@ const queryClient = new QueryClient({
 });
 
 export const App = () => {
-  const [isTokenUnvalid, setIsTokenUnvalid] = useState(false);
+  const [isTokenError, setIsTokenError] = useState(false);
   // .env 파일 내역 불러오기
   const ENV = useGuardContext(EnvContext);
 
@@ -101,7 +103,7 @@ export const App = () => {
         'errcode' in responseBody &&
         responseBody.errcode === 8194
       )
-        setIsTokenUnvalid(true);
+        setIsTokenError(true);
     }
     return {
       status: response.status,
@@ -159,11 +161,11 @@ export const App = () => {
       <ServiceContext.Provider value={services}>
         <TokenManageContext.Provider value={tokenServiceWithStateSetter}>
           {token !== null ? (
-            <TokenAuthContext.Provider value={{ token, isTokenUnvalid }}>
-              <RouterProvider router={privateRouter} />
+            <TokenAuthContext.Provider value={{ token, isTokenError }}>
+              <RouterProvider router={SignInRouter} />
             </TokenAuthContext.Provider>
           ) : (
-            <RouterProvider router={publicRouter} />
+            <RouterProvider router={UnSignInRouter} />
           )}
         </TokenManageContext.Provider>
       </ServiceContext.Provider>
