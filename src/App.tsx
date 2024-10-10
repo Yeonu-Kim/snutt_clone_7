@@ -41,14 +41,12 @@ const publicRoutes = [
 ];
 
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
+// 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용
 
 // 241010 연우:
 // signin과 signup은 두 라우터에 대해 중복으로 나타나는데
 // 이렇게 처리하는 게 최선인가..??
 
-// 보통은 PrivateProtectedRoute같이 LandingPage를 감싸주는 방식으로 처리하는데,
-// token이 context api에 의해 저장되어서 불러올 수 없음.
-// 해결 방법 알아보기
 const privateRoutes = [
   {
     path: '/signin',
@@ -139,7 +137,7 @@ export const App = () => {
 
   // tanstack query를 사용하지 않으면 그냥 tokenService를 TokenManageContext에 넣으면 됨.
   // 하지만 우리는 tanstack query를 사용하기로 했으므로
-  // 인증 상태에 따라 캐싱된 데이터를 업데이트해줘야 함.
+  // 인증 상태에 따라 캐싱된 데이터를 업데이트 or 삭제해줘야 함.
   const [token, setToken] = useState(tokenService.getToken());
 
   // token을 context api를 사용하여 관리하면 getToken을 사용할 이유가 없어짐.
