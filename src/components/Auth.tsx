@@ -7,10 +7,5 @@ import { ReSignInModal } from './Modal';
 export const AuthProtectedRoute = ({ children }: { children: ReactNode }) => {
   const { isTokenUnvalid } = useGuardContext(TokenAuthContext);
 
-  return (
-    <div>
-      {children}
-      {isTokenUnvalid ? <ReSignInModal /> : null}
-    </div>
-  );
+  return isTokenUnvalid ? <ReSignInModal /> : <>{children}</>;
 };
