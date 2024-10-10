@@ -13,7 +13,7 @@ import { impleAuthRepository } from './infrastructure/impleAuthRepository';
 import { implTokenSessionStorageRepository } from './infrastructure/impleStorageRepository';
 import { impleUserRepository } from './infrastructure/impleUserRepository';
 import { Landing } from './pages/landing';
-import { LandingLogin } from './pages/landing/landing-login';
+import { Login } from './pages/login';
 import { getAuthService } from './usecases/authServices';
 import { getTokenService } from './usecases/tokenService';
 import { getUserService } from './usecases/userService';
@@ -75,7 +75,7 @@ export const App = () => {
   return (
     <ServiceContext.Provider value={services}>
       <TokenManageContext.Provider value={tokenContextValue}>
-        {token !== null ? <Landing /> : <LandingLogin />}
+        {token !== null ? <Landing /> : <Login />}
       </TokenManageContext.Provider>
     </ServiceContext.Provider>
   );

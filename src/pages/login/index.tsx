@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import { ServiceContext } from '../../../context/ServiceContext';
-import { TokenManageContext } from '../../../context/TokenManageContext';
-import { useGuardContext } from '../../../hooks/useGuardContext';
+import { ServiceContext } from '../../context/ServiceContext';
+import { TokenManageContext } from '../../context/TokenManageContext';
+import { useGuardContext } from '../../hooks/useGuardContext';
 
-export const LandingLogin = () => {
+export const Login = () => {
   const { saveToken } = useGuardContext(TokenManageContext);
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
