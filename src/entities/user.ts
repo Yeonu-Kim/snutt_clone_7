@@ -1,7 +1,7 @@
 export type User = {
   email: string | null;
   isAdmin: boolean;
-  localId: string | null;
+  local_id: string | null;
   notificationCheckedAt: string;
   regDate: string;
 };

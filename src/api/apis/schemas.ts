@@ -24,7 +24,7 @@ export type UserResponse = {
   regDate: DateTime;
   notificationCheckedAt: DateTime;
   email?: string;
-  localId: string;
+  local_id: string;
   fbName?: string;
   nickname: NicknameResponse;
 };

@@ -1,16 +1,20 @@
 import { type getTokenService } from '../usecases/tokenService';
 
+const storageKey = {
+  snuttToken: 'snutt_token',
+};
+
 type GetTokenServiceParams = Parameters<typeof getTokenService>[0];
 
 export const implTokenSessionStorageRepository =
   (): GetTokenServiceParams['temporaryStorageRepository'] => {
     return {
-      getToken: () => sessionStorage.getItem('snutt_token'),
+      getToken: () => sessionStorage.getItem(storageKey.snuttToken),
       saveToken: (token) => {
-        sessionStorage.setItem('snutt_token', token);
+        sessionStorage.setItem(storageKey.snuttToken, token);
       },
       clearToken: () => {
-        sessionStorage.removeItem('snutt_token');
+        sessionStorage.removeItem(storageKey.snuttToken);
       },
     };
   };

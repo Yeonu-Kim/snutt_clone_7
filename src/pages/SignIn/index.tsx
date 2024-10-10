@@ -1,22 +1,26 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { ServiceContext } from '../../context/ServiceContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
 import { useGuardContext } from '../../hooks/useGuardContext';
 
-export const Login = () => {
+export const SignInPage = () => {
   const { saveToken } = useGuardContext(TokenManageContext);
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const navigate = useNavigate();
 
   const { authService } = useGuardContext(ServiceContext);
+
   const onClickButton = async () => {
     const response = await authService.signIn({ id, password });
     if (response.type === 'success') {
-      alert(`로그인 성공! 토큰은 ${response.data.token}입니다.`);
       saveToken(response.data.token);
+      navigate('/');
     } else alert(response.message);
   };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && id !== '' && password !== '') {
       onClickButton().catch(() => {
@@ -24,6 +28,7 @@ export const Login = () => {
       });
     }
   };
+
   return (
     <div className="LoginWrapper flex flex-col items-center min-h-screen px-4 sm:px-6 lg:px:8">
       <div className="LoginHeaderWrapper flex items-center justify-between w-full mt-4 pb-6">
