@@ -1,11 +1,19 @@
-import { TokenManageContext } from '../../context/TokenManageContext';
-import { useGuardContext } from '../../hooks/useGuardContext';
-import { Landing } from './Landing';
-import { Main } from './Main';
+import { useNavigate } from 'react-router-dom';
 
 export const LandingPage = () => {
-  const { getToken } = useGuardContext(TokenManageContext);
-  const token = getToken();
+  const navigate = useNavigate();
 
-  return token !== null ? <Main /> : <Landing />;
+  const onClickSignIn = () => {
+    navigate('/signIn');
+  };
+
+  const onClickSignUp = () => {
+    navigate('signUp');
+  };
+  return (
+    <div>
+      <button onClick={onClickSignIn}>로그인</button>
+      <button onClick={onClickSignUp}>회원가입</button>
+    </div>
+  );
 };

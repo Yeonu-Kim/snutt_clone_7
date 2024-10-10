@@ -5,7 +5,7 @@ import { TokenAuthContext } from '../../context/TokenAuthContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
 import { useGuardContext } from '../../hooks/useGuardContext';
 
-export const Main = () => {
+export const MainPage = () => {
   const { saveToken } = useGuardContext(TokenManageContext);
   const { userService } = useGuardContext(ServiceContext);
   const { token } = useGuardContext(TokenAuthContext);

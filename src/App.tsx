@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import type { CallParams } from './api';
 import { impleSnuttApi } from './api';
+import { AuthProtectedRoute } from './components/Auth';
 import { EnvContext } from './context/EnvContext';
 import { ServiceContext } from './context/ServiceContext';
 import { TokenAuthContext } from './context/TokenAuthContext';
@@ -17,6 +18,7 @@ import { implTokenSessionStorageRepository } from './infrastructure/impleStorage
 import { impleUserRepository } from './infrastructure/impleUserRepository';
 import { NotFound } from './pages/Error';
 import { LandingPage } from './pages/landing';
+import { MainPage } from './pages/Main';
 import { SignInPage } from './pages/SignIn';
 import { SignUpPage } from './pages/SignUp';
 import { getAuthService } from './usecases/authServices';
@@ -24,10 +26,6 @@ import { getTokenService } from './usecases/tokenService';
 import { getUserService } from './usecases/userService';
 
 const publicRoutes = [
-  {
-    path: '/',
-    element: <LandingPage />,
-  },
   {
     path: '/signin',
     element: <SignInPage />,
@@ -38,14 +36,39 @@ const publicRoutes = [
   },
   {
     path: '/*',
-    element: <NotFound />,
+    element: <LandingPage />,
   },
 ];
 
+// 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
+
+// 241010 연우:
+// signin과 signup은 두 라우터에 대해 중복으로 나타나는데
+// 이렇게 처리하는 게 최선인가..??
+
+// 보통은 PrivateProtectedRoute같이 LandingPage를 감싸주는 방식으로 처리하는데,
+// token이 context api에 의해 저장되어서 불러올 수 없음.
+// 해결 방법 알아보기
 const privateRoutes = [
   {
+    path: '/signin',
+    element: <SignInPage />,
+  },
+  {
+    path: '/signup',
+    element: <SignUpPage />,
+  },
+  {
     path: '/',
-    element: <LandingPage />,
+    element: (
+      <AuthProtectedRoute>
+        <MainPage />
+      </AuthProtectedRoute>
+    ),
+  },
+  {
+    path: '/*',
+    element: <NotFound />,
   },
 ];
 
@@ -62,6 +85,7 @@ const queryClient = new QueryClient({
 });
 
 export const App = () => {
+  const [isTokenUnvalid, setIsTokenUnvalid] = useState(false);
   // .env 파일 내역 불러오기
   const ENV = useGuardContext(EnvContext);
 
@@ -76,6 +100,15 @@ export const App = () => {
 
     const responseBody = (await response.json().catch(() => null)) as unknown;
 
+    if (!response.ok) {
+      if (
+        responseBody !== null &&
+        typeof responseBody === 'object' &&
+        'errcode' in responseBody &&
+        responseBody.errcode === 8194
+      )
+        setIsTokenUnvalid(true);
+    }
     return {
       status: response.status,
       data: responseBody,
@@ -112,7 +145,6 @@ export const App = () => {
   // token을 context api를 사용하여 관리하면 getToken을 사용할 이유가 없어짐.
   // saveToken과 clearToken만 생성
   const tokenServiceWithStateSetter = {
-    ...tokenService,
     saveToken: (newToken: string) => {
       setToken(newToken);
       tokenService.saveToken(newToken);
@@ -133,7 +165,7 @@ export const App = () => {
       <ServiceContext.Provider value={services}>
         <TokenManageContext.Provider value={tokenServiceWithStateSetter}>
           {token !== null ? (
-            <TokenAuthContext.Provider value={{ token }}>
+            <TokenAuthContext.Provider value={{ token, isTokenUnvalid }}>
               <RouterProvider router={privateRouter} />
             </TokenAuthContext.Provider>
           ) : (
