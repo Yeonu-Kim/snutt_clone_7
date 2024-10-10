@@ -22,7 +22,6 @@ export const MainPage = () => {
   if (userData === undefined) return <div>로딩중...</div>;
 
   if (userData.type === 'success') {
-    console.log(userData.data);
     return (
       <>
         <p>아이디: {userData.data.local_id}</p>
