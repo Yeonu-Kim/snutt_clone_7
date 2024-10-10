@@ -5,7 +5,7 @@ import { useGuardContext } from '../hooks/useGuardContext';
 import { ReSignInModal } from './Modal';
 
 export const AuthProtectedRoute = ({ children }: { children: ReactNode }) => {
-  const { isTokenUnvalid } = useGuardContext(TokenAuthContext);
+  const { isTokenError } = useGuardContext(TokenAuthContext);
 
-  return isTokenUnvalid ? <ReSignInModal /> : <>{children}</>;
+  return isTokenError ? <ReSignInModal /> : <>{children}</>;
 };
