@@ -20,7 +20,7 @@ export const LandingPage = () => {
         >
           <img
             id="image-TimeTable"
-            src={`/TimeTable.png`}
+            src="/logo/TimeTable.png"
             alt="timetable"
             className="w-[108px] h-[101px] mb-[136px]"
           ></img>
@@ -52,10 +52,10 @@ export const LandingPage = () => {
               id="SNS-icon"
               className="h-[44px] gap-[12px] flex justify-center"
             >
-              <img src="/kakaotalkid.png" alt="kakaotalk" />
-              <img src="/googleid.png" alt="google" />
-              <img src="/facebookid.png" alt="facebook" />
-              <img src="/appleid.png" alt="apple" />
+              <img src="/landing/kakaotalkid.png" alt="kakaotalk" />
+              <img src="/landing/googleid.png" alt="google" />
+              <img src="/landing/facebookid.png" alt="facebook" />
+              <img src="/landing/appleid.png" alt="apple" />
             </div>
           </div>
         </div>
