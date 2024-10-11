@@ -1,7 +1,22 @@
 import { getErrorMessage } from '../entities/error';
-import type { UsecaseResponse } from '../entities/response';
+import type { RepositoryResponse, UsecaseResponse } from '../entities/response';
 import type { User } from '../entities/user';
-import type { UserRepository } from '../infrastructure/impleUserRepository';
+
+type UserRepository = {
+  getUserInfo(_: { token: string }): RepositoryResponse<{
+    id: string;
+    isAdmin: boolean;
+    regDate: string;
+    notificationCheckedAt: string;
+    email?: string;
+    local_id: string;
+    fbName?: string;
+    nickname: {
+      nickname: string;
+      tag: string;
+    };
+  }>;
+};
 
 export type UserService = {
   getUserInfo(args: { token: string }): UsecaseResponse<User>;

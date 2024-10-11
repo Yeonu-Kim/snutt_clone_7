@@ -1,12 +1,7 @@
-import type { LocalLoginRequest, LocalLoginResponse } from '../api';
 import type { SnuttApi } from '../api/apis/api';
-import type { RepositoryResponse } from '../entities/response';
+import { getAuthService } from '../usecases/authServices';
 
-export type AuthRepository = {
-  signInWithIdPassword(
-    args: LocalLoginRequest,
-  ): RepositoryResponse<LocalLoginResponse>;
-};
+type AuthRepository = Parameters<typeof getAuthService>[0]['authRepository'];
 
 export const impleAuthRepository = ({
   snuttApi,

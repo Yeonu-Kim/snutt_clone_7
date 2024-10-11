@@ -1,10 +1,7 @@
-import type { UserResponse } from '../api';
 import type { SnuttApi } from '../api/apis/api';
-import type { RepositoryResponse } from '../entities/response';
+import { type getUserService } from '../usecases/userService';
 
-export type UserRepository = {
-  getUserInfo(_: { token: string }): RepositoryResponse<UserResponse>;
-};
+type UserRepository = Parameters<typeof getUserService>[0]['userRepository'];
 
 export const impleUserRepository = ({
   snuttApi,
