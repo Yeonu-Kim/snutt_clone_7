@@ -10,6 +10,7 @@ import { impleSnuttApi } from './api';
 import { AuthProtectedRoute } from './components/Auth';
 import { PATH, ROUTE_TYPE } from './constants/route';
 import { EnvContext } from './context/EnvContext';
+import { ModalManageContext } from './context/ModalManageContext';
 import { ServiceContext } from './context/ServiceContext';
 import { TokenAuthContext } from './context/TokenAuthContext';
 import { TokenManageContext } from './context/TokenManageContext';
@@ -157,13 +158,22 @@ export const App = () => {
     },
   };
 
+  // 모달 창 닫아주는 함수를 context api를 사용하여 관리
+  const closeModal = () => {
+    setIsTokenError(false);
+  };
+
   return (
     <QueryClientProvider key={token} client={queryClient}>
       <ServiceContext.Provider value={services}>
         <TokenManageContext.Provider value={manageToken}>
           {token !== null ? (
-            <TokenAuthContext.Provider value={{ token, isTokenError }}>
-              <RouterProvider router={SignInRouter} />
+            <TokenAuthContext.Provider value={{ token }}>
+              <ModalManageContext.Provider
+                value={{ isModalOpen: isTokenError, closeModal }}
+              >
+                <RouterProvider router={SignInRouter} />
+              </ModalManageContext.Provider>
             </TokenAuthContext.Provider>
           ) : (
             <RouterProvider router={UnSignInRouter} />

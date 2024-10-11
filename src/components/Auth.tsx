@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react';
 
-import { TokenAuthContext } from '../context/TokenAuthContext';
+import { ModalManageContext } from '../context/ModalManageContext';
 import { useGuardContext } from '../hooks/useGuardContext';
 import { ReSignInModal } from './Modal';
 
 export const AuthProtectedRoute = ({ children }: { children: ReactNode }) => {
-  const { isTokenError } = useGuardContext(TokenAuthContext);
+  const { isModalOpen } = useGuardContext(ModalManageContext);
 
-  return isTokenError ? <ReSignInModal /> : <>{children}</>;
+  return isModalOpen ? <ReSignInModal /> : <>{children}</>;
 };
