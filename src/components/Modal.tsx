@@ -1,14 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
-import { ModalManageContext } from '../context/ModalManageContext';
-import { useGuardContext } from '../hooks/useGuardContext';
-
 export const ReSignInModal = () => {
-  const { closeModal } = useGuardContext(ModalManageContext);
 
   const navigate = useNavigate();
   const onClickButton = () => {
-    closeModal();
     navigate('/signin');
   };
 

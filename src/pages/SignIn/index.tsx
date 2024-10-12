@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { ModalManageContext } from '../../context/ModalManageContext';
 import { ServiceContext } from '../../context/ServiceContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
 import { useGuardContext } from '../../hooks/useGuardContext';
 
 export const SignInPage = () => {
   const { saveToken } = useGuardContext(TokenManageContext);
+  const { closeModal } = useGuardContext(ModalManageContext);
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ export const SignInPage = () => {
     const response = await authService.signIn({ id, password });
     if (response.type === 'success') {
       saveToken(response.data.token);
+      closeModal();
       navigate('/');
     } else alert(response.message);
   };
