@@ -23,6 +23,10 @@ export default {
           '0%': { opacity: 0, transform: 'translateY(20px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
+        popup: {
+          '0%': { opacity: 0, transform: 'scale(0.8)' },
+          '100%': { opacity: 1, transform: 'scale(1)' },
+        },
       },
       animation: {
         'updown-1': 'moveUpDown 2s infinite ease-in-out 0.1s',
@@ -31,6 +35,7 @@ export default {
         'updown-4': 'moveUpDown 2s infinite ease-in-out 0.7s',
         'updown-5': 'moveUpDown 2s infinite ease-in-out 0.9s',
         slideUp: 'slideInUp 0.5s ease-in-out',
+        popup: 'popup 0.3s ease-out',
       },
     },
   },
