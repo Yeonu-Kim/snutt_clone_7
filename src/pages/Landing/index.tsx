@@ -1,15 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigation } from '../../hooks/useNavigation';
 
 export const LandingPage = () => {
-  const navigate = useNavigate();
-
-  const onClickSignIn = () => {
-    navigate('/signIn');
-  };
-
-  const onClickSignUp = () => {
-    navigate('signUp');
-  };
+  const { toSignIn, toSignUp } = useNavigation();
 
   return (
     <div className="p-[100px]">
@@ -31,14 +23,14 @@ export const LandingPage = () => {
             <button
               id="login"
               className="w-[311px] h-[41px] bg-[#F58D3D] text-white hover:bg-[#E07C2C] transition-colors duration-200"
-              onClick={onClickSignIn}
+              onClick={toSignIn}
             >
               로그인
             </button>
             <button
               id="signup"
               className="w-[311px] h-[17px] hover:text-[#F58D3D] transition-colors duration-300"
-              onClick={onClickSignUp}
+              onClick={toSignUp}
             >
               회원가입
             </button>
