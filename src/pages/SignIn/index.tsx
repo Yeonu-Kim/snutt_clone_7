@@ -55,7 +55,9 @@ export const SignInPage = () => {
   return (
     <div className="LoginWrapper flex flex-col items-center min-h-screen px-4 sm:px-6 lg:px:8">
       <div className="LoginHeaderWrapper flex items-center justify-between w-full mt-4 pb-6">
-        <div className="text-gray-500 cursor-pointer hover:800">&larr; 뒤로</div>
+        <div className="text-gray-500 cursor-pointer hover:800">
+          &larr; 뒤로
+        </div>
         <h1 className="text-xl font-semibold text-center flex-1">로그인</h1>
         <div className="w-6"></div>
       </div>
