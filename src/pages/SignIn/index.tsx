@@ -34,7 +34,6 @@ export const SignInPage = () => {
       }
     },
     onError: (error) => {
-      console.error('Error during sign-in:', error);
       alert('로그인 중 문제가 발생했습니다.');
     },
   });
