@@ -26,7 +26,7 @@ export const getSnuttApis = ({
     'GET /v1/users/me': ({ token }: { token: string }) =>
       callWithToken<SuccessResponse<UserResponse> | ErrorResponse<403, 8194>>({
         method: 'get',
-        path: 'v1/user/info',
+        path: 'v1/users/me',
         token,
       }),
   }) satisfies Record<string, Api>;
