@@ -23,7 +23,7 @@ export const LandingPage = () => {
           >
             <button
               id="login"
-              className="w-[311px] h-[41px] bg-[#F58D3D] text-white hover:bg-[#E07C2C] transition-colors duration-200"
+              className="w-[311px] h-[41px] bg-[#F58D3D] text-white hover:bg-[#E07C2C] transition-colors duration-200 rounded-md"
               onClick={toSignIn}
             >
               로그인
