@@ -27,7 +27,6 @@ export type AuthService = {
     password: string;
   }): UsecaseResponse<SignInResponse>;
   logout(): void;
-  getToken(): string | null;
 };
 
 export const getAuthService = ({
@@ -61,6 +60,4 @@ export const getAuthService = ({
   logout: () => {
     tokenRepository.clearToken();
   },
-  // 스토리지에서 저장된 토큰 가져오기
-  getToken: () => tokenRepository.getToken(),
 });

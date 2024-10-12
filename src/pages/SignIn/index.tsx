@@ -1,33 +1,56 @@
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { ModalManageContext } from '../../context/ModalManageContext';
 import { ServiceContext } from '../../context/ServiceContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
 import { useGuardContext } from '../../hooks/useGuardContext';
 
 export const SignInPage = () => {
-  const { saveToken } = useGuardContext(TokenManageContext);
+  const { closeModal } = useGuardContext(ModalManageContext);
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
 
   const { authService } = useGuardContext(ServiceContext);
+  const { saveToken } = useGuardContext(TokenManageContext);
 
-  const onClickButton = async () => {
-    const response = await authService.signIn({ id, password });
-    if (response.type === 'success') {
-      saveToken(response.data.token);
-      navigate('/');
-    } else alert(response.message);
+  const { mutate: signIn, isPending } = useMutation({
+    mutationFn: ({
+      inputId,
+      inputPassword,
+    }: {
+      inputId: string;
+      inputPassword: string;
+    }) => authService.signIn({ id: inputId, password: inputPassword }),
+    onSuccess: (response) => {
+      if (response.type === 'success') {
+        saveToken(response.data.token);
+        closeModal();
+        navigate('/');
+      } else {
+        alert(response.message);
+      }
+    },
+    onError: () => {
+      alert('로그인 중 문제가 발생했습니다.');
+    },
+  });
+
+  const onClickButton = () => {
+    if (id !== '' && password !== '') {
+      signIn({ inputId: id, inputPassword: password });
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && id !== '' && password !== '') {
-      onClickButton().catch(() => {
-        console.error('error');
-      });
+      onClickButton();
     }
   };
+
+  if (isPending) return <div>로딩중...</div>;
 
   return (
     <div className="LoginWrapper flex flex-col items-center min-h-screen px-4 sm:px-6 lg:px:8">
@@ -79,11 +102,7 @@ export const SignInPage = () => {
         </div>
         <button
           className={`LoginButton rounded-md w-full h-[41px] ${id !== '' && password !== '' ? 'bg-orange text-white cursor-pointer hover:800' : 'bg-gray-100 cursor-not-allowed'}`}
-          onClick={() => {
-            onClickButton().catch(() => {
-              console.error('error');
-            });
-          }}
+          onClick={onClickButton}
           disabled={!(id !== '' && password !== '')}
         >
           로그인

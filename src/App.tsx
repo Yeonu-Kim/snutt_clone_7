@@ -10,6 +10,7 @@ import { impleSnuttApi } from './api';
 import { AuthProtectedRoute } from './components/Auth';
 import { PATH, ROUTE_TYPE } from './constants/route';
 import { EnvContext } from './context/EnvContext';
+import { ModalManageContext } from './context/ModalManageContext';
 import { ServiceContext } from './context/ServiceContext';
 import { TokenAuthContext } from './context/TokenAuthContext';
 import { TokenManageContext } from './context/TokenManageContext';
@@ -139,7 +140,7 @@ export const App = () => {
   // tanstack query를 사용하지 않으면 그냥 tokenService를 TokenManageContext에 넣으면 됨.
   // 하지만 우리는 tanstack query를 사용하기로 했으므로
   // 인증 상태에 따라 캐싱된 데이터를 업데이트 or 삭제해줘야 함.
-  const [token, setToken] = useState(authService.getToken());
+  const [token, setToken] = useState(temporaryStorageRepository.getToken());
 
   // token을 context api를 사용하여 관리하면 getToken을 사용할 이유가 없어짐.
   // saveToken과 clearToken만 생성
@@ -155,19 +156,36 @@ export const App = () => {
         console.error(error);
       });
     },
+
+    // 241012 연우:
+    // 개발자용 토큰 변조를 위한 부분
+    // 다음주 과제 생성 시에 삭제
+    contaminateToken: (wrongToken: string) => {
+      setToken(wrongToken);
+      temporaryStorageRepository.saveToken(wrongToken);
+    },
+  };
+
+  // 모달 창 닫아주는 함수를 context api를 사용하여 관리
+  const closeModal = () => {
+    setIsTokenError(false);
   };
 
   return (
     <QueryClientProvider key={token} client={queryClient}>
       <ServiceContext.Provider value={services}>
         <TokenManageContext.Provider value={manageToken}>
-          {token !== null ? (
-            <TokenAuthContext.Provider value={{ token, isTokenError }}>
-              <RouterProvider router={SignInRouter} />
-            </TokenAuthContext.Provider>
-          ) : (
-            <RouterProvider router={UnSignInRouter} />
-          )}
+          <ModalManageContext.Provider
+            value={{ isModalOpen: isTokenError, closeModal }}
+          >
+            {token !== null ? (
+              <TokenAuthContext.Provider value={{ token }}>
+                <RouterProvider router={SignInRouter} />
+              </TokenAuthContext.Provider>
+            ) : (
+              <RouterProvider router={UnSignInRouter} />
+            )}
+          </ModalManageContext.Provider>
         </TokenManageContext.Provider>
       </ServiceContext.Provider>
     </QueryClientProvider>
