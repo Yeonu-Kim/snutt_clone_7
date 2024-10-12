@@ -23,10 +23,21 @@ export const MainPage = () => {
 
   if (userData.type === 'success') {
     return (
-      <>
-        <p>아이디: {userData.data.local_id}</p>
-        <button onClick={contaminateToken}>토큰 변조하기 버튼</button>
-      </>
+      <div className="flex flex-col justify-between items-center h-dvh py-[300px]">
+        <span className="text-xl font-bold">
+          안녕하세요, {userData.data.nickname.nickname} #
+          {userData.data.nickname.tag}님!
+        </span>
+        <div className="flex flex-col items-center gap-4">
+          <span>개발자를 위한 버튼입니다.</span>
+          <button
+            className="flex px-10 py-2 rounded bg-orange text-white"
+            onClick={contaminateToken}
+          >
+            토큰 변조하기 버튼
+          </button>
+        </div>
+      </div>
     );
   }
 

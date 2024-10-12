@@ -1,7 +1,13 @@
 export type User = {
-  email: string | null;
+  id: string;
   isAdmin: boolean;
-  local_id: string | null;
-  notificationCheckedAt: string;
   regDate: string;
+  notificationCheckedAt: string;
+  email?: string;
+  local_id: string;
+  fbName?: string;
+  nickname: {
+    nickname: string;
+    tag: string;
+  };
 };
