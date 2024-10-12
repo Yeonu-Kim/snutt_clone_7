@@ -57,7 +57,7 @@ export const SignInPage = () => {
 
   return (
     <Layout>
-      <div className="LoginWrapper flex flex-col items-center w-full min-h-screen px-[32px] psm:px-2 lg:px:8">
+      <div className="LoginWrapper flex flex-col items-center w-full min-h-screen px-[20px] psm:px-2 lg:px:8">
         <div className="LoginHeaderWrapper flex items-center justify-between w-full mt-4 pb-6">
           <div className="text-gray-500 cursor-pointer hover:800">
             &larr; 뒤로
@@ -65,55 +65,59 @@ export const SignInPage = () => {
           <h1 className="text-xl font-semibold text-center flex-1">로그인</h1>
           <div className="w-6"></div>
         </div>
-        <div className="LoginFormWrapper w-full px-4 space-y-4">
-          <div className="IDWrapper flex flex-col">
-            <label htmlFor="id" className="text-gray-700 mb-1">
-              아이디:
-            </label>
-            <input
-              type="text"
-              id="id"
-              value={id}
-              onChange={(e) => {
-                setId(e.target.value);
-              }}
-              onKeyDown={handleKeyDown}
-              placeholder="아이디를 입력하세요"
-              className="p-3 border-b-2 border-gray-300 focus:outline-none focus:border-orange"
-            />
+        <div className="LoginWrapper relative flex-auto w-full content-between">
+          <div className="LoginFormWrapper w-full space-y-4">
+            <div className="IDWrapper flex flex-col">
+              <label htmlFor="id" className="text-gray-700 mb-1">
+                아이디:
+              </label>
+              <input
+                type="text"
+                id="id"
+                value={id}
+                onChange={(e) => {
+                  setId(e.target.value);
+                }}
+                onKeyDown={handleKeyDown}
+                placeholder="아이디를 입력하세요"
+                className="py-3 border-b-2 border-gray-300 focus:outline-none focus:border-orange"
+              />
+            </div>
+            <div className="PasswordWrapper flex flex-col">
+              <label htmlFor="password" className="text-gray-700 mb-1">
+                비밀번호:
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                onKeyDown={handleKeyDown}
+                placeholder="비밀번호를 입력하세요"
+                className="py-3 border-b-2 border-gray-300 focus:outline-none focus:border-orange"
+              />
+            </div>
+            <div className="FindIdPwWrapper flex justify-left text-sm text-gray-500 py-4 gap-2">
+              <a href="#" className="hover:text-orange underline">
+                아이디 찾기
+              </a>
+              <span>|</span>
+              <a href="#" className="hover:text-orange underline">
+                비밀번호 찾기
+              </a>
+            </div>
           </div>
-          <div className="PasswordWrapper flex flex-col">
-            <label htmlFor="password" className="text-gray-700 mb-1">
-              비밀번호:
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              onKeyDown={handleKeyDown}
-              placeholder="비밀번호를 입력하세요"
-              className="p-3 border-b-2 border-gray-300 focus:outline-none focus:border-orange"
-            />
+          <div className="LoginButtonWrapper fixed w-full bottom-8 left-0 px-[20px]">
+            <button
+              className={`LoginButton w-full h-[50px] ${id !== '' && password !== '' ? 'bg-orange text-white cursor-pointer hover:bg-[#E07C2C] transition-colors duration-200' : 'bg-gray-100 cursor-not-allowed text-gray-500'}`}
+              onClick={onClickButton}
+              disabled={!(id !== '' && password !== '')}
+            >
+              로그인
+            </button>
           </div>
-          <div className="FindIdPwWrapper flex justify-left text-sm text-gray-500 py-4 gap-2">
-            <a href="#" className="hover:text-orange underline">
-              아이디 찾기
-            </a>
-            <span>|</span>
-            <a href="#" className="hover:text-orange underline">
-              비밀번호 찾기
-            </a>
-          </div>
-          <button
-            className={`LoginButton rounded-md w-full h-[41px] ${id !== '' && password !== '' ? 'bg-orange text-white cursor-pointer hover:bg-[#E07C2C] transition-colors duration-200' : 'bg-gray-100 cursor-not-allowed text-gray-500'}`}
-            onClick={onClickButton}
-            disabled={!(id !== '' && password !== '')}
-          >
-            로그인
-          </button>
         </div>
       </div>
     </Layout>
