@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
 export const ReSignInModal = () => {
-
   const navigate = useNavigate();
   const onClickButton = () => {
     navigate('/signin');
