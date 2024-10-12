@@ -57,7 +57,9 @@ export const SignInPage = () => {
   return (
     <div className="LoginWrapper flex flex-col items-center min-h-screen px-4 sm:px-6 lg:px:8">
       <div className="LoginHeaderWrapper flex items-center justify-between w-full mt-4 pb-6">
-        <div className="text-gray-500">&larr; 뒤로</div>
+        <div className="text-gray-500 cursor-pointer hover:800">
+          &larr; 뒤로
+        </div>
         <h1 className="text-xl font-semibold text-center flex-1">로그인</h1>
         <div className="w-6"></div>
       </div>
@@ -103,7 +105,7 @@ export const SignInPage = () => {
           </a>
         </div>
         <button
-          className={`LoginButton rounded-md w-full h-[41px] ${id !== '' && password !== '' ? 'bg-orange text-white cursor-pointer hover:800' : 'bg-gray-100 cursor-not-allowed'}`}
+          className={`LoginButton rounded-md w-full h-[41px] ${id !== '' && password !== '' ? 'bg-orange text-white cursor-pointer hover:bg-[#E07C2C] transition-colors duration-200' : 'bg-gray-100 cursor-not-allowed text-gray-500'}`}
           onClick={onClickButton}
           disabled={!(id !== '' && password !== '')}
         >

@@ -30,14 +30,14 @@ export const LandingPage = () => {
           >
             <button
               id="login"
-              className="w-[311px] h-[41px] bg-[#F58D3D] text-white"
+              className="w-[311px] h-[41px] bg-[#F58D3D] text-white hover:bg-[#E07C2C] transition-colors duration-200"
               onClick={onClickSignIn}
             >
               로그인
             </button>
             <button
               id="signup"
-              className="w-[311px] h-[17px]"
+              className="w-[311px] h-[17px] hover:text-[#F58D3D] transition-colors duration-300"
               onClick={onClickSignUp}
             >
               회원가입
@@ -47,7 +47,13 @@ export const LandingPage = () => {
             id="wrapper-SNS"
             className="w-full h-[85px] flex flex-col justify-center items-center gap-[24px]"
           >
-            <p>SNS 계정으로 계속하기</p>
+            <div className="flex justify-center items-center w-[320px]">
+              <div className="flex-grow border-t border-gray-300 mr-2" />
+              <p className="text-[#C4C4C4] text-sm flex items-center">
+                SNS 계정으로 계속하기
+              </p>
+              <div className="flex-grow border-t border-gray-300 ml-2" />
+            </div>
             <div
               id="SNS-icon"
               className="h-[44px] gap-[12px] flex justify-center"
