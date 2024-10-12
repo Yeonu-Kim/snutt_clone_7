@@ -2,15 +2,19 @@ import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { ModalManageContext } from '../../context/ModalManageContext';
 import { ServiceContext } from '../../context/ServiceContext';
+import { TokenManageContext } from '../../context/TokenManageContext';
 import { useGuardContext } from '../../hooks/useGuardContext';
 
 export const SignInPage = () => {
+  const { closeModal } = useGuardContext(ModalManageContext);
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
 
   const { authService } = useGuardContext(ServiceContext);
+  const { saveToken } = useGuardContext(TokenManageContext);
 
   const { mutate: signIn, isPending } = useMutation({
     mutationFn: ({
@@ -22,9 +26,8 @@ export const SignInPage = () => {
     }) => authService.signIn({ id: inputId, password: inputPassword }),
     onSuccess: (response) => {
       if (response.type === 'success') {
-        // 241012 연우:
-        // 여기에서 토큰 저장, 모달 닫기 작업 추가
-        // 브랜치 병합할 때 수정
+        saveToken(response.data.token);
+        closeModal();
         navigate('/');
       } else {
         alert(response.message);
