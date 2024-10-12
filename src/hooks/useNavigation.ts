@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 export const useNavigation = () => {
   const navigate = useNavigate();
 
+  const toMain = () => {
+    navigate('/');
+  };
+
   const toSignIn = () => {
     navigate('/signin');
   };
@@ -12,6 +16,7 @@ export const useNavigation = () => {
   };
 
   return {
+    toMain,
     toSignIn,
     toSignUp,
   };
