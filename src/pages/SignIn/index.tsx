@@ -33,7 +33,7 @@ export const SignInPage = () => {
         alert(response.message);
       }
     },
-    onError: (error) => {
+    onError: () => {
       alert('로그인 중 문제가 발생했습니다.');
     },
   });
