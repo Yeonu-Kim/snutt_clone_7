@@ -7,12 +7,16 @@ export const LoadingPage = () => {
     '시간표 테마기능으로 나만의 시간표를 만들어봐요',
     '내가 원하는 유형의 강의를 강의평 둘러보기에서 찾아봐요.',
     '내 계정 설정에서 아이디를 바꿀 수 있어요.',
-    '빈자리 알림 기능으로 수강신청에 성공할 수 있어요.',
-    '개발자 정보에서 만든 사람들이 누구인지 알 수 있어요.',
+    '빈자리 알림 기능으로 수강신청 클리어!',
+    'SNUTT를 만든 사람들은 누구일까요? 개발자 정보를 확인해보세요.',
   ];
 
-  const [currentTip, setCurrentTip] = useState(0);
+  // 시작 지점을 랜덤으로 설정
+  const [currentTip, setCurrentTip] = useState(
+    Math.floor(Math.random() * tips.length),
+  );
 
+  // 2초에 한번씩 문구가 바뀜.
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentTip((prevTip) => (prevTip + 1) % tips.length);
