@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 import { LoadingPage } from '../../components/Loading';
+import { Layout } from '../../components/styles/Layout';
 import { ServiceContext } from '../../context/ServiceContext';
 import { TokenAuthContext } from '../../context/TokenAuthContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
@@ -52,7 +53,7 @@ export const MainPage = () => {
             </button>
           </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 

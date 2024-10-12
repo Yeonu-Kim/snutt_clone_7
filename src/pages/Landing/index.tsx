@@ -1,11 +1,12 @@
+import { Layout } from '../../components/styles/Layout';
 import { useNavigation } from '../../hooks/useNavigation';
 
 export const LandingPage = () => {
   const { toSignIn, toSignUp } = useNavigation();
 
   return (
-    <div className="p-[100px]">
-      <div id="container" className="relative w-[375px] h-[800px] bg-white">
+    <Layout>
+      <div id="container" className="relative h-full bg-white">
         <div
           id="wrapper-feature"
           className="mt-[232px] mb-[90px] w-full h-[434px] bg-white flex flex-col items-center"
@@ -58,6 +59,6 @@ export const LandingPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
