@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 import { LoadingPage } from '../../components/Loading';
@@ -31,11 +32,11 @@ export const SignInPage = () => {
         closeModal();
         navigate('/');
       } else {
-        alert(response.message);
+        toast.error(response.message);
       }
     },
     onError: () => {
-      alert('로그인 중 문제가 발생했습니다.');
+      toast.error('로그인 중 문제가 발생했습니다.');
     },
   });
 

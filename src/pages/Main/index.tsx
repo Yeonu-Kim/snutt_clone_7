@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 import { LoadingPage } from '../../components/Loading';
 import { ServiceContext } from '../../context/ServiceContext';
@@ -42,5 +43,6 @@ export const MainPage = () => {
     );
   }
 
-  return <p>{userData.message}</p>;
+  toast.error(userData.message);
+  return null;
 };
