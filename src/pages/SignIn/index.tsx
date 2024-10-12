@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { LoadingPage } from '../../components/Loading';
 import { ModalManageContext } from '../../context/ModalManageContext';
 import { ServiceContext } from '../../context/ServiceContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
@@ -50,7 +51,7 @@ export const SignInPage = () => {
     }
   };
 
-  if (isPending) return <div>로딩중...</div>;
+  if (isPending) return <LoadingPage />;
 
   return (
     <div className="LoginWrapper flex flex-col items-center min-h-screen px-4 sm:px-6 lg:px:8">
