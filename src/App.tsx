@@ -3,6 +3,7 @@ import './index.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import type { CallParams } from './api';
@@ -152,8 +153,10 @@ export const App = () => {
       setToken(null);
       // 241009 연우:
       // resetQuery에서 오류가 나오면 어떻게 해야할지 몰라서 일단 error 찍는 걸로 넣음.
-      queryClient.resetQueries().catch((error: unknown) => {
-        console.error(error);
+      queryClient.resetQueries().catch(() => {
+        toast.error(
+          '예상치 못한 에러가 발생했어요. 페이지를 새로고침 해주세요.',
+        );
       });
     },
 
@@ -185,6 +188,7 @@ export const App = () => {
             ) : (
               <RouterProvider router={UnSignInRouter} />
             )}
+            <Toaster position="bottom-center" />
           </ModalManageContext.Provider>
         </TokenManageContext.Provider>
       </ServiceContext.Provider>
