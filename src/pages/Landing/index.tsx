@@ -49,7 +49,9 @@ export const LandingPage = () => {
           >
             <div className="flex justify-center items-center w-[320px]">
               <div className="flex-grow border-t border-gray-300 mr-2" />
-              <p className="text-[#C4C4C4] text-sm flex items-center">SNS 계정으로 계속하기</p>
+              <p className="text-[#C4C4C4] text-sm flex items-center">
+                SNS 계정으로 계속하기
+              </p>
               <div className="flex-grow border-t border-gray-300 ml-2" />
             </div>
             <div
