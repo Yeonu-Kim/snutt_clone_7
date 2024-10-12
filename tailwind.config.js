@@ -39,7 +39,7 @@ export default {
       },
     },
     fontFamily: {
-      sans: [
+      kor: [
         'Pretendard',
         'ui-sans-serif',
         'system-ui',
@@ -50,6 +50,16 @@ export default {
         '"Helvetica Neue"',
         'Arial',
         '"Noto Sans"',
+        'sans-serif',
+      ],
+      eng: [
+        '-apple-system',
+        'Pretendard',
+        'BlinkMacSystemFont',
+        'San Francisco',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
         'sans-serif',
       ],
     },
