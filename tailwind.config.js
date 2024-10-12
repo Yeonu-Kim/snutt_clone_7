@@ -38,6 +38,21 @@ export default {
         popup: 'popup 0.3s ease-out',
       },
     },
+    fontFamily: {
+      sans: [
+        'Pretendard',
+        'ui-sans-serif',
+        'system-ui',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        '"Noto Sans"',
+        'sans-serif',
+      ],
+    },
   },
   plugins: [],
 };
