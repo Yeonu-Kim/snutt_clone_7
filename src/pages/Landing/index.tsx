@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
+import { Layout } from '../../components/styles/Layout';
+
 export const LandingPage = () => {
   const navigate = useNavigate();
 
@@ -12,8 +14,8 @@ export const LandingPage = () => {
   };
 
   return (
-    <div className="p-[100px]">
-      <div id="container" className="relative w-[375px] h-[800px] bg-white">
+    <Layout>
+      <div id="container" className="relative h-full bg-white">
         <div
           id="wrapper-feature"
           className="mt-[232px] mb-[90px] w-full h-[434px] bg-white flex flex-col items-center"
@@ -66,6 +68,6 @@ export const LandingPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };

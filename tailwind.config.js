@@ -53,6 +53,9 @@ export default {
         'sans-serif',
       ],
     },
+    maxWidth: {
+      375: '375px', // 모바일용
+    },
   },
   plugins: [],
 };

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 import { LoadingPage } from '../../components/Loading';
+import { Layout } from '../../components/styles/Layout';
 import { ServiceContext } from '../../context/ServiceContext';
 import { TokenAuthContext } from '../../context/TokenAuthContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
@@ -25,21 +26,23 @@ export const MainPage = () => {
 
   if (userData.type === 'success') {
     return (
-      <div className="flex flex-col justify-between items-center h-dvh py-[300px]">
-        <span className="text-xl font-bold">
-          안녕하세요, {userData.data.nickname.nickname} #
-          {userData.data.nickname.tag}님!
-        </span>
-        <div className="flex flex-col items-center gap-4">
-          <span>개발자를 위한 버튼입니다.</span>
-          <button
-            className="flex px-10 py-2 rounded bg-orange text-white"
-            onClick={handleClickContaminateButton}
-          >
-            토큰 변조하기 버튼
-          </button>
+      <Layout>
+        <div className="flex flex-col justify-between items-center h-dvh py-[300px] gap-4">
+          <span className="text-xl font-bold">
+            안녕하세요, {userData.data.nickname.nickname} #
+            {userData.data.nickname.tag}님!
+          </span>
+          <div className="flex flex-col items-center gap-4">
+            <span>개발자를 위한 버튼입니다.</span>
+            <button
+              className="flex px-10 py-2 rounded bg-orange text-white"
+              onClick={handleClickContaminateButton}
+            >
+              토큰 변조하기 버튼
+            </button>
+          </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 
