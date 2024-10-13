@@ -6,12 +6,12 @@ export const LandingPage = () => {
 
   return (
     <Layout>
-      <div id="container" className="relative h-full bg-white">
+      <div id="container" className="h-full bg-white">
         <div
           id="wrapper-feature"
-          className="flex relative w-full h-full flex-col items-center justify-center gap-[136px]"
+          className="flex flex-auto w-full h-full flex-col items-center justify-center"
         >
-          <div className="imageWrapper flex flex-col items-center gap-4">
+          <div className="imageWrapper flex flex-col flex-auto justify-center items-center gap-4">
             <img
               id="image-TimeTable"
               src="/logo/snutt_logo.svg"
@@ -44,7 +44,7 @@ export const LandingPage = () => {
             </div>
             <div
               id="wrapper-SNS"
-              className="w-full h-[85px] flex flex-col justify-center items-center gap-[24px]"
+              className="w-full h-[85px] flex flex-col justify-center items-center gap-[24px] mb-12"
             >
               <div className="flex justify-center items-center w-[320px]">
                 <div className="flex-grow border-t border-gray-300 mr-2" />
