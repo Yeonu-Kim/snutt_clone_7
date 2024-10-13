@@ -4,11 +4,11 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 import { LoadingPage } from '../../components/Loading';
+import { Wrapper } from '../../components/Wrapper';
 import { ModalManageContext } from '../../context/ModalManageContext';
 import { ServiceContext } from '../../context/ServiceContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
 import { useGuardContext } from '../../hooks/useGuardContext';
-
 export const SignInPage = () => {
   const { closeModal } = useGuardContext(ModalManageContext);
   const [id, setId] = useState<string>('');
@@ -55,7 +55,7 @@ export const SignInPage = () => {
   if (isPending) return <LoadingPage />;
 
   return (
-    <div className="LoginWrapper flex flex-col items-center min-h-screen px-4 sm:px-6 lg:px:8">
+    <Wrapper>
       <div className="LoginHeaderWrapper flex items-center justify-between w-full mt-4 pb-6">
         <div className="text-gray-500 cursor-pointer hover:800">
           &larr; 뒤로
@@ -112,6 +112,6 @@ export const SignInPage = () => {
           로그인
         </button>
       </div>
-    </div>
+    </Wrapper>
   );
 };
