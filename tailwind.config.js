@@ -38,6 +38,34 @@ export default {
         popup: 'popup 0.3s ease-out',
       },
     },
+    fontFamily: {
+      kor: [
+        'Pretendard',
+        'ui-sans-serif',
+        'system-ui',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        '"Noto Sans"',
+        'sans-serif',
+      ],
+      eng: [
+        '-apple-system',
+        'Pretendard',
+        'BlinkMacSystemFont',
+        'San Francisco',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        'sans-serif',
+      ],
+    },
+    maxWidth: {
+      375: '375px', // 모바일용
+    },
   },
   plugins: [],
 };
