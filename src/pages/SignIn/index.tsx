@@ -64,11 +64,11 @@ export const SignInPage = () => {
           </div>
           <h1 className="text-xl font-semibold text-center w-full">로그인</h1>
         </div>
-        <div className="LoginWrapper relative flex-auto w-full content-between">
+        <div className="LoginWrapper flex flex-col flex-auto w-full h-full justify-between pb-8">
           <div className="LoginFormWrapper w-full space-y-4">
             <div className="IDWrapper flex flex-col">
               <label htmlFor="id" className="text-gray-700 mb-1">
-                아이디:
+                아이디
               </label>
               <input
                 type="text"
@@ -79,12 +79,12 @@ export const SignInPage = () => {
                 }}
                 onKeyDown={handleKeyDown}
                 placeholder="아이디를 입력하세요"
-                className="py-3 border-b-2 border-gray-300 focus:outline-none focus:border-orange"
+                className="py-1 border-b-2 border-gray-300 focus:outline-none focus:border-orange"
               />
             </div>
             <div className="PasswordWrapper flex flex-col">
               <label htmlFor="password" className="text-gray-700 mb-1">
-                비밀번호:
+                비밀번호
               </label>
               <input
                 type="password"
@@ -95,7 +95,7 @@ export const SignInPage = () => {
                 }}
                 onKeyDown={handleKeyDown}
                 placeholder="비밀번호를 입력하세요"
-                className="py-3 border-b-2 border-gray-300 focus:outline-none focus:border-orange"
+                className="py-1 border-b-2 border-gray-300 focus:outline-none focus:border-orange"
               />
             </div>
             <div className="FindIdPwWrapper flex justify-left text-sm text-gray-500 py-4 gap-2">
@@ -108,15 +108,13 @@ export const SignInPage = () => {
               </a>
             </div>
           </div>
-          <div className="LoginButtonWrapper fixed w-full bottom-8 left-0 px-[20px]">
-            <button
-              className={`LoginButton w-full h-[50px] ${id !== '' && password !== '' ? 'bg-orange text-white cursor-pointer hover:bg-[#E07C2C] transition-colors duration-200' : 'bg-gray-100 cursor-not-allowed text-gray-500'}`}
-              onClick={onClickButton}
-              disabled={!(id !== '' && password !== '')}
-            >
-              로그인
-            </button>
-          </div>
+          <button
+            className={`LoginButton w-full h-[50px] rounded-lg ${id !== '' && password !== '' ? 'bg-orange text-white cursor-pointer hover:bg-[#E07C2C] transition-colors duration-200' : 'bg-gray-100 cursor-not-allowed text-gray-500'}`}
+            onClick={onClickButton}
+            disabled={!(id !== '' && password !== '')}
+          >
+            로그인
+          </button>
         </div>
       </div>
     </Layout>
