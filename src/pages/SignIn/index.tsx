@@ -54,6 +54,12 @@ export const SignInPage = () => {
     }
   };
 
+  const onClickTBD = () => {
+    toast('아직 없는 기능이에요.', {
+      icon: '🔔',
+    });
+  };
+
   if (isPending) return <LoadingPage />;
 
   return (
@@ -101,12 +107,12 @@ export const SignInPage = () => {
                 className="py-1 border-b-2 border-gray text-sm focus:outline-none focus:border-orange"
               />
             </div>
-            <div className="FindIdPwWrapper flex justify-left text-sm text-gray-400 py-4 gap-2">
-              <a href="#" className="hover:text-orange underline">
+            <div className="FindIdPwWrapper flex justify-left text-sm text-gray-500 py-4 gap-2">
+              <a onClick={onClickTBD} className="hover:text-orange underline">
                 아이디 찾기
               </a>
               <span>|</span>
-              <a href="#" className="hover:text-orange underline">
+              <a onClick={onClickTBD} className="hover:text-orange underline">
                 비밀번호 찾기
               </a>
             </div>
