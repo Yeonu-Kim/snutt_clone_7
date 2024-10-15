@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
 
 import { LoadingPage } from '../../components/Loading';
 import { Button } from '../../components/styles/Button';
@@ -10,12 +9,13 @@ import { ModalManageContext } from '../../context/ModalManageContext';
 import { ServiceContext } from '../../context/ServiceContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
 import { useGuardContext } from '../../hooks/useGuardContext';
+import { useNavigation } from '../../hooks/useNavigation';
 
 export const SignInPage = () => {
   const { closeModal } = useGuardContext(ModalManageContext);
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const navigate = useNavigate();
+  const { toMain } = useNavigation();
 
   const { authService } = useGuardContext(ServiceContext);
   const { saveToken } = useGuardContext(TokenManageContext);
@@ -32,7 +32,7 @@ export const SignInPage = () => {
       if (response.type === 'success') {
         saveToken(response.data.token);
         closeModal();
-        navigate('/');
+        toMain();
       } else {
         toast.error(response.message);
       }
@@ -61,7 +61,9 @@ export const SignInPage = () => {
       <div className="LoginWrapper flex flex-col items-center w-full min-h-screen px-[20px] psm:px-2 lg:px:8">
         <div className="LoginHeaderWrapper relative flex w-full mt-4 pb-6">
           <div className="BackButtonWrapper absolute flex top-0.5 left-0 items-center cursor-pointer ">
-            <span className="hover:text-orange">&larr; 뒤로</span>
+            <span className="text-gray-500 hover:text-orange" onClick={toMain}>
+              &larr; 뒤로
+            </span>
           </div>
           <h1 className="text-xl font-semibold text-center w-full">로그인</h1>
         </div>
