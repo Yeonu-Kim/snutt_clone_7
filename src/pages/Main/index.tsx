@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 import { LoadingPage } from '../../components/Loading';
+import { Button } from '../../components/styles/Button';
 import { Layout } from '../../components/styles/Layout';
 import { ServiceContext } from '../../context/ServiceContext';
 import { TokenAuthContext } from '../../context/TokenAuthContext';
@@ -38,20 +39,17 @@ export const MainPage = () => {
             {userData.data.nickname.tag}님!
           </span>
           <div className="flex flex-col items-center gap-8">
-            <button
-              className="flex w-[300px] py-2 rounded bg-mint text-white justify-center"
-              onClick={handleClickLogoutButton}
-            >
+            <Button variant="secondary" onClick={handleClickLogoutButton}>
               로그아웃
-            </button>
+            </Button>
             <div className="flex flex-col items-center gap-4">
               <span>개발자를 위한 버튼입니다.</span>
-              <button
+              <Button
                 className="flex w-[300px] py-2 rounded bg-orange text-white justify-center"
                 onClick={handleClickContaminateButton}
               >
                 잘못된 토큰 저장하기
-              </button>
+              </Button>
             </div>
           </div>
         </div>
