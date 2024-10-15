@@ -4,15 +4,15 @@ export const useNavigation = () => {
   const navigate = useNavigate();
 
   const toMain = () => {
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   const toSignIn = () => {
-    navigate('/signin');
+    navigate('/signin', { replace: true });
   };
 
   const toSignUp = () => {
-    navigate('/signup');
+    navigate('/signup', { replace: true });
   };
 
   return {

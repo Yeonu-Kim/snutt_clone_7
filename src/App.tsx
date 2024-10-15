@@ -8,8 +8,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import type { CallParams } from './api';
 import { impleSnuttApi } from './api';
-import { AuthProtectedRoute } from './components/Auth';
-import { PATH, ROUTE_TYPE } from './constants/route';
+import {
+  AuthProtectedRoute,
+  AuthProtectedSwitchRoute,
+} from './components/Auth';
+import { PATH } from './constants/route';
 import { EnvContext } from './context/EnvContext';
 import { ModalManageContext } from './context/ModalManageContext';
 import { ServiceContext } from './context/ServiceContext';
@@ -30,49 +33,33 @@ import { getUserService } from './usecases/userService';
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용
 
-const routes = [
+const routers = createBrowserRouter([
   {
     path: PATH.SIGNIN,
     element: <SignInPage />,
-    type: ROUTE_TYPE.ALL,
   },
   {
     path: PATH.SIGNUP,
     element: <SignUpPage />,
-    type: ROUTE_TYPE.ALL,
   },
   {
     path: PATH.INDEX,
     element: (
-      <AuthProtectedRoute>
-        <MainPage />
-      </AuthProtectedRoute>
+      <AuthProtectedSwitchRoute
+        authorized={
+          <AuthProtectedRoute>
+            <MainPage />
+          </AuthProtectedRoute>
+        }
+        unauthorized={<LandingPage />}
+      />
     ),
-    type: ROUTE_TYPE.SIGNIN,
-  },
-  {
-    path: '/*',
-    element: <LandingPage />,
-    type: ROUTE_TYPE.UNSIGNIN,
   },
   {
     path: '/*',
     element: <NotFoundPage />,
-    type: ROUTE_TYPE.SIGNIN,
   },
-];
-
-const UnSignInRoutes = routes.filter(
-  (route) =>
-    route.type === ROUTE_TYPE.ALL || route.type === ROUTE_TYPE.UNSIGNIN,
-);
-
-const SignInRoutes = routes.filter(
-  (route) => route.type === ROUTE_TYPE.ALL || route.type === ROUTE_TYPE.SIGNIN,
-);
-
-const UnSignInRouter = createBrowserRouter(UnSignInRoutes);
-const SignInRouter = createBrowserRouter(SignInRoutes);
+]);
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -181,13 +168,9 @@ export const App = () => {
           <ModalManageContext.Provider
             value={{ isModalOpen: isTokenError, closeModal }}
           >
-            {token !== null ? (
-              <TokenAuthContext.Provider value={{ token }}>
-                <RouterProvider router={SignInRouter} />
-              </TokenAuthContext.Provider>
-            ) : (
-              <RouterProvider router={UnSignInRouter} />
-            )}
+            <TokenAuthContext.Provider value={{ token }}>
+              <RouterProvider router={routers} />
+            </TokenAuthContext.Provider>
             <Toaster position="bottom-center" />
           </ModalManageContext.Provider>
         </TokenManageContext.Provider>
