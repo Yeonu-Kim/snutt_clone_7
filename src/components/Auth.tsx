@@ -19,5 +19,9 @@ export const AuthProtectedSwitchRoute = ({
   unauthorized: ReactNode;
 }) => {
   const { token } = useGuardContext(TokenAuthContext);
-  return token !== null ? <>{authorized}</> : <>{unauthorized}</>;
+  return token !== null ? (
+    <AuthProtectedRoute>{authorized}</AuthProtectedRoute>
+  ) : (
+    <>{unauthorized}</>
+  );
 };

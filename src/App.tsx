@@ -49,11 +49,7 @@ const routers = createBrowserRouter([
     path: PATH.INDEX,
     element: (
       <AuthProtectedSwitchRoute
-        authorized={
-          <AuthProtectedRoute>
-            <MainPage />
-          </AuthProtectedRoute>
-        }
+        authorized={<MainPage />}
         unauthorized={<LandingPage />}
       />
     ),
