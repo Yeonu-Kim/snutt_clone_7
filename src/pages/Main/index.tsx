@@ -17,8 +17,13 @@ export const MainPage = () => {
   const { showErrorDialog } = showDialog();
 
   const { data: userData } = useQuery({
-    queryKey: ['UserService', 'getUserInfo', { token }] as const,
-    queryFn: ({ queryKey }) => userService.getUserInfo(queryKey[2]),
+    queryKey: ['UserService', 'getUserInfo', token] as const,
+    queryFn: ({ queryKey }) => {
+      // token이 null이 아닐 때 실행되도 getUserInfo 안에서는 string | null이 들어갈 수 없음.
+      // 241015 연우: 이렇게 강제로 string 타입을 지정해도 되는지?
+      return userService.getUserInfo({ token: queryKey[2] as string });
+    },
+    enabled: token !== null,
   });
 
   const handleClickContaminateButton = () => {
