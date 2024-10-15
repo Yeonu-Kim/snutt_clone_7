@@ -5,7 +5,7 @@ import { TokenAuthContext } from '../context/TokenAuthContext';
 import { useGuardContext } from '../hooks/useGuardContext';
 import { ReSignInModal } from './Modal';
 
-export const AuthProtectedRoute = ({ children }: { children: ReactNode }) => {
+const AuthProtectedRoute = ({ children }: { children: ReactNode }) => {
   const { isModalOpen } = useGuardContext(ModalManageContext);
 
   return isModalOpen ? <ReSignInModal /> : <>{children}</>;
@@ -19,5 +19,9 @@ export const AuthProtectedSwitchRoute = ({
   unauthorized: ReactNode;
 }) => {
   const { token } = useGuardContext(TokenAuthContext);
-  return token !== null ? <>{authorized}</> : <>{unauthorized}</>;
+  return token !== null ? (
+    <AuthProtectedRoute>{authorized}</AuthProtectedRoute>
+  ) : (
+    <>{unauthorized}</>
+  );
 };

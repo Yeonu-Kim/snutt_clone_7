@@ -8,10 +8,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import type { CallParams } from './api';
 import { impleSnuttApi } from './api';
-import {
-  AuthProtectedRoute,
-  AuthProtectedSwitchRoute,
-} from './components/Auth';
+import { AuthProtectedSwitchRoute } from './components/Auth';
 import { PATH } from './constants/route';
 import { EnvContext } from './context/EnvContext';
 import { ModalManageContext } from './context/ModalManageContext';
@@ -46,11 +43,7 @@ const routers = createBrowserRouter([
     path: PATH.INDEX,
     element: (
       <AuthProtectedSwitchRoute
-        authorized={
-          <AuthProtectedRoute>
-            <MainPage />
-          </AuthProtectedRoute>
-        }
+        authorized={<MainPage />}
         unauthorized={<LandingPage />}
       />
     ),
