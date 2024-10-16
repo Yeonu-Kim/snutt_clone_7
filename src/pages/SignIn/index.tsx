@@ -11,7 +11,7 @@ import { useGuardContext } from '../../hooks/useGuardContext';
 import { useNavigation } from '../../hooks/useNavigation';
 
 export const SignInPage = () => {
-  const { closeModal } = useGuardContext(ModalManageContext);
+  const { setOpen } = useGuardContext(ModalManageContext);
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { toMain } = useNavigation();
@@ -30,7 +30,7 @@ export const SignInPage = () => {
     onSuccess: (response) => {
       if (response.type === 'success') {
         saveToken(response.data.token);
-        closeModal();
+        setOpen(false);
         toMain();
       } else {
         toast.error(response.message);

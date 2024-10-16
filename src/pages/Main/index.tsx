@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 
 import { LoadingPage } from '../../components/Loading';
 import { Layout } from '../../components/styles/Layout';
+import { ModalManageContext } from '../../context/ModalManageContext';
 import { ServiceContext } from '../../context/ServiceContext';
 import { TokenAuthContext } from '../../context/TokenAuthContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
@@ -10,18 +11,25 @@ import { useGuardContext } from '../../hooks/useGuardContext';
 
 export const MainPage = () => {
   const { contaminateToken, clearToken } = useGuardContext(TokenManageContext);
+  const { setOpen } = useGuardContext(ModalManageContext);
   const { userService, authService } = useGuardContext(ServiceContext);
   const { token } = useGuardContext(TokenAuthContext);
 
-  const { data: userData } = useQuery({
+  const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,
-    queryFn: ({ queryKey }) => {
-      // token이 null이 아닐 때 실행되도 getUserInfo 안에서는 string | null이 들어갈 수 없음.
-      // 241015 연우: 이렇게 강제로 string 타입을 지정해도 되는지?
-      return userService.getUserInfo({ token: queryKey[2] as string });
+    queryFn: ({ queryKey: [, , t] }) => {
+      if (t === null) {
+        throw new Error();
+      }
+      return userService.getUserInfo({ token: t });
     },
     enabled: token !== null,
   });
+
+  if (isError) {
+    setOpen(true);
+    return null;
+  }
 
   const handleClickContaminateButton = () => {
     contaminateToken('xxx');
