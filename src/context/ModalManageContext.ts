@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 type ModalManageContext = {
   isModalOpen: boolean;
-  closeModal(): void;
+  setOpen(isOpen: boolean): void;
 };
 
 export const ModalManageContext = createContext<ModalManageContext | null>(
