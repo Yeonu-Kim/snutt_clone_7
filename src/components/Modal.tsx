@@ -1,10 +1,17 @@
-import { useNavigate } from 'react-router-dom';
+import { ServiceContext } from '../context/ServiceContext';
+import { TokenManageContext } from '../context/TokenManageContext';
+import { useGuardContext } from '../hooks/useGuardContext';
+import { useNavigation } from '../hooks/useNavigation';
 
 export const ReSignInModal = () => {
-  const navigate = useNavigate();
+  const { toSignIn } = useNavigation();
+  const { authService } = useGuardContext(ServiceContext);
+  const { clearToken } = useGuardContext(TokenManageContext);
 
   const onClickButton = () => {
-    navigate('/signin');
+    authService.logout();
+    clearToken();
+    toSignIn();
   };
 
   return (
