@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
 
 import { LoadingPage } from '../../components/Loading';
 import { Button } from '../../components/styles/Button';
@@ -10,6 +9,7 @@ import { ServiceContext } from '../../context/ServiceContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
 import { useGuardContext } from '../../hooks/useGuardContext';
 import { useNavigation } from '../../hooks/useNavigation';
+import { showDialog } from '../../utils/showDialog';
 
 export const SignInPage = () => {
   const { closeModal } = useGuardContext(ModalManageContext);
@@ -19,6 +19,7 @@ export const SignInPage = () => {
 
   const { authService } = useGuardContext(ServiceContext);
   const { saveToken } = useGuardContext(TokenManageContext);
+  const { showErrorDialog, showTBDDialog } = showDialog();
 
   const { mutate: signIn, isPending } = useMutation({
     mutationFn: ({
@@ -34,11 +35,11 @@ export const SignInPage = () => {
         closeModal();
         toMain();
       } else {
-        toast.error(response.message);
+        showErrorDialog(response.message);
       }
     },
     onError: () => {
-      toast.error('로그인 중 문제가 발생했습니다.');
+      showErrorDialog('로그인 중 문제가 발생했습니다.');
     },
   });
 
@@ -55,9 +56,7 @@ export const SignInPage = () => {
   };
 
   const onClickTBD = () => {
-    toast('아직 없는 기능이에요.', {
-      icon: '🔔',
-    });
+    showTBDDialog();
   };
 
   if (isPending) return <LoadingPage />;
