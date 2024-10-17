@@ -3,7 +3,7 @@ import './index.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import type { CallParams } from './api';
@@ -26,6 +26,7 @@ import { SignInPage } from './pages/SignIn';
 import { SignUpPage } from './pages/SignUp';
 import { getAuthService } from './usecases/authServices';
 import { getUserService } from './usecases/userService';
+import { showDialog } from './utils/showDialog';
 
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용
@@ -87,6 +88,7 @@ export const App = () => {
   const [isTokenError, setIsTokenError] = useState(false);
   // .env 파일 내역 불러오기
   const ENV = useGuardContext(EnvContext);
+  const { showErrorDialog } = showDialog();
 
   const call = async (content: CallParams) => {
     const response = await fetch(`${ENV.API_BASE_URL}/${content.path}`, {
@@ -154,7 +156,7 @@ export const App = () => {
       // 241009 연우:
       // resetQuery에서 오류가 나오면 어떻게 해야할지 몰라서 일단 error 찍는 걸로 넣음.
       queryClient.resetQueries().catch(() => {
-        toast.error(
+        showErrorDialog(
           '예상치 못한 에러가 발생했어요. 페이지를 새로고침 해주세요.',
         );
       });

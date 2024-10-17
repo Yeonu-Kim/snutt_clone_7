@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
 
 import { LoadingPage } from '../../components/Loading';
 import { Button } from '../../components/styles/Button';
@@ -8,11 +7,13 @@ import { ServiceContext } from '../../context/ServiceContext';
 import { TokenAuthContext } from '../../context/TokenAuthContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
 import { useGuardContext } from '../../hooks/useGuardContext';
+import { showDialog } from '../../utils/showDialog';
 
 export const MainPage = () => {
   const { contaminateToken, clearToken } = useGuardContext(TokenManageContext);
   const { userService, authService } = useGuardContext(ServiceContext);
   const { token } = useGuardContext(TokenAuthContext);
+  const { showErrorDialog } = showDialog();
 
   const { data: userData } = useQuery({
     queryKey: ['UserService', 'getUserInfo', { token }] as const,
@@ -57,6 +58,6 @@ export const MainPage = () => {
     );
   }
 
-  toast.error(userData.message);
+  showErrorDialog(userData.message);
   return null;
 };
