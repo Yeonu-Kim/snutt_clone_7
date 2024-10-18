@@ -1,5 +1,5 @@
-import { Navbar } from '../../components/Navbar';
-import { Layout } from '../../components/styles/Layout';
+import { Navbar } from '@/components/Navbar';
+import { Layout } from '@/components/styles/Layout';
 
 export const MyPage = () => {
   return (

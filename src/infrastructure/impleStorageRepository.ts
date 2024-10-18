@@ -1,4 +1,4 @@
-import { getAuthService } from '../usecases/authServices';
+import { getAuthService } from '@/usecases/authServices';
 
 const storageKey = {
   snuttToken: 'snutt_token',

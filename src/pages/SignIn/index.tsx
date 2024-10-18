@@ -1,15 +1,15 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { LoadingPage } from '../../components/Loading';
-import { Button } from '../../components/styles/Button';
-import { Layout } from '../../components/styles/Layout';
-import { ModalManageContext } from '../../context/ModalManageContext';
-import { ServiceContext } from '../../context/ServiceContext';
-import { TokenManageContext } from '../../context/TokenManageContext';
-import { useGuardContext } from '../../hooks/useGuardContext';
-import { useNavigation } from '../../hooks/useNavigation';
-import { showDialog } from '../../utils/showDialog';
+import { LoadingPage } from '@/components/Loading';
+import { Button } from '@/components/styles/Button';
+import { Layout } from '@/components/styles/Layout';
+import { ModalManageContext } from '@/context/ModalManageContext';
+import { ServiceContext } from '@/context/ServiceContext';
+import { TokenManageContext } from '@/context/TokenManageContext';
+import { useGuardContext } from '@/hooks/useGuardContext';
+import { useNavigation } from '@/hooks/useNavigation';
+import { showDialog } from '@/utils/showDialog';
 
 export const SignInPage = () => {
   const { closeModal } = useGuardContext(ModalManageContext);

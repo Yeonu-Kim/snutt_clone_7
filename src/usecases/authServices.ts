@@ -1,7 +1,7 @@
-import type { SignInResponse } from '../entities/auth';
-import { getErrorMessage } from '../entities/error';
-import type { UsecaseResponse } from '../entities/response';
-import { type RepositoryResponse } from '../entities/response';
+import type { SignInResponse } from '@/entities/auth';
+import { getErrorMessage } from '@/entities/error';
+import type { UsecaseResponse } from '@/entities/response';
+import { type RepositoryResponse } from '@/entities/response';
 
 type TokenRepository = {
   getToken: () => string | null;

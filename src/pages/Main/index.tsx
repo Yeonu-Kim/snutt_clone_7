@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { LoadingPage } from '../../components/Loading';
-import { Navbar } from '../../components/Navbar';
-import { Button } from '../../components/styles/Button';
-import { Layout } from '../../components/styles/Layout';
-import { ServiceContext } from '../../context/ServiceContext';
-import { TokenAuthContext } from '../../context/TokenAuthContext';
-import { TokenManageContext } from '../../context/TokenManageContext';
-import { useGuardContext } from '../../hooks/useGuardContext';
-import { showDialog } from '../../utils/showDialog';
+import { LoadingPage } from '@/components/Loading';
+import { Navbar } from '@/components/Navbar';
+import { Button } from '@/components/styles/Button';
+import { Layout } from '@/components/styles/Layout';
+import { ServiceContext } from '@/context/ServiceContext';
+import { TokenAuthContext } from '@/context/TokenAuthContext';
+import { TokenManageContext } from '@/context/TokenManageContext';
+import { useGuardContext } from '@/hooks/useGuardContext';
+import { showDialog } from '@/utils/showDialog';
 
 export const MainPage = () => {
   const { contaminateToken, clearToken } = useGuardContext(TokenManageContext);

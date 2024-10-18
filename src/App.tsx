@@ -1,33 +1,33 @@
-import './reset.css';
-import './index.css';
+import '@/reset.css';
+import '@/index.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import type { CallParams } from './api';
-import { impleSnuttApi } from './api';
-import { AuthProtectedRoute } from './components/Auth';
-import { PATH, ROUTE_TYPE } from './constants/route';
-import { EnvContext } from './context/EnvContext';
-import { ModalManageContext } from './context/ModalManageContext';
-import { ServiceContext } from './context/ServiceContext';
-import { TokenAuthContext } from './context/TokenAuthContext';
-import { TokenManageContext } from './context/TokenManageContext';
-import { useGuardContext } from './hooks/useGuardContext';
-import { impleAuthRepository } from './infrastructure/impleAuthRepository';
-import { implTokenSessionStorageRepository } from './infrastructure/impleStorageRepository';
-import { impleUserRepository } from './infrastructure/impleUserRepository';
-import { NotFoundPage } from './pages/Error';
-import { LandingPage } from './pages/Landing';
-import { MainPage } from './pages/Main';
-import { MyPage } from './pages/MyPage';
-import { SignInPage } from './pages/SignIn';
-import { SignUpPage } from './pages/SignUp';
-import { getAuthService } from './usecases/authServices';
-import { getUserService } from './usecases/userService';
-import { showDialog } from './utils/showDialog';
+import type { CallParams } from '@/api';
+import { impleSnuttApi } from '@/api';
+import { AuthProtectedRoute } from '@/components/Auth';
+import { PATH, ROUTE_TYPE } from '@/constants/route';
+import { EnvContext } from '@/context/EnvContext';
+import { ModalManageContext } from '@/context/ModalManageContext';
+import { ServiceContext } from '@/context/ServiceContext';
+import { TokenAuthContext } from '@/context/TokenAuthContext';
+import { TokenManageContext } from '@/context/TokenManageContext';
+import { useGuardContext } from '@/hooks/useGuardContext';
+import { impleAuthRepository } from '@/infrastructure/impleAuthRepository';
+import { implTokenSessionStorageRepository } from '@/infrastructure/impleStorageRepository';
+import { impleUserRepository } from '@/infrastructure/impleUserRepository';
+import { NotFoundPage } from '@/pages/Error';
+import { LandingPage } from '@/pages/Landing';
+import { MainPage } from '@/pages/Main';
+import { MyPage } from '@/pages/MyPage';
+import { SignInPage } from '@/pages/SignIn';
+import { SignUpPage } from '@/pages/SignUp';
+import { getAuthService } from '@/usecases/authServices';
+import { getUserService } from '@/usecases/userService';
+import { showDialog } from '@/utils/showDialog';
 
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용

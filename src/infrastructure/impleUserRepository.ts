@@ -1,5 +1,5 @@
-import type { SnuttApi } from '../api/apis/api';
-import { type getUserService } from '../usecases/userService';
+import type { SnuttApi } from '@/api/apis/api';
+import { type getUserService } from '@/usecases/userService';
 
 type UserRepository = Parameters<typeof getUserService>[0]['userRepository'];
 
