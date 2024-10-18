@@ -109,12 +109,3 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
     </div>
   );
 };
-
-/*
-          <div
-            key={index}
-            onClick={handleClickMenu}
-            className="flex justify-center align-center w-[30px] h-[30px]"
-          >
-<img src={navMenu.offSrc} alt={navMenu.alt} />
-*/
