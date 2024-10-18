@@ -12,21 +12,21 @@ export const LandingPage = () => {
           id="wrapper-feature"
           className="flex flex-auto w-full h-full flex-col items-center justify-center"
         >
-          <div className="imageWrapper flex flex-col flex-auto justify-center items-center gap-4">
+          <div className="imageWrapper flex flex-col flex-auto justify-center items-center gap-8">
             <img
               id="image-TimeTable"
               src="/logo/snutt_logo.svg"
               alt="timetable"
-              className="w-[60px] h-[60px] "
+              className="w-60 h-60"
             ></img>
-            <h1 className="title font-eng font-extrabold  text-2xl">
+            <h1 className="title font-eng font-extrabold text-2xl">
               TimeTable
             </h1>
           </div>
           <div className="bottomWrapper flex-col">
             <div
               id="wrapper-button"
-              className="w-full h-[72px] mb-[40px] gap-[15px] flex flex-col justify-center items-center"
+              className="w-full h-72 mb-40 gap-15 flex flex-col justify-center items-center"
             >
               <Button onClick={toSignIn}>로그인</Button>
 
@@ -40,19 +40,16 @@ export const LandingPage = () => {
             </div>
             <div
               id="wrapper-SNS"
-              className="w-full h-[85px] flex flex-col justify-center items-center gap-[24px] mb-12"
+              className="w-full h-85 flex flex-col justify-center items-center gap-24 mb-48"
             >
-              <div className="flex justify-center items-center w-[320px]">
-                <div className="flex-grow border-t border-gray mr-2" />
+              <div className="flex justify-center items-center w-[32rem]">
+                <div className="flex-grow border-t border-gray mr-8" />
                 <p className="text-gray text-sm flex items-center">
                   SNS 계정으로 계속하기
                 </p>
-                <div className="flex-grow border-t border-gray ml-2" />
+                <div className="flex-grow border-t border-gray ml-8" />
               </div>
-              <div
-                id="SNS-icon"
-                className="h-[44px] gap-[12px] flex justify-center"
-              >
+              <div id="SNS-icon" className="h-44 gap-12 flex justify-center">
                 <img src="/landing/kakaotalkid.png" alt="kakaotalk" />
                 <img src="/landing/googleid.png" alt="google" />
                 <img src="/landing/facebookid.png" alt="facebook" />
