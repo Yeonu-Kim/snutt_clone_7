@@ -1,6 +1,6 @@
-import { Button } from '../../components/styles/Button';
-import { Layout } from '../../components/styles/Layout';
-import { useNavigation } from '../../hooks/useNavigation';
+import { Button } from '@/components/styles/Button';
+import { Layout } from '@/components/styles/Layout';
+import { useNavigation } from '@/hooks/useNavigation';
 
 export const LandingPage = () => {
   const { toSignIn, toSignUp } = useNavigation();

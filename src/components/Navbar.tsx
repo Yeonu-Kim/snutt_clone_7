@@ -1,8 +1,8 @@
 import toast from 'react-hot-toast';
 
-import { ICON_SRC } from '../constants/fileSource';
-import { PATH } from '../constants/route';
-import { useNavigation } from '../hooks/useNavigation';
+import { ICON_SRC } from '@/constants/fileSource';
+import { PATH } from '@/constants/route';
+import { useNavigation } from '@/hooks/useNavigation';
 
 type Menu = 'timetable' | 'search' | 'ev' | 'friends' | 'mypage';
 
