@@ -13,5 +13,8 @@ export const useNavigation = () => {
     toSignUp: () => {
       navigate('/signup', { replace: true });
     },
+    toMypage: () => {
+      navigate('/mypage', { replace: true });
+    },
   };
 };

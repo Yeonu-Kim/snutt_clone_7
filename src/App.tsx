@@ -22,6 +22,7 @@ import { impleUserRepository } from './infrastructure/impleUserRepository';
 import { NotFoundPage } from './pages/Error';
 import { LandingPage } from './pages/Landing';
 import { MainPage } from './pages/Main';
+import { MyPage } from './pages/MyPage';
 import { SignInPage } from './pages/SignIn';
 import { SignUpPage } from './pages/SignUp';
 import { getAuthService } from './usecases/authServices';
@@ -47,6 +48,15 @@ const routes = [
     element: (
       <AuthProtectedRoute>
         <MainPage />
+      </AuthProtectedRoute>
+    ),
+    type: ROUTE_TYPE.SIGNIN,
+  },
+  {
+    path: PATH.MYPAGE,
+    element: (
+      <AuthProtectedRoute>
+        <MyPage />
       </AuthProtectedRoute>
     ),
     type: ROUTE_TYPE.SIGNIN,

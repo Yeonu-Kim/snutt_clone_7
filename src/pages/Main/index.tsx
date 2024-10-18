@@ -55,7 +55,7 @@ export const MainPage = () => {
             </div>
           </div>
         </div>
-        <Navbar />
+        <Navbar selectedMenu="timetable" />
       </Layout>
     );
   }

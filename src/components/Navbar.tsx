@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 import { ICON_SRC } from '../constants/fileSource';
 import { PATH } from '../constants/route';
+import { useNavigation } from '../hooks/useNavigation';
 
 type Menu = 'timetable' | 'search' | 'ev' | 'friends' | 'mypage';
 
@@ -14,11 +14,18 @@ type NavMenu = {
   alt: string;
 };
 
-export const Navbar = () => {
-  const [menu, setMenu] = useState<Menu>('timetable');
+export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
+  const { toMain, toMypage } = useNavigation();
 
-  const handleClickMenu = (selectedMenu: Menu) => {
-    setMenu(selectedMenu);
+  const handleClickMenu = (nextMenu: Menu) => {
+    switch (nextMenu) {
+      case 'timetable':
+        toMain();
+        break;
+      case 'mypage':
+        toMypage();
+        break;
+    }
   };
 
   const onClickTBD = () => {
@@ -39,7 +46,7 @@ export const Navbar = () => {
       menu: 'search',
       offSrc: ICON_SRC.SEARCH.OFF,
       onSrc: ICON_SRC.SEARCH.ON,
-      to: PATH.SEARCH,
+      to: null,
       alt: '검색',
     },
     {
@@ -74,17 +81,28 @@ export const Navbar = () => {
             onClick={() => {
               handleClickMenu(navMenu.menu);
             }}
-            className="flex justify-center align-center w-[30px] h-[30px]"
+            className="flex justify-center align-center w-[30px] h-[30px] p-[4px]"
           >
-            <img src={navMenu.offSrc} alt={navMenu.alt} />
+            <img
+              className="max-w-full"
+              src={
+                navMenu.menu === selectedMenu ? navMenu.onSrc : navMenu.offSrc
+              }
+              alt={navMenu.alt}
+            />
           </div>
         ) : (
           <div
             key={index}
             onClick={onClickTBD}
-            className="flex justify-center align-center w-[30px] h-[30px]"
+            className="flex justify-center align-center w-[30px] h-[30px] p-[4px]"
           >
-            <img src={navMenu.offSrc} alt={navMenu.alt} />
+            <img
+              src={
+                navMenu.menu === selectedMenu ? navMenu.onSrc : navMenu.offSrc
+              }
+              alt={navMenu.alt}
+            />
           </div>
         );
       })}
