@@ -16,10 +16,10 @@ export const Button = ({
   disabled = false,
 }: ButtonProps) => {
   const baseStyle =
-    'w-[311px] h-[41px] transition-colors duration-200 rounded-md ';
+    'w-[31.1rem] h-[4.1rem] transition-colors duration-200 rounded-md ';
   const variantStyle = {
-    primary: 'cursor-pointer text-white bg-orange hover:bg-[#E07C2C]',
-    secondary: 'cursor-pointer text-white bg-mint hover:bg-[#00A896]',
+    primary: 'cursor-pointer text-white bg-orange hover:bg-orange-dark',
+    secondary: 'cursor-pointer text-white bg-mint hover:bg-mint-dark',
     disable: 'bg-gray-100 cursor-not-allowed text-gray-500',
   };
   const appliedStyle = disabled ? variantStyle.disable : variantStyle[variant];

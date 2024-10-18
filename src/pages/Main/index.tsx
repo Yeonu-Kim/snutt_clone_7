@@ -35,19 +35,19 @@ export const MainPage = () => {
   if (userData.type === 'success') {
     return (
       <Layout>
-        <div className="flex flex-col justify-between items-center h-dvh py-[200px]">
+        <div className="flex flex-col justify-between items-center h-dvh py-[220px]">
           <span className="text-xl font-bold">
             안녕하세요, {userData.data.nickname.nickname} #
             {userData.data.nickname.tag}님!
           </span>
-          <div className="flex flex-col items-center gap-8">
+          <div className="flex flex-col items-center gap-48">
             <Button variant="secondary" onClick={handleClickLogoutButton}>
               로그아웃
             </Button>
-            <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center gap-12">
               <span>개발자를 위한 버튼입니다.</span>
               <Button
-                className="flex w-[300px] py-2 rounded bg-orange text-white justify-center"
+                className="flex w-[300px] py-8 rounded bg-orange text-white justify-center"
                 onClick={handleClickContaminateButton}
               >
                 잘못된 토큰 저장하기

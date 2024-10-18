@@ -73,7 +73,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
   ];
 
   return (
-    <div className="flex justify-between w-full px-[30px] py-[10px] mb-[34px]">
+    <div className="flex justify-between w-full px-30 py-10 mb-34">
       {navMenuList.map((navMenu, index) => {
         return navMenu.to !== null ? (
           <div
@@ -81,7 +81,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
             onClick={() => {
               handleClickMenu(navMenu.menu);
             }}
-            className="flex justify-center align-center w-[30px] h-[30px] p-[4px]"
+            className="flex justify-center align-center w-30 h-30 p-4"
           >
             <img
               className="max-w-full"
@@ -95,7 +95,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
           <div
             key={index}
             onClick={onClickTBD}
-            className="flex justify-center align-center w-[30px] h-[30px] p-[4px]"
+            className="flex justify-center align-center w-30 h-30 p-4"
           >
             <img
               src={

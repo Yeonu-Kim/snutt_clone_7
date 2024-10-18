@@ -3,12 +3,87 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      spacing: () => ({
+        ...Array.from({ length: 96 }, (_, index) => index).reduce(
+          (acc, i) => ({ ...acc, [i]: `${i / 10}rem` }),
+          {},
+        ),
+      }),
+      fontSize: {
+        xs: [
+          '1.2rem',
+          {
+            lineHeight: '1.6rem',
+          },
+        ],
+        sm: [
+          '1.4rem',
+          {
+            lineHeight: '2.0rem',
+          },
+        ],
+        base: [
+          '1.6rem',
+          {
+            lineHeight: '2.4rem',
+          },
+        ],
+
+        lg: [
+          '1.8rem',
+          {
+            lineHeight: '2.8rem',
+          },
+        ],
+        xl: [
+          '2.0rem',
+          {
+            lineHeight: '2.8rem',
+          },
+        ],
+        '2xl': [
+          '2.4rem',
+          {
+            lineHeight: '3.2rem',
+          },
+        ],
+        '3xl': [
+          '3.0rem',
+          {
+            lineHeight: '3.6rem',
+          },
+        ],
+        '4xl': [
+          '3.6rem',
+          {
+            lineHeight: '4.0rem',
+          },
+        ],
+        '5xl': [
+          '4.8rem',
+          {
+            lineHeight: '5.2rem',
+          },
+        ],
+        '6xl': [
+          '6.0rem',
+          {
+            lineHeight: '7.0rem',
+          },
+        ],
+      },
       colors: {
         primary: {
           DEFAULT: '#2bca43',
         },
-        orange: '#F58D3D',
-        mint: '#1BD0C8',
+        orange: {
+          DEFAULT: '#F58D3D',
+          dark: '#E07C2C',
+        },
+        mint: {
+          DEFAULT: '#1BD0C8',
+          dark: '#00A896',
+        },
         blue: '#1D99E8',
         red: '#E54459',
         lime: '#A6D930',
@@ -58,22 +133,14 @@ export default {
         'ui-sans-serif',
         'system-ui',
         '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
         '"Noto Sans"',
         'sans-serif',
       ],
       eng: [
-        '-apple-system',
-        'Pretendard',
-        'BlinkMacSystemFont',
         'San Francisco',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
+        'Pretendard',
+        '-apple-system',
+        '"Noto Sans"',
         'sans-serif',
       ],
     },

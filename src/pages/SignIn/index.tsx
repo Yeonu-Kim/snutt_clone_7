@@ -63,19 +63,19 @@ export const SignInPage = () => {
 
   return (
     <Layout>
-      <div className="LoginWrapper flex flex-col items-center w-full min-h-screen px-[20px] psm:px-2 lg:px:8">
-        <div className="LoginHeaderWrapper relative flex w-full mt-4 pb-6">
-          <div className="BackButtonWrapper absolute flex top-0.5 left-0 items-center cursor-pointer ">
+      <div className="LoginWrapper flex flex-col items-center w-full min-h-screen px-[20px] psm:px-8 lg:px-32">
+        <div className="LoginHeaderWrapper relative flex w-full mt-16 pb-24">
+          <div className="BackButtonWrapper absolute flex top-2 left-0 items-center cursor-pointer ">
             <span className="text-gray-500 hover:text-orange" onClick={toMain}>
               &larr; 뒤로
             </span>
           </div>
           <h1 className="text-xl font-semibold text-center w-full">로그인</h1>
         </div>
-        <div className="LoginWrapper flex flex-col flex-auto w-full h-full justify-between pb-8">
-          <div className="LoginFormWrapper w-full space-y-4">
+        <div className="LoginWrapper flex flex-col flex-auto w-full h-full justify-between pb-32">
+          <div className="LoginFormWrapper w-full space-y-16">
             <div className="IDWrapper flex flex-col">
-              <label htmlFor="id" className="mb-1">
+              <label htmlFor="id" className="mb-4">
                 아이디
               </label>
               <input
@@ -87,11 +87,11 @@ export const SignInPage = () => {
                 }}
                 onKeyDown={handleKeyDown}
                 placeholder="아이디를 입력하세요"
-                className="py-1 border-b-2 border-gray focus:outline-none focus:border-orange"
+                className="py-4 border-b-2 border-gray text-sm focus:outline-none focus:border-orange"
               />
             </div>
             <div className="PasswordWrapper flex flex-col">
-              <label htmlFor="password" className=" mb-1">
+              <label htmlFor="password" className="mb-4">
                 비밀번호
               </label>
               <input
@@ -103,10 +103,10 @@ export const SignInPage = () => {
                 }}
                 onKeyDown={handleKeyDown}
                 placeholder="비밀번호를 입력하세요"
-                className="py-1 border-b-2 border-gray text-sm focus:outline-none focus:border-orange"
+                className="py-4 border-b-2 border-gray text-sm focus:outline-none focus:border-orange"
               />
             </div>
-            <div className="FindIdPwWrapper flex justify-left text-sm text-gray-500 py-4 gap-2">
+            <div className="FindIdPwWrapper flex justify-left text-sm text-gray-500 py-16 gap-16">
               <a onClick={onClickTBD} className="hover:text-orange underline">
                 아이디 찾기
               </a>
