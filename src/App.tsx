@@ -181,9 +181,8 @@ export const App = () => {
     },
   };
 
-  // 모달 창 닫아주는 함수를 context api를 사용하여 관리
-  const closeModal = () => {
-    setIsTokenError(false);
+  const setModalOpen = (isOpen: boolean) => {
+    setIsTokenError(isOpen);
   };
 
   return (
@@ -191,7 +190,7 @@ export const App = () => {
       <ServiceContext.Provider value={services}>
         <TokenManageContext.Provider value={manageToken}>
           <ModalManageContext.Provider
-            value={{ isModalOpen: isTokenError, closeModal }}
+            value={{ isModalOpen: isTokenError, setModalOpen }}
           >
             {token !== null ? (
               <TokenAuthContext.Provider value={{ token }}>
