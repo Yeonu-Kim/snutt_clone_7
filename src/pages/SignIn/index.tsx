@@ -87,7 +87,7 @@ export const SignInPage = () => {
                 }}
                 onKeyDown={handleKeyDown}
                 placeholder="아이디를 입력하세요"
-                className="py-1 border-b-2 border-gray focus:outline-none focus:border-orange"
+                className="py-1 border-b-2 border-gray text-sm focus:outline-none focus:border-orange"
               />
             </div>
             <div className="PasswordWrapper flex flex-col">
