@@ -1,79 +1,20 @@
-import { useQuery } from '@tanstack/react-query';
-
-import { LoadingPage } from '@/components/Loading';
 import { Navbar } from '@/components/Navbar';
-import { Button } from '@/components/styles/Button';
 import { Layout } from '@/components/styles/Layout';
-import { ServiceContext } from '@/context/ServiceContext';
-import { TokenAuthContext } from '@/context/TokenAuthContext';
-import { TokenManageContext } from '@/context/TokenManageContext';
-import { useGuardContext } from '@/hooks/useGuardContext';
-import { showDialog } from '@/utils/showDialog';
 
-import { ModalManageContext } from '../../context/ModalManageContext';
+import { Drawer } from './drawer';
+import { TimeTable } from './timeTable';
 
 export const MainPage = () => {
-  const { contaminateToken, clearToken } = useGuardContext(TokenManageContext);
-  const { setOpen } = useGuardContext(ModalManageContext);
-  const { userService, authService } = useGuardContext(ServiceContext);
-  const { token } = useGuardContext(TokenAuthContext);
-  const { showErrorDialog } = showDialog();
+  // todo: 현재 시간표 id 저장하기 (기본값 recent)
+  // todo: drawer에 의해 현재 시간표 id가 변경될 수 있도록 하기
+  // todo: timetable component는 id를 props로 받아서 렌더링하기
 
-  const { data: userData, isError } = useQuery({
-    queryKey: ['UserService', 'getUserInfo', token] as const,
-    queryFn: ({ queryKey: [, , t] }) => {
-      if (t === null) {
-        throw new Error();
-      }
-      return userService.getUserInfo({ token: t });
-    },
-    enabled: token !== null,
-  });
-
-  if (isError) {
-    setOpen(true);
-    return null;
-  }
-
-  const handleClickContaminateButton = () => {
-    contaminateToken('xxx');
-  };
-
-  const handleClickLogoutButton = () => {
-    authService.logout();
-    clearToken();
-  };
-
-  if (userData === undefined) return <LoadingPage />;
-
-  if (userData.type === 'success') {
-    return (
-      <Layout>
-        <div className="flex flex-col justify-between items-center h-dvh py-[200px]">
-          <span className="text-xl font-bold">
-            안녕하세요, {userData.data.nickname.nickname} #
-            {userData.data.nickname.tag}님!
-          </span>
-          <div className="flex flex-col items-center gap-8">
-            <Button variant="secondary" onClick={handleClickLogoutButton}>
-              로그아웃
-            </Button>
-            <div className="flex flex-col items-center gap-4">
-              <span>개발자를 위한 버튼입니다.</span>
-              <Button
-                className="flex w-[300px] py-2 rounded bg-orange text-white justify-center"
-                onClick={handleClickContaminateButton}
-              >
-                잘못된 토큰 저장하기
-              </Button>
-            </div>
-          </div>
-        </div>
-        <Navbar selectedMenu="timetable" />
-      </Layout>
-    );
-  }
-
-  showErrorDialog(userData.message);
-  return null;
+  return (
+    <Layout>
+      <p>메인페이지입니다.</p>
+      <TimeTable />
+      <Drawer />
+      <Navbar selectedMenu="timetable" />
+    </Layout>
+  );
 };
