@@ -4,13 +4,12 @@ import { LoadingPage } from '@/components/Loading';
 import { Navbar } from '@/components/Navbar';
 import { Button } from '@/components/styles/Button';
 import { Layout } from '@/components/styles/Layout';
+import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { TokenManageContext } from '@/context/TokenManageContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { showDialog } from '@/utils/showDialog';
-
-import { ModalManageContext } from '@/context/ModalManageContext';
 
 export const MyPage = () => {
   const { contaminateToken, clearToken } = useGuardContext(TokenManageContext);
