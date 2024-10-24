@@ -8,14 +8,14 @@ import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenManageContext } from '@/context/TokenManageContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
-import { useNavigation } from '@/hooks/useNavigation';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog';
 
 export const SignInPage = () => {
   const { setOpen } = useGuardContext(ModalManageContext);
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { toMain } = useNavigation();
+  const { toMain } = useRouteNavigation();
 
   const { authService } = useGuardContext(ServiceContext);
   const { saveToken } = useGuardContext(TokenManageContext);
