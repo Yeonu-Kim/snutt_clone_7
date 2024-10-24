@@ -1,10 +1,10 @@
 import { ServiceContext } from '../context/ServiceContext';
 import { TokenManageContext } from '../context/TokenManageContext';
 import { useGuardContext } from '../hooks/useGuardContext';
-import { useNavigation } from '../hooks/useNavigation';
+import { useRouteNavigation } from '../hooks/useRouteNavigation.ts';
 
 export const ReSignInModal = () => {
-  const { toSignIn } = useNavigation();
+  const { toSignIn } = useRouteNavigation();
   const { authService } = useGuardContext(ServiceContext);
   const { clearToken } = useGuardContext(TokenManageContext);
 
