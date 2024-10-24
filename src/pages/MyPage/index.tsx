@@ -10,7 +10,7 @@ import { TokenManageContext } from '@/context/TokenManageContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { showDialog } from '@/utils/showDialog';
 
-import { ModalManageContext } from '../../context/ModalManageContext';
+import { ModalManageContext } from '@/context/ModalManageContext';
 
 export const MyPage = () => {
   const { contaminateToken, clearToken } = useGuardContext(TokenManageContext);
