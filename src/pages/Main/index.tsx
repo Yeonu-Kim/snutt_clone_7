@@ -28,7 +28,9 @@ export const MainPage = () => {
         onClose={closeDrawer}
         setTimetableId={setTimetableId}
       />
-      <p>메인페이지입니다.</p>
+      <div className="flex flex-auto">
+        <p>메인페이지입니다.</p>
+      </div>
       <TimeTable timetableId={timetableId} />
       <Navbar selectedMenu="timetable" />
     </Layout>
