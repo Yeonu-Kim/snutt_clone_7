@@ -50,13 +50,11 @@ export const Inforamation = () => {
             id="upper-bar"
             className="w-full py-4 px-6 top-0 bg-white flex justify-center items-center fixed max-w-375"
           >
-            <div className="BackButtonWrapper absolute left-3 bg-gray-100 p-2 rounded-lg flex items-center
-            cursor-pointer text-gray-500 hover:text-orange">
-              <span
-                onClick={toMypage}
-              >
-                &larr; 뒤로
-              </span>
+            <div
+              className="BackButtonWrapper absolute left-3 bg-gray-100 p-2 rounded-lg flex items-center
+            cursor-pointer text-gray-500 hover:text-orange"
+            >
+              <span onClick={toMypage}>&larr; 뒤로</span>
             </div>
             <p>내 계정</p>
           </div>

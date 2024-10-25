@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { LoadingPage } from '@/components/Loading.tsx';
-import {Navbar} from "@/components/Navbar.tsx";
+import { Navbar } from '@/components/Navbar.tsx';
 import { Button } from '@/components/styles/Button.tsx';
 import { Layout } from '@/components/styles/Layout.tsx';
 import { ModalManageContext } from '@/context/ModalManageContext.ts';
@@ -74,7 +74,8 @@ export const NewMyPage = () => {
               <div className="m-4">내 계정</div>
               <div className="m-4">
                 <span className="text-gray-400 ">
-                  {userData.data.nickname.nickname} {userData.data.nickname.tag}{' '}{'>'}
+                  {userData.data.nickname.nickname} {userData.data.nickname.tag}{' '}
+                  {'>'}
                 </span>
               </div>
             </button>
