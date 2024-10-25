@@ -16,5 +16,8 @@ export const useRouteNavigation = () => {
     toMypage: () => {
       navigate('/mypage', { replace: true });
     },
+    toInformation: () => {
+      navigate('/mypage/information', { replace: true });
+    },
   };
 };

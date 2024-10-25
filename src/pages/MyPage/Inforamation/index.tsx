@@ -1,24 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { LoadingPage } from '@/components/Loading.tsx';
-import {Navbar} from "@/components/Navbar.tsx";
-import { Button } from '@/components/styles/Button.tsx';
+import { Navbar } from '@/components/Navbar.tsx';
 import { Layout } from '@/components/styles/Layout.tsx';
 import { ModalManageContext } from '@/context/ModalManageContext.ts';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
-import { TokenManageContext } from '@/context/TokenManageContext.ts';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog.ts';
 
-export const NewMyPage = () => {
-  const { clearToken } = useGuardContext(TokenManageContext);
+export const Inforamation = () => {
   const { token } = useGuardContext(TokenAuthContext);
-  const { userService, authService } = useGuardContext(ServiceContext);
+  const { userService } = useGuardContext(ServiceContext);
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
-  const { toMain, toInformation } = useRouteNavigation();
+  const { toMypage, toInformation } = useRouteNavigation();
 
   const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,
@@ -35,12 +32,6 @@ export const NewMyPage = () => {
     setOpen(true);
     return null;
   }
-
-  const handleClickLogoutButton = () => {
-    authService.logout();
-    clearToken();
-    toMain();
-  };
 
   const handleClickInformationButton = () => {
     toInformation();
@@ -59,7 +50,15 @@ export const NewMyPage = () => {
             id="upper-bar"
             className="w-full py-4 px-6 top-0 bg-white flex justify-center items-center fixed max-w-375"
           >
-            <p>마이페이지</p>
+            <div className="BackButtonWrapper absolute left-3 bg-gray-100 p-2 rounded-lg flex items-center
+            cursor-pointer text-gray-500 hover:text-orange">
+              <span
+                onClick={toMypage}
+              >
+                &larr; 뒤로
+              </span>
+            </div>
+            <p>내 계정</p>
           </div>
           <div
             id="Main-Container"
@@ -74,13 +73,11 @@ export const NewMyPage = () => {
               <div className="m-4">내 계정</div>
               <div className="m-4">
                 <span className="text-gray-400 ">
-                  {userData.data.nickname.nickname} {userData.data.nickname.tag}{' '}{'>'}
+                  {userData.data.nickname.nickname} {userData.data.nickname.tag}{' '}
+                  {'>'}
                 </span>
               </div>
             </button>
-            <Button variant="secondary" onClick={handleClickLogoutButton}>
-              로그아웃
-            </Button>
           </div>
           <div className="bottom-0 w-full bg-white fixed max-w-375">
             <Navbar selectedMenu="mypage" />

@@ -32,6 +32,7 @@ import {
   AuthProtectedRoute,
   AuthProtectedSwitchRoute,
 } from './components/Auth';
+import {Inforamation} from "@/pages/MyPage/Inforamation";
 
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용
@@ -66,7 +67,7 @@ const routers = createBrowserRouter([
     path: PATH.MYPAGE.INFORMATION.ROOT,
     element: (
       <AuthProtectedRoute>
-        <>Information!</>
+        <Inforamation/>
       </AuthProtectedRoute>
     ),
   },
