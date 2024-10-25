@@ -22,6 +22,7 @@ import { NotFoundPage } from '@/pages/Error';
 import { LandingPage } from '@/pages/Landing';
 import { MainPage } from '@/pages/Main';
 import { Account } from '@/pages/MyPage/Inforamation';
+import { ChangeNickname } from '@/pages/MyPage/Inforamation/Nickname';
 import { NewMyPage } from '@/pages/MyPage/newIndex.tsx';
 import { SignInPage } from '@/pages/SignIn';
 import { SignUpPage } from '@/pages/SignUp';
@@ -33,7 +34,6 @@ import {
   AuthProtectedRoute,
   AuthProtectedSwitchRoute,
 } from './components/Auth';
-import { ChangeNickname } from '@/pages/MyPage/Inforamation/Nickname';
 
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용
