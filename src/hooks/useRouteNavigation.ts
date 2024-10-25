@@ -1,23 +1,28 @@
 import { useNavigate } from 'react-router-dom';
+import { PATH } from '@/constants/route.ts';
 
 export const useRouteNavigation = () => {
   const navigate = useNavigate();
+  const { INDEX, MYPAGE, SIGNUP, SIGNIN } = PATH;
 
   return {
     toMain: () => {
-      navigate('/', { replace: true });
+      navigate(INDEX, { replace: true });
     },
     toSignIn: () => {
-      navigate('/signin', { replace: true });
+      navigate(SIGNIN, { replace: true });
     },
     toSignUp: () => {
-      navigate('/signup', { replace: true });
+      navigate(SIGNUP, { replace: true });
     },
     toMypage: () => {
-      navigate('/mypage', { replace: true });
+      navigate(MYPAGE.ROOT, { replace: true });
     },
     toInformation: () => {
-      navigate('/mypage/information', { replace: true });
+      navigate(MYPAGE.INFORMATION.ROOT, { replace: true });
+    },
+    toNickname: () => {
+      navigate(MYPAGE.INFORMATION.NICKNAME, { replace: true });
     },
   };
 };

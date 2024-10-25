@@ -5,8 +5,8 @@ export const PATH = {
   MYPAGE: {
     ROOT: '/mypage',
     INFORMATION: {
-      ROOT: '/mypage/information',
-      NICKNAME: '/mypage/information/nickname',
+      ROOT: '/mypage/account',
+      NICKNAME: '/mypage/account/change-nickname',
     },
   },
   SEARCH: '/search',
