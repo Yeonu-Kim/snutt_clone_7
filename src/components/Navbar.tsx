@@ -2,7 +2,7 @@ import toast from 'react-hot-toast';
 
 import { ICON_SRC } from '@/constants/fileSource';
 import { PATH } from '@/constants/route';
-import { useNavigation } from '@/hooks/useNavigation';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 
 type Menu = 'timetable' | 'search' | 'ev' | 'friends' | 'mypage';
 
@@ -15,7 +15,7 @@ type NavMenu = {
 };
 
 export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
-  const { toMain, toMypage } = useNavigation();
+  const { toMain, toMypage } = useRouteNavigation();
 
   const handleClickMenu = (nextMenu: Menu) => {
     switch (nextMenu) {
@@ -67,7 +67,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
       menu: 'mypage',
       offSrc: ICON_SRC.MYPAGE.OFF,
       onSrc: ICON_SRC.MYPAGE.ON,
-      to: PATH.MYPAGE,
+      to: PATH.MYPAGE.ROOT,
       alt: '마이페이지',
     },
   ];

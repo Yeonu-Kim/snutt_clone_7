@@ -1,9 +1,9 @@
 import { Button } from '@/components/styles/Button';
 import { Layout } from '@/components/styles/Layout';
-import { useNavigation } from '@/hooks/useNavigation';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 
 export const LandingPage = () => {
-  const { toSignIn, toSignUp } = useNavigation();
+  const { toSignIn, toSignUp } = useRouteNavigation();
 
   return (
     <Layout>
