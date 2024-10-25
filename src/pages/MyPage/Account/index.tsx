@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
 import { Layout } from '@/components/styles/Layout.tsx';
+import { WhiteButtonBox } from '@/components/styles/WhiteButtonBox.tsx';
 import { ModalManageContext } from '@/context/ModalManageContext.ts';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
@@ -59,11 +60,9 @@ export const AccountPage = () => {
             className="h-lvh  flex flex-col justify-start items-center
             p-5 w-full mt-[60px] mb-[80px] bg-gray-200 gap-5"
           >
-            <button
-              id="Account"
+            <WhiteButtonBox
               onClick={toNickname}
-              className="flex items-center bg-white w-[335px] h-10 rounded-lg justify-between
-              cursor-pointer hover:bg-gray-100 transition-colors duration-200"
+              className="flex items-center justify-between"
             >
               <div className="m-4">닉네임 변경</div>
               <div className="m-4">
@@ -72,7 +71,7 @@ export const AccountPage = () => {
                   {'>'}
                 </span>
               </div>
-            </button>
+            </WhiteButtonBox>
           </div>
           <div className="bottom-0 w-full bg-white fixed max-w-375">
             <Navbar selectedMenu="mypage" />

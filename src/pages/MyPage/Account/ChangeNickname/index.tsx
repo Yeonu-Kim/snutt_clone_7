@@ -63,7 +63,7 @@ export const ChangeNicknamePage = () => {
           </div>
           <div
             id="Main-Container"
-            className="h-lvh  flex flex-col justify-start items-center
+            className="h-lvh flex flex-col justify-start items-center
             p-5 w-full mt-[60px] mb-[80px] bg-gray-200"
           >
             <ChangeNicknamePTag>
