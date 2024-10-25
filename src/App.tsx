@@ -21,9 +21,9 @@ import { impleUserRepository } from '@/infrastructure/impleUserRepository';
 import { NotFoundPage } from '@/pages/Error';
 import { LandingPage } from '@/pages/Landing';
 import { MainPage } from '@/pages/Main';
+import { Mypage } from '@/pages/MyPage/index.tsx';
 import { Account } from '@/pages/MyPage/Inforamation';
 import { ChangeNickname } from '@/pages/MyPage/Inforamation/Nickname';
-import { NewMyPage } from '@/pages/MyPage/newIndex.tsx';
 import { SignInPage } from '@/pages/SignIn';
 import { SignUpPage } from '@/pages/SignUp';
 import { getAuthService } from '@/usecases/authServices';
@@ -60,7 +60,7 @@ const routers = createBrowserRouter([
     path: PATH.MYPAGE.ROOT,
     element: (
       <AuthProtectedRoute>
-        <NewMyPage />
+        <Mypage />
       </AuthProtectedRoute>
     ),
   },

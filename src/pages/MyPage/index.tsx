@@ -1,22 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { LoadingPage } from '@/components/Loading';
-import { Navbar } from '@/components/Navbar';
-import { Button } from '@/components/styles/Button';
-import { Layout } from '@/components/styles/Layout';
-import { ModalManageContext } from '@/context/ModalManageContext';
-import { ServiceContext } from '@/context/ServiceContext';
-import { TokenAuthContext } from '@/context/TokenAuthContext';
-import { TokenManageContext } from '@/context/TokenManageContext';
-import { useGuardContext } from '@/hooks/useGuardContext';
-import { showDialog } from '@/utils/showDialog';
+import { LoadingPage } from '@/components/Loading.tsx';
+import { Navbar } from '@/components/Navbar.tsx';
+import { Button } from '@/components/styles/Button.tsx';
+import { Layout } from '@/components/styles/Layout.tsx';
+import { ModalManageContext } from '@/context/ModalManageContext.ts';
+import { ServiceContext } from '@/context/ServiceContext.ts';
+import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
+import { TokenManageContext } from '@/context/TokenManageContext.ts';
+import { useGuardContext } from '@/hooks/useGuardContext.ts';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
+import { showDialog } from '@/utils/showDialog.ts';
 
-export const MyPage = () => {
-  const { contaminateToken, clearToken } = useGuardContext(TokenManageContext);
-  const { setOpen } = useGuardContext(ModalManageContext);
-  const { userService, authService } = useGuardContext(ServiceContext);
+export const Mypage = () => {
+  const { clearToken } = useGuardContext(TokenManageContext);
   const { token } = useGuardContext(TokenAuthContext);
+  const { userService, authService } = useGuardContext(ServiceContext);
+  const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
+  const { toMain, toInformation } = useRouteNavigation();
 
   const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,
@@ -34,13 +36,14 @@ export const MyPage = () => {
     return null;
   }
 
-  const handleClickContaminateButton = () => {
-    contaminateToken('xxx');
-  };
-
   const handleClickLogoutButton = () => {
     authService.logout();
     clearToken();
+    toMain();
+  };
+
+  const handleClickInformationButton = () => {
+    toInformation();
   };
 
   if (userData === undefined) return <LoadingPage />;
@@ -48,27 +51,42 @@ export const MyPage = () => {
   if (userData.type === 'success') {
     return (
       <Layout>
-        <div className="flex flex-col justify-between items-center h-dvh py-[200px]">
-          <span className="text-xl font-bold">
-            안녕하세요, {userData.data.nickname.nickname} #
-            {userData.data.nickname.tag}님!
-          </span>
-          <div className="flex flex-col items-center gap-8">
+        <div
+          id="Wrapper-Container"
+          className="flex flex-col items-center w-full min-h-screen"
+        >
+          <div
+            id="upper-bar"
+            className="w-full py-4 px-6 top-0 bg-white flex justify-center items-center fixed max-w-375"
+          >
+            <p>마이페이지</p>
+          </div>
+          <div
+            id="Main-Container"
+            className="h-lvh  flex flex-col justify-center items-center w-full mt-[60px] mb-[80px] bg-gray-200 gap-5"
+          >
+            <button
+              id="Account"
+              onClick={handleClickInformationButton}
+              className="flex items-center bg-white w-[335px] h-14 rounded-lg justify-between
+              cursor-pointer hover:bg-gray-100 transition-colors duration-200"
+            >
+              <div className="m-4">내 계정</div>
+              <div className="m-4">
+                <span className="text-gray-400 ">
+                  {userData.data.nickname.nickname}#{userData.data.nickname.tag}{' '}
+                  {'>'}
+                </span>
+              </div>
+            </button>
             <Button variant="secondary" onClick={handleClickLogoutButton}>
               로그아웃
             </Button>
-            <div className="flex flex-col items-center gap-4">
-              <span>개발자를 위한 버튼입니다.</span>
-              <Button
-                className="flex w-[300px] py-2 rounded bg-orange text-white justify-center"
-                onClick={handleClickContaminateButton}
-              >
-                잘못된 토큰 저장하기
-              </Button>
-            </div>
+          </div>
+          <div className="bottom-0 w-full bg-white fixed max-w-375">
+            <Navbar selectedMenu="mypage" />
           </div>
         </div>
-        <Navbar selectedMenu="mypage" />
       </Layout>
     );
   }
