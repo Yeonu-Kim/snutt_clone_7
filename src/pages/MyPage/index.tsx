@@ -4,6 +4,7 @@ import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
 import { Button } from '@/components/styles/Button.tsx';
 import { Layout } from '@/components/styles/Layout.tsx';
+import { WhiteButtonBox } from '@/components/styles/WhiteButtonBox.tsx';
 import { ModalManageContext } from '@/context/ModalManageContext.ts';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
@@ -65,11 +66,9 @@ export const MyPage = () => {
             id="Main-Container"
             className="h-lvh  flex flex-col justify-center items-center w-full mt-[60px] mb-[80px] bg-gray-200 gap-5"
           >
-            <button
-              id="Account"
+            <WhiteButtonBox
+              className="flex items-center justify-between h-14"
               onClick={handleClickInformationButton}
-              className="flex items-center bg-white w-[335px] h-14 rounded-lg justify-between
-              cursor-pointer hover:bg-gray-100 transition-colors duration-200"
             >
               <div className="m-4">내 계정</div>
               <div className="m-4">
@@ -78,7 +77,7 @@ export const MyPage = () => {
                   {'>'}
                 </span>
               </div>
-            </button>
+            </WhiteButtonBox>
             <Button variant="secondary" onClick={handleClickLogoutButton}>
               로그아웃
             </Button>
