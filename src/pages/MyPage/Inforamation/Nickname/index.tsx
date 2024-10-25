@@ -63,28 +63,36 @@ export const ChangeNickname = () => {
           <div
             id="Main-Container"
             className="h-lvh  flex flex-col justify-start items-center
-            p-5 w-full mt-[60px] mb-[80px] bg-gray-200 gap-1"
+            p-5 w-full mt-[60px] mb-[80px] bg-gray-200"
           >
-            <p className="text-gray-400 text-[14px] text-left w-full pl-3">
+            <p className="text-gray-400 text-[12px] text-left w-full pl-3.5">
               닉네임 (공백 포함 한/영/숫자 10자 이내)
             </p>
             <input
               placeholder={userData.data.nickname.nickname}
-              className="bg-white w-[335px] h-10 rounded-lg pl-4 m-1"
+              className="bg-white w-[335px] h-10 rounded-lg pl-4 mb-3 m-1"
             />
-            <button
-              id="Account"
-              className="flex items-center justify-between bg-white w-[335px] h-10 rounded-lg
-              cursor-pointer hover:bg-gray-100 transition-colors duration-200"
-            >
-              <div className="m-4">닉네임 변경</div>
-              <div className="m-4">
-                <span className="text-gray-400 ">
-                  {userData.data.nickname.nickname}#{userData.data.nickname.tag}{' '}
-                  {'>'}
-                </span>
-              </div>
-            </button>
+            <p className="text-gray-400 text-[12px] text-left w-full pl-3.5">
+              최초 닉네임은 가입 시 임의 부여된 닉네임으로,
+            </p>
+            <p className="text-gray-400 text-[12px] text-left w-full pl-3.5 mb-3">
+              앞의 이름을 변경할 시 4자리 숫자 태그는 자동 변경됩니다.
+            </p>
+            <p className="text-gray-400 text-[12px] text-left w-full pl-3.5 mb-5">
+              변경된 닉네임은 나의 모든 친구에게 반영됩니다.
+            </p>
+            <p className="text-gray-400 text-[12px] text-left w-full pl-3.5 font-bold">
+              닉네임 조건
+            </p>
+            <p className="text-gray-400 text-[12px] text-left w-full pl-3.5">
+              <ul>- 불완전한 한글(예: ㄱ, ㅏ)은 포함될 수 없습니다.</ul>
+              <ul>- 영문 대/소문자는 구분됩니다.</ul>
+              <ul>
+                - 상대에게 불쾌감을 주는 등 부적절한 닉네임은 관리자에 의해
+                안내없이 수정될 수 있습니다.
+              </ul>
+            </p>
+            <p className="text-gray-400 text-[12px] text-left w-full pl-3.5"></p>
           </div>
           <div className="bottom-0 w-full bg-white fixed max-w-375">
             <Navbar selectedMenu="mypage" />
