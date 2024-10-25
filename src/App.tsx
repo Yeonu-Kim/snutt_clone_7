@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Account } from 'src/pages/MyPage/Account';
 
 import type { CallParams } from '@/api';
 import { impleSnuttApi } from '@/api';
@@ -21,9 +22,8 @@ import { impleUserRepository } from '@/infrastructure/impleUserRepository';
 import { NotFoundPage } from '@/pages/Error';
 import { LandingPage } from '@/pages/Landing';
 import { MainPage } from '@/pages/Main';
-import { MyPage } from '@/pages/MyPage/index.tsx';
-import { Account } from 'src/pages/MyPage/Account';
 import { ChangeNickname } from '@/pages/MyPage/Account/ChangeNickname';
+import { MyPage } from '@/pages/MyPage/index.tsx';
 import { SignInPage } from '@/pages/SignIn';
 import { SignUpPage } from '@/pages/SignUp';
 import { getAuthService } from '@/usecases/authServices';
