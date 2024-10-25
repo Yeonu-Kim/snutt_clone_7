@@ -12,7 +12,7 @@ import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog.ts';
 
-export const Mypage = () => {
+export const MyPage = () => {
   const { clearToken } = useGuardContext(TokenManageContext);
   const { token } = useGuardContext(TokenAuthContext);
   const { userService, authService } = useGuardContext(ServiceContext);
