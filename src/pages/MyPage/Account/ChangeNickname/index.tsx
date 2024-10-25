@@ -10,7 +10,7 @@ import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog.ts';
 
-export const ChangeNickname = () => {
+export const ChangeNicknamePage = () => {
   const { token } = useGuardContext(TokenAuthContext);
   const { userService } = useGuardContext(ServiceContext);
   const { setOpen } = useGuardContext(ModalManageContext);
