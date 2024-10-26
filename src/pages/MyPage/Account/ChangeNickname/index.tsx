@@ -10,6 +10,7 @@ import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog.ts';
+import {useState} from "react";
 
 export const ChangeNicknamePage = () => {
   const { token } = useGuardContext(TokenAuthContext);
@@ -17,6 +18,19 @@ export const ChangeNicknamePage = () => {
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
   const { toInformation } = useRouteNavigation();
+  const [nickname, setNickname] = useState<string>()
+
+  // const onClickButton = () => {
+  //   if (nickname !== '') {
+  //     signIn({inputId: nickname);
+  //   }
+  // };
+
+  // const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (e.key === 'Enter' && nickname !== '') {
+  //     onClickButton();
+  //   }
+  // };
 
   const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,
@@ -70,6 +84,12 @@ export const ChangeNicknamePage = () => {
               <span>닉네임 (공백 포함 한/영/숫자 10자 이내)</span>
             </ChangeNicknamePTag>
             <input
+              type="text"
+              id="nickname"
+              value={nickname}
+              onChange={(e) => {
+                setNickname(e.target.value);
+              }}
               placeholder={userData.data.nickname.nickname}
               className="bg-white w-[335px] h-10 rounded-lg pl-4 mb-3 m-1"
             />
