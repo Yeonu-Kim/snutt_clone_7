@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import {useState} from "react";
 
 import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
@@ -10,7 +11,6 @@ import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog.ts';
-import {useState} from "react";
 
 export const ChangeNicknamePage = () => {
   const { token } = useGuardContext(TokenAuthContext);
