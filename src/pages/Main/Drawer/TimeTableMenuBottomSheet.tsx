@@ -44,7 +44,7 @@ type BottomSheetProps = {
   options: { label: string; action: () => void }[];
 };
 
-export const BottomSheet = ({ onClose, options }: BottomSheetProps) => {
+const BottomSheet = ({ onClose, options }: BottomSheetProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
