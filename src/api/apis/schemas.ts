@@ -1,5 +1,3 @@
-import type { Lecture } from '@/entities/lecture';
-
 import type { DateTime } from './types';
 
 // Request
@@ -36,7 +34,32 @@ export type TimeTableResponse = {
   user_id: string;
   year: number;
   semester: 1 | 2 | 3 | 4;
-  lecture_list: Lecture[];
+  lecture_list: LectureResponse[];
   title: string;
   updated_at: DateTime;
+};
+
+export type LectureResponse = {
+  _id: string;
+  academic_year?: string;
+  category?: string;
+  class_time_json: ClassTimeResponse[];
+  classification?: string;
+  credit: number;
+  department?: string;
+  instructor: string;
+  lecture_number: string;
+  quota: number;
+  remark: string;
+  course_number?: string;
+  course_title: string;
+  colorIndex: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+  lecture_id?: string;
+};
+
+export type ClassTimeResponse = {
+  day: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  place: string;
+  start_time: DateTime;
+  end_time: DateTime;
 };

@@ -34,6 +34,8 @@ import {
   AuthProtectedRoute,
   AuthProtectedSwitchRoute,
 } from './components/Auth';
+import { impleTimeTableRepository } from './infrastructure/impleTimeTableRespository';
+import { getTimeTableService } from './usecases/timeTableService';
 
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용
@@ -137,16 +139,19 @@ export const App = () => {
   const authRepository = impleAuthRepository({ snuttApi });
   const userRepository = impleUserRepository({ snuttApi });
   const temporaryStorageRepository = implTokenSessionStorageRepository();
+  const timeTableRepository = impleTimeTableRepository({ snuttApi });
 
   const authService = getAuthService({
     authRepository,
     tokenRepository: temporaryStorageRepository,
   });
   const userService = getUserService({ userRepository });
+  const timeTableService = getTimeTableService({ timeTableRepository });
 
   const services = {
     authService,
     userService,
+    timeTableService,
   };
 
   // 토큰과 관련된 context는 따로 저장
