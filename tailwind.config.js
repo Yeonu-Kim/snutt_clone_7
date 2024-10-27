@@ -41,6 +41,10 @@ export default {
           '0%': { opacity: 0, transform: 'scale(0.8)' },
           '100%': { opacity: 1, transform: 'scale(1)' },
         },
+        popout: {
+          '0%': { opacity: 1, transform: 'scale(1)' },
+          '100%': { opacity: 0, transform: 'scale(0.8)' },
+        },
       },
       animation: {
         'updown-1': 'moveUpDown 2s infinite ease-in-out 0.1s',
@@ -49,7 +53,8 @@ export default {
         'updown-4': 'moveUpDown 2s infinite ease-in-out 0.7s',
         'updown-5': 'moveUpDown 2s infinite ease-in-out 0.9s',
         slideUp: 'slideInUp 0.5s ease-in-out',
-        popup: 'popup 0.3s ease-out',
+        popup: 'popup 0.3s ease-in-out',
+        popout: 'popout 0.3s ease-in-out forwards',
       },
     },
     fontFamily: {

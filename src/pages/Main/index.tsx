@@ -1,19 +1,37 @@
+// MainPage.js
+import { useState } from 'react';
+
 import { Navbar } from '@/components/Navbar';
 import { Layout } from '@/components/styles/Layout';
+import { Drawer } from '@/pages/Main/Drawer';
+import { Header } from '@/pages/Main/Header';
 
-import { Drawer } from './drawer';
-import { TimeTable } from './timeTable';
+import { TimeTable } from './TimeTable';
 
 export const MainPage = () => {
-  // todo: 현재 시간표 id 저장하기 (기본값 recent)
-  // todo: drawer에 의해 현재 시간표 id가 변경될 수 있도록 하기
-  // todo: timetable component는 id를 props로 받아서 렌더링하기
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const [timetableId, setTimetableId] = useState<string | null>(null);
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!isDrawerOpen);
+  };
+
+  const closeDrawer = () => {
+    setDrawerOpen(false);
+  };
 
   return (
     <Layout>
-      <p>메인페이지입니다.</p>
-      <TimeTable />
-      <Drawer />
+      <Header onMenuClick={toggleDrawer} />
+      <Drawer
+        isOpen={isDrawerOpen}
+        onClose={closeDrawer}
+        setTimetableId={setTimetableId}
+      />
+      <div className="flex flex-auto">
+        <p>메인페이지입니다.</p>
+      </div>
+      <TimeTable timetableId={timetableId} />
       <Navbar selectedMenu="timetable" />
     </Layout>
   );
