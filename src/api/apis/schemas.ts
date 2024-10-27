@@ -1,3 +1,5 @@
+import type { Lecture } from '@/entities/lecture';
+
 import type { DateTime } from './types';
 
 // Request
@@ -27,4 +29,14 @@ export type UserResponse = {
   local_id: string;
   fbName?: string;
   nickname: NicknameResponse;
+};
+
+export type TimeTableResponse = {
+  _id: string;
+  user_id: string;
+  year: number;
+  semester: 1 | 2 | 3 | 4;
+  lecture_list: Lecture[];
+  title: string;
+  updated_at: DateTime;
 };
