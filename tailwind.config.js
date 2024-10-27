@@ -53,7 +53,7 @@ export default {
         'updown-4': 'moveUpDown 2s infinite ease-in-out 0.7s',
         'updown-5': 'moveUpDown 2s infinite ease-in-out 0.9s',
         slideUp: 'slideInUp 0.5s ease-in-out',
-        popup: 'popup 0.3s ease-in-out forwards',
+        popup: 'popup 0.3s ease-in-out',
         popout: 'popout 0.3s ease-in-out forwards',
       },
     },
