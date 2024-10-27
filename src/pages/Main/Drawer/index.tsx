@@ -29,13 +29,14 @@ type CoursebookItem = {
   updated_at: string;
 };
 
+type BottomSheetItem = Pick<MenuItem, '_id' | 'title'>;
+
 export const Drawer = ({ isOpen, onClose, setTimetableId }: Drawer) => {
   const [openDropdowns, setOpenDropdowns] = useState<{
     [key: string]: boolean;
   }>({});
-  const [bottomSheetTimeTableId, setBottomSheetTimeTableId] = useState<
-    string | null
-  >(null);
+  const [bottomSheetTimeTable, setBottomSheetTimeTableId] =
+    useState<BottomSheetItem | null>(null);
   const [showAddTimeTableBottomSheet, setShowAddTimeTableBottomSheet] =
     useState(false);
   const { showTBDDialog } = showDialog();
@@ -107,8 +108,8 @@ export const Drawer = ({ isOpen, onClose, setTimetableId }: Drawer) => {
     setShowAddTimeTableBottomSheet(true);
   };
 
-  const openTimeTableMenu = (timetableId: string) => {
-    setBottomSheetTimeTableId(timetableId);
+  const openTimeTableMenu = (timetable: BottomSheetItem) => {
+    setBottomSheetTimeTableId(timetable);
   };
 
   const closeAddTimeTable = () => {
@@ -219,7 +220,10 @@ export const Drawer = ({ isOpen, onClose, setTimetableId }: Drawer) => {
                         <span
                           className="text-sm text-gray-400 cursor-pointer"
                           onClick={() => {
-                            openTimeTableMenu(timetable._id);
+                            openTimeTableMenu({
+                              _id: timetable._id,
+                              title: timetable.title,
+                            });
                           }}
                         >
                           ...
@@ -235,9 +239,9 @@ export const Drawer = ({ isOpen, onClose, setTimetableId }: Drawer) => {
       {showAddTimeTableBottomSheet ? (
         <AddTimeTableBottomSheet onClose={closeAddTimeTable} />
       ) : null}
-      {bottomSheetTimeTableId !== null ? (
+      {bottomSheetTimeTable !== null ? (
         <TimeTableMenuBottomSheet
-          timetableId={bottomSheetTimeTableId}
+          timetable={bottomSheetTimeTable}
           onClose={closeTimeTableMenu}
         />
       ) : null}
