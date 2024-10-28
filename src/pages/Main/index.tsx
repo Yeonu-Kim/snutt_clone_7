@@ -23,15 +23,14 @@ export const MainPage = () => {
   return (
     <Layout>
       <Header onMenuClick={toggleDrawer} />
-      <Drawer
-        isOpen={isDrawerOpen}
-        onClose={closeDrawer}
-        setTimetableId={setTimetableId}
-      />
-      <div className="flex flex-auto">
-        <p>메인페이지입니다.</p>
+      <div className="flex-1 w-full overflow-hidden">
+        <Drawer
+          isOpen={isDrawerOpen}
+          onClose={closeDrawer}
+          setTimetableId={setTimetableId}
+        />
+        <TimeTable timetableId={timetableId} />
       </div>
-      <TimeTable timetableId={timetableId} />
       <Navbar selectedMenu="timetable" />
     </Layout>
   );

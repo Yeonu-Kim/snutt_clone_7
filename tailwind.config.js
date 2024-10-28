@@ -27,6 +27,9 @@ export default {
           900: '#111827',
           950: '#030712',
         },
+        textAlternative: '#8A898E',
+        lineLight: '#EBEBED',
+        lineLightest: '#F5F5F5',
       },
       keyframes: {
         moveUpDown: {
