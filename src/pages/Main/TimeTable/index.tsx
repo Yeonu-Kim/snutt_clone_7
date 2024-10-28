@@ -4,6 +4,7 @@ import { LoadingPage } from '@/components/Loading';
 import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
+import { colorList } from '@/entities/color';
 import { DAY_LABEL_MAP, dayList, hourList } from '@/entities/time';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { showDialog } from '@/utils/showDialog';
@@ -109,11 +110,14 @@ export const TimeTable = ({ timetableId }: { timetableId: string | null }) => {
               col: [colStart, colEnd],
               row: [rowStart, rowEnd],
             } = timeTableService.getGridPos(time);
+            const colorClass = colorList[
+              lecture.colorIndex % colorList.length
+            ] as string;
 
             return (
               <div
                 key={`${lecture._id}-${i}`}
-                className="bg-orange text-white flex flex-col items-center justify-center p-2 text-center"
+                className={`text-white flex flex-col items-center justify-center p-2 text-center ${colorClass} col-start-${colStart} col-end-${colEnd} row-start-${rowStart} row-end-${rowEnd}`}
                 style={{
                   gridColumnStart: colStart,
                   gridColumnEnd: colEnd,
