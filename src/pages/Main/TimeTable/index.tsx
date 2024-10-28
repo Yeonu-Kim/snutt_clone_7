@@ -101,6 +101,7 @@ export const TimeTable = ({ timetableId }: { timetableId: string | null }) => {
             }}
           ></div>
         ))}
+        {/* 날짜 라인 */}
         {dayList.slice(0, 5).map((_, i) => (
           <div
             key={_}
