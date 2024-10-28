@@ -9,7 +9,10 @@ export const DAY_LABEL_MAP = {
   6: '일',
 };
 export const dayList: Day[] = [0, 1, 2, 3, 4, 5, 6];
-
+export const hourList: Hour24[] = Array.from(
+  { length: 14 },
+  (_, i) => (9 + i) as Hour24,
+);
 export type Hour24 =
   | 0
   | 1
