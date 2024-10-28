@@ -20,6 +20,6 @@ export type Lecture = {
 export type ClassTime = {
   day: Day;
   place: string;
-  start_time: string;
-  end_time: string;
+  startMinute: string;
+  endMinute: string;
 };
