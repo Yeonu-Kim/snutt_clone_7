@@ -24,7 +24,7 @@ export const getSnuttApis = ({
 
     // 요청한 유저의 정보 전달 api
     'GET /v1/users/me': ({ token }: { token: string }) =>
-      callWithToken<SuccessResponse<UserResponse> | ErrorResponse<403, 8194>>({
+      callWithToken<SuccessResponse<UserResponse>>({
         method: 'get',
         path: 'v1/users/me',
         token,
