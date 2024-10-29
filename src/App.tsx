@@ -65,7 +65,7 @@ const routers = createBrowserRouter([
     ),
   },
   {
-    path: PATH.MYPAGE.INFORMATION.ROOT,
+    path: PATH.MYPAGE.ACCOUNT.ROOT,
     element: (
       <AuthProtectedRoute>
         <AccountPage />
@@ -73,7 +73,7 @@ const routers = createBrowserRouter([
     ),
   },
   {
-    path: PATH.MYPAGE.INFORMATION.NICKNAME,
+    path: PATH.MYPAGE.ACCOUNT.CHANGENICKNAME,
     element: (
       <AuthProtectedRoute>
         <ChangeNicknamePage />

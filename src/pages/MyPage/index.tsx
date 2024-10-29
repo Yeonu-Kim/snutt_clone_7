@@ -19,7 +19,7 @@ export const MyPage = () => {
   const { userService, authService } = useGuardContext(ServiceContext);
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
-  const { toMain, toInformation } = useRouteNavigation();
+  const { toMain, toAccount } = useRouteNavigation();
 
   const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,
@@ -44,7 +44,7 @@ export const MyPage = () => {
   };
 
   const handleClickInformationButton = () => {
-    toInformation();
+    toAccount();
   };
 
   if (userData === undefined) return <LoadingPage />;

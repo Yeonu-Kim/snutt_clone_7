@@ -17,7 +17,7 @@ export const ChangeNicknamePage = () => {
   const { userService } = useGuardContext(ServiceContext);
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
-  const { toInformation } = useRouteNavigation();
+  const { toAccount } = useRouteNavigation();
   const [nickname, setNickname] = useState<string>();
   const queryClient = useQueryClient();
 
@@ -36,7 +36,7 @@ export const ChangeNicknamePage = () => {
         await queryClient.invalidateQueries({
           queryKey: ['UserService', 'getUserInfo', token],
         });
-        toInformation();
+        toAccount();
       } else {
         showErrorDialog(response.message);
       }
@@ -93,7 +93,7 @@ export const ChangeNicknamePage = () => {
               className="BackButtonWrapper absolute left-3 rounded-lg flex items-center
             cursor-pointer text-gray-500 hover:text-orange"
             >
-              <span onClick={toInformation}>&larr; 뒤로</span>
+              <span onClick={toAccount}>&larr; 뒤로</span>
             </div>
             <div
               className="BackButtonWrapper absolute right-3 rounded-lg flex items-center
