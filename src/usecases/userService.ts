@@ -37,7 +37,7 @@ type UserRepository = {
 };
 
 export type UserService = {
-  getUserInfo(args: { token: string }): UsecaseResponse<User>;
+  getUserInfo(args: { token: string }): UsecaseResponse<User>,
   patchUserInfo(args: {
     token: string;
     body: ChangeNicknameRequest;
@@ -59,10 +59,12 @@ export const getUserService = ({
   },
   patchUserInfo: async ({ token, body }) => {
     const data = await userRepository.patchUserInfo({ token, body });
+
     if (data.type === 'success') {
       const user = data.data;
       return { type: 'success', data: user };
     }
+
     return { type: 'error', message: getErrorMessage(data) };
   },
 });

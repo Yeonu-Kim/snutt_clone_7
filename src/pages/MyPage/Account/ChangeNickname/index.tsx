@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import {useMutation, useQuery} from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { LoadingPage } from '@/components/Loading.tsx';
@@ -19,18 +19,44 @@ export const ChangeNicknamePage = () => {
   const { showErrorDialog } = showDialog();
   const { toInformation } = useRouteNavigation();
   const [nickname, setNickname] = useState<string>();
+  
+  const { mutate: changeNickname, isPending } = useMutation({
+    mutationFn: ({ inputNickname }: { inputNickname: string }) => {
+      if (token === null) {
+        throw new Error();
+      }
+      return userService.patchUserInfo({
+        token: token,
+        body: { nickname: inputNickname },
+      });
+    },
+    onSuccess: (response) => {
+      if (response.type === 'success') {
+        toInformation();
+      } else {
+        showErrorDialog(response.message);
+      }
+    },
+    onError: () => {
+      showErrorDialog('로그인 중 문제가 발생했습니다.');
+    },
+  });
+  
+  
+  const onClickButton = () => {
+    if (nickname !== undefined) {
+      if (nickname !== '') {
+        changeNickname({ inputNickname: nickname });
+      }
+    }
+  };
 
-  // const onClickButton = () => {
-  //   if (nickname !== '') {
-  //     signIn({inputId: nickname);
-  //   }
-  // };
-
-  // const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-  //   if (e.key === 'Enter' && nickname !== '') {
-  //     onClickButton();
-  //   }
-  // };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && nickname !== '') {
+      onClickButton();
+    }
+  };
+  
 
   const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,
@@ -71,7 +97,7 @@ export const ChangeNicknamePage = () => {
               className="BackButtonWrapper absolute right-3 rounded-lg flex items-center
             cursor-pointer text-gray-500 hover:text-orange"
             >
-              <span onClick={toInformation}>저장</span>
+              <span onClick={onClickButton}>저장</span>
             </div>
             <p>내 계정</p>
           </div>
@@ -90,6 +116,7 @@ export const ChangeNicknamePage = () => {
               onChange={(e) => {
                 setNickname(e.target.value);
               }}
+              onKeyDown={handleKeyDown}
               placeholder={userData.data.nickname.nickname}
               className="bg-white w-[335px] h-10 rounded-lg pl-4 mb-3 m-1"
             />
