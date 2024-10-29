@@ -13,8 +13,8 @@ export type SuccessResponse<T, Status extends number = 200> = {
 };
 
 export type ErrorResponse<
-  Status extends 400 | 401 | 403 | 404,
-  Errcode extends number,
+  Status extends 400 | 401 | 403 | 404 | 500 = 400 | 401 | 403 | 404 | 500,
+  Errcode extends number = number,
   Ext extends Record<string, never> = Record<string, never>,
 > = {
   status: Status;

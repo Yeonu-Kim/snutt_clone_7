@@ -1,4 +1,4 @@
-import type { ResponseNecessary } from '../response';
+import type { ErrorResponse, ResponseNecessary } from '../response';
 import { getSnuttApis } from './api';
 
 export type Api = (_: {
@@ -20,10 +20,10 @@ type InternalClient = {
 export type GetApiSpecsParameter = {
   callWithToken: <R extends ResponseNecessary>(
     p: Parameters<InternalClient['call']>[0] & { token: string },
-  ) => Promise<R>;
+  ) => Promise<R | ErrorResponse>;
   callWithoutToken: <R extends ResponseNecessary>(
     p: Omit<Parameters<InternalClient['call']>[0], 'token'> & { token?: never },
-  ) => Promise<R>;
+  ) => Promise<R | ErrorResponse>;
 };
 
 export const apis = (client: InternalClient) => {
@@ -36,11 +36,11 @@ export const apis = (client: InternalClient) => {
         token?: string;
     } */
     p: Parameters<InternalClient['call']>[0] & { token: string },
-  ) => client.call<R>(p);
+  ) => client.call<R | ErrorResponse>(p);
 
   const callWithoutToken = <R extends ResponseNecessary>(
     p: Parameters<InternalClient['call']>[0] & { token?: never },
-  ) => client.call<R>(p);
+  ) => client.call<R | ErrorResponse>(p);
 
   const params = { callWithToken, callWithoutToken };
 
