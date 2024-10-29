@@ -18,7 +18,7 @@ export const getSnuttApis = ({
       callWithoutToken<
         SuccessResponse<LocalLoginResponse> | ErrorResponse<403, 8197>
       >({
-        method: 'post',
+        method: 'POST',
         path: 'v1/auth/login_local',
         body,
       }),
@@ -26,7 +26,7 @@ export const getSnuttApis = ({
     // 요청한 유저의 정보 전달 api
     'GET /v1/users/me': ({ token }: { token: string }) =>
       callWithToken<SuccessResponse<UserResponse>>({
-        method: 'get',
+        method: 'GET',
         path: 'v1/users/me',
         token,
       }),
@@ -39,7 +39,7 @@ export const getSnuttApis = ({
       body: ChangeNicknameRequest;
     }) =>
       callWithToken<SuccessResponse<UserResponse>>({
-        method: 'patch',
+        method: 'PATCH',
         path: 'v1/users/me',
         token,
         body,

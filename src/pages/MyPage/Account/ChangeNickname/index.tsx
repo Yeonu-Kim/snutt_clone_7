@@ -1,4 +1,4 @@
-import {useMutation, useQuery} from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { LoadingPage } from '@/components/Loading.tsx';
@@ -19,8 +19,9 @@ export const ChangeNicknamePage = () => {
   const { showErrorDialog } = showDialog();
   const { toInformation } = useRouteNavigation();
   const [nickname, setNickname] = useState<string>();
-  
-  const { mutate: changeNickname, isPending } = useMutation({
+  const queryClient = useQueryClient();
+
+  const { mutate: changeNickname } = useMutation({
     mutationFn: ({ inputNickname }: { inputNickname: string }) => {
       if (token === null) {
         throw new Error();
@@ -30,8 +31,11 @@ export const ChangeNicknamePage = () => {
         body: { nickname: inputNickname },
       });
     },
-    onSuccess: (response) => {
+    onSuccess: async (response) => {
       if (response.type === 'success') {
+        await queryClient.invalidateQueries({
+          queryKey: ['UserService', 'getUserInfo', token],
+        });
         toInformation();
       } else {
         showErrorDialog(response.message);
@@ -41,8 +45,7 @@ export const ChangeNicknamePage = () => {
       showErrorDialog('로그인 중 문제가 발생했습니다.');
     },
   });
-  
-  
+
   const onClickButton = () => {
     if (nickname !== undefined) {
       if (nickname !== '') {
@@ -56,7 +59,6 @@ export const ChangeNicknamePage = () => {
       onClickButton();
     }
   };
-  
 
   const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,

@@ -37,7 +37,7 @@ type UserRepository = {
 };
 
 export type UserService = {
-  getUserInfo(args: { token: string }): UsecaseResponse<User>,
+  getUserInfo(args: { token: string }): UsecaseResponse<User>;
   patchUserInfo(args: {
     token: string;
     body: ChangeNicknameRequest;
