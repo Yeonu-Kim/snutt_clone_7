@@ -78,6 +78,19 @@ export const MyPage = () => {
                 </span>
               </div>
             </WhiteButtonBox>
+            <div className="flex flex-col items-center justify-between">
+              <WhiteButtonBox className="">색상 모드</WhiteButtonBox>
+              <WhiteButtonBox>시간표 설정</WhiteButtonBox>
+              <WhiteButtonBox>시간표 테마</WhiteButtonBox>
+            </div>
+
+            <WhiteButtonBox>빈자리 알림</WhiteButtonBox>
+
+            <div className="flex flex-col items-center justify-between">
+              <WhiteButtonBox>버전 정보</WhiteButtonBox>
+              <WhiteButtonBox>개발자 정보</WhiteButtonBox>
+            </div>
+
             <Button variant="secondary" onClick={handleClickLogoutButton}>
               로그아웃
             </Button>

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import {useState} from "react";
+import { useState } from 'react';
 
 import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
@@ -18,7 +18,7 @@ export const ChangeNicknamePage = () => {
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
   const { toInformation } = useRouteNavigation();
-  const [nickname, setNickname] = useState<string>()
+  const [nickname, setNickname] = useState<string>();
 
   // const onClickButton = () => {
   //   if (nickname !== '') {
