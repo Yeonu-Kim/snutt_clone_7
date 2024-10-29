@@ -1,5 +1,5 @@
 import type { impleSnuttApi } from '..';
-import type { ErrorResponse, SuccessResponse } from '../response';
+import type { SuccessResponse } from '../response';
 import type { Api, GetApiSpecsParameter } from '.';
 import type {
   LocalLoginRequest,
@@ -14,9 +14,7 @@ export const getSnuttApis = ({
   ({
     // 로컬 로그인 api
     'POST /v1/auth/login_local': ({ body }: { body: LocalLoginRequest }) =>
-      callWithoutToken<
-        SuccessResponse<LocalLoginResponse> | ErrorResponse<403, 8197>
-      >({
+      callWithoutToken<SuccessResponse<LocalLoginResponse>>({
         method: 'post',
         path: 'v1/auth/login_local',
         body,
