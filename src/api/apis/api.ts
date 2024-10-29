@@ -28,13 +28,23 @@ export const getSnuttApis = ({
         path: 'v1/users/me',
         token,
       }),
-    //  시간표 전달 api
+    //  최근 시간표 불러오는 api
     'GET /v1/tables/recent': ({ token }: { token: string }) =>
-      callWithToken<
-        SuccessResponse<TimeTableResponse> | ErrorResponse<403, 4099>
-      >({
+      callWithToken<SuccessResponse<TimeTableResponse>>({
         method: 'get',
         path: 'v1/tables/recent',
+        token,
+      }),
+    'GET /v1/tables/:timetableId': ({
+      token,
+      params,
+    }: {
+      token: string;
+      params: { timetableId: string };
+    }) =>
+      callWithToken<SuccessResponse<TimeTableResponse>>({
+        method: 'get',
+        path: `/v1/tables/${params.timetableId}`,
         token,
       }),
   }) satisfies Record<string, Api>;

@@ -17,7 +17,7 @@ export type Lecture = {
   colorIndex: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
   lecture_id?: string;
 };
-export type ClassTime = {
+type ClassTime = {
   day: Day;
   place: string;
   startMinute: string;

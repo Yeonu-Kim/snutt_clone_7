@@ -16,15 +16,27 @@ export const TimeTable = ({ timetableId }: { timetableId: string | null }) => {
   const { showErrorDialog } = showDialog();
 
   const { data: timeTableData, isError } = useQuery({
-    queryKey: ['TimeTableService', 'getTimeTable', token] as const,
-    queryFn: ({ queryKey: [, , t] }) => {
+    queryKey: [
+      'TimeTableService',
+      timetableId !== null && timetableId !== ''
+        ? 'getTimeTableById'
+        : 'getTimeTable',
+      token,
+      timetableId,
+    ] as const,
+    queryFn: ({ queryKey: [, , t, id] }) => {
       if (t === null) {
-        throw new Error();
+        throw new Error('토큰이 없습니다.');
       }
-      return timeTableService.getTimeTable({ token: t });
+      if (id !== null && id !== '') {
+        return timeTableService.getTimeTableById({ token: t, timetableId: id });
+      } else {
+        return timeTableService.getTimeTable({ token: t });
+      }
     },
     enabled: token !== null,
   });
+
   if (timeTableData === undefined) return <LoadingPage />;
 
   if (isError) {

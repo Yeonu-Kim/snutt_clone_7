@@ -39,7 +39,7 @@ export type TimeTableResponse = {
   updated_at: DateTime;
 };
 
-export type LectureResponse = {
+type LectureResponse = {
   _id: string;
   academic_year?: string;
   category?: string;
@@ -57,7 +57,7 @@ export type LectureResponse = {
   lecture_id?: string;
 };
 
-export type ClassTimeResponse = {
+type ClassTimeResponse = {
   day: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   place: string;
   startMinute: DateTime;

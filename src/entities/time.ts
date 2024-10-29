@@ -13,7 +13,7 @@ export const hourList: Hour24[] = Array.from(
   { length: 14 },
   (_, i) => (9 + i) as Hour24,
 );
-export type Hour24 =
+type Hour24 =
   | 0
   | 1
   | 2
@@ -38,7 +38,3 @@ export type Hour24 =
   | 21
   | 22
   | 23;
-
-export type Minute = 0 | 5 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 | 55;
-
-export type HourMinute = { hour: Hour24; minute: Minute };
