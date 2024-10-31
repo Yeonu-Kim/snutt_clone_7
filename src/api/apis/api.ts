@@ -61,6 +61,39 @@ export const getSnuttApis = ({
         path: 'v1/course_books',
         token,
       }),
+    'PUT /v1/tables/:timetableId': ({
+      token,
+      params,
+      body,
+    }: {
+      token: string;
+      params: {
+        timetableId: string;
+      };
+      body: {
+        title: string;
+      };
+    }) =>
+      callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
+        method: 'PUT',
+        path: `v1/tables/${params.timetableId}`,
+        token,
+        body,
+      }),
+    'DELETE /v1/tables/:timetableId': ({
+      token,
+      params,
+    }: {
+      token: string;
+      params: {
+        timetableId: string;
+      };
+    }) =>
+      callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
+        method: 'DELETE',
+        path: `v1/tables/${params.timetableId}`,
+        token,
+      }),
   }) satisfies Record<string, Api>;
 
 export type SnuttApi = ReturnType<typeof impleSnuttApi>;

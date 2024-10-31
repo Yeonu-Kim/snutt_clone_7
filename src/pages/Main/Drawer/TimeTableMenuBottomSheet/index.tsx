@@ -90,6 +90,7 @@ export const TimeTableMenuBottomSheet = ({
       </div>
       {showChangeNameDialog ? (
         <ChangeNameDialog
+          timetableId={timetable._id}
           onClose={handleClose}
           prevTimeTableName={timetable.title}
         />

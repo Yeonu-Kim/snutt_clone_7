@@ -10,6 +10,15 @@ type TimeTableRepository = {
     token: string;
     timetableId: string;
   }) => RepositoryResponse<TimeTable>;
+  changeTimeTableName(_: {
+    token: string;
+    timetableId: string;
+    timetableName: string;
+  }): RepositoryResponse<TimeTableBrief[]>;
+  deleteTimeTableById(_: {
+    token: string;
+    timetableId: string;
+  }): RepositoryResponse<TimeTableBrief[]>;
 };
 type LectureTime = Lecture['class_time_json'][number];
 
@@ -24,6 +33,15 @@ export type TimeTableService = {
     col: [number, number];
     row: [number, number];
   };
+  changeTimeTableName(_: {
+    token: string;
+    timetableId: string;
+    timetableName: string;
+  }): UsecaseResponse<TimeTableBrief[]>;
+  deleteTimeTableById(_: {
+    token: string;
+    timetableId: string;
+  }): UsecaseResponse<TimeTableBrief[]>;
 };
 
 export const getTimeTableService = ({
@@ -82,5 +100,30 @@ export const getTimeTableService = ({
     })();
 
     return { col: [colStart, colEnd], row: [rowStart, rowEnd] };
+  },
+
+  changeTimeTableName: async ({ token, timetableId, timetableName }) => {
+    const data = await timeTableRepository.changeTimeTableName({
+      token,
+      timetableId,
+      timetableName,
+    });
+    if (data.type === 'success') {
+      const timeTable = data.data;
+      return { type: 'success', data: timeTable };
+    }
+    return { type: 'error', message: getErrorMessage(data) };
+  },
+
+  deleteTimeTableById: async ({ token, timetableId }) => {
+    const data = await timeTableRepository.deleteTimeTableById({
+      token,
+      timetableId,
+    });
+    if (data.type === 'success') {
+      const timeTable = data.data;
+      return { type: 'success', data: timeTable };
+    }
+    return { type: 'error', message: getErrorMessage(data) };
   },
 });
