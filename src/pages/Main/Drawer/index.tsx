@@ -67,11 +67,11 @@ export const Drawer = ({
 
   if (timeTableListData.type === 'error') {
     showErrorDialog(timeTableListData.message);
-    return null;
+    return <></>;
   }
   if (courseBookListData.type === 'error') {
     showErrorDialog(courseBookListData.message);
-    return null;
+    return <></>;
   }
 
   const timetableItems = timeTableListData.data;
