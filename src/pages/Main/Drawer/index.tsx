@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { LoadingPage } from '@/components/Loading';
 import { ICON_SRC } from '@/constants/fileSource';
@@ -63,7 +63,7 @@ export const Drawer = ({
   });
 
   if (timeTableListData === undefined || courseBookListData === undefined)
-    return LoadingPage;
+    return <LoadingPage />;
 
   if (timeTableListData.type === 'error') {
     showErrorDialog(timeTableListData.message);
