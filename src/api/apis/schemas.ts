@@ -49,6 +49,12 @@ export type TimeTableBriefResponse = {
   total_credit: number;
 };
 
+export type CourseBookResponse = {
+  year: number;
+  semester: '1' | '2' | '3' | '4';
+  updated_at: string;
+};
+
 type LectureResponse = {
   _id: string;
   academic_year?: string;

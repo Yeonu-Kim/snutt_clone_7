@@ -2,6 +2,7 @@ import type { impleSnuttApi } from '..';
 import type { SuccessResponse } from '../response';
 import type { Api, GetApiSpecsParameter } from '.';
 import type {
+  CourseBookResponse,
   LocalLoginRequest,
   LocalLoginResponse,
   TimeTableBriefResponse,
@@ -45,13 +46,19 @@ export const getSnuttApis = ({
     }) =>
       callWithToken<SuccessResponse<TimeTableResponse>>({
         method: 'get',
-        path: `/v1/tables/${params.timetableId}`,
+        path: `v1/tables/${params.timetableId}`,
         token,
       }),
     'GET /v1/tables': ({ token }: { token: string }) =>
       callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
         method: 'get',
         path: 'v1/tables',
+        token,
+      }),
+    'GET /v1/course_books': ({ token }: { token: string }) =>
+      callWithToken<SuccessResponse<CourseBookResponse[]>>({
+        method: 'get',
+        path: 'v1/course_books',
         token,
       }),
   }) satisfies Record<string, Api>;
