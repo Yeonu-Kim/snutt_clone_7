@@ -10,6 +10,7 @@ import { TimeTableMenuBottomSheet } from './TimeTableMenuBottomSheet';
 type Drawer = {
   isOpen: boolean;
   onClose: () => void;
+  selectedTimetableId: string | null;
   setTimetableId: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
@@ -31,7 +32,12 @@ type CoursebookItem = {
 
 type BottomSheetItem = Pick<MenuItem, '_id' | 'title'>;
 
-export const Drawer = ({ isOpen, onClose, setTimetableId }: Drawer) => {
+export const Drawer = ({
+  isOpen,
+  onClose,
+  selectedTimetableId,
+  setTimetableId,
+}: Drawer) => {
   const [openDropdowns, setOpenDropdowns] = useState<{
     [key: string]: boolean;
   }>({});
@@ -40,6 +46,7 @@ export const Drawer = ({ isOpen, onClose, setTimetableId }: Drawer) => {
   const [showAddTimeTableBottomSheet, setShowAddTimeTableBottomSheet] =
     useState(false);
   const { showTBDDialog } = showDialog();
+
   const coursebookItems: CoursebookItem[] = [
     {
       year: 2024,
@@ -62,7 +69,7 @@ export const Drawer = ({ isOpen, onClose, setTimetableId }: Drawer) => {
     {
       _id: 'a',
       year: 2024,
-      semester: 3,
+      semester: 2,
       title: '4학년 2학기',
       isPrimary: true,
       updated_at: '2024-10-23T12:48:03.259Z',
@@ -70,9 +77,9 @@ export const Drawer = ({ isOpen, onClose, setTimetableId }: Drawer) => {
     },
     {
       _id: 'b',
-      year: 2024,
+      year: 2023,
       semester: 1,
-      title: '4학년 1학기',
+      title: '3학년 1학기',
       isPrimary: false,
       updated_at: '2024-03-03T12:48:03.259Z',
       total_credit: 0,
@@ -87,8 +94,8 @@ export const Drawer = ({ isOpen, onClose, setTimetableId }: Drawer) => {
       total_credit: 0,
     },
     {
-      _id: 'c',
-      year: 2024,
+      _id: 'd',
+      year: 2023,
       semester: 1,
       title: '예비',
       isPrimary: true,
@@ -96,6 +103,44 @@ export const Drawer = ({ isOpen, onClose, setTimetableId }: Drawer) => {
       total_credit: 0,
     },
   ];
+
+  const sortedTimetableItems = [...timetableItems].sort((a, b) => {
+    if (a.year !== b.year) {
+      return b.year - a.year;
+    }
+    if (a.semester !== b.semester) {
+      return b.semester - a.semester;
+    }
+    return a.isPrimary ? -1 : 0;
+  });
+
+  const recentCourse = coursebookItems.find((_, index) => index === 0);
+
+  const initialGroupedTimeTables =
+    recentCourse !== undefined
+      ? {
+          [`${recentCourse.year}-${recentCourse.semester}`]: {
+            year: recentCourse.year,
+            semester: recentCourse.semester,
+            items: [],
+          },
+        }
+      : {};
+
+  const groupedTimetables = sortedTimetableItems.reduce<
+    Record<string, { year: number; semester: number; items: MenuItem[] }>
+  >((acc, timetable) => {
+    const key = `${timetable.year}-${timetable.semester}`;
+    if (acc[key] === undefined) {
+      acc[key] = {
+        year: timetable.year,
+        semester: timetable.semester,
+        items: [],
+      };
+    }
+    acc[key].items.push(timetable);
+    return acc;
+  }, initialGroupedTimeTables);
 
   const toggleDropdown = (id: string) => {
     setOpenDropdowns((prev) => ({
@@ -118,6 +163,11 @@ export const Drawer = ({ isOpen, onClose, setTimetableId }: Drawer) => {
 
   const closeTimeTableMenu = () => {
     setBottomSheetTimeTableId(null);
+  };
+
+  const clickTimetableMenu = (timetableId: string) => {
+    setTimetableId(timetableId);
+    onClose();
   };
 
   return (
@@ -150,87 +200,90 @@ export const Drawer = ({ isOpen, onClose, setTimetableId }: Drawer) => {
               +
             </span>
           </li>
-          {coursebookItems.map((coursebook) => (
-            <li
-              key={`${coursebook.year}-${coursebook.semester}`}
-              className="flex flex-col"
-            >
+          {Object.entries(groupedTimetables).map(([key, group]) => (
+            <li key={key} className="flex flex-col">
               <div className="flex justify-between items-center py-2 text-gray-700">
                 <div className="flex gap-2">
                   <span className="font-bold">
-                    {coursebook.year}년 {formatSemester(coursebook.semester)}
+                    {group.year}년 {formatSemester(group.semester)}
                   </span>
                   <img
                     src={ICON_SRC.ARROW.DOWN}
-                    className={`w-6 h-6 cursor-pointer transition-transform duration-200 ${
-                      openDropdowns[
-                        `${coursebook.year}-${coursebook.semester}`
-                      ] === true
-                        ? 'rotate-180'
-                        : 'rotate-0'
-                    }`}
+                    className={`w-6 h-6 cursor-pointer transition-transform duration-200 ${openDropdowns[key] === true ? 'rotate-180' : 'rotate-0'}`}
                     onClick={() => {
-                      toggleDropdown(
-                        `${coursebook.year}-${coursebook.semester}`,
-                      );
+                      toggleDropdown(key);
                     }}
-                  ></img>
+                    aria-expanded={openDropdowns[key]}
+                  />
+                  {group.items.length === 0 ? (
+                    <div className="flex items-center">
+                      <div className="w-1.5 h-1.5 rounded-[50%] bg-red"></div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
               <div
                 className={`flex flex-col gap-4 duration-200 ease-in-out overflow-hidden ${
-                  openDropdowns[`${coursebook.year}-${coursebook.semester}`] ===
-                  true
+                  openDropdowns[key] === true
                     ? 'py-2 max-h-40 opacity-100'
                     : 'max-h-0 opacity-0'
                 }`}
               >
-                {timetableItems
-                  .filter(
-                    (item) =>
-                      item.year === coursebook.year &&
-                      item.semester === coursebook.semester,
-                  )
-                  .map((timetable) => (
+                {group.items.map((timetable) => (
+                  <div
+                    className="flex justify-between items-center transition-all"
+                    key={timetable._id}
+                  >
                     <div
-                      className="flex justify-between items-center transition-all"
-                      key={timetable._id}
+                      className="flex gap-1 cursor-pointer"
+                      onClick={() => {
+                        clickTimetableMenu(timetable._id);
+                      }}
                     >
-                      <div
-                        className="flex gap-1 cursor-pointer"
+                      {timetable._id === selectedTimetableId ? (
+                        <div className="flex items-center">
+                          <div className="w-2 h-2 rounded-[50%] bg-mint mr-2"></div>
+                        </div>
+                      ) : (
+                        <div className="flex items-center">
+                          <div className="w-2 h-2 rounded-[50%] mr-2"></div>
+                        </div>
+                      )}
+                      <span className="text-sm">{timetable.title}</span>
+                      <span className="text-sm text-gray-400">
+                        ({timetable.total_credit}학점)
+                      </span>
+                      {timetable.isPrimary && <span>👤</span>}
+                    </div>
+                    <div className="flex gap-2">
+                      <span
+                        className="text-sm text-gray-400 cursor-pointer"
+                        onClick={showTBDDialog}
+                      >
+                        복사
+                      </span>
+                      <span
+                        className="text-sm text-gray-400 cursor-pointer"
                         onClick={() => {
-                          setTimetableId(timetable._id);
+                          openTimeTableMenu({
+                            _id: timetable._id,
+                            title: timetable.title,
+                          });
                         }}
                       >
-                        <span className="text-sm">{timetable.title}</span>
-                        <span className="text-sm text-gray-400">
-                          {'('}
-                          {timetable.total_credit}학점
-                          {')'}
-                        </span>
-                        {timetable.isPrimary && <span>👤</span>}
-                      </div>
-                      <div className="flex gap-2">
-                        <span
-                          className="text-sm text-gray-400 cursor-pointer"
-                          onClick={showTBDDialog}
-                        >
-                          복사
-                        </span>
-                        <span
-                          className="text-sm text-gray-400 cursor-pointer"
-                          onClick={() => {
-                            openTimeTableMenu({
-                              _id: timetable._id,
-                              title: timetable.title,
-                            });
-                          }}
-                        >
-                          ...
-                        </span>
-                      </div>
+                        ...
+                      </span>
                     </div>
-                  ))}
+                  </div>
+                ))}
+                {group.items.length === 0 ? (
+                  <p
+                    className="text-sm cursor-pointer ml-4"
+                    onClick={showTBDDialog}
+                  >
+                    + 시간표 추가하기
+                  </p>
+                ) : null}
               </div>
             </li>
           ))}

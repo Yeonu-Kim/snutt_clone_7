@@ -27,6 +27,7 @@ export const MainPage = () => {
         <Drawer
           isOpen={isDrawerOpen}
           onClose={closeDrawer}
+          selectedTimetableId={timetableId}
           setTimetableId={setTimetableId}
         />
         <TimeTable timetableId={timetableId} />
