@@ -1,11 +1,15 @@
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import { LoadingPage } from '@/components/Loading';
 import { ICON_SRC } from '@/constants/fileSource';
+import { ServiceContext } from '@/context/ServiceContext';
+import { TokenAuthContext } from '@/context/TokenAuthContext';
+import { useGuardContext } from '@/hooks/useGuardContext';
+import { AddTimeTableBottomSheet } from '@/pages/Main/Drawer/AddTimeTableBottomSheet';
+import { TimeTableMenuBottomSheet } from '@/pages/Main/Drawer/TimeTableMenuBottomSheet';
 import { formatSemester } from '@/utils/format';
 import { showDialog } from '@/utils/showDialog';
-
-import { AddTimeTableBottomSheet } from './AddTimeTableBottonSheet';
-import { TimeTableMenuBottomSheet } from './TimeTableMenuBottomSheet';
 
 type Drawer = {
   isOpen: boolean;
@@ -38,6 +42,9 @@ export const Drawer = ({
   selectedTimetableId,
   setTimetableId,
 }: Drawer) => {
+  const { timeTableService } = useGuardContext(ServiceContext);
+  const { token } = useGuardContext(TokenAuthContext);
+
   const [openDropdowns, setOpenDropdowns] = useState<{
     [key: string]: boolean;
   }>({});
@@ -45,7 +52,27 @@ export const Drawer = ({
     useState<BottomSheetItem | null>(null);
   const [showAddTimeTableBottomSheet, setShowAddTimeTableBottomSheet] =
     useState(false);
-  const { showTBDDialog } = showDialog();
+  const { showTBDDialog, showErrorDialog } = showDialog();
+
+  const { data: timeTableListData } = useQuery({
+    queryKey: ['TimeTableService', 'getTimeTableList', token] as const,
+    queryFn: ({ queryKey: [, , t] }) => {
+      if (t === null) {
+        throw new Error('토큰이 없습니다.');
+      }
+      return timeTableService.getTimeTableList({ token: t });
+    },
+    enabled: token !== null,
+  });
+
+  if (timeTableListData === undefined) return LoadingPage;
+
+  if (timeTableListData.type === 'error') {
+    showErrorDialog(timeTableListData.message);
+    return null;
+  }
+
+  const timetableItems = timeTableListData.data;
 
   const coursebookItems: CoursebookItem[] = [
     {
@@ -62,45 +89,6 @@ export const Drawer = ({
       year: 2023,
       semester: 4,
       updated_at: '2024-07-01T12:00:43.047Z',
-    },
-  ];
-
-  const timetableItems: MenuItem[] = [
-    {
-      _id: 'a',
-      year: 2024,
-      semester: 2,
-      title: '4학년 2학기',
-      isPrimary: true,
-      updated_at: '2024-10-23T12:48:03.259Z',
-      total_credit: 1,
-    },
-    {
-      _id: 'b',
-      year: 2023,
-      semester: 1,
-      title: '3학년 1학기',
-      isPrimary: false,
-      updated_at: '2024-03-03T12:48:03.259Z',
-      total_credit: 0,
-    },
-    {
-      _id: 'c',
-      year: 2023,
-      semester: 4,
-      title: '겨울 학기 ㅜㅜ',
-      isPrimary: true,
-      updated_at: '2023-09-02T12:48:03.259Z',
-      total_credit: 0,
-    },
-    {
-      _id: 'd',
-      year: 2023,
-      semester: 1,
-      title: '예비',
-      isPrimary: true,
-      updated_at: '2023-09-02T12:48:03.259Z',
-      total_credit: 0,
     },
   ];
 

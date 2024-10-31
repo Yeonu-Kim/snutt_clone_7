@@ -9,3 +9,13 @@ export type TimeTable = {
   title: string;
   updated_at: string;
 };
+
+export type TimeTableBrief = {
+  _id: string;
+  year: number;
+  semester: 1 | 2 | 3 | 4;
+  title: string;
+  isPrimary: boolean;
+  updated_at: string;
+  total_credit: number;
+};

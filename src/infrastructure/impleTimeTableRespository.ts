@@ -20,6 +20,16 @@ export const impleTimeTableRepository = ({
     }
     return { type: 'error', errcode: data.errcode };
   },
+  getTimeTableList: async ({ token }: { token: string }) => {
+    const { status, data } = await snuttApi['GET /v1/tables']({ token });
+    if (status === 200) {
+      return {
+        type: 'success',
+        data,
+      };
+    }
+    return { type: 'error', errcode: data.errcode };
+  },
   getTimeTableById: async ({
     token,
     timetableId,

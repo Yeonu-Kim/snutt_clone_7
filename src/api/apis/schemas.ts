@@ -39,6 +39,16 @@ export type TimeTableResponse = {
   updated_at: DateTime;
 };
 
+export type TimeTableBriefResponse = {
+  _id: string;
+  year: number;
+  semester: 1 | 2 | 3 | 4;
+  title: string;
+  isPrimary: boolean;
+  updated_at: DateTime;
+  total_credit: number;
+};
+
 type LectureResponse = {
   _id: string;
   academic_year?: string;

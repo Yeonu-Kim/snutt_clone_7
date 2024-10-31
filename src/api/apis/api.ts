@@ -4,6 +4,7 @@ import type { Api, GetApiSpecsParameter } from '.';
 import type {
   LocalLoginRequest,
   LocalLoginResponse,
+  TimeTableBriefResponse,
   TimeTableResponse,
   UserResponse,
 } from './schemas';
@@ -45,6 +46,12 @@ export const getSnuttApis = ({
       callWithToken<SuccessResponse<TimeTableResponse>>({
         method: 'get',
         path: `/v1/tables/${params.timetableId}`,
+        token,
+      }),
+    'GET /v1/tables': ({ token }: { token: string }) =>
+      callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
+        method: 'get',
+        path: 'v1/tables',
         token,
       }),
   }) satisfies Record<string, Api>;

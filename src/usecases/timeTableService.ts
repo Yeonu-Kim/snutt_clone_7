@@ -1,10 +1,11 @@
 import { getErrorMessage } from '@/entities/error';
 import type { Lecture } from '@/entities/lecture';
 import type { RepositoryResponse, UsecaseResponse } from '@/entities/response';
-import type { TimeTable } from '@/entities/timetable';
+import type { TimeTable, TimeTableBrief } from '@/entities/timetable';
 
 type TimeTableRepository = {
   getTimeTable(_: { token: string }): RepositoryResponse<TimeTable>;
+  getTimeTableList(_: { token: string }): RepositoryResponse<TimeTableBrief[]>;
   getTimeTableById: (_: {
     token: string;
     timetableId: string;
@@ -14,6 +15,7 @@ type LectureTime = Lecture['class_time_json'][number];
 
 export type TimeTableService = {
   getTimeTable(_: { token: string }): UsecaseResponse<TimeTable>;
+  getTimeTableList(_: { token: string }): UsecaseResponse<TimeTableBrief[]>;
   getTimeTableById: (_: {
     token: string;
     timetableId: string;
@@ -37,6 +39,16 @@ export const getTimeTableService = ({
     }
     return { type: 'error', message: getErrorMessage(data) };
   },
+
+  getTimeTableList: async ({ token }) => {
+    const data = await timeTableRepository.getTimeTableList({ token });
+    if (data.type === 'success') {
+      const timeTableList = data.data;
+      return { type: 'success', data: timeTableList };
+    }
+    return { type: 'error', message: getErrorMessage(data) };
+  },
+
   getTimeTableById: async ({ token, timetableId }) => {
     const data = await timeTableRepository.getTimeTableById({
       token,
@@ -48,6 +60,7 @@ export const getTimeTableService = ({
     }
     return { type: 'error', message: getErrorMessage(data) };
   },
+
   getGridPos: (time) => {
     const startMinute = 540;
 
