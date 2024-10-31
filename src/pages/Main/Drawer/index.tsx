@@ -190,95 +190,100 @@ export const Drawer = ({
               +
             </span>
           </li>
-          {Object.entries(groupedTimetables).map(([key, group]) => (
-            <li key={key} className="flex flex-col">
-              <div className="flex justify-between items-center py-2 text-gray-700">
-                <div className="flex gap-2">
-                  <span className="font-bold">
-                    {group.year}년 {formatSemester(group.semester)}
-                  </span>
-                  <img
-                    src={ICON_SRC.ARROW.DOWN}
-                    className={`w-6 h-6 cursor-pointer transition-transform duration-200 ${openDropdowns[key] === true ? 'rotate-180' : 'rotate-0'}`}
-                    onClick={() => {
-                      toggleDropdown(key);
-                    }}
-                    aria-expanded={openDropdowns[key]}
-                  />
-                  {group.items.length === 0 ? (
-                    <div className="flex items-center">
-                      <div className="w-1.5 h-1.5 rounded-[50%] bg-red"></div>
-                    </div>
-                  ) : null}
-                </div>
-              </div>
-              <div
-                className={`flex flex-col gap-4 duration-200 ease-in-out overflow-hidden ${
-                  openDropdowns[key] === true
-                    ? 'py-2 max-h-40 opacity-100'
-                    : 'max-h-0 opacity-0'
-                }`}
-              >
-                {group.items.map((timetable) => (
-                  <div
-                    className="flex justify-between items-center transition-all"
-                    key={timetable._id}
-                  >
-                    <div
-                      className="flex gap-1 cursor-pointer"
+          <div
+            className="overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+            style={{ maxHeight: `calc(100dvh - 9rem)` }}
+          >
+            {Object.entries(groupedTimetables).map(([key, group]) => (
+              <li key={key} className="flex flex-col">
+                <div className="flex justify-between items-center py-2 text-gray-700">
+                  <div className="flex gap-2">
+                    <span className="font-bold">
+                      {group.year}년 {formatSemester(group.semester)}
+                    </span>
+                    <img
+                      src={ICON_SRC.ARROW.DOWN}
+                      className={`w-6 h-6 cursor-pointer transition-transform duration-200 ${openDropdowns[key] === true ? 'rotate-180' : 'rotate-0'}`}
                       onClick={() => {
-                        clickTimetableMenu(timetable._id);
+                        toggleDropdown(key);
                       }}
+                      aria-expanded={openDropdowns[key]}
+                    />
+                    {group.items.length === 0 ? (
+                      <div className="flex items-center">
+                        <div className="w-1.5 h-1.5 rounded-[50%] bg-red"></div>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+                <div
+                  className={`flex flex-col gap-4 duration-200 ease-in-out overflow-hidden ${
+                    openDropdowns[key] === true
+                      ? 'py-2 max-h-40 opacity-100'
+                      : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  {group.items.map((timetable) => (
+                    <div
+                      className="flex justify-between items-center transition-all mr-4"
+                      key={timetable._id}
                     >
-                      {timetable._id === selectedTimetableId ? (
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 rounded-[50%] bg-mint mr-2"></div>
-                        </div>
-                      ) : (
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 rounded-[50%] mr-2"></div>
-                        </div>
-                      )}
-                      <span className="text-sm">{timetable.title}</span>
-                      <span className="text-sm text-gray-400">
-                        ({timetable.total_credit}학점)
-                      </span>
-                      {timetable.isPrimary && <span>👤</span>}
-                    </div>
-                    <div className="flex gap-2">
-                      <span
-                        className="text-sm text-gray-400 cursor-pointer"
-                        onClick={showTBDDialog}
-                      >
-                        복사
-                      </span>
-                      <span
-                        className="text-sm text-gray-400 cursor-pointer"
+                      <div
+                        className="flex gap-1 cursor-pointer"
                         onClick={() => {
-                          openTimeTableMenu({
-                            _id: timetable._id,
-                            title: timetable.title,
-                          });
+                          clickTimetableMenu(timetable._id);
                         }}
                       >
-                        ...
-                      </span>
+                        {timetable._id === selectedTimetableId ? (
+                          <div className="flex items-center">
+                            <div className="w-2 h-2 rounded-[50%] bg-mint mr-2"></div>
+                          </div>
+                        ) : (
+                          <div className="flex items-center">
+                            <div className="w-2 h-2 rounded-[50%] mr-2"></div>
+                          </div>
+                        )}
+                        <span className="text-sm">{timetable.title}</span>
+                        <span className="text-sm text-gray-400">
+                          ({timetable.total_credit}학점)
+                        </span>
+                        {timetable.isPrimary && <span>👤</span>}
+                      </div>
+                      <div className="flex gap-2">
+                        <span
+                          className="text-sm text-gray-400 cursor-pointer"
+                          onClick={showTBDDialog}
+                        >
+                          복사
+                        </span>
+                        <span
+                          className="text-sm text-gray-400 cursor-pointer"
+                          onClick={() => {
+                            openTimeTableMenu({
+                              _id: timetable._id,
+                              title: timetable.title,
+                            });
+                          }}
+                        >
+                          ...
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
-                {group.items.length === 0 ? (
-                  <p
-                    className="text-sm cursor-pointer ml-4"
-                    onClick={() => {
-                      clickAddTimeTableBySemester(group.year, group.semester);
-                    }}
-                  >
-                    + 시간표 추가하기
-                  </p>
-                ) : null}
-              </div>
-            </li>
-          ))}
+                  ))}
+                  {group.items.length === 0 ? (
+                    <p
+                      className="text-sm cursor-pointer ml-4"
+                      onClick={() => {
+                        clickAddTimeTableBySemester(group.year, group.semester);
+                      }}
+                    >
+                      + 시간표 추가하기
+                    </p>
+                  ) : null}
+                </div>
+              </li>
+            ))}
+          </div>
         </ul>
       </div>
       {showAddTimeTableBottomSheet ? (

@@ -80,5 +80,5 @@ export default {
       375: '375px', // 모바일용
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 };
