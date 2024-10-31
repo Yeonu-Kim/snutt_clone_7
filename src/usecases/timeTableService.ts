@@ -4,6 +4,12 @@ import type { RepositoryResponse, UsecaseResponse } from '@/entities/response';
 import type { TimeTable, TimeTableBrief } from '@/entities/timetable';
 
 type TimeTableRepository = {
+  createTimeTable(_: {
+    token: string;
+    year: number;
+    semester: number;
+    title: string;
+  }): RepositoryResponse<TimeTableBrief[]>;
   getTimeTable(_: { token: string }): RepositoryResponse<TimeTable>;
   getTimeTableList(_: { token: string }): RepositoryResponse<TimeTableBrief[]>;
   getTimeTableById: (_: {
@@ -23,6 +29,12 @@ type TimeTableRepository = {
 type LectureTime = Lecture['class_time_json'][number];
 
 export type TimeTableService = {
+  createTimeTable(_: {
+    token: string;
+    year: number;
+    semester: number;
+    title: string;
+  }): UsecaseResponse<TimeTableBrief[]>;
   getTimeTable(_: { token: string }): UsecaseResponse<TimeTable>;
   getTimeTableList(_: { token: string }): UsecaseResponse<TimeTableBrief[]>;
   getTimeTableById: (_: {
@@ -49,6 +61,19 @@ export const getTimeTableService = ({
 }: {
   timeTableRepository: TimeTableRepository;
 }): TimeTableService => ({
+  createTimeTable: async ({ token, semester, year, title }) => {
+    const data = await timeTableRepository.createTimeTable({
+      token,
+      semester,
+      year,
+      title,
+    });
+    if (data.type === 'success') {
+      const timeTableList = data.data;
+      return { type: 'success', data: timeTableList };
+    }
+    return { type: 'error', message: getErrorMessage(data) };
+  },
   getTimeTable: async ({ token }) => {
     const data = await timeTableRepository.getTimeTable({ token });
     if (data.type === 'success') {

@@ -10,6 +10,19 @@ export const impleTimeTableRepository = ({
 }: {
   snuttApi: SnuttApi;
 }): TimeTableRepository => ({
+  createTimeTable: async ({ token, semester, year, title }) => {
+    const { status, data } = await snuttApi['POST /v1/tables']({
+      token,
+      body: { semester, year, title },
+    });
+    if (status === 200) {
+      return {
+        type: 'success',
+        data,
+      };
+    }
+    return { type: 'error', errcode: data.errcode };
+  },
   getTimeTable: async ({ token }: { token: string }) => {
     const { status, data } = await snuttApi['GET /v1/tables/recent']({ token });
     if (status === 200) {

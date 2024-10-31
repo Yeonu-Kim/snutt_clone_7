@@ -6,6 +6,20 @@ export type LocalLoginRequest = {
   password: string;
 };
 
+export type TimeTableTitleRequest = {
+  title: string;
+};
+
+export type TimeTableRequest = {
+  year: number;
+  semester: number;
+  title: string;
+};
+// Params
+export type TimeTableIdParams = {
+  timetableId: string;
+};
+
 // Response
 export type LocalLoginResponse = {
   user_id: string;

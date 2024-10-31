@@ -3,25 +3,22 @@ import { useEffect, useState } from 'react';
 
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
-import type { CourseBook } from '@/entities/courseBook';
 import { useGuardContext } from '@/hooks/useGuardContext';
-import { formatSemester } from '@/utils/format';
 import { showDialog } from '@/utils/showDialog';
 
 type ChangeNameDialog = {
-  courseBookList: CourseBook[];
+  year: number;
+  semester: number;
   onClose(): void;
 };
 
-export const AddTimeTableBottomSheet = ({
-  courseBookList,
+export const AddTimeTableBySemesterBottomSheet = ({
+  year,
+  semester,
   onClose,
 }: ChangeNameDialog) => {
   const [isVisible, setIsVisible] = useState(false);
   const [timeTableName, setTimeTableName] = useState('');
-  const [semester, setSemester] = useState<number | null>(null);
-  const [year, setYear] = useState<number | null>(null);
-
   const { timeTableService } = useGuardContext(ServiceContext);
   const { token } = useGuardContext(TokenAuthContext);
   const { showErrorDialog } = showDialog();
@@ -31,23 +28,15 @@ export const AddTimeTableBottomSheet = ({
     setIsVisible(true);
   }, []);
 
-  const { mutate: createTimeTable, isPending } = useMutation({
-    mutationFn: async ({
-      inputYear,
-      inputSemester,
-      inputTimeTableName,
-    }: {
-      inputYear: number;
-      inputSemester: number;
-      inputTimeTableName: string;
-    }) => {
+  const { mutate: createTimeTableBySemester, isPending } = useMutation({
+    mutationFn: async (inputTimeTableName: string) => {
       if (token === null) {
         throw new Error('토큰이 존재하지 않습니다.');
       }
       return await timeTableService.createTimeTable({
         token,
-        year: inputYear,
-        semester: inputSemester,
+        year,
+        semester,
         title: inputTimeTableName,
       });
     },
@@ -73,26 +62,11 @@ export const AddTimeTableBottomSheet = ({
   };
 
   const onClickButton = () => {
-    if (year !== null && semester !== null && timeTableName !== '') {
-      createTimeTable({
-        inputYear: year,
-        inputSemester: semester,
-        inputTimeTableName: timeTableName,
-      });
+    if (timeTableName !== '') {
+      createTimeTableBySemester(timeTableName);
     }
   };
 
-  const clickOption = (yearWithSemester: string) => {
-    const [yearString, semesterString] = yearWithSemester.split('-');
-
-    if (yearString !== undefined && semesterString !== undefined) {
-      const optionYear = parseInt(yearString, 10);
-      const optionSemester = parseInt(semesterString, 10);
-
-      setYear(optionYear);
-      setSemester(optionSemester);
-    }
-  };
   return (
     <>
       <div
@@ -131,29 +105,6 @@ export const AddTimeTableBottomSheet = ({
               }
               className="w-full py-1 border-b-2 border-gray focus:outline-none focus:border-black"
             />
-          </div>
-          <div className="flex flex-col gap-2">
-            <h1 className="text-sm text-gray-500">학기 선택</h1>
-            <select
-              onChange={(e) => {
-                clickOption(e.target.value);
-              }}
-              className="py-1 border-b-2 border-gray focus:outline-none focus:border-black"
-            >
-              <option value="" disabled>
-                학기를 선택하세요
-              </option>
-              {courseBookList.map((courseBook) => {
-                return (
-                  <option
-                    key={`${courseBook.year}-${courseBook.semester}`}
-                    value={`${courseBook.year}-${courseBook.semester}`}
-                  >
-                    {`${courseBook.year}년 ${formatSemester(Number(courseBook.semester))}`}
-                  </option>
-                );
-              })}
-            </select>
           </div>
         </div>
       </div>

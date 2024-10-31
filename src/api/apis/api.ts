@@ -6,7 +6,10 @@ import type {
   LocalLoginRequest,
   LocalLoginResponse,
   TimeTableBriefResponse,
+  TimeTableIdParams,
+  TimeTableRequest,
   TimeTableResponse,
+  TimeTableTitleRequest,
   UserResponse,
 } from './schemas';
 
@@ -42,7 +45,7 @@ export const getSnuttApis = ({
       params,
     }: {
       token: string;
-      params: { timetableId: string };
+      params: TimeTableIdParams;
     }) =>
       callWithToken<SuccessResponse<TimeTableResponse>>({
         method: 'get',
@@ -67,12 +70,8 @@ export const getSnuttApis = ({
       body,
     }: {
       token: string;
-      params: {
-        timetableId: string;
-      };
-      body: {
-        title: string;
-      };
+      params: TimeTableIdParams;
+      body: TimeTableTitleRequest;
     }) =>
       callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
         method: 'PUT',
@@ -85,14 +84,25 @@ export const getSnuttApis = ({
       params,
     }: {
       token: string;
-      params: {
-        timetableId: string;
-      };
+      params: TimeTableIdParams;
     }) =>
       callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
         method: 'DELETE',
         path: `v1/tables/${params.timetableId}`,
         token,
+      }),
+    'POST /v1/tables': ({
+      token,
+      body,
+    }: {
+      token: string;
+      body: TimeTableRequest;
+    }) =>
+      callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
+        method: 'POST',
+        path: `v1/tables`,
+        token,
+        body,
       }),
   }) satisfies Record<string, Api>;
 

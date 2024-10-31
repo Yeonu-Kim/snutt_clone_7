@@ -8,6 +8,7 @@ import { TokenAuthContext } from '@/context/TokenAuthContext';
 import type { TimeTableBrief } from '@/entities/timetable';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { AddTimeTableBottomSheet } from '@/pages/Main/Drawer/AddTimeTableBottomSheet';
+import { AddTimeTableBySemesterBottomSheet } from '@/pages/Main/Drawer/AddTimeTableBySemesterBottomSheet';
 import { TimeTableMenuBottomSheet } from '@/pages/Main/Drawer/TimeTableMenuBottomSheet';
 import { formatSemester } from '@/utils/format';
 import { showDialog } from '@/utils/showDialog';
@@ -38,6 +39,10 @@ export const Drawer = ({
     useState<BottomSheetItem | null>(null);
   const [showAddTimeTableBottomSheet, setShowAddTimeTableBottomSheet] =
     useState(false);
+  const [showAddTimeTableBySemester, setShowAddTimeTableBySemester] =
+    useState(false);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [selectedSemester, setSelectedSemester] = useState<number | null>(null);
   const { showTBDDialog, showErrorDialog } = showDialog();
 
   const { data: timeTableListData } = useQuery({
@@ -140,10 +145,19 @@ export const Drawer = ({
   const closeTimeTableMenu = () => {
     setBottomSheetTimeTableId(null);
   };
+  const closeAddTimeTableBySemester = () => {
+    setShowAddTimeTableBySemester(false);
+  };
 
   const clickTimetableMenu = (timetableId: string) => {
     setTimetableId(timetableId);
     onClose();
+  };
+
+  const clickAddTimeTableBySemester = (year: number, semester: number) => {
+    setSelectedYear(year);
+    setSelectedSemester(semester);
+    setShowAddTimeTableBySemester(true);
   };
 
   return (
@@ -255,7 +269,9 @@ export const Drawer = ({
                 {group.items.length === 0 ? (
                   <p
                     className="text-sm cursor-pointer ml-4"
-                    onClick={showTBDDialog}
+                    onClick={() => {
+                      clickAddTimeTableBySemester(group.year, group.semester);
+                    }}
                   >
                     + 시간표 추가하기
                   </p>
@@ -266,12 +282,24 @@ export const Drawer = ({
         </ul>
       </div>
       {showAddTimeTableBottomSheet ? (
-        <AddTimeTableBottomSheet onClose={closeAddTimeTable} />
+        <AddTimeTableBottomSheet
+          onClose={closeAddTimeTable}
+          courseBookList={coursebookItems}
+        />
       ) : null}
       {bottomSheetTimeTable !== null ? (
         <TimeTableMenuBottomSheet
           timetable={bottomSheetTimeTable}
           onClose={closeTimeTableMenu}
+        />
+      ) : null}
+      {showAddTimeTableBySemester &&
+      selectedYear !== null &&
+      selectedSemester !== null ? (
+        <AddTimeTableBySemesterBottomSheet
+          year={selectedYear}
+          semester={selectedSemester}
+          onClose={closeAddTimeTableBySemester}
         />
       ) : null}
     </>
