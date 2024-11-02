@@ -12,6 +12,7 @@ type TimeTableMenuBottomSheet = {
     title: string;
   };
   onClose(): void;
+  selectedTimetableId: string | null;
   setTimetableId: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
@@ -19,6 +20,7 @@ export const TimeTableMenuBottomSheet = ({
   timetable,
   onClose,
   setTimetableId,
+  selectedTimetableId,
 }: TimeTableMenuBottomSheet) => {
   const { isVisible, handleClose } = useBottomSheet({ onClose });
   const [showChangeNameDialog, setShowChangeNameDialog] = useState(false);
@@ -80,6 +82,7 @@ export const TimeTableMenuBottomSheet = ({
         <DeleteDialog
           onClose={handleClose}
           timetableId={timetable._id}
+          selectedTimetableId={selectedTimetableId}
           setTimetableId={setTimetableId}
         />
       ) : null}

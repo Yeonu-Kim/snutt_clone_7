@@ -163,6 +163,7 @@ export const Drawer = ({
         <TimeTableMenuBottomSheet
           timetable={bottomSheetTimeTableInfo}
           onClose={closeTimeTableMenu}
+          selectedTimetableId={selectedTimetableId}
           setTimetableId={setTimetableId}
         />
       ) : null}
