@@ -1,3 +1,4 @@
+import type { CourseBook } from '@/entities/courseBook';
 import { getErrorMessage } from '@/entities/error';
 import type { Lecture } from '@/entities/lecture';
 import type { RepositoryResponse, UsecaseResponse } from '@/entities/response';
@@ -54,6 +55,17 @@ export type TimeTableService = {
     token: string;
     timetableId: string;
   }): UsecaseResponse<TimeTableBrief[]>;
+  groupTimeTableByCourseBook(_: {
+    timetableItems: TimeTableBrief[];
+    coursebookItems: CourseBook[];
+  }): Record<
+    string,
+    {
+      year: number;
+      semester: 1 | 2 | 3 | 4;
+      items: TimeTableBrief[];
+    }
+  >;
 };
 
 export const getTimeTableService = ({
@@ -150,5 +162,56 @@ export const getTimeTableService = ({
       return { type: 'success', data: timeTable };
     }
     return { type: 'error', message: getErrorMessage(data) };
+  },
+
+  groupTimeTableByCourseBook: ({
+    timetableItems,
+    coursebookItems,
+  }: {
+    timetableItems: TimeTableBrief[];
+    coursebookItems: CourseBook[];
+  }) => {
+    const sortedTimetableItems = [...timetableItems].sort((a, b) => {
+      if (a.year !== b.year) {
+        return b.year - a.year;
+      }
+      if (a.semester !== b.semester) {
+        return b.semester - a.semester;
+      }
+      return a.isPrimary ? -1 : 0;
+    });
+
+    const recentCourse = coursebookItems.find((_, index) => index === 0);
+
+    const initialGroupedTimeTables =
+      recentCourse !== undefined
+        ? {
+            [`${recentCourse.year}-${recentCourse.semester}`]: {
+              year: recentCourse.year,
+              semester: Number(recentCourse.semester) as 1 | 2 | 3 | 4, // courseBook의 semester는 string이라 다음과 같이 수정함.
+              items: [],
+            },
+          }
+        : {};
+
+    const groupedTimetables = sortedTimetableItems.reduce<
+      Record<
+        string,
+        { year: number; semester: 1 | 2 | 3 | 4; items: TimeTableBrief[] }
+      >
+    >((acc, timetable) => {
+      const key = `${timetable.year}-${timetable.semester}`;
+      if (acc[key] === undefined) {
+        acc[key] = {
+          year: timetable.year,
+          semester: timetable.semester,
+          items: [],
+        };
+      }
+      acc[key].items.push(timetable);
+      return acc;
+    }, initialGroupedTimeTables);
+
+    return groupedTimetables;
   },
 });

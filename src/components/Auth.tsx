@@ -3,12 +3,12 @@ import type { ReactNode } from 'react';
 import { ModalManageContext } from '../context/ModalManageContext';
 import { TokenAuthContext } from '../context/TokenAuthContext';
 import { useGuardContext } from '../hooks/useGuardContext';
-import { ReSignInModal } from './Modal';
+import { ReSignInDialog } from './Dialog';
 
 export const AuthProtectedRoute = ({ children }: { children: ReactNode }) => {
   const { isModalOpen } = useGuardContext(ModalManageContext);
 
-  return isModalOpen ? <ReSignInModal /> : <>{children}</>;
+  return isModalOpen ? <ReSignInDialog /> : <>{children}</>;
 };
 
 export const AuthProtectedSwitchRoute = ({

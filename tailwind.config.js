@@ -40,6 +40,10 @@ export default {
           '0%': { opacity: 0, transform: 'translateY(20px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
+        bottonSheetUp: {
+          '0%': { transform: 'translateY(0px)' },
+          '100%': { transform: 'translateY(100%)' },
+        },
         popup: {
           '0%': { opacity: 0, transform: 'scale(0.8)' },
           '100%': { opacity: 1, transform: 'scale(1)' },
