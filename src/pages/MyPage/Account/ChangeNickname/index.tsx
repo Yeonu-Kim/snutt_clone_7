@@ -21,7 +21,7 @@ export const ChangeNicknamePage = () => {
   const [nickname, setNickname] = useState<string>();
   const queryClient = useQueryClient();
 
-  const { mutate: changeNickname } = useMutation({
+  const { mutate: changeNickname, isPending } = useMutation({
     mutationFn: ({ inputNickname }: { inputNickname: string }) => {
       if (token === null) {
         throw new Error();
@@ -31,11 +31,12 @@ export const ChangeNicknamePage = () => {
         body: { nickname: inputNickname },
       });
     },
-    onSuccess: async (response) => {
+    onSuccess: (response) => {
       if (response.type === 'success') {
-        await queryClient.invalidateQueries({
-          queryKey: ['UserService', 'getUserInfo', token],
-        });
+        queryClient.setQueryData(
+          ['UserService', 'getUserInfo', token],
+          response,
+        );
         toAccount();
       } else {
         showErrorDialog(response.message);
@@ -68,6 +69,8 @@ export const ChangeNicknamePage = () => {
     setOpen(true);
     return null;
   }
+
+  if (isPending) return <LoadingPage />;
 
   if (userData === undefined) return <LoadingPage />;
 
