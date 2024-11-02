@@ -27,6 +27,9 @@ export default {
           900: '#111827',
           950: '#030712',
         },
+        textAlternative: '#8A898E',
+        lineLight: '#EBEBED',
+        lineLightest: '#F5F5F5',
       },
       keyframes: {
         moveUpDown: {
@@ -37,9 +40,17 @@ export default {
           '0%': { opacity: 0, transform: 'translateY(20px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
+        bottonSheetUp: {
+          '0%': { transform: 'translateY(0px)' },
+          '100%': { transform: 'translateY(100%)' },
+        },
         popup: {
           '0%': { opacity: 0, transform: 'scale(0.8)' },
           '100%': { opacity: 1, transform: 'scale(1)' },
+        },
+        popout: {
+          '0%': { opacity: 1, transform: 'scale(1)' },
+          '100%': { opacity: 0, transform: 'scale(0.8)' },
         },
       },
       animation: {
@@ -49,7 +60,8 @@ export default {
         'updown-4': 'moveUpDown 2s infinite ease-in-out 0.7s',
         'updown-5': 'moveUpDown 2s infinite ease-in-out 0.9s',
         slideUp: 'slideInUp 0.5s ease-in-out',
-        popup: 'popup 0.3s ease-out',
+        popup: 'popup 0.3s ease-in-out',
+        popout: 'popout 0.3s ease-in-out forwards',
       },
     },
     fontFamily: {
@@ -72,5 +84,5 @@ export default {
       375: '375px', // 모바일용
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 };

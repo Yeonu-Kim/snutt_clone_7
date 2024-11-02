@@ -1,11 +1,17 @@
 import type { impleSnuttApi } from '..';
-import type { ErrorResponse, SuccessResponse } from '../response';
+import type { SuccessResponse } from '../response';
 import type { Api, GetApiSpecsParameter } from '.';
 import type {
+  CourseBookResponse,
   ChangeNicknameRequest,
   LocalLoginRequest,
   LocalLoginResponse,
   UserResponse,
+  TimeTableBriefResponse,
+  TimeTableIdParams,
+  TimeTableRequest,
+  TimeTableResponse,
+  TimeTableTitleRequest,
 } from './schemas';
 
 export const getSnuttApis = ({
@@ -15,9 +21,7 @@ export const getSnuttApis = ({
   ({
     // 로컬 로그인 api
     'POST /v1/auth/login_local': ({ body }: { body: LocalLoginRequest }) =>
-      callWithoutToken<
-        SuccessResponse<LocalLoginResponse> | ErrorResponse<403, 8197>
-      >({
+      callWithoutToken<SuccessResponse<LocalLoginResponse>>({
         method: 'POST',
         path: 'v1/auth/login_local',
         body,
@@ -26,9 +30,10 @@ export const getSnuttApis = ({
     // 요청한 유저의 정보 전달 api
     'GET /v1/users/me': ({ token }: { token: string }) =>
       callWithToken<SuccessResponse<UserResponse>>({
-        method: 'GET',
+        method: 'get',
         path: 'v1/users/me',
         token,
+        body,
       }),
 
     'PATCH /v1/users/me': ({
@@ -41,6 +46,77 @@ export const getSnuttApis = ({
       callWithToken<SuccessResponse<UserResponse>>({
         method: 'PATCH',
         path: 'v1/users/me',
+        token,
+        body,
+      }),
+    //  최근 시간표 불러오는 api
+    'GET /v1/tables/recent': ({ token }: { token: string }) =>
+      callWithToken<SuccessResponse<TimeTableResponse>>({
+        method: 'get',
+        path: 'v1/tables/recent',
+        token,
+      }),
+    'GET /v1/tables/:timetableId': ({
+      token,
+      params,
+    }: {
+      token: string;
+      params: TimeTableIdParams;
+    }) =>
+      callWithToken<SuccessResponse<TimeTableResponse>>({
+        method: 'get',
+        path: `v1/tables/${params.timetableId}`,
+        token,
+      }),
+    'GET /v1/tables': ({ token }: { token: string }) =>
+      callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
+        method: 'get',
+        path: 'v1/tables',
+        token,
+      }),
+    'GET /v1/course_books': ({ token }: { token: string }) =>
+      callWithToken<SuccessResponse<CourseBookResponse[]>>({
+        method: 'get',
+        path: 'v1/course_books',
+        token,
+      }),
+    'PUT /v1/tables/:timetableId': ({
+      token,
+      params,
+      body,
+    }: {
+      token: string;
+      params: TimeTableIdParams;
+      body: TimeTableTitleRequest;
+    }) =>
+      callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
+        method: 'PUT',
+        path: `v1/tables/${params.timetableId}`,
+        token,
+        body,
+      }),
+    'DELETE /v1/tables/:timetableId': ({
+      token,
+      params,
+    }: {
+      token: string;
+      params: TimeTableIdParams;
+    }) =>
+      callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
+        method: 'DELETE',
+        path: `v1/tables/${params.timetableId}`,
+        token,
+      }),
+    'POST /v1/tables': ({
+      token,
+      body,
+    }: {
+      token: string;
+      body: TimeTableRequest;
+    }) =>
+      callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
+        method: 'POST',
+        path: `v1/tables`,
         token,
         body,
       }),

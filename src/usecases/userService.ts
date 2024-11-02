@@ -5,35 +5,11 @@ import type { RepositoryResponse, UsecaseResponse } from '../entities/response';
 import type { User } from '../entities/user';
 
 type UserRepository = {
-  getUserInfo(_: { token: string }): RepositoryResponse<{
-    id: string;
-    isAdmin: boolean;
-    regDate: string;
-    notificationCheckedAt: string;
-    email?: string;
-    local_id: string;
-    fbName?: string;
-    nickname: {
-      nickname: string;
-      tag: string;
-    };
-  }>;
+  getUserInfo(_: { token: string }): RepositoryResponse<User>;
   patchUserInfo(_: {
     token: string;
     body: ChangeNicknameRequest;
-  }): RepositoryResponse<{
-    id: string;
-    isAdmin: boolean;
-    regDate: string;
-    notificationCheckedAt: string;
-    email?: string;
-    local_id: string;
-    fbName?: string;
-    nickname: {
-      nickname: string;
-      tag: string;
-    };
-  }>;
+  }): RepositoryResponse<User>;
 };
 
 export type UserService = {

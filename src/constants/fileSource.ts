@@ -19,4 +19,9 @@ export const ICON_SRC = {
     ON: '/navbar/tab_mypage_on.svg',
     OFF: '/navbar/tab_mypage_off.svg',
   },
+  HAMBURGER: '/header/hamburger.svg',
+  LOGO: '/logo/snutt_logo.svg',
+  ARROW: {
+    DOWN: '/arrow/arrow_down.svg',
+  },
 };

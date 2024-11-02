@@ -20,10 +20,10 @@ type InternalClient = {
 export type GetApiSpecsParameter = {
   callWithToken: <R extends ResponseNecessary>(
     p: Parameters<InternalClient['call']>[0] & { token: string },
-  ) => Promise<R | ErrorResponse<403, 8194>>;
+  ) => Promise<R | ErrorResponse>;
   callWithoutToken: <R extends ResponseNecessary>(
     p: Omit<Parameters<InternalClient['call']>[0], 'token'> & { token?: never },
-  ) => Promise<R>;
+  ) => Promise<R | ErrorResponse>;
 };
 
 export const apis = (client: InternalClient) => {
@@ -36,11 +36,11 @@ export const apis = (client: InternalClient) => {
         token?: string;
     } */
     p: Parameters<InternalClient['call']>[0] & { token: string },
-  ) => client.call<R | ErrorResponse<403, 8194>>(p);
+  ) => client.call<R | ErrorResponse>(p);
 
   const callWithoutToken = <R extends ResponseNecessary>(
     p: Parameters<InternalClient['call']>[0] & { token?: never },
-  ) => client.call<R>(p);
+  ) => client.call<R | ErrorResponse>(p);
 
   const params = { callWithToken, callWithoutToken };
 
