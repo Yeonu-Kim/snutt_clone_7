@@ -101,7 +101,7 @@ export const ChangeNicknamePage = () => {
             >
               <span onClick={onClickButton}>저장</span>
             </div>
-            <p>내 계정</p>
+            <p className="font-bold">내 계정</p>
           </div>
           <div
             id="Main-Container"

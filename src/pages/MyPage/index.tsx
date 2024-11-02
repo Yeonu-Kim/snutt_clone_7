@@ -60,7 +60,7 @@ export const MyPage = () => {
             id="upper-bar"
             className="w-full py-4 px-6 top-0 bg-white flex justify-center items-center fixed max-w-375"
           >
-            <p>마이페이지</p>
+            <p className="font-bold">마이페이지</p>
           </div>
           <div
             id="Main-Container"

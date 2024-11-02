@@ -21,7 +21,7 @@ export type TimeTableIdParams = {
 };
 
 export type ChangeNicknameRequest = {
-  nickname: string;
+  nickname?: string;
 };
 
 // Response

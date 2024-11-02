@@ -53,7 +53,7 @@ export const AccountPage = () => {
             >
               <span onClick={toMypage}>&larr; 뒤로</span>
             </div>
-            <p>내 계정</p>
+            <p className="font-bold">내 계정</p>
           </div>
           <div
             id="Main-Container"

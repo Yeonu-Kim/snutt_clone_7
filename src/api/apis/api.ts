@@ -2,16 +2,16 @@ import type { impleSnuttApi } from '..';
 import type { SuccessResponse } from '../response';
 import type { Api, GetApiSpecsParameter } from '.';
 import type {
-  CourseBookResponse,
   ChangeNicknameRequest,
+  CourseBookResponse,
   LocalLoginRequest,
   LocalLoginResponse,
-  UserResponse,
   TimeTableBriefResponse,
   TimeTableIdParams,
   TimeTableRequest,
   TimeTableResponse,
   TimeTableTitleRequest,
+  UserResponse,
 } from './schemas';
 
 export const getSnuttApis = ({
@@ -33,7 +33,6 @@ export const getSnuttApis = ({
         method: 'get',
         path: 'v1/users/me',
         token,
-        body,
       }),
 
     'PATCH /v1/users/me': ({
