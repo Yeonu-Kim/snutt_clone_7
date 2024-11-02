@@ -46,17 +46,10 @@ export const ChangeNicknamePage = () => {
     },
   });
 
-  const onClickButton = () => {
-    if (nickname !== undefined) {
-      if (nickname !== '') {
-        changeNickname({ inputNickname: nickname });
-      }
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && nickname !== '') {
-      onClickButton();
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (nickname !== undefined && nickname !== '') {
+      changeNickname({ inputNickname: nickname });
     }
   };
 
@@ -99,7 +92,9 @@ export const ChangeNicknamePage = () => {
               className="BackButtonWrapper absolute right-3 rounded-lg flex items-center
             cursor-pointer text-gray-500 hover:text-orange"
             >
-              <span onClick={onClickButton}>저장</span>
+              <button type="submit" form="changeNicknameForm">
+                저장
+              </button>
             </div>
             <p className="font-bold">내 계정</p>
           </div>
@@ -111,17 +106,18 @@ export const ChangeNicknamePage = () => {
             <ChangeNicknamePTag>
               <span>닉네임 (공백 포함 한/영/숫자 10자 이내)</span>
             </ChangeNicknamePTag>
-            <input
-              type="text"
-              id="nickname"
-              value={nickname}
-              onChange={(e) => {
-                setNickname(e.target.value);
-              }}
-              onKeyDown={handleKeyDown}
-              placeholder={userData.data.nickname.nickname}
-              className="bg-white w-[335px] h-10 rounded-lg pl-4 mb-3 m-1"
-            />
+            <form id="changeNicknameForm" onSubmit={onSubmit}>
+              <input
+                type="text"
+                id="nickname"
+                value={nickname}
+                onChange={(e) => {
+                  setNickname(e.target.value);
+                }}
+                placeholder={userData.data.nickname.nickname}
+                className="bg-white w-[335px] h-10 rounded-lg pl-4 mb-3 m-1"
+              />
+            </form>
             <ChangeNicknamePTag>
               <span>최초 닉네임은 가입 시 임의 부여된 닉네임으로,</span>
             </ChangeNicknamePTag>
