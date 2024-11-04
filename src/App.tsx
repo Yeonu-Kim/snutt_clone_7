@@ -4,7 +4,7 @@ import '@/index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 
 import type { CallParams } from '@/api';
 import { impleSnuttApi } from '@/api';
@@ -42,7 +42,7 @@ import { getTimeTableService } from './usecases/timeTableService';
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용
 
-const routers = createBrowserRouter([
+const publicRoutes = [
   {
     path: PATH.SIGNIN,
     element: <SignInPage />,
@@ -52,6 +52,13 @@ const routers = createBrowserRouter([
     element: <SignUpPage />,
   },
   {
+    path: '/*',
+    element: <NotFoundPage />,
+  },
+];
+
+const authSwitchRoutes = [
+  {
     path: PATH.INDEX,
     element: (
       <AuthProtectedSwitchRoute
@@ -60,34 +67,36 @@ const routers = createBrowserRouter([
       />
     ),
   },
+];
+
+const authRoutes = [
   {
-    path: PATH.MYPAGE.ROOT,
     element: (
       <AuthProtectedRoute>
-        <MyPage />
+        <Outlet />
       </AuthProtectedRoute>
     ),
+    children: [
+      {
+        path: PATH.MYPAGE.ROOT,
+        element: <MyPage />,
+      },
+      {
+        path: PATH.MYPAGE.ACCOUNT.ROOT,
+        element: <AccountPage />,
+      },
+      {
+        path: PATH.MYPAGE.ACCOUNT.CHANGENICKNAME,
+        element: <ChangeNicknamePage />,
+      },
+    ],
   },
-  {
-    path: PATH.MYPAGE.ACCOUNT.ROOT,
-    element: (
-      <AuthProtectedRoute>
-        <AccountPage />
-      </AuthProtectedRoute>
-    ),
-  },
-  {
-    path: PATH.MYPAGE.ACCOUNT.CHANGENICKNAME,
-    element: (
-      <AuthProtectedRoute>
-        <ChangeNicknamePage />
-      </AuthProtectedRoute>
-    ),
-  },
-  {
-    path: '/*',
-    element: <NotFoundPage />,
-  },
+];
+
+const routers = createBrowserRouter([
+  ...publicRoutes,
+  ...authSwitchRoutes,
+  ...authRoutes,
 ]);
 
 const queryClient = new QueryClient({
