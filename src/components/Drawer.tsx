@@ -1,9 +1,3 @@
-import {
-  RiAddLine,
-  RiCheckboxCircleFill,
-  RiCloseLine,
-  RiUserFill,
-} from '@remixicon/react';
 import type { ReactNode } from 'react';
 
 import { ICON_SRC } from '@/constants/fileSource';
