@@ -20,6 +20,9 @@ export const ICON_SRC = {
     OFF: '/navbar/tab_mypage_off.svg',
   },
   HAMBURGER: '/header/hamburger.svg',
+  LIST_BULLET: '/header/listbullet.svg',
+  BELL: '/header/bell.svg',
+  SHARE: '/header/share.svg',
   LOGO: '/logo/snutt_logo.svg',
   ARROW: {
     DOWN: '/arrow/arrow_down.svg',

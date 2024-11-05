@@ -9,7 +9,15 @@ import { DAY_LABEL_MAP, dayList, hourList } from '@/entities/time';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { showDialog } from '@/utils/showDialog';
 
-export const TimeTable = ({ timetableId }: { timetableId: string | null }) => {
+export const TimeTable = ({
+  timetableId,
+  setTotalCredit,
+  setTitle,
+}: {
+  timetableId: string | null;
+  setTotalCredit: (credit: number) => void;
+  setTitle: (title: string) => void;
+}) => {
   const { timeTableService } = useGuardContext(ServiceContext);
   const { token } = useGuardContext(TokenAuthContext);
   const { setOpen } = useGuardContext(ModalManageContext);
@@ -45,6 +53,12 @@ export const TimeTable = ({ timetableId }: { timetableId: string | null }) => {
   }
 
   if (timeTableData.type === 'success') {
+    const totalCredit = timeTableData.data.lecture_list.reduce(
+      (acc, cur) => acc + cur.credit,
+      0,
+    );
+    setTotalCredit(totalCredit);
+    setTitle(timeTableData.data.title);
     const columnCount = dayList.length - 2;
     const rowCount = hourList.length * 12;
     return (
