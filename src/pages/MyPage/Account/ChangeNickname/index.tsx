@@ -69,8 +69,6 @@ export const ChangeNicknamePage = () => {
     return null;
   }
 
-  if (isPending) return <LoadingPage />;
-
   if (userData === undefined) return <LoadingPage />;
 
   if (userData.type === 'success') {
