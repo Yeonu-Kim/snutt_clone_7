@@ -5,7 +5,7 @@ type ChangeNicknamePTagProps = {
   className?: string;
 };
 
-export const ChangeNicknamePTag = ({
+export const PTagOnTheWhiteBox = ({
   children,
   className = '',
 }: ChangeNicknamePTagProps) => {

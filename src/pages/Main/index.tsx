@@ -11,6 +11,8 @@ import { TimeTable } from './TimeTable';
 export const MainPage = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [timetableId, setTimetableId] = useState<string | null>(null);
+  const [totalCredit, setTotalCredit] = useState(0);
+  const [title, setTitle] = useState('');
 
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
@@ -22,7 +24,11 @@ export const MainPage = () => {
 
   return (
     <Layout>
-      <Header onMenuClick={toggleDrawer} />
+      <Header
+        onMenuClick={toggleDrawer}
+        totalCredit={totalCredit}
+        title={title}
+      />
       <div className="flex-1 w-full overflow-hidden">
         <Drawer
           isOpen={isDrawerOpen}
@@ -30,7 +36,11 @@ export const MainPage = () => {
           selectedTimetableId={timetableId}
           setTimetableId={setTimetableId}
         />
-        <TimeTable timetableId={timetableId} />
+        <TimeTable
+          timetableId={timetableId}
+          setTotalCredit={setTotalCredit}
+          setTitle={setTitle}
+        />
       </div>
       <Navbar selectedMenu="timetable" />
     </Layout>
