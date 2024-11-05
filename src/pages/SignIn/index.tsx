@@ -1,3 +1,4 @@
+import { RiArrowLeftSLine } from '@remixicon/react';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
@@ -66,8 +67,9 @@ export const SignInPage = () => {
       <div className="LoginWrapper flex flex-col items-center w-full min-h-screen px-[20px] psm:px-2 lg:px:8">
         <div className="LoginHeaderWrapper relative flex w-full mt-4 pb-6">
           <div className="BackButtonWrapper absolute flex top-0.5 left-0 items-center cursor-pointer ">
+            <RiArrowLeftSLine />
             <span className="text-gray-500 hover:text-orange" onClick={toMain}>
-              &larr; 뒤로
+              뒤로
             </span>
           </div>
           <h1 className="text-xl font-semibold text-center w-full">로그인</h1>

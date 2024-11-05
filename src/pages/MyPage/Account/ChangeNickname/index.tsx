@@ -133,12 +133,12 @@ export const ChangeNicknamePage = () => {
               <span>닉네임 조건</span>
             </PTagOnTheWhiteBox>
             <PTagOnTheWhiteBox>
-              <ul>- 불완전한 한글(예: ㄱ, ㅏ)은 포함될 수 없습니다.</ul>
-              <ul>- 영문 대/소문자는 구분됩니다.</ul>
-              <ul>
+              <span>- 불완전한 한글(예: ㄱ, ㅏ)은 포함될 수 없습니다.</span>
+              <span>- 영문 대/소문자는 구분됩니다.</span>
+              <span>
                 - 상대에게 불쾌감을 주는 등 부적절한 닉네임은 관리자에 의해
                 안내없이 수정될 수 있습니다.
-              </ul>
+              </span>
             </PTagOnTheWhiteBox>
           </div>
           <div className="bottom-0 w-full bg-white fixed max-w-375">

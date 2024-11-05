@@ -1,3 +1,9 @@
+import {
+  RiAddLine,
+  RiCheckboxCircleFill,
+  RiCloseLine,
+  RiUserFill,
+} from '@remixicon/react';
 import type { ReactNode } from 'react';
 
 import { ICON_SRC } from '@/constants/fileSource';
@@ -16,7 +22,7 @@ export const DrawerHeader = ({ onClose }: { onClose(): void }) => {
         onClick={onClose}
         aria-label="Close Menu"
       >
-        x
+        <RiCloseLine />
       </button>
     </div>
   );
@@ -24,10 +30,10 @@ export const DrawerHeader = ({ onClose }: { onClose(): void }) => {
 
 export const AddTimeTableMenuBar = ({ onClick }: { onClick(): void }) => {
   return (
-    <li className="flex justify-between items-center pt-4 pb-2">
+    <li className="flex justify-between items-center pt-4 pb-4">
       <span className="text-sm text-gray-400">나의 시간표</span>
       <span className="font-bold text-gray-400" onClick={onClick}>
-        +
+        <RiAddLine size={18} />
       </span>
     </li>
   );
@@ -84,10 +90,10 @@ export const TimeTableMenuBar = ({
       className="flex justify-between items-center transition-all mr-4"
       key={timeTable._id}
     >
-      <div className="flex gap-1 cursor-pointer" onClick={onClick}>
+      <div className="flex items-center gap-1 cursor-pointer" onClick={onClick}>
         {timeTable._id === selectedTimeTableId ? (
           <div className="flex items-center">
-            <div className="w-2 h-2 rounded-[50%] bg-mint mr-2"></div>
+            <RiCheckboxCircleFill size={16} color="#1BD0C8" />
           </div>
         ) : (
           <div className="flex items-center">
@@ -98,7 +104,7 @@ export const TimeTableMenuBar = ({
         <span className="text-sm text-gray-400">
           ({timeTable.total_credit}학점)
         </span>
-        {timeTable.isPrimary && <span>👤</span>}
+        {timeTable.isPrimary && <RiUserFill size={16} color="#1BD0C8" />}
       </div>
       <div className="flex gap-2">{children}</div>
     </div>
