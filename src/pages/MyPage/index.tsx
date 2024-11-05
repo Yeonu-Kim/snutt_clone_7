@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
-import { Button } from '@/components/styles/Button.tsx';
 import { Layout } from '@/components/styles/Layout.tsx';
+import { PTagOnTheWhiteBox } from '@/components/styles/PTagOnTheWhiteBox.tsx';
 import { WhiteButtonBox } from '@/components/styles/WhiteButtonBox.tsx';
 import { ModalManageContext } from '@/context/ModalManageContext.ts';
 import { ServiceContext } from '@/context/ServiceContext.ts';
@@ -79,21 +79,52 @@ export const MyPage = () => {
               </div>
             </WhiteButtonBox>
             <div className="flex flex-col items-center justify-between">
-              <WhiteButtonBox className="">색상 모드</WhiteButtonBox>
-              <WhiteButtonBox>시간표 설정</WhiteButtonBox>
-              <WhiteButtonBox>시간표 테마</WhiteButtonBox>
+              <PTagOnTheWhiteBox>
+                <span>디스플레이</span>
+              </PTagOnTheWhiteBox>
+              <WhiteButtonBox className="justify-between">
+                <span className="m-4">색상모드</span>
+                <span className="m-4 text-gray-400">라이트모드 {'>'}</span>
+              </WhiteButtonBox>
+              <WhiteButtonBox className="justify-between">
+                <span className="m-4">시간표 설정</span>
+                <span className="m-4 text-gray-400">{'>'}</span>
+              </WhiteButtonBox>
+              <WhiteButtonBox className="justify-between">
+                <span className="m-4">시간표 테마</span>
+                <span className="m-4 text-gray-400">{'>'}</span>
+              </WhiteButtonBox>
             </div>
-
-            <WhiteButtonBox>빈자리 알림</WhiteButtonBox>
 
             <div className="flex flex-col items-center justify-between">
-              <WhiteButtonBox>버전 정보</WhiteButtonBox>
-              <WhiteButtonBox>개발자 정보</WhiteButtonBox>
+              <PTagOnTheWhiteBox>
+                <span>서비스</span>
+              </PTagOnTheWhiteBox>
+              <WhiteButtonBox className="justify-between">
+                <span className="m-4">빈자리 알림</span>
+                <span className="m-4 text-gray-400">{'>'}</span>
+              </WhiteButtonBox>
             </div>
 
-            <Button variant="secondary" onClick={handleClickLogoutButton}>
-              로그아웃
-            </Button>
+            <div className="flex flex-col items-center justify-between">
+              <PTagOnTheWhiteBox>
+                <span>정보 및 제안</span>
+              </PTagOnTheWhiteBox>
+              <WhiteButtonBox>
+                <span className="m-4">버전 정보</span>
+              </WhiteButtonBox>
+              <WhiteButtonBox className="justify-between">
+                <span className="m-4">개발자 정보</span>
+                <span className="m-4 text-gray-400">{'>'}</span>
+              </WhiteButtonBox>
+            </div>
+
+            <WhiteButtonBox
+              className="justify-between"
+              onClick={handleClickLogoutButton}
+            >
+              <span className="text-red m-4">로그아웃</span>
+            </WhiteButtonBox>
           </div>
           <div className="bottom-0 w-full bg-white fixed max-w-375">
             <Navbar selectedMenu="mypage" />
