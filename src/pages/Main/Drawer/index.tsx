@@ -1,3 +1,4 @@
+import { RiFileCopyLine, RiMore2Fill } from '@remixicon/react';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 
@@ -8,7 +9,7 @@ import {
   DrawerHeader,
   TimeTableMenuBar,
   TimeTableMenuIcon,
-} from '@/components/DrawerContainer';
+} from '@/components/Drawer';
 import { LoadingPage } from '@/components/Loading';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
@@ -122,7 +123,7 @@ export const Drawer = ({
                       }}
                     >
                       <TimeTableMenuIcon onClick={showTBDDialog}>
-                        복사
+                        <RiFileCopyLine size={18} />
                       </TimeTableMenuIcon>
                       <TimeTableMenuIcon
                         onClick={() => {
@@ -132,7 +133,7 @@ export const Drawer = ({
                           });
                         }}
                       >
-                        ...
+                        <RiMore2Fill size={18} />
                       </TimeTableMenuIcon>
                     </TimeTableMenuBar>
                   ))}
