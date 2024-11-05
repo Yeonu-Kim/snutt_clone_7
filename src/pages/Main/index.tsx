@@ -40,6 +40,7 @@ export const MainPage = () => {
           timetableId={timetableId}
           setTotalCredit={setTotalCredit}
           setTitle={setTitle}
+          setTimetableId={setTimetableId}
         />
       </div>
       <Navbar selectedMenu="timetable" />
