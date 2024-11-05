@@ -1,4 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 
 import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
@@ -16,7 +17,42 @@ export const ChangeNicknamePage = () => {
   const { userService } = useGuardContext(ServiceContext);
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
-  const { toInformation } = useRouteNavigation();
+  const { toAccount } = useRouteNavigation();
+  const [nickname, setNickname] = useState<string>();
+  const queryClient = useQueryClient();
+
+  const { mutate: changeNickname, isPending } = useMutation({
+    mutationFn: ({ inputNickname }: { inputNickname: string }) => {
+      if (token === null) {
+        throw new Error();
+      }
+      return userService.patchUserInfo({
+        token: token,
+        body: { nickname: inputNickname },
+      });
+    },
+    onSuccess: (response) => {
+      if (response.type === 'success') {
+        queryClient.setQueryData(
+          ['UserService', 'getUserInfo', token],
+          response,
+        );
+        toAccount();
+      } else {
+        showErrorDialog(response.message);
+      }
+    },
+    onError: () => {
+      showErrorDialog('로그인 중 문제가 발생했습니다.');
+    },
+  });
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (nickname !== undefined && nickname !== '') {
+      changeNickname({ inputNickname: nickname });
+    }
+  };
 
   const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,
@@ -33,6 +69,8 @@ export const ChangeNicknamePage = () => {
     setOpen(true);
     return null;
   }
+
+  if (isPending) return <LoadingPage />;
 
   if (userData === undefined) return <LoadingPage />;
 
@@ -51,15 +89,17 @@ export const ChangeNicknamePage = () => {
               className="BackButtonWrapper absolute left-3 rounded-lg flex items-center
             cursor-pointer text-gray-500 hover:text-orange"
             >
-              <span onClick={toInformation}>&larr; 뒤로</span>
+              <span onClick={toAccount}>&larr; 뒤로</span>
             </div>
             <div
               className="BackButtonWrapper absolute right-3 rounded-lg flex items-center
             cursor-pointer text-gray-500 hover:text-orange"
             >
-              <span onClick={toInformation}>저장</span>
+              <button type="submit" form="changeNicknameForm">
+                저장
+              </button>
             </div>
-            <p>내 계정</p>
+            <p className="font-bold">내 계정</p>
           </div>
           <div
             id="Main-Container"
@@ -69,10 +109,18 @@ export const ChangeNicknamePage = () => {
             <ChangeNicknamePTag>
               <span>닉네임 (공백 포함 한/영/숫자 10자 이내)</span>
             </ChangeNicknamePTag>
-            <input
-              placeholder={userData.data.nickname.nickname}
-              className="bg-white w-[335px] h-10 rounded-lg pl-4 mb-3 m-1"
-            />
+            <form id="changeNicknameForm" onSubmit={onSubmit}>
+              <input
+                type="text"
+                id="nickname"
+                value={nickname}
+                onChange={(e) => {
+                  setNickname(e.target.value);
+                }}
+                placeholder={userData.data.nickname.nickname}
+                className="bg-white w-[335px] h-10 rounded-lg pl-4 mb-3 m-1"
+              />
+            </form>
             <ChangeNicknamePTag>
               <span>최초 닉네임은 가입 시 임의 부여된 닉네임으로,</span>
             </ChangeNicknamePTag>

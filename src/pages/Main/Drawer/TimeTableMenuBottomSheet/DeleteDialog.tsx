@@ -1,27 +1,69 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
 
+import { DialogContainer } from '@/components/Dialog';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
+import { useDialog } from '@/hooks/useVisible';
 import { showDialog } from '@/utils/showDialog';
 
-type DeleteDialog = {
+export const DeleteDialog = ({
+  onClose,
+  timetableId,
+  selectedTimetableId,
+  setTimetableId,
+}: {
   onClose(): void;
   timetableId: string;
+  selectedTimetableId: string | null;
+  setTimetableId: React.Dispatch<React.SetStateAction<string | null>>;
+}) => {
+  const { isVisible, handleClose } = useDialog({ onClose });
+  const { deleteTimeTable, isPending } = useDeleteTimeTable({
+    handleClose,
+    selectedTimetableId,
+    setTimetableId,
+  });
+
+  const onClickButton = () => {
+    deleteTimeTable({ timetableId });
+  };
+
+  return (
+    <DialogContainer isVisible={isVisible} onClick={handleClose}>
+      <h1 className="text-lg font-semibold">시간표 삭제</h1>
+      <p className="text-sm">
+        {isPending ? '처리 중입니다...' : '시간표를 정말 삭제하시겠습니까?'}
+      </p>
+      <div className="flex justify-end flex-end gap-4">
+        <button onClick={handleClose}>취소</button>
+        <button onClick={onClickButton}>확인</button>
+      </div>
+    </DialogContainer>
+  );
 };
 
-export const DeleteDialog = ({ onClose, timetableId }: DeleteDialog) => {
-  const [isVisible, setIsVisible] = useState(true);
+const useDeleteTimeTable = ({
+  handleClose,
+  selectedTimetableId,
+  setTimetableId,
+}: {
+  handleClose(): void;
+  selectedTimetableId: string | null;
+  setTimetableId: React.Dispatch<React.SetStateAction<string | null>>;
+}) => {
   const { timeTableService } = useGuardContext(ServiceContext);
   const { token } = useGuardContext(TokenAuthContext);
   const { showErrorDialog } = showDialog();
   const queryClient = useQueryClient();
 
   const { mutate: deleteTimeTable, isPending } = useMutation({
-    mutationFn: async () => {
+    mutationFn: async ({ timetableId }: { timetableId: string }) => {
       if (token === null) {
         throw new Error('토큰이 존재하지 않습니다.');
+      }
+      if (timetableId === selectedTimetableId) {
+        setTimetableId(null);
       }
       return await timeTableService.deleteTimeTableById({
         token,
@@ -43,38 +85,5 @@ export const DeleteDialog = ({ onClose, timetableId }: DeleteDialog) => {
     },
   });
 
-  const onClickButton = () => {
-    deleteTimeTable();
-  };
-
-  const handleClose = () => {
-    setIsVisible(false);
-    // 애니메이션 실행 이후 바텀시트가 닫히도록 설정
-    setTimeout(onClose, 300);
-  };
-
-  return (
-    <div
-      className="fixed flex justify-center items-center inset-0 z-50 flex items-end bg-black bg-opacity-50"
-      onClick={handleClose}
-    >
-      <div
-        className={`flex flex-col gap-4 bg-white rounded-lg shadow-lg p-6 w-[300px] relative transition-transform duration-300 ${
-          isVisible ? 'animate-popup' : 'animate-popout'
-        }`}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <h1 className="text-lg font-semibold">시간표 삭제</h1>
-        <p className="text-sm">
-          {isPending ? '처리 중입니다...' : '시간표를 정말 삭제하시겠습니까?'}
-        </p>
-        <div className="flex justify-end flex-end gap-4">
-          <button onClick={handleClose}>취소</button>
-          <button onClick={onClickButton}>확인</button>
-        </div>
-      </div>
-    </div>
-  );
+  return { deleteTimeTable, isPending };
 };

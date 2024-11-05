@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
+import { BottomSheetContainer } from '@/components/BottomeSheetContainer';
+import { useBottomSheet } from '@/hooks/useVisible';
+import { ChangeNameDialog } from '@/pages/Main/Drawer/TimeTableMenuBottomSheet/ChangeNameDialog';
+import { DeleteDialog } from '@/pages/Main/Drawer/TimeTableMenuBottomSheet/DeleteDialog';
 import { showDialog } from '@/utils/showDialog';
-
-import { ChangeNameDialog } from './ChangeNameDialog';
-import { DeleteDialog } from './DeleteDialog';
 
 type TimeTableMenuBottomSheet = {
   timetable: {
@@ -11,13 +12,17 @@ type TimeTableMenuBottomSheet = {
     title: string;
   };
   onClose(): void;
+  selectedTimetableId: string | null;
+  setTimetableId: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export const TimeTableMenuBottomSheet = ({
   timetable,
   onClose,
+  setTimetableId,
+  selectedTimetableId,
 }: TimeTableMenuBottomSheet) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const { isVisible, handleClose } = useBottomSheet({ onClose });
   const [showChangeNameDialog, setShowChangeNameDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
@@ -50,44 +55,22 @@ export const TimeTableMenuBottomSheet = ({
     },
   ];
 
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
-  const handleClose = () => {
-    setIsVisible(false);
-    // 애니메이션 실행 이후 바텀시트가 닫히도록 설정
-    setTimeout(onClose, 300);
-  };
-
   return (
     <>
-      <div
-        className="fixed inset-0 z-50 flex items-end bg-black bg-opacity-50"
-        onClick={handleClose}
-      >
-        <div
-          className={`w-full bg-white rounded-t-lg p-4 transform transition-transform duration-300 ${
-            isVisible ? 'translate-y-0' : 'translate-y-full'
-          }`}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          {menuOptions.map((option, index) => (
-            <div
-              key={index}
-              className="flex items-center py-2 cursor-pointer hover:bg-gray-100"
-              onClick={(e) => {
-                e.stopPropagation();
-                option.action();
-              }}
-            >
-              <span>{option.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BottomSheetContainer isVisible={isVisible} onClick={handleClose}>
+        {menuOptions.map((option, index) => (
+          <div
+            key={index}
+            className="flex items-center py-2 cursor-pointer hover:bg-gray-100"
+            onClick={(e) => {
+              e.stopPropagation();
+              option.action();
+            }}
+          >
+            <span>{option.label}</span>
+          </div>
+        ))}
+      </BottomSheetContainer>
       {showChangeNameDialog ? (
         <ChangeNameDialog
           timetableId={timetable._id}
@@ -96,7 +79,12 @@ export const TimeTableMenuBottomSheet = ({
         />
       ) : null}
       {showDeleteDialog ? (
-        <DeleteDialog onClose={handleClose} timetableId={timetable._id} />
+        <DeleteDialog
+          onClose={handleClose}
+          timetableId={timetable._id}
+          selectedTimetableId={selectedTimetableId}
+          setTimetableId={setTimetableId}
+        />
       ) : null}
     </>
   );

@@ -20,6 +20,10 @@ export type TimeTableIdParams = {
   timetableId: string;
 };
 
+export type ChangeNicknameRequest = {
+  nickname?: string;
+};
+
 // Response
 export type LocalLoginResponse = {
   user_id: string;

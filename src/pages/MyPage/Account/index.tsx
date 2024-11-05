@@ -16,7 +16,7 @@ export const AccountPage = () => {
   const { userService } = useGuardContext(ServiceContext);
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
-  const { toMypage, toNickname } = useRouteNavigation();
+  const { toMypage, toChangeNickname } = useRouteNavigation();
 
   const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,
@@ -53,7 +53,7 @@ export const AccountPage = () => {
             >
               <span onClick={toMypage}>&larr; 뒤로</span>
             </div>
-            <p>내 계정</p>
+            <p className="font-bold">내 계정</p>
           </div>
           <div
             id="Main-Container"
@@ -61,7 +61,7 @@ export const AccountPage = () => {
             p-5 w-full mt-[60px] mb-[80px] bg-gray-200 gap-5"
           >
             <WhiteButtonBox
-              onClick={toNickname}
+              onClick={toChangeNickname}
               className="flex items-center justify-between"
             >
               <div className="m-4">닉네임 변경</div>

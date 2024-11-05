@@ -19,11 +19,11 @@ export const useRouteNavigation = () => {
     toMypage: () => {
       navigate(MYPAGE.ROOT, { replace: true });
     },
-    toInformation: () => {
-      navigate(MYPAGE.INFORMATION.ROOT, { replace: true });
+    toAccount: () => {
+      navigate(MYPAGE.ACCOUNT.ROOT, { replace: true });
     },
-    toNickname: () => {
-      navigate(MYPAGE.INFORMATION.NICKNAME, { replace: true });
+    toChangeNickname: () => {
+      navigate(MYPAGE.ACCOUNT.CHANGENICKNAME, { replace: true });
     },
   };
 };

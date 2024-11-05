@@ -1,9 +1,11 @@
-import { ServiceContext } from '../context/ServiceContext';
-import { TokenManageContext } from '../context/TokenManageContext';
-import { useGuardContext } from '../hooks/useGuardContext';
+import type { ReactNode } from 'react';
+
+import { ServiceContext } from '../context/ServiceContext.ts';
+import { TokenManageContext } from '../context/TokenManageContext.ts';
+import { useGuardContext } from '../hooks/useGuardContext.ts';
 import { useRouteNavigation } from '../hooks/useRouteNavigation.ts';
 
-export const ReSignInModal = () => {
+export const ReSignInDialog = () => {
   const { toSignIn } = useRouteNavigation();
   const { authService } = useGuardContext(ServiceContext);
   const { clearToken } = useGuardContext(TokenManageContext);
@@ -29,6 +31,34 @@ export const ReSignInModal = () => {
             로그인 페이지로
           </button>
         </div>
+      </div>
+    </div>
+  );
+};
+
+export const DialogContainer = ({
+  isVisible,
+  onClick,
+  children,
+}: {
+  isVisible: boolean;
+  onClick(): void;
+  children: ReactNode;
+}) => {
+  return (
+    <div
+      className="fixed flex justify-center items-center inset-0 z-50 flex items-end bg-black bg-opacity-50"
+      onClick={onClick}
+    >
+      <div
+        className={`flex flex-col gap-4 bg-white rounded-lg shadow-lg p-6 w-[300px] relative transition-transform duration-300 ${
+          isVisible ? 'animate-popup' : 'animate-popout'
+        }`}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        {children}
       </div>
     </div>
   );

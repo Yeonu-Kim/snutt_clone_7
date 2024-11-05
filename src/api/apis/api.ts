@@ -2,6 +2,7 @@ import type { impleSnuttApi } from '..';
 import type { SuccessResponse } from '../response';
 import type { Api, GetApiSpecsParameter } from '.';
 import type {
+  ChangeNicknameRequest,
   CourseBookResponse,
   LocalLoginRequest,
   LocalLoginResponse,
@@ -21,7 +22,7 @@ export const getSnuttApis = ({
     // 로컬 로그인 api
     'POST /v1/auth/login_local': ({ body }: { body: LocalLoginRequest }) =>
       callWithoutToken<SuccessResponse<LocalLoginResponse>>({
-        method: 'post',
+        method: 'POST',
         path: 'v1/auth/login_local',
         body,
       }),
@@ -32,6 +33,20 @@ export const getSnuttApis = ({
         method: 'get',
         path: 'v1/users/me',
         token,
+      }),
+
+    'PATCH /v1/users/me': ({
+      token,
+      body,
+    }: {
+      token: string;
+      body: ChangeNicknameRequest;
+    }) =>
+      callWithToken<SuccessResponse<UserResponse>>({
+        method: 'PATCH',
+        path: 'v1/users/me',
+        token,
+        body,
       }),
     //  최근 시간표 불러오는 api
     'GET /v1/tables/recent': ({ token }: { token: string }) =>
