@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { DialogContainer } from '@/components/Dialog';
+import { SpinnerLoading } from '@/components/Loading';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
@@ -31,10 +32,9 @@ export const DeleteDialog = ({
 
   return (
     <DialogContainer isVisible={isVisible} onClick={handleClose}>
+      {isPending && <SpinnerLoading />}
       <h1 className="text-lg font-semibold">시간표 삭제</h1>
-      <p className="text-sm">
-        {isPending ? '처리 중입니다...' : '시간표를 정말 삭제하시겠습니까?'}
-      </p>
+      <p className="text-sm">시간표를 정말 삭제하시겠습니까?</p>
       <div className="flex justify-end flex-end gap-4">
         <button onClick={handleClose}>취소</button>
         <button onClick={onClickButton}>확인</button>

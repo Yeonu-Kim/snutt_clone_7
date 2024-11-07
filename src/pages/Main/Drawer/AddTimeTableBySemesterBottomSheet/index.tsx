@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { BottomSheetContainer } from '@/components/BottomeSheetContainer';
+import { SpinnerLoading } from '@/components/Loading';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
@@ -32,6 +33,7 @@ export const AddTimeTableBySemesterBottomSheet = ({
   return (
     <>
       <BottomSheetContainer isVisible={isVisible} onClick={handleClose}>
+        {isPending && <SpinnerLoading />}
         <div className="flex flex-col gap-6">
           <div className="flex flex-end justify-between">
             <button onClick={handleClose}>취소</button>
@@ -42,7 +44,7 @@ export const AddTimeTableBySemesterBottomSheet = ({
             <input
               type="text"
               id="id"
-              value={isPending ? '' : timeTableName}
+              value={timeTableName}
               onChange={(e) => {
                 setTimeTableName(e.target.value);
               }}
@@ -51,10 +53,8 @@ export const AddTimeTableBySemesterBottomSheet = ({
                   onClickButton();
                 }
               }}
+              placeholder={'시간표 제목을 입력하세요'}
               disabled={isPending}
-              placeholder={
-                isPending ? '처리 중입니다...' : '시간표 제목을 입력하세요'
-              }
               className="w-full py-1 border-b-2 border-gray focus:outline-none focus:border-black"
             />
           </div>

@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { LoadingPage } from '@/components/Loading.tsx';
+import { LoadingPage, SpinnerLoading } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
 import { Layout } from '@/components/styles/Layout.tsx';
 import { PTagOnTheWhiteBox } from '@/components/styles/PTagOnTheWhiteBox.tsx';
@@ -21,7 +21,7 @@ export const ChangeNicknamePage = () => {
   const [nickname, setNickname] = useState<string>();
   const queryClient = useQueryClient();
 
-  const { mutate: changeNickname } = useMutation({
+  const { mutate: changeNickname, isPending } = useMutation({
     mutationFn: ({ inputNickname }: { inputNickname: string }) => {
       if (token === null) {
         throw new Error();
@@ -74,6 +74,7 @@ export const ChangeNicknamePage = () => {
   if (userData.type === 'success') {
     return (
       <Layout>
+        {isPending && <SpinnerLoading />}
         <div
           id="Wrapper-Container"
           className="flex flex-col items-center w-full min-h-screen"
@@ -114,6 +115,7 @@ export const ChangeNicknamePage = () => {
                 onChange={(e) => {
                   setNickname(e.target.value);
                 }}
+                disabled={isPending}
                 placeholder={userData.data.nickname.nickname}
                 className="bg-white w-[335px] h-10 rounded-lg pl-4 mb-3 m-1"
               />

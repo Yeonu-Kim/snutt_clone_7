@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { DialogContainer } from '@/components/Dialog';
+import { SpinnerLoading } from '@/components/Loading';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
@@ -32,11 +33,12 @@ export const ChangeNameDialog = ({
 
   return (
     <DialogContainer isVisible={isVisible} onClick={handleClose}>
+      {isPending && <SpinnerLoading />}
       <h1 className="text-lg font-semibold">이름 변경하기</h1>
       <input
         type="text"
         id="id"
-        value={isPending ? '' : timetableName}
+        value={timetableName}
         onChange={(e) => {
           setTimetableName(e.target.value);
         }}
@@ -45,9 +47,7 @@ export const ChangeNameDialog = ({
             onClickButton();
           }
         }}
-        placeholder={
-          isPending ? '처리 중입니다...' : '시간표 제목을 입력하세요'
-        }
+        placeholder={'시간표 제목을 입력하세요'}
         disabled={isPending}
         className="py-1 border-b-2 border-gray focus:outline-none focus:border-black"
       />

@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { BottomSheetContainer } from '@/components/BottomeSheetContainer';
+import { SpinnerLoading } from '@/components/Loading';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import type { CourseBook } from '@/entities/courseBook';
@@ -48,6 +49,7 @@ export const AddTimeTableBottomSheet = ({
   return (
     <>
       <BottomSheetContainer isVisible={isVisible} onClick={handleClose}>
+        {isPending && <SpinnerLoading />}
         <div className="flex flex-col gap-6">
           <div className="flex flex-end justify-between">
             <button onClick={handleClose}>취소</button>
@@ -58,7 +60,7 @@ export const AddTimeTableBottomSheet = ({
             <input
               type="text"
               id="id"
-              value={isPending ? '' : timeTableName}
+              value={timeTableName}
               onChange={(e) => {
                 setTimeTableName(e.target.value);
               }}
@@ -67,10 +69,8 @@ export const AddTimeTableBottomSheet = ({
                   onClickButton();
                 }
               }}
+              placeholder={'시간표 제목을 입력하세요'}
               disabled={isPending}
-              placeholder={
-                isPending ? '처리 중입니다...' : '시간표 제목을 입력하세요'
-              }
               className="w-full py-1 border-b-2 border-gray focus:outline-none focus:border-black"
             />
           </div>
@@ -81,10 +81,9 @@ export const AddTimeTableBottomSheet = ({
                 clickOption(e.target.value);
               }}
               className="py-1 border-b-2 border-gray focus:outline-none focus:border-black"
+              disabled={isPending}
             >
-              <option value="" disabled>
-                학기를 선택하세요
-              </option>
+              <option value="">학기를 선택하세요</option>
               {courseBookList.map((courseBook) => {
                 return (
                   <option
