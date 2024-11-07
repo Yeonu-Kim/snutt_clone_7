@@ -16,7 +16,7 @@ export const DrawerHeader = ({ onClose }: { onClose(): void }) => {
         onClick={onClose}
         aria-label="Close Menu"
       >
-        <RiCloseLine />
+        <img src={ICON_SRC.CLOSE} />
       </button>
     </div>
   );
@@ -27,7 +27,7 @@ export const AddTimeTableMenuBar = ({ onClick }: { onClick(): void }) => {
     <li className="flex justify-between items-center pt-4 pb-4">
       <span className="text-sm text-gray-400">나의 시간표</span>
       <span className="font-bold text-gray-400" onClick={onClick}>
-        <RiAddLine size={18} />
+        <img src={ICON_SRC.ADD} />
       </span>
     </li>
   );
@@ -87,7 +87,7 @@ export const TimeTableMenuBar = ({
       <div className="flex items-center gap-1 cursor-pointer" onClick={onClick}>
         {timeTable._id === selectedTimeTableId ? (
           <div className="flex items-center">
-            <RiCheckboxCircleFill size={16} color="#1BD0C8" />
+            <img src={ICON_SRC.CHECK_BOX.CIRCLE} className="w-4 h-4" />
           </div>
         ) : (
           <div className="flex items-center">
@@ -98,7 +98,9 @@ export const TimeTableMenuBar = ({
         <span className="text-sm text-gray-400">
           ({timeTable.total_credit}학점)
         </span>
-        {timeTable.isPrimary && <RiUserFill size={16} color="#1BD0C8" />}
+        {timeTable.isPrimary && (
+          <img src={ICON_SRC.PRIMARY} className="w-4 h-4" />
+        )}
       </div>
       <div className="flex gap-2">{children}</div>
     </div>

@@ -32,5 +32,7 @@ export const ICON_SRC = {
     CIRCLE: '/drawer/CheckBoxCircle.svg',
   },
   CLOSE: '/drawer/Close.svg',
-  USER: '/drawer/User.svg',
+  PRIMARY: '/drawer/Primary.svg',
+  COPY: '/drawer/Copy.svg',
+  MORE: '/drawer/More.svg',
 };

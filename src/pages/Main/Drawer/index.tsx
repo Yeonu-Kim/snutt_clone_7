@@ -1,4 +1,3 @@
-import { RiFileCopyLine, RiMore2Fill } from '@remixicon/react';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 
@@ -11,6 +10,7 @@ import {
   TimeTableMenuIcon,
 } from '@/components/Drawer';
 import { LoadingPage } from '@/components/Loading';
+import { ICON_SRC } from '@/constants/fileSource';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import type { TimeTableBrief } from '@/entities/timetable';
@@ -123,7 +123,7 @@ export const Drawer = ({
                       }}
                     >
                       <TimeTableMenuIcon onClick={showTBDDialog}>
-                        <RiFileCopyLine size={18} />
+                        <img src={ICON_SRC.COPY} className="w-18 h-18" />
                       </TimeTableMenuIcon>
                       <TimeTableMenuIcon
                         onClick={() => {
@@ -133,7 +133,10 @@ export const Drawer = ({
                           });
                         }}
                       >
-                        <RiMore2Fill size={18} />
+                        <img
+                          src={ICON_SRC.MORE}
+                          className="w-18 h-18 rotate-90"
+                        />
                       </TimeTableMenuIcon>
                     </TimeTableMenuBar>
                   ))}

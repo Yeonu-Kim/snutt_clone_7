@@ -1,10 +1,10 @@
-import { RiArrowLeftSLine } from '@remixicon/react';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { LoadingPage } from '@/components/Loading';
 import { Button } from '@/components/styles/Button';
 import { Layout } from '@/components/styles/Layout';
+import { ICON_SRC } from '@/constants/fileSource';
 import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenManageContext } from '@/context/TokenManageContext';
@@ -67,7 +67,7 @@ export const SignInPage = () => {
       <div className="LoginWrapper flex flex-col items-center w-full min-h-screen px-[20px] psm:px-2 lg:px:8">
         <div className="LoginHeaderWrapper relative flex w-full mt-4 pb-6">
           <div className="BackButtonWrapper absolute flex top-0.5 left-0 items-center cursor-pointer ">
-            <RiArrowLeftSLine />
+            <img src={ICON_SRC.ARROW.DOWN} className="w-6 h-6 rotate-90" />
             <span className="text-gray-500 hover:text-orange" onClick={toMain}>
               뒤로
             </span>
