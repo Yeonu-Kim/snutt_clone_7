@@ -125,13 +125,13 @@ export const getTimeTableService = ({
 
     // 시간
     const rowStart = (() => {
-      const offset = parseInt(time.startMinute) - startMinute;
+      const offset = time.startMinute - startMinute;
       const row = offset / 5;
       return Math.floor(row) + 2;
     })();
 
     const rowEnd = (() => {
-      const offset = parseInt(time.endMinute) - startMinute;
+      const offset = time.endMinute - startMinute;
       const row = offset / 5;
       return Math.ceil(row) + 2;
     })();

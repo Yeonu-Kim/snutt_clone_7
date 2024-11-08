@@ -96,4 +96,6 @@ type ClassTimeResponse = {
   place: string;
   startMinute: DateTime;
   endMinute: DateTime;
+  start_time: string;
+  end_time: string;
 };

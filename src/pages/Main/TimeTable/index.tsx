@@ -49,6 +49,8 @@ export const TimeTable = ({
 
   if (timeTableData === undefined) return <LoadingPage />;
 
+  // 241108 연우: 단순히 token 문제가 아닐 수 있음.
+  // toast로 에러 메세지를 띄워줘야 할 거 같음.
   if (isError) {
     setOpen(true);
     return null;
