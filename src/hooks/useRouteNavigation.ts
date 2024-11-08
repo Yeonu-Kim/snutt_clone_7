@@ -26,7 +26,7 @@ export const useRouteNavigation = () => {
     toChangeNickname: () => {
       navigate(MYPAGE.ACCOUNT.CHANGENICKNAME, { replace: true });
     },
-    toDetailPage: ({
+    toLectureDetailPage: ({
       timetableId,
       lectureId,
     }: {
