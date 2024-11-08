@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
-import { PATH } from '@/constants/route.ts';
+import { HREF, PATH } from '@/constants/route.ts';
 
 export const useRouteNavigation = () => {
   const navigate = useNavigate();
   const { INDEX, MYPAGE, SIGNUP, SIGNIN } = PATH;
+  const { LECTURE_DETAIL } = HREF;
 
   return {
     toMain: () => {
@@ -24,6 +25,15 @@ export const useRouteNavigation = () => {
     },
     toChangeNickname: () => {
       navigate(MYPAGE.ACCOUNT.CHANGENICKNAME, { replace: true });
+    },
+    toDetailPage: ({
+      timetableId,
+      lectureId,
+    }: {
+      timetableId: string;
+      lectureId: string;
+    }) => {
+      navigate(LECTURE_DETAIL(timetableId, lectureId), { replace: true });
     },
   };
 };
