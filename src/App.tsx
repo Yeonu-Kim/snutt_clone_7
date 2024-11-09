@@ -39,6 +39,9 @@ import { getTimeTableService } from '@/usecases/timeTableService';
 import { getUserService } from '@/usecases/userService';
 import { showDialog } from '@/utils/showDialog';
 
+import { implLectureRepository } from './infrastructure/impleLecutreRepository';
+import { getLecutureService } from './usecases/lectureService';
+
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용
 
@@ -91,8 +94,8 @@ const authRoutes = [
       },
       {
         path: PATH.LECTURE_DETAIL,
-        element: <LectureDetailPage />
-      }
+        element: <LectureDetailPage />,
+      },
     ],
   },
 ];
@@ -156,6 +159,7 @@ export const App = () => {
   const temporaryStorageRepository = implTokenSessionStorageRepository();
   const timeTableRepository = impleTimeTableRepository({ snuttApi });
   const courseBookRepository = implCourseBookRepository({ snuttApi });
+  const lectureRepository = implLectureRepository({ snuttApi });
 
   const authService = getAuthService({
     authRepository,
@@ -164,12 +168,14 @@ export const App = () => {
   const userService = getUserService({ userRepository });
   const timeTableService = getTimeTableService({ timeTableRepository });
   const courseBookService = getCourseBookService({ courseBookRepository });
+  const lectureService = getLecutureService({ lectureRepository });
 
   const services = {
     authService,
     userService,
     timeTableService,
     courseBookService,
+    lectureService,
   };
 
   // 토큰과 관련된 context는 따로 저장

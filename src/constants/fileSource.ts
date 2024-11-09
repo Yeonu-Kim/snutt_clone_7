@@ -35,4 +35,5 @@ export const ICON_SRC = {
   PRIMARY: '/drawer/Primary.svg',
   COPY: '/drawer/Copy.svg',
   MORE: '/drawer/More.svg',
+  BOOKMARK: '/header/bookmark.svg',
 };

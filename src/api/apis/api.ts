@@ -4,6 +4,8 @@ import type { Api, GetApiSpecsParameter } from '.';
 import type {
   ChangeNicknameRequest,
   CourseBookResponse,
+  DeleteLecutreParams,
+  LectureResponse,
   LocalLoginRequest,
   LocalLoginResponse,
   TimeTableBriefResponse,
@@ -118,6 +120,18 @@ export const getSnuttApis = ({
         path: `v1/tables`,
         token,
         body,
+      }),
+    'DELETE /v1/tables/:timetableId/lecture/:lectureId': ({
+      token,
+      params,
+    }: {
+      token: string;
+      params: DeleteLecutreParams;
+    }) =>
+      callWithToken<SuccessResponse<LectureResponse>>({
+        method: 'DELETE',
+        path: `v1/tables/${params.timetableId}/lecture/${params.lectureId}`,
+        token,
       }),
   }) satisfies Record<string, Api>;
 

@@ -1,3 +1,4 @@
+import { HeaderContainer } from '@/components/common/HeaderContainer';
 import { ICON_SRC } from '@/constants/fileSource';
 
 export const Header = ({
@@ -10,7 +11,7 @@ export const Header = ({
   title: string;
 }) => {
   return (
-    <div className="flex w-full justify-between pt-2 pb-1.5 pl-4 p-3 border-b-[1px] border-solid  border-b-lineLight">
+    <HeaderContainer>
       <div className="flex gap-2 items-center">
         <button
           className="text-xl focus:outline-none"
@@ -30,9 +31,9 @@ export const Header = ({
           <img src={ICON_SRC.SHARE} />
         </span>
         <span>
-          <img src={ICON_SRC.BELL} />
+          <img src={ICON_SRC.BELL} className="w-6 h-6" />
         </span>
       </div>
-    </div>
+    </HeaderContainer>
   );
 };

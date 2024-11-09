@@ -15,6 +15,7 @@ export type TimeTableRequest = {
   semester: number;
   title: string;
 };
+
 // Params
 export type TimeTableIdParams = {
   timetableId: string;
@@ -22,6 +23,11 @@ export type TimeTableIdParams = {
 
 export type ChangeNicknameRequest = {
   nickname?: string;
+};
+
+export type DeleteLecutreParams = {
+  timetableId: string;
+  lectureId: string;
 };
 
 // Response
@@ -73,7 +79,7 @@ export type CourseBookResponse = {
   updated_at: string;
 };
 
-type LectureResponse = {
+export type LectureResponse = {
   _id: string;
   academic_year?: string;
   category?: string;
@@ -94,8 +100,8 @@ type LectureResponse = {
 type ClassTimeResponse = {
   day: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   place: string;
-  startMinute: DateTime;
-  endMinute: DateTime;
+  startMinute: number;
+  endMinute: number;
   start_time: string;
   end_time: string;
 };
