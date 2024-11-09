@@ -8,6 +8,7 @@ import { Layout } from '@/components/styles/Layout';
 import { ICON_SRC } from '@/constants/fileSource';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
+import type { Lecture } from '@/entities/lecture';
 import { DAY_LABEL_MAP } from '@/entities/time';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation';
@@ -16,11 +17,124 @@ import { showDialog } from '@/utils/showDialog';
 
 export const LectureDetailPage = () => {
   const { timetableId, lectureId } = useParams();
-  const { token } = useGuardContext(TokenAuthContext);
-  const { timeTableService } = useGuardContext(ServiceContext);
   const { showErrorDialog, showTBDDialog } = showDialog();
   const { toMain } = useRouteNavigation();
   const [dialogMenu, setDialogMenu] = useState<'NONE' | 'DELETE'>('NONE');
+
+  const { timetableData } = useGetTimetableData({ timetableId });
+
+  if (timetableData === undefined) return <LoadingPage />;
+
+  if (timetableData.type === 'error') {
+    showErrorDialog(timetableData.message);
+    return null;
+  }
+
+  const currentLecture = timetableData.data.lecture_list.find(
+    (timetable) => timetable._id === lectureId,
+  );
+
+  if (currentLecture === undefined) {
+    toMain();
+    return null;
+  }
+
+  const { lectureInfoSectionList, showContent } = renderContents({
+    currentLecture,
+  });
+
+  const clickDeleteButton = () => {
+    setDialogMenu('DELETE');
+  };
+
+  const closeDeleteDailog = () => {
+    setDialogMenu('NONE');
+  };
+
+  return (
+    <>
+      <Layout>
+        <div className="h-full bg-gray-200 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+          <HeaderContainer>
+            <div className="flex gap-2">
+              <div
+                className="BackButtonWrapper flex items-center cursor-pointer"
+                onClick={toMain}
+              >
+                <img src={ICON_SRC.ARROW.DOWN} className="w-6 h-6 rotate-90" />
+              </div>
+              <span>강의 상세 보기</span>
+            </div>
+            <div className="flex gap-2 items-center">
+              <img src={ICON_SRC.BELL} className="w-6 h-6" />
+              <img src={ICON_SRC.BOOKMARK} className="w-6 h-6" />
+              <span>편집</span>
+            </div>
+          </HeaderContainer>
+          <div className="flex flex-col gap-2 mt-12 mb-10">
+            {lectureInfoSectionList.map((lectureInfoSection, sectionIndex) => (
+              <div
+                key={`section-${sectionIndex}`}
+                className="flex flex-col bg-white py-1 gap-1"
+              >
+                {lectureInfoSection.title !== null && (
+                  <div className="px-4 py-1 text-gray-400 text-sm">
+                    {lectureInfoSection.title}
+                  </div>
+                )}
+                {lectureInfoSection.contents.map((infoContent, infoIndex) => {
+                  if (infoContent.content !== undefined) {
+                    return showContent(infoContent, infoIndex);
+                  }
+                  return null;
+                })}
+              </div>
+            ))}
+            <div className="flex flex-col bg-white gap-1">
+              <div
+                className="flex justify-center p-2 cursor-pointer transition-all hover:bg-gray"
+                onClick={showTBDDialog}
+              >
+                강의계획서
+              </div>
+              <div
+                className="flex justify-center p-2 cursor-pointer transition-all hover:bg-gray"
+                onClick={showTBDDialog}
+              >
+                강의평
+              </div>
+            </div>
+            <div className="flex flex-col bg-white gap-1">
+              <div
+                className="flex justify-center p-2 cursor-pointer text-red transition-all hover:bg-gray"
+                onClick={clickDeleteButton}
+              >
+                삭제
+              </div>
+            </div>
+          </div>
+        </div>
+      </Layout>
+      {dialogMenu === 'DELETE' &&
+        lectureId !== undefined &&
+        timetableId !== undefined && (
+          <DeleteLectureDialog
+            onClose={closeDeleteDailog}
+            timetableId={timetableId}
+            lectureId={lectureId}
+          />
+        )}
+    </>
+  );
+};
+
+const useGetTimetableData = ({
+  timetableId,
+}: {
+  timetableId: string | undefined;
+}) => {
+  const { token } = useGuardContext(TokenAuthContext);
+  const { timeTableService } = useGuardContext(ServiceContext);
 
   const { data: timetableData } = useQuery({
     queryKey: [
@@ -38,33 +152,10 @@ export const LectureDetailPage = () => {
     enabled: token !== null && timetableId !== undefined,
   });
 
-  if (timetableData === undefined) return <LoadingPage />;
+  return { timetableData };
+};
 
-  if (timetableData.type === 'error') {
-    showErrorDialog(timetableData.message);
-    return null;
-  }
-
-  const currentLecture = timetableData.data.lecture_list.find(
-    (timetable) => timetable._id === lectureId,
-  );
-
-  if (currentLecture === undefined) {
-    return (
-      <div>
-        <span>존재하지 않는 강의입니다.</span>
-      </div>
-    );
-  }
-
-  const clickDeleteButton = () => {
-    setDialogMenu('DELETE');
-  };
-
-  const closeDeleteDailog = () => {
-    setDialogMenu('NONE');
-  };
-
+const renderContents = ({ currentLecture }: { currentLecture: Lecture }) => {
   const lectureInfoSectionList = [
     {
       title: null,
@@ -199,79 +290,8 @@ export const LectureDetailPage = () => {
     );
   };
 
-  return (
-    <>
-      <Layout>
-        <div className="h-full bg-gray-200 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-          <HeaderContainer>
-            <div className="flex gap-2">
-              <div
-                className="BackButtonWrapper flex items-center cursor-pointer"
-                onClick={toMain}
-              >
-                <img src={ICON_SRC.ARROW.DOWN} className="w-6 h-6 rotate-90" />
-              </div>
-              <span>강의 상세 보기</span>
-            </div>
-            <div className="flex gap-2 items-center">
-              <img src={ICON_SRC.BELL} className="w-6 h-6" />
-              <img src={ICON_SRC.BOOKMARK} className="w-6 h-6" />
-              <span>편집</span>
-            </div>
-          </HeaderContainer>
-          <div className="flex flex-col gap-2 mt-12 mb-10">
-            {lectureInfoSectionList.map((lectureInfoSection, sectionIndex) => (
-              <div
-                key={`section-${sectionIndex}`}
-                className="flex flex-col bg-white py-1 gap-1"
-              >
-                {lectureInfoSection.title !== null && (
-                  <div className="px-4 py-1 text-gray-400 text-sm">
-                    {lectureInfoSection.title}
-                  </div>
-                )}
-                {lectureInfoSection.contents.map((infoContent, infoIndex) => {
-                  if (infoContent.content !== undefined) {
-                    return showContent(infoContent, infoIndex);
-                  }
-                  return null;
-                })}
-              </div>
-            ))}
-            <div className="flex flex-col bg-white gap-1">
-              <div
-                className="flex justify-center p-2 cursor-pointer transition-all hover:bg-gray"
-                onClick={showTBDDialog}
-              >
-                강의계획서
-              </div>
-              <div
-                className="flex justify-center p-2 cursor-pointer transition-all hover:bg-gray"
-                onClick={showTBDDialog}
-              >
-                강의평
-              </div>
-            </div>
-            <div className="flex flex-col bg-white gap-1">
-              <div
-                className="flex justify-center p-2 cursor-pointer text-red transition-all hover:bg-gray"
-                onClick={clickDeleteButton}
-              >
-                삭제
-              </div>
-            </div>
-          </div>
-        </div>
-      </Layout>
-      {dialogMenu === 'DELETE' &&
-        lectureId !== undefined &&
-        timetableId !== undefined && (
-          <DeleteLectureDialog
-            onClose={closeDeleteDailog}
-            timetableId={timetableId}
-            lectureId={lectureId}
-          />
-        )}
-    </>
-  );
+  return {
+    lectureInfoSectionList,
+    showContent,
+  };
 };
