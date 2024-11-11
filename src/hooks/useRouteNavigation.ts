@@ -5,7 +5,7 @@ import { HREF, PATH } from '@/constants/route.ts';
 export const useRouteNavigation = () => {
   const navigate = useNavigate();
   const { INDEX, MYPAGE, SIGNUP, SIGNIN } = PATH;
-  const { LECTURE_DETAIL } = HREF;
+  const { LECTURE_DETAIL , LECTURE_LIST } = HREF;
 
   return {
     toMain: () => {
@@ -35,5 +35,13 @@ export const useRouteNavigation = () => {
     }) => {
       navigate(LECTURE_DETAIL(timetableId, lectureId), { replace: true });
     },
+    toLectureList: ({
+      timetableId,
+    }: {
+      timetableId: string;
+  }) => {
+      navigate(LECTURE_LIST(timetableId), { replace: true });
+
+    }
   };
 };
