@@ -8,9 +8,9 @@ import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { showDialog } from '@/utils/showDialog.ts';
 
-export const LectureList = () => {
+export const LectureListPage = () => {
   const { timetableId } = useParams();
-  const { showErrorDialog, showTBDDialog } = showDialog();
+  const { showErrorDialog } = showDialog();
 
   const { timetableData } = useGetTimetableData({ timetableId });
 
@@ -24,7 +24,7 @@ export const LectureList = () => {
   return (
     <>
       <Layout>
-        aa
+        lectures!
       </Layout>
     </>
   )

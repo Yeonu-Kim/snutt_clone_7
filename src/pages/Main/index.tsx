@@ -7,12 +7,14 @@ import { Drawer } from '@/pages/Main/Drawer';
 import { Header } from '@/pages/Main/Header';
 
 import { TimeTable } from './TimeTable';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 
 export const MainPage = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [timetableId, setTimetableId] = useState<string | null>(null);
   const [totalCredit, setTotalCredit] = useState(0);
   const [title, setTitle] = useState('');
+  const { toLectureList } = useRouteNavigation();
 
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
@@ -26,6 +28,12 @@ export const MainPage = () => {
     <Layout>
       <Header
         onMenuClick={toggleDrawer}
+        onLectureListClick={() =>{
+          if (timetableId !== null) {
+            toLectureList({ timetableId });
+          }
+        }
+      }
         totalCredit={totalCredit}
         title={title}
       />

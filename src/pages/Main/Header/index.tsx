@@ -3,10 +3,12 @@ import { ICON_SRC } from '@/constants/fileSource';
 
 export const Header = ({
   onMenuClick,
+  onLectureListClick,
   totalCredit,
   title,
 }: {
   onMenuClick: () => void;
+  onLectureListClick: () => void;
   totalCredit: number;
   title: string;
 }) => {
@@ -24,9 +26,11 @@ export const Header = ({
         <span className="text-xs text-gray-400">{`(${totalCredit} 학점)`}</span>
       </div>
       <div className="flex gap-2 items-center">
-        <span>
+        <button
+          onClick={onLectureListClick}
+        >
           <img src={ICON_SRC.LIST_BULLET} />
-        </span>
+        </button>
         <span>
           <img src={ICON_SRC.SHARE} />
         </span>
