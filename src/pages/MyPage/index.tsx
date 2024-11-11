@@ -67,7 +67,7 @@ export const MyPage = () => {
             className="h-lvh  flex flex-col justify-center items-center w-full mt-[60px] mb-[80px] bg-gray-200 gap-5"
           >
             <WhiteButtonBox
-              className="flex items-center justify-between h-14"
+              className="flex items-center justify-between h-12"
               onClick={handleClickInformationButton}
             >
               <div className="m-4">내 계정</div>
@@ -82,15 +82,17 @@ export const MyPage = () => {
               <PTagOnTheWhiteBox>
                 <span>디스플레이</span>
               </PTagOnTheWhiteBox>
-              <WhiteButtonBox className="justify-between">
+              <WhiteButtonBox className="justify-between rounded-t-lg rounded-b-[0]
+              border-b border-gray-300">
                 <span className="m-4">색상모드</span>
                 <span className="m-4 text-gray-400">라이트모드 {'>'}</span>
               </WhiteButtonBox>
-              <WhiteButtonBox className="justify-between">
+              <WhiteButtonBox className="justify-between rounded-[0]
+              border-b border-gray-300">
                 <span className="m-4">시간표 설정</span>
                 <span className="m-4 text-gray-400">{'>'}</span>
               </WhiteButtonBox>
-              <WhiteButtonBox className="justify-between">
+              <WhiteButtonBox className="justify-between rounded-t-[0]">
                 <span className="m-4">시간표 테마</span>
                 <span className="m-4 text-gray-400">{'>'}</span>
               </WhiteButtonBox>
@@ -110,10 +112,11 @@ export const MyPage = () => {
               <PTagOnTheWhiteBox>
                 <span>정보 및 제안</span>
               </PTagOnTheWhiteBox>
-              <WhiteButtonBox>
+              <WhiteButtonBox className="justify-between rounded-b-[0]
+              border-b border-gray-300">
                 <span className="m-4">버전 정보</span>
               </WhiteButtonBox>
-              <WhiteButtonBox className="justify-between">
+              <WhiteButtonBox className="justify-between rounded-t-[0]">
                 <span className="m-4">개발자 정보</span>
                 <span className="m-4 text-gray-400">{'>'}</span>
               </WhiteButtonBox>
