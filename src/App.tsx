@@ -81,15 +81,15 @@ const authRoutes = [
     ),
     children: [
       {
-        path: PATH.MYPAGE.ROOT,
+        path: PATH.MYPAGE,
         element: <MyPage />,
       },
       {
-        path: PATH.MYPAGE.ACCOUNT.ROOT,
+        path: PATH.MYPAGE_ACCOUNT,
         element: <AccountPage />,
       },
       {
-        path: PATH.MYPAGE.ACCOUNT.CHANGENICKNAME,
+        path: PATH.MYPAGE_CHANGENICKNAME,
         element: <ChangeNicknamePage />,
       },
       {

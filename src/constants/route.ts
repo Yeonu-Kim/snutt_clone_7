@@ -2,13 +2,9 @@ export const PATH = {
   INDEX: '/',
   SIGNIN: '/signin',
   SIGNUP: '/signup',
-  MYPAGE: {
-    ROOT: '/mypage',
-    ACCOUNT: {
-      ROOT: '/mypage/account',
-      CHANGENICKNAME: '/mypage/account/change-nickname',
-    },
-  },
+  MYPAGE: '/mypage',
+  MYPAGE_ACCOUNT: '/mypage/account',
+  MYPAGE_CHANGENICKNAME: '/mypage/account/change-nickname',
   SEARCH: '/search',
   LECTURE_DETAIL: '/timetables/:timetableId/lectures/:lectureId',
 };
