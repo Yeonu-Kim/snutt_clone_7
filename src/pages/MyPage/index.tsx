@@ -82,13 +82,17 @@ export const MyPage = () => {
               <PTagOnTheWhiteBox>
                 <span>디스플레이</span>
               </PTagOnTheWhiteBox>
-              <WhiteButtonBox className="justify-between rounded-t-lg rounded-b-[0]
-              border-b border-gray-300">
+              <WhiteButtonBox
+                className="justify-between rounded-t-lg rounded-b-[0]
+              border-b border-gray-300"
+              >
                 <span className="m-4">색상모드</span>
                 <span className="m-4 text-gray-400">라이트모드 {'>'}</span>
               </WhiteButtonBox>
-              <WhiteButtonBox className="justify-between rounded-[0]
-              border-b border-gray-300">
+              <WhiteButtonBox
+                className="justify-between rounded-[0]
+              border-b border-gray-300"
+              >
                 <span className="m-4">시간표 설정</span>
                 <span className="m-4 text-gray-400">{'>'}</span>
               </WhiteButtonBox>
@@ -112,12 +116,22 @@ export const MyPage = () => {
               <PTagOnTheWhiteBox>
                 <span>정보 및 제안</span>
               </PTagOnTheWhiteBox>
-              <WhiteButtonBox className="justify-between rounded-b-[0]
-              border-b border-gray-300">
+              <WhiteButtonBox
+                className="justify-between rounded-b-[0]
+              border-b border-gray-300"
+              >
                 <span className="m-4">버전 정보</span>
+                <span className="m-4 text-gray-400">Waffle team07</span>
               </WhiteButtonBox>
               <WhiteButtonBox className="justify-between rounded-t-[0]">
                 <span className="m-4">개발자 정보</span>
+                <span className="m-4 text-gray-400">{'>'}</span>
+              </WhiteButtonBox>
+            </div>
+
+            <div className="flex flex-col items-center justify-between">
+              <WhiteButtonBox className="justify-between">
+                <span className="m-4">개발자 괴롭히기</span>
                 <span className="m-4 text-gray-400">{'>'}</span>
               </WhiteButtonBox>
             </div>
