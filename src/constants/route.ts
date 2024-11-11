@@ -16,7 +16,7 @@ export const PATH = {
 
 export const HREF = {
   LECTURE_LIST: (timetableId: string) =>
-    `/timetables/:${timetableId}/lectures`,
+    `/timetables/${timetableId}/lectures`,
   LECTURE_DETAIL: (timetableId: string, lectureId: string) =>
     `/timetables/${timetableId}/lectures/${lectureId}`,
 };

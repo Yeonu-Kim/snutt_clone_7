@@ -17,7 +17,7 @@ export const LectureListPage = () => {
   if (timetableData === undefined) return <LoadingPage />;
 
   if (timetableData.type === 'error') {
-    showErrorDialog(timetableData.message);
+    showErrorDialog("강의 불러오기 실패");
     return null;
   }
 
