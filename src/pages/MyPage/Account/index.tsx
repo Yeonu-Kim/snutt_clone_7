@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
@@ -35,6 +36,22 @@ export const AccountPage = () => {
   }
 
   if (userData === undefined) return <LoadingPage />;
+
+  const copyNicknameToClipboard = async () => {
+    if (userData.type === 'success') {
+      await navigator.clipboard.writeText(
+        `${userData.data.nickname.nickname}#${userData.data.nickname.tag}`,
+      );
+    } else {
+      toast.error('몬가... 발생했습니다...');
+    }
+  };
+
+  const handleClickCopyNickname = () => {
+    copyNicknameToClipboard()
+      .then(() => toast('닉네임을 복사했습니다.'))
+      .catch(() => toast.error('몬가... 발생했습니다...'));
+  };
 
   if (userData.type === 'success') {
     return (
@@ -74,7 +91,10 @@ export const AccountPage = () => {
                   </span>
                 </div>
               </WhiteButtonBox>
-              <WhiteButtonBox className="flex items-center justify-between rounded-t-[0]">
+              <WhiteButtonBox
+                onClick={handleClickCopyNickname}
+                className="flex items-center justify-between rounded-t-[0]"
+              >
                 <span className="m-4">닉네임 복사하기</span>
                 <span className="text-gray-400 m-4"></span>
               </WhiteButtonBox>
