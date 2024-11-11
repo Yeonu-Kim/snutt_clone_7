@@ -60,18 +60,52 @@ export const AccountPage = () => {
             className="h-lvh  flex flex-col justify-start items-center
             p-5 w-full mt-[60px] mb-[80px] bg-gray-200 gap-5"
           >
-            <WhiteButtonBox
-              onClick={toChangeNickname}
-              className="flex items-center justify-between"
-            >
-              <div className="m-4">닉네임 변경</div>
-              <div className="m-4">
-                <span className="text-gray-400 ">
-                  {userData.data.nickname.nickname}#{userData.data.nickname.tag}{' '}
-                  {'>'}
-                </span>
-              </div>
-            </WhiteButtonBox>
+            <div className="flex flex-col items-center justify-between">
+              <WhiteButtonBox
+                onClick={toChangeNickname}
+                className="flex items-center justify-between rounded-b-[0]
+                border-b border-gray-300"
+              >
+                <span className="m-4">닉네임 변경</span>
+                <div className="m-4">
+                  <span className="text-gray-400 ">
+                    {userData.data.nickname.nickname}#
+                    {userData.data.nickname.tag} {'>'}
+                  </span>
+                </div>
+              </WhiteButtonBox>
+              <WhiteButtonBox className="flex items-center justify-between rounded-t-[0]">
+                <span className="m-4">닉네임 복사하기</span>
+                <span className="text-gray-400 m-4"></span>
+              </WhiteButtonBox>
+            </div>
+
+            <div className="flex flex-col items-center justify-between">
+              <WhiteButtonBox className="flex items-center justify-between">
+                <span className="m-4">아이디 / 비밀번호 추가</span>
+                <span className="text-gray-400 m-4">{'>'}</span>
+              </WhiteButtonBox>
+            </div>
+
+            <div className="flex flex-col items-center justify-between">
+              <WhiteButtonBox className="flex items-center justify-between">
+                <span className="m-4">SNS 계정 연동 및 해제</span>
+                <span className="text-gray-400 m-4">{'>'}</span>
+              </WhiteButtonBox>
+            </div>
+
+            <div className="flex flex-col items-center justify-between">
+              <WhiteButtonBox className="flex items-center justify-between">
+                <span className="m-4">이메일</span>
+                <span className="text-gray-400 m-4">{userData.data.email}</span>
+              </WhiteButtonBox>
+            </div>
+
+            <div className="flex flex-col items-center justify-between">
+              <WhiteButtonBox className="flex items-center justify-between">
+                <span className="m-4 text-red">회원 탈퇴</span>
+              </WhiteButtonBox>
+            </div>
           </div>
           <div className="bottom-0 w-full bg-white fixed max-w-375">
             <Navbar selectedMenu="mypage" />
