@@ -4,7 +4,14 @@ import { HREF, PATH } from '@/constants/route.ts';
 
 export const useRouteNavigation = () => {
   const navigate = useNavigate();
-  const { INDEX, MYPAGE, SIGNUP, SIGNIN, MYPAGE_ACCOUNT, MYPAGE_CHANGENICKNAME } = PATH;
+  const {
+    INDEX,
+    MYPAGE,
+    SIGNUP,
+    SIGNIN,
+    MYPAGE_ACCOUNT,
+    MYPAGE_CHANGENICKNAME,
+  } = PATH;
   const { LECTURE_DETAIL } = HREF;
 
   return {
