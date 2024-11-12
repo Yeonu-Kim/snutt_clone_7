@@ -3,11 +3,11 @@ import { useState } from 'react';
 
 import { Navbar } from '@/components/Navbar';
 import { Layout } from '@/components/styles/Layout';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { Drawer } from '@/pages/Main/Drawer';
 import { Header } from '@/pages/Main/Header';
 
 import { TimeTable } from './TimeTable';
-import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 
 export const MainPage = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -28,12 +28,11 @@ export const MainPage = () => {
     <Layout>
       <Header
         onMenuClick={toggleDrawer}
-        onLectureListClick={() =>{
+        onLectureListClick={() => {
           if (timetableId !== null) {
             toLectureList({ timetableId });
           }
-        }
-      }
+        }}
         totalCredit={totalCredit}
         title={title}
       />

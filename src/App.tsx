@@ -27,6 +27,7 @@ import { impleUserRepository } from '@/infrastructure/impleUserRepository';
 import { NotFoundPage } from '@/pages/Error';
 import { LandingPage } from '@/pages/Landing';
 import { LectureDetailPage } from '@/pages/Lecture/LectureDetail';
+import { LectureListPage } from '@/pages/Lecture/LectureList';
 import { MainPage } from '@/pages/Main';
 import { AccountPage } from '@/pages/MyPage/Account';
 import { ChangeNicknamePage } from '@/pages/MyPage/Account/ChangeNickname';
@@ -41,7 +42,6 @@ import { showDialog } from '@/utils/showDialog';
 
 import { implLectureRepository } from './infrastructure/impleLecutreRepository';
 import { getLecutureService } from './usecases/lectureService';
-import { LectureListPage } from '@/pages/Lecture/LectureList';
 
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용

@@ -26,9 +26,7 @@ export const Header = ({
         <span className="text-xs text-gray-400">{`(${totalCredit} 학점)`}</span>
       </div>
       <div className="flex gap-2 items-center">
-        <button
-          onClick={onLectureListClick}
-        >
+        <button onClick={onLectureListClick}>
           <img src={ICON_SRC.LIST_BULLET} />
         </button>
         <span>
