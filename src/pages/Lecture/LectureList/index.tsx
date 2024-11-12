@@ -47,7 +47,7 @@ export const LectureListPage = () => {
           </div>
           <div
             id="Main-Container"
-            className="h-lvh flex flex-col justify-start items-start
+            className="h-lvh flex flex-col justify-start items-start overflow-y-auto overflow-x-hidden
             p-5 pt-2 w-full mt-[60px] mb-[80px]"
           >
             <div>
