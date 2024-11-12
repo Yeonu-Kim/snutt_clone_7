@@ -67,7 +67,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
       menu: 'mypage',
       offSrc: ICON_SRC.MYPAGE.OFF,
       onSrc: ICON_SRC.MYPAGE.ON,
-      to: PATH.MYPAGE.ROOT,
+      to: PATH.MYPAGE,
       alt: '마이페이지',
     },
   ];
