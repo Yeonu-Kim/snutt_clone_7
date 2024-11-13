@@ -75,7 +75,8 @@ export const LectureListPage = () => {
                     </div>
 
                     <span className="text-[12px] text-gray-700">
-                      {lecture.department}, {lecture.academic_year}
+                      { (lecture.department !== undefined && lecture.academic_year !== undefined) ?
+                      `${lecture.department}, ${lecture.academic_year}` : `-`}
                     </span>
                     <span className="text-[12px] text-gray-700">
                       {lecture.class_time_json.map((classTime, timeIndex) => {
