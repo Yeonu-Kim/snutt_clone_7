@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 type TimetableContext = {
   timetableId: string | null;
-  setTimetableId: React.Dispatch<React.SetStateAction<string | null>>;
-}
+  setTimetableId: (timetableId: string | null) => void;
+};
 
-export const TimetableContext = createContext<TimetableContext | null>(null)
+export const TimetableContext = createContext<TimetableContext | null>(null);

@@ -13,7 +13,7 @@ type TimeTableMenuBottomSheet = {
   };
   onClose(): void;
   selectedTimetableId: string | null;
-  setTimetableId: React.Dispatch<React.SetStateAction<string | null>>;
+  setTimetableId: (timetableId: string | null) => void;
 };
 
 export const TimeTableMenuBottomSheet = ({

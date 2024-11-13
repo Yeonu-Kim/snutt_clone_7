@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { LoadingPage } from '@/components/Loading';
 import { ICON_SRC } from '@/constants/fileSource';
@@ -18,7 +18,7 @@ type Drawer = {
   isOpen: boolean;
   onClose: () => void;
   selectedTimetableId: string | null;
-  setTimetableId: React.Dispatch<React.SetStateAction<string | null>>;
+  setTimetableId: (timetableId: string | null) => void;
 };
 
 type BottomSheetItem = Pick<TimeTableBrief, '_id' | 'title'>;

@@ -17,7 +17,7 @@ export const DeleteDialog = ({
   onClose(): void;
   timetableId: string;
   selectedTimetableId: string | null;
-  setTimetableId: React.Dispatch<React.SetStateAction<string | null>>;
+  setTimetableId: (timetableId: string | null) => void;
 }) => {
   const { isVisible, handleClose } = useDialog({ onClose });
   const { deleteTimeTable, isPending } = useDeleteTimeTable({
@@ -50,7 +50,7 @@ const useDeleteTimeTable = ({
 }: {
   handleClose(): void;
   selectedTimetableId: string | null;
-  setTimetableId: React.Dispatch<React.SetStateAction<string | null>>;
+  setTimetableId: (timetableId: string | null) => void;
 }) => {
   const { timeTableService } = useGuardContext(ServiceContext);
   const { token } = useGuardContext(TokenAuthContext);

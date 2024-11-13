@@ -16,7 +16,7 @@ export const MainPage = () => {
   const [totalCredit, setTotalCredit] = useState(0);
   const [title, setTitle] = useState('');
   const { toLectureList } = useRouteNavigation();
-  const { timetableId ,setTimetableId } = useGuardContext(TimetableContext);
+  const { timetableId, setTimetableId } = useGuardContext(TimetableContext);
 
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
