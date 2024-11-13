@@ -6,10 +6,10 @@ import { Navbar } from '@/components/Navbar.tsx';
 import { Layout } from '@/components/styles/Layout.tsx';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
+import { DAY_LABEL_MAP } from '@/entities/time.ts';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog.ts';
-import { DAY_LABEL_MAP } from '@/entities/time.ts';
 
 export const LectureListPage = () => {
   const { timetableId } = useParams();
