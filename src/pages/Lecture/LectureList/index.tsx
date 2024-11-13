@@ -9,6 +9,7 @@ import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog.ts';
+import { DAY_LABEL_MAP } from '@/entities/time.ts';
 
 export const LectureListPage = () => {
   const { timetableId } = useParams();
@@ -71,35 +72,11 @@ export const LectureListPage = () => {
                   </span>
                   <span className="text-[12px] text-gray-700">
                     {lecture.class_time_json.map((classTime, timeIndex) => {
-                      let tempDay = '';
-                      switch (classTime.day) {
-                        case 0:
-                          tempDay = '월';
-                          break;
-                        case 1:
-                          tempDay = '화';
-                          break;
-                        case 2:
-                          tempDay = '수';
-                          break;
-                        case 3:
-                          tempDay = '목';
-                          break;
-                        case 4:
-                          tempDay = '금';
-                          break;
-                        case 5:
-                          tempDay = '토';
-                          break;
-                        case 6:
-                          tempDay = '일';
-                          break;
-                      }
 
                       const times = {
                         startTime: classTime.start_time,
                         endTime: classTime.end_time,
-                        day: tempDay,
+                        day: DAY_LABEL_MAP[classTime.day],
                       };
 
                       return (
