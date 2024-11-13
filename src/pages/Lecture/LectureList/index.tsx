@@ -113,7 +113,8 @@ export const LectureListPage = () => {
                       })}
                     </span>
                     <span className="text-[12px] text-gray-700">
-                      {uniqueArray.join(', ')}
+                      { uniqueArray.at(0) !== '' ?
+                        uniqueArray.join(', ') : '-'}
                     </span>
                   </div>
                 );})}
