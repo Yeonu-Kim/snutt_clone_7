@@ -228,13 +228,13 @@ export const App = () => {
 
     if (savedTimetableId === null) return null;
 
-    return JSON.parse(savedTimetableId) as string;
+    return savedTimetableId;
   });
 
   const updateTimetableId = (id: string | null) => {
     setTimetableId(id);
     if (id !== null) {
-      localStorage.setItem('selectedTimetableId', JSON.stringify(id));
+      localStorage.setItem('selectedTimetableId', id);
     } else {
       localStorage.removeItem('selectedTimetableId');
     }
