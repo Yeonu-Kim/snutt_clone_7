@@ -42,6 +42,7 @@ import { showDialog } from '@/utils/showDialog';
 
 import { implLectureRepository } from './infrastructure/impleLecutreRepository';
 import { getLecutureService } from './usecases/lectureService';
+import { TimetableContext } from '@/context/TimetableContext.ts';
 
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용
@@ -221,6 +222,24 @@ export const App = () => {
     setIsTokenError(isOpen);
   };
 
+  // timetableId 저장 함수를 context api로 관리
+  const [timetableId, setTimetableId] = useState<string | null>(() => {
+    const savedTimetableId = localStorage.getItem('selectedTimetableId');
+
+    if (savedTimetableId === null) return null
+
+    return JSON.parse(savedTimetableId) as string;
+  });
+
+  const updateTimetableId = (id: string | null) => {
+    setTimetableId(id);
+    if (id !== null) {
+      localStorage.setItem('selectedTimetableId', JSON.stringify(id));
+    } else {
+      localStorage.removeItem('selectedTimetableId');
+    }
+  };
+
   return (
     <QueryClientProvider key={token} client={queryClient}>
       <ServiceContext.Provider value={services}>
@@ -229,7 +248,11 @@ export const App = () => {
             value={{ isModalOpen: isTokenError, setOpen }}
           >
             <TokenAuthContext.Provider value={{ token }}>
-              <RouterProvider router={routers} />
+              <TimetableContext.Provider
+                value={{ timetableId, setTimetableId: updateTimetableId }}
+              >
+                <RouterProvider router={routers} />
+              </TimetableContext.Provider>
             </TokenAuthContext.Provider>
             <Toaster position="top-center" />
           </ModalManageContext.Provider>

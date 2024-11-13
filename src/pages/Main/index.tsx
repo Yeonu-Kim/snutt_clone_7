@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 import { Navbar } from '@/components/Navbar';
 import { Layout } from '@/components/styles/Layout';
+import { TimetableContext } from '@/context/TimetableContext.ts';
+import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { Drawer } from '@/pages/Main/Drawer';
 import { Header } from '@/pages/Main/Header';
@@ -11,10 +13,10 @@ import { TimeTable } from './TimeTable';
 
 export const MainPage = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const [timetableId, setTimetableId] = useState<string | null>(null);
   const [totalCredit, setTotalCredit] = useState(0);
   const [title, setTitle] = useState('');
   const { toLectureList } = useRouteNavigation();
+  const { timetableId ,setTimetableId } = useGuardContext(TimetableContext);
 
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
