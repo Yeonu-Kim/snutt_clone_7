@@ -52,59 +52,53 @@ export const LectureListPage = () => {
             p-5 pt-2 w-full mt-[60px] mb-[80px]"
           >
             <div>
-              {timetableData.data.lecture_list.map((lecture, index) => (
-                <div
-                  key={index}
-                  className="w-[335px] pt-0 gap-0.5
-                     flex flex-col items-start border-b-[1px] border-b-gray-200 mt-2 pb-3"
-                >
-                  <div className="flex justify-between w-full items-center">
-                    <span className="font-bold text-[14px]">
-                      {lecture.course_title}
+              {timetableData.data.lecture_list.map((lecture, index) => {
+                const uniqueArray = [...new Set(
+                  lecture.class_time_json.map(
+                    (classTime) => classTime.place,
+                  ))]
+
+                return (
+                  <div
+                    key={index}
+                    className="w-[335px] pt-0 gap-0.5
+                       flex flex-col items-start border-b-[1px] border-b-gray-200 mt-2 pb-3"
+                  >
+                    <div className="flex justify-between w-full items-center">
+                      <span className="font-bold text-[14px]">
+                        {lecture.course_title}
+                      </span>
+                      <span className="text-gray-400 text-[12px]">
+                        {lecture.instructor} / {lecture.credit}학점
+                      </span>
+                    </div>
+
+                    <span className="text-[12px] text-gray-700">
+                      {lecture.department}, {lecture.academic_year}
                     </span>
-                    <span className="text-gray-400 text-[12px]">
-                      {lecture.instructor} / {lecture.credit}학점
+                    <span className="text-[12px] text-gray-700">
+                      {lecture.class_time_json.map((classTime, timeIndex) => {
+                        const times = {
+                          startTime: classTime.start_time,
+                          endTime: classTime.end_time,
+                          day: DAY_LABEL_MAP[classTime.day],
+                        };
+
+                        return (
+                          <span
+                            key={timeIndex}
+                            className="text-[12px] text-gray-700"
+                          >
+                            {`${times.day}(${times.startTime}~${times.endTime})${timeIndex < lecture.class_time_json.length - 1 ? ', ' : ''} `}
+                          </span>
+                        );
+                      })}
+                    </span>
+                    <span className="text-[12px] text-gray-700">
+                      {uniqueArray.join(', ')}
                     </span>
                   </div>
-
-                  <span className="text-[12px] text-gray-700">
-                    {lecture.department}, {lecture.academic_year}
-                  </span>
-                  <span className="text-[12px] text-gray-700">
-                    {lecture.class_time_json.map((classTime, timeIndex) => {
-
-                      const times = {
-                        startTime: classTime.start_time,
-                        endTime: classTime.end_time,
-                        day: DAY_LABEL_MAP[classTime.day],
-                      };
-
-                      return (
-                        <span
-                          key={timeIndex}
-                          className="text-[12px] text-gray-700"
-                        >
-                          {`${times.day}(${times.startTime}~${times.endTime})${timeIndex < lecture.class_time_json.length - 1 ? ', ' : ''} `}
-                        </span>
-                      );
-                    })}
-                  </span>
-                  <span className="text-[12px] text-gray-700">
-                    {Array.from(
-                      new Set(
-                        lecture.class_time_json.map(
-                          (classTime) => classTime.place,
-                        ),
-                      ),
-                    ).map((uniquePlace, timeIndex) => (
-                      <span key={timeIndex}>
-                        {uniquePlace}
-                        {timeIndex < Array.length - 1 ? ', ' : ''}
-                      </span>
-                    ))}
-                  </span>
-                </div>
-              ))}
+              )})}
             </div>
           </div>
           <div className="bottom-0 w-full bg-white fixed max-w-375">
