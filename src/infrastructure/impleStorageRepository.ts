@@ -22,11 +22,12 @@ export const implTokenSessionStorageRepository = (): TokenRepository => {
 export const implTimetableStorageRepository = () => {
   return {
     getStorageTimetableId: () => {
-      const savedTimetableId = localStorage.getItem(storageKey.selectedTimetableId);
-      if (savedTimetableId == null) return null
+      const savedTimetableId = localStorage.getItem(
+        storageKey.selectedTimetableId,
+      );
+      if (savedTimetableId == null) return null;
       return savedTimetableId;
-      }
-      ,
+    },
     saveStorageTimetableId: (timetableId: string) => {
       localStorage.setItem(storageKey.selectedTimetableId, timetableId);
     },

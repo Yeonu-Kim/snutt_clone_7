@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { Navbar } from '@/components/Navbar';
 import { Layout } from '@/components/styles/Layout';
+import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TimetableContext } from '@/context/TimetableContext.ts';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
@@ -10,7 +11,6 @@ import { Drawer } from '@/pages/Main/Drawer';
 import { Header } from '@/pages/Main/Header';
 
 import { TimeTable } from './TimeTable';
-import { ServiceContext } from '@/context/ServiceContext.ts';
 
 export const MainPage = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -18,12 +18,14 @@ export const MainPage = () => {
   const [title, setTitle] = useState('');
   const { toLectureList } = useRouteNavigation();
   const { timetableId, setTimetableId } = useGuardContext(TimetableContext);
-  const { timeTableService } = useGuardContext(ServiceContext)
-  
+  const { timeTableService } = useGuardContext(ServiceContext);
+
   const handleClickSetTimetableId = (selectedTimetableId: string | null) => {
-    setTimetableId(selectedTimetableId)
-    timeTableService.storeSelectedTimetableId({ selectedTimetableId: selectedTimetableId });
-  }
+    setTimetableId(selectedTimetableId);
+    timeTableService.storeSelectedTimetableId({
+      selectedTimetableId: selectedTimetableId,
+    });
+  };
 
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
