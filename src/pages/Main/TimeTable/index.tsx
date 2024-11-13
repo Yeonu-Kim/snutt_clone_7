@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { LoadingPage } from '@/components/Loading';
+import { DAY_LABEL_MAP } from '@/constants/dayLabel';
 import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { colorList } from '@/entities/color';
-import { DAY_LABEL_MAP, dayList, hourList } from '@/entities/time';
+import { dayList, hourList } from '@/entities/time';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation';
 import { showDialog } from '@/utils/showDialog';

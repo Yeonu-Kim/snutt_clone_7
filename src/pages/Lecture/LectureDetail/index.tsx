@@ -9,7 +9,7 @@ import { ICON_SRC } from '@/constants/fileSource';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import type { Lecture } from '@/entities/lecture';
-import { DAY_LABEL_MAP } from '@/entities/time';
+import { DAY_LABEL_MAP } from '@/constants/dayLabel.ts';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation';
 import { DeleteLectureDialog } from '@/pages/Lecture/LectureDetail/DeleteLectureDialog';
