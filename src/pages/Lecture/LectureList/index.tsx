@@ -69,7 +69,8 @@ export const LectureListPage = () => {
                         {lecture.course_title}
                       </span>
                       <span className="text-gray-400 text-[12px]">
-                        {lecture.instructor} / {lecture.credit}학점
+                        { lecture.instructor !== '' ?
+                          `${lecture.instructor} / ${lecture.credit}학점` : `${lecture.credit}학점`}
                       </span>
                     </div>
 
@@ -83,6 +84,22 @@ export const LectureListPage = () => {
                           endTime: classTime.end_time,
                           day: DAY_LABEL_MAP[classTime.day],
                         };
+
+                        if (
+                          classTime.start_time === ' ' &&
+                          classTime.end_time === ' ' &&
+                          classTime.day === 0
+                        ) {
+                          return (
+                            <span
+                              key={timeIndex}
+                              className="text-[12px] text-gray-700"
+                            >
+                              {' '}
+                              -{' '}
+                            </span>
+                          );
+                        }
 
                         return (
                           <span
@@ -98,7 +115,7 @@ export const LectureListPage = () => {
                       {uniqueArray.join(', ')}
                     </span>
                   </div>
-              )})}
+                );})}
             </div>
           </div>
           <div className="bottom-0 w-full bg-white fixed max-w-375">
