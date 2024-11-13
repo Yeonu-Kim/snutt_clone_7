@@ -32,7 +32,7 @@ export const Drawer = ({
   const { showTBDDialog, showErrorDialog } = showDialog();
   const { timeTableService } = useGuardContext(ServiceContext);
 
-  const setSelectedTimeTableId = (timetableId: string) => {
+  const setSelectedTimeTableId = (timetableId: string | null) => {
     setTimetableId(timetableId);
     onClose();
   };
