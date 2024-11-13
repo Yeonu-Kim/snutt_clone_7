@@ -53,10 +53,11 @@ export const LectureListPage = () => {
           >
             <div>
               {timetableData.data.lecture_list.map((lecture, index) => {
-                const uniqueArray = [...new Set(
-                  lecture.class_time_json.map(
-                    (classTime) => classTime.place,
-                  ))]
+                const uniqueArray = [
+                  ...new Set(
+                    lecture.class_time_json.map((classTime) => classTime.place),
+                  ),
+                ];
 
                 return (
                   <div
@@ -69,14 +70,17 @@ export const LectureListPage = () => {
                         {lecture.course_title}
                       </span>
                       <span className="text-gray-400 text-[12px]">
-                        { lecture.instructor !== '' ?
-                          `${lecture.instructor} / ${lecture.credit}학점` : `${lecture.credit}학점`}
+                        {lecture.instructor !== ''
+                          ? `${lecture.instructor} / ${lecture.credit}학점`
+                          : `${lecture.credit}학점`}
                       </span>
                     </div>
 
                     <span className="text-[12px] text-gray-700">
-                      { (lecture.department !== undefined && lecture.academic_year !== undefined) ?
-                      `${lecture.department}, ${lecture.academic_year}` : `-`}
+                      {lecture.department !== undefined &&
+                      lecture.academic_year !== undefined
+                        ? `${lecture.department}, ${lecture.academic_year}`
+                        : `-`}
                     </span>
                     <span className="text-[12px] text-gray-700">
                       {lecture.class_time_json.map((classTime, timeIndex) => {
@@ -113,11 +117,11 @@ export const LectureListPage = () => {
                       })}
                     </span>
                     <span className="text-[12px] text-gray-700">
-                      { uniqueArray.at(0) !== '' ?
-                        uniqueArray.join(', ') : '-'}
+                      {uniqueArray.at(0) !== '' ? uniqueArray.join(', ') : '-'}
                     </span>
                   </div>
-                );})}
+                );
+              })}
             </div>
           </div>
           <div className="bottom-0 w-full bg-white fixed max-w-375">
