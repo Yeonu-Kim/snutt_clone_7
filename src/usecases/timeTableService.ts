@@ -29,6 +29,12 @@ type TimeTableRepository = {
 };
 type LectureTime = Lecture['class_time_json'][number];
 
+type TimetableStorageRepository = {
+  getStorageTimetableId: () => string | null;
+  saveStorageTimetableId: (id: string) => void;
+  clearStorageTimetableId: () => void;
+};
+
 export type TimeTableService = {
   createTimeTable(_: {
     token: string;
@@ -66,12 +72,15 @@ export type TimeTableService = {
       items: TimeTableBrief[];
     }
   >;
+  storeSelectedTimetableId(_: { selectedTimetableId: string | null }): void;
 };
 
 export const getTimeTableService = ({
   timeTableRepository,
+  timetableStorageRepository,
 }: {
   timeTableRepository: TimeTableRepository;
+  timetableStorageRepository: TimetableStorageRepository;
 }): TimeTableService => ({
   createTimeTable: async ({ token, semester, year, title }) => {
     const data = await timeTableRepository.createTimeTable({
@@ -213,5 +222,17 @@ export const getTimeTableService = ({
     }, initialGroupedTimeTables);
 
     return groupedTimetables;
+  },
+
+  storeSelectedTimetableId: ({
+    selectedTimetableId,
+  }: {
+    selectedTimetableId: string | null;
+  }) => {
+    if (selectedTimetableId !== null) {
+      timetableStorageRepository.saveStorageTimetableId(selectedTimetableId);
+    } else {
+      timetableStorageRepository.clearStorageTimetableId();
+    }
   },
 });

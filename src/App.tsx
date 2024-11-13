@@ -22,7 +22,10 @@ import { TokenManageContext } from '@/context/TokenManageContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { impleAuthRepository } from '@/infrastructure/impleAuthRepository';
 import { implCourseBookRepository } from '@/infrastructure/impleCourseBookRepository';
-import { implTokenSessionStorageRepository } from '@/infrastructure/impleStorageRepository';
+import {
+  implTimetableStorageRepository,
+  implTokenSessionStorageRepository,
+} from '@/infrastructure/impleStorageRepository';
 import { impleTimeTableRepository } from '@/infrastructure/impleTimeTableRespository';
 import { impleUserRepository } from '@/infrastructure/impleUserRepository';
 import { NotFoundPage } from '@/pages/Error';
@@ -166,13 +169,17 @@ export const App = () => {
   const timeTableRepository = impleTimeTableRepository({ snuttApi });
   const courseBookRepository = implCourseBookRepository({ snuttApi });
   const lectureRepository = implLectureRepository({ snuttApi });
+  const timetableStorageRepository = implTimetableStorageRepository();
 
   const authService = getAuthService({
     authRepository,
     tokenRepository: temporaryStorageRepository,
   });
   const userService = getUserService({ userRepository });
-  const timeTableService = getTimeTableService({ timeTableRepository });
+  const timeTableService = getTimeTableService({
+    timeTableRepository,
+    timetableStorageRepository,
+  });
   const courseBookService = getCourseBookService({ courseBookRepository });
   const lectureService = getLecutureService({ lectureRepository });
 
@@ -223,22 +230,9 @@ export const App = () => {
   };
 
   // timetableId 저장 함수를 context api로 관리
-  const [timetableId, setTimetableId] = useState<string | null>(() => {
-    const savedTimetableId = localStorage.getItem('selectedTimetableId');
-
-    if (savedTimetableId === null) return null;
-
-    return savedTimetableId;
-  });
-
-  const updateTimetableId = (id: string | null) => {
-    setTimetableId(id);
-    if (id !== null) {
-      localStorage.setItem('selectedTimetableId', id);
-    } else {
-      localStorage.removeItem('selectedTimetableId');
-    }
-  };
+  const [timetableId, setTimetableId] = useState(
+    timetableStorageRepository.getStorageTimetableId,
+  );
 
   return (
     <QueryClientProvider key={token} client={queryClient}>
@@ -249,7 +243,7 @@ export const App = () => {
           >
             <TokenAuthContext.Provider value={{ token }}>
               <TimetableContext.Provider
-                value={{ timetableId, setTimetableId: updateTimetableId }}
+                value={{ timetableId, setTimetableId }}
               >
                 <RouterProvider router={routers} />
               </TimetableContext.Provider>
