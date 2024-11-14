@@ -46,6 +46,7 @@ import { showDialog } from '@/utils/showDialog';
 
 import { implLectureRepository } from './infrastructure/impleLecutreRepository';
 import { getLecutureService } from './usecases/lectureService';
+import { ColorSchemePage } from '@/pages/MyPage/ColorScheme';
 
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용
@@ -96,6 +97,10 @@ const authRoutes = [
       {
         path: PATH.MYPAGE_CHANGENICKNAME,
         element: <ChangeNicknamePage />,
+      },
+      {
+        path: PATH.MYPAGE_COLORSCHEME,
+        element: <ColorSchemePage/>
       },
       {
         path: PATH.LECTURE_DETAIL,
