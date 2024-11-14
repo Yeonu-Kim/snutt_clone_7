@@ -81,7 +81,7 @@ export default {
       ],
     },
     maxWidth: {
-      375: '375px', // 모바일용
+      375: '480px', // 모바일용
     },
   },
   plugins: [require('tailwind-scrollbar')],

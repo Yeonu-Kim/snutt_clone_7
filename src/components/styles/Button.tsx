@@ -16,7 +16,7 @@ export const Button = ({
   disabled = false,
 }: ButtonProps) => {
   const baseStyle =
-    'w-[311px] h-[41px] transition-colors duration-200 rounded-md ';
+    'w-full h-[41px] transition-colors duration-200 rounded-md ';
   const variantStyle = {
     primary: 'cursor-pointer text-white bg-orange hover:bg-[#E07C2C]',
     secondary: 'cursor-pointer text-white bg-mint hover:bg-[#00A896]',

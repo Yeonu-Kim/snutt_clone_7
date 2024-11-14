@@ -94,7 +94,7 @@ export const TimeTable = ({
         {hourList.map((hour, i) => (
           <div
             key={hour}
-            className="col-start-1 col-end-2 text-right text-xs text-textALternative opacity-40 pr-1 pt-1"
+            className="col-start-1 col-end-2 text-right text-xs text-textALternative opacity-40 pl-1 pt-1"
             style={{
               gridRowStart: i * 12 + 2,
               gridRowEnd: i * 12 + 2 + 6,
