@@ -12,6 +12,7 @@ import { TokenManageContext } from '@/context/TokenManageContext.ts';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog.ts';
+import toast from 'react-hot-toast';
 
 export const MyPage = () => {
   const { clearToken } = useGuardContext(TokenManageContext);
@@ -45,6 +46,12 @@ export const MyPage = () => {
 
   const handleClickInformationButton = () => {
     toAccount();
+  };
+
+  const onClickTBD = () => {
+    toast('아직 없는 기능이에요.', {
+      icon: '🔔',
+    });
   };
 
   if (userData === undefined) return <LoadingPage />;
@@ -92,11 +99,14 @@ export const MyPage = () => {
               <WhiteButtonBox
                 className="justify-between rounded-[0]
               border-b border-gray-300"
+                onClick={onClickTBD}
               >
                 <span className="m-4">시간표 설정</span>
                 <span className="m-4 text-gray-400">{'>'}</span>
               </WhiteButtonBox>
-              <WhiteButtonBox className="justify-between rounded-t-[0]">
+              <WhiteButtonBox className="justify-between rounded-t-[0]"
+                              onClick={onClickTBD}
+              >
                 <span className="m-4">시간표 테마</span>
                 <span className="m-4 text-gray-400">{'>'}</span>
               </WhiteButtonBox>
@@ -107,7 +117,9 @@ export const MyPage = () => {
                 <span>서비스</span>
               </PTagOnTheWhiteBox>
               <WhiteButtonBox className="justify-between">
-                <span className="m-4">빈자리 알림</span>
+                <span className="m-4"
+                      onClick={onClickTBD}
+                >빈자리 알림</span>
                 <span className="m-4 text-gray-400">{'>'}</span>
               </WhiteButtonBox>
             </div>
@@ -123,14 +135,18 @@ export const MyPage = () => {
                 <span className="m-4">버전 정보</span>
                 <span className="m-4 text-gray-400">Waffle team07</span>
               </WhiteButtonBox>
-              <WhiteButtonBox className="justify-between rounded-t-[0]">
+              <WhiteButtonBox className="justify-between rounded-t-[0]"
+                              onClick={onClickTBD}
+              >
                 <span className="m-4">개발자 정보</span>
                 <span className="m-4 text-gray-400">{'>'}</span>
               </WhiteButtonBox>
             </div>
 
             <div className="flex flex-col items-center justify-between">
-              <WhiteButtonBox className="justify-between">
+              <WhiteButtonBox className="justify-between"
+                              onClick={onClickTBD}
+              >
                 <span className="m-4">개발자 괴롭히기</span>
                 <span className="m-4 text-gray-400">{'>'}</span>
               </WhiteButtonBox>
