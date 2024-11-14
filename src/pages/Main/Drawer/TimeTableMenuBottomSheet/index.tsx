@@ -71,21 +71,21 @@ export const TimeTableMenuBottomSheet = ({
           </div>
         ))}
       </BottomSheetContainer>
-      {showChangeNameDialog ? (
+      {showChangeNameDialog && (
         <ChangeNameDialog
           timetableId={timetable._id}
           onClose={handleClose}
           prevTimeTableName={timetable.title}
         />
-      ) : null}
-      {showDeleteDialog ? (
+      )}
+      {showDeleteDialog && (
         <DeleteDialog
           onClose={handleClose}
           timetableId={timetable._id}
           selectedTimetableId={selectedTimetableId}
           handleClickSetTimetableId={handleClickSetTimetableId}
         />
-      ) : null}
+      )}
     </>
   );
 };
