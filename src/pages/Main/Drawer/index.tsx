@@ -18,7 +18,7 @@ type Drawer = {
   isOpen: boolean;
   onClose: () => void;
   selectedTimetableId: string | null;
-  setTimetableId: (timetableId: string | null) => void;
+  handleClickSetTimetableId: (timetableId: string | null) => void;
 };
 
 type BottomSheetItem = Pick<TimeTableBrief, '_id' | 'title'>;
@@ -27,13 +27,13 @@ export const Drawer = ({
   isOpen,
   onClose,
   selectedTimetableId,
-  setTimetableId,
+  handleClickSetTimetableId,
 }: Drawer) => {
   const { showTBDDialog, showErrorDialog } = showDialog();
   const { timeTableService } = useGuardContext(ServiceContext);
 
   const setSelectedTimeTableId = (timetableId: string | null) => {
-    setTimetableId(timetableId);
+    handleClickSetTimetableId(timetableId);
     onClose();
   };
 
@@ -162,7 +162,7 @@ export const Drawer = ({
           timetable={bottomSheetTimeTableInfo}
           onClose={closeTimeTableMenu}
           selectedTimetableId={selectedTimetableId}
-          setTimetableId={setTimetableId}
+          handleClickSetTimetableId={handleClickSetTimetableId}
         />
       ) : null}
       {showAddTimeTableBySemesterBottomSheet &&

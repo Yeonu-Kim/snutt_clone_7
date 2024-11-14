@@ -52,13 +52,13 @@ export const MainPage = () => {
           isOpen={isDrawerOpen}
           onClose={closeDrawer}
           selectedTimetableId={timetableId}
-          setTimetableId={handleClickSetTimetableId}
+          handleClickSetTimetableId={handleClickSetTimetableId}
         />
         <TimeTable
           timetableId={timetableId}
           setTotalCredit={setTotalCredit}
           setTitle={setTitle}
-          setTimetableId={handleClickSetTimetableId}
+          handleClickSetTimetableId={handleClickSetTimetableId}
         />
       </div>
       <Navbar selectedMenu="timetable" />

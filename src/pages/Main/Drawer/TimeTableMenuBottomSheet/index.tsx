@@ -13,13 +13,13 @@ type TimeTableMenuBottomSheet = {
   };
   onClose(): void;
   selectedTimetableId: string | null;
-  setTimetableId: (timetableId: string | null) => void;
+  handleClickSetTimetableId: (timetableId: string | null) => void;
 };
 
 export const TimeTableMenuBottomSheet = ({
   timetable,
   onClose,
-  setTimetableId,
+  handleClickSetTimetableId,
   selectedTimetableId,
 }: TimeTableMenuBottomSheet) => {
   const { isVisible, handleClose } = useBottomSheet({ onClose });
@@ -83,7 +83,7 @@ export const TimeTableMenuBottomSheet = ({
           onClose={handleClose}
           timetableId={timetable._id}
           selectedTimetableId={selectedTimetableId}
-          setTimetableId={setTimetableId}
+          handleClickSetTimetableId={handleClickSetTimetableId}
         />
       ) : null}
     </>

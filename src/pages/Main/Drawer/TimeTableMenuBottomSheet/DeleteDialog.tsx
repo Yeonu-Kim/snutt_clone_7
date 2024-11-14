@@ -12,18 +12,18 @@ export const DeleteDialog = ({
   onClose,
   timetableId,
   selectedTimetableId,
-  setTimetableId,
+  handleClickSetTimetableId,
 }: {
   onClose(): void;
   timetableId: string;
   selectedTimetableId: string | null;
-  setTimetableId: (timetableId: string | null) => void;
+  handleClickSetTimetableId: (timetableId: string | null) => void;
 }) => {
   const { isVisible, handleClose } = useDialog({ onClose });
   const { deleteTimeTable, isPending } = useDeleteTimeTable({
     handleClose,
     selectedTimetableId,
-    setTimetableId,
+    handleClickSetTimetableId: handleClickSetTimetableId,
   });
 
   const onClickButton = () => {

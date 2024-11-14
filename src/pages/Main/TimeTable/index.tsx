@@ -15,12 +15,12 @@ export const TimeTable = ({
   timetableId,
   setTotalCredit,
   setTitle,
-  setTimetableId,
+  handleClickSetTimetableId,
 }: {
   timetableId: string | null;
   setTotalCredit: (credit: number) => void;
   setTitle: (title: string) => void;
-  setTimetableId: (timetableId: string) => void;
+  handleClickSetTimetableId: (timetableId: string) => void;
 }) => {
   const { timeTableService } = useGuardContext(ServiceContext);
   const { token } = useGuardContext(TokenAuthContext);
@@ -66,7 +66,7 @@ export const TimeTable = ({
     );
     setTotalCredit(totalCredit);
     setTitle(timeTableData.data.title);
-    setTimetableId(timeTableData.data._id);
+    handleClickSetTimetableId(timeTableData.data._id);
     const columnCount = dayList.length - 2;
     const rowCount = hourList.length * 12;
     return (
