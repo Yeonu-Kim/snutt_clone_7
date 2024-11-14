@@ -198,6 +198,10 @@ export const App = () => {
   // 인증 상태에 따라 캐싱된 데이터를 업데이트 or 삭제해줘야 함.
   const [token, setToken] = useState(temporaryStorageRepository.getToken());
 
+  const [timetableId, setTimetableId] = useState(
+    timetableStorageRepository.getStorageTimetableId,
+  );
+
   // token을 context api를 사용하여 관리하면 getToken을 사용할 이유가 없어짐.
   // saveToken과 clearToken만 생성
   const manageToken = {
@@ -228,11 +232,6 @@ export const App = () => {
   const setOpen = (isOpen: boolean) => {
     setIsTokenError(isOpen);
   };
-
-  // timetableId 저장 함수를 context api로 관리
-  const [timetableId, setTimetableId] = useState(
-    timetableStorageRepository.getStorageTimetableId,
-  );
 
   return (
     <QueryClientProvider key={token} client={queryClient}>
