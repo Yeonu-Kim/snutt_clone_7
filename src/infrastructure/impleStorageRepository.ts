@@ -1,4 +1,5 @@
 import { getAuthService } from '@/usecases/authServices';
+import type { getTimeTableService } from '@/usecases/timeTableService.ts';
 
 const storageKey = {
   snuttToken: 'snutt_token',
@@ -6,6 +7,7 @@ const storageKey = {
 };
 
 type TokenRepository = Parameters<typeof getAuthService>[0]['tokenRepository'];
+type TimetableRepository = Parameters<typeof getTimeTableService>[0]['timetableStorageRepository'];
 
 export const implTokenSessionStorageRepository = (): TokenRepository => {
   return {
@@ -19,7 +21,7 @@ export const implTokenSessionStorageRepository = (): TokenRepository => {
   };
 };
 
-export const implTimetableStorageRepository = () => {
+export const implTimetableStorageRepository = (): TimetableRepository => {
   return {
     getStorageTimetableId: () => {
       const savedTimetableId = localStorage.getItem(
