@@ -1,4 +1,3 @@
-// MainPage.js
 import { useState } from 'react';
 
 import { Navbar } from '@/components/Navbar';
@@ -9,8 +8,7 @@ import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { Drawer } from '@/pages/Main/Drawer';
 import { Header } from '@/pages/Main/Header';
-
-import { TimeTable } from './TimeTable';
+import { TimeTable } from '@/pages/Main/TimeTable';
 
 export const MainPage = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);

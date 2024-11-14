@@ -1,4 +1,3 @@
-import type { ChangeNicknameRequest } from '@/api';
 import type { SnuttApi } from '@/api/apis/api';
 import { type getUserService } from '@/usecases/userService';
 
@@ -9,7 +8,7 @@ export const impleUserRepository = ({
 }: {
   snuttApi: SnuttApi;
 }): UserRepository => ({
-  getUserInfo: async ({ token }: { token: string }) => {
+  getUserInfo: async ({ token }) => {
     const { status, data } = await snuttApi['GET /v1/users/me']({ token });
     if (status === 200) {
       return {
@@ -20,16 +19,12 @@ export const impleUserRepository = ({
     return { type: 'error', errcode: data.errcode };
   },
 
-  patchUserInfo: async ({
-    token,
-    body,
-  }: {
-    token: string;
-    body: ChangeNicknameRequest;
-  }) => {
+  patchUserInfo: async ({ token, nickname }) => {
     const { status, data } = await snuttApi['PATCH /v1/users/me']({
       token,
-      body,
+      body: {
+        nickname,
+      },
     });
     if (status === 200) {
       return {

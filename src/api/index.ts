@@ -39,5 +39,3 @@ export const impleSnuttApi = ({
       return response as R;
     },
   });
-
-export * from './apis/schemas';

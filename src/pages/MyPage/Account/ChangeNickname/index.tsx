@@ -18,7 +18,7 @@ export const ChangeNicknamePage = () => {
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
   const { toAccount } = useRouteNavigation();
-  const [nickname, setNickname] = useState<string>();
+  const [nickname, setNickname] = useState<string>('');
   const queryClient = useQueryClient();
 
   const { mutate: changeNickname, isPending } = useMutation({
@@ -28,7 +28,7 @@ export const ChangeNicknamePage = () => {
       }
       return userService.patchUserInfo({
         token: token,
-        body: { nickname: inputNickname },
+        nickname: inputNickname,
       });
     },
     onSuccess: async (response) => {
@@ -48,7 +48,7 @@ export const ChangeNicknamePage = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (nickname !== undefined && nickname !== '') {
+    if (nickname !== '') {
       changeNickname({ inputNickname: nickname });
     }
   };
