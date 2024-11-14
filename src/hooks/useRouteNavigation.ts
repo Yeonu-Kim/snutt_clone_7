@@ -11,6 +11,7 @@ export const useRouteNavigation = () => {
     SIGNIN,
     MYPAGE_ACCOUNT,
     MYPAGE_CHANGENICKNAME,
+    MYPAGE_COLORSCHEME,
   } = PATH;
   const { LECTURE_DETAIL, LECTURE_LIST } = HREF;
 
@@ -32,6 +33,9 @@ export const useRouteNavigation = () => {
     },
     toChangeNickname: () => {
       navigate(MYPAGE_CHANGENICKNAME, { replace: true });
+    },
+    toColorScheme: () => {
+      navigate(MYPAGE_COLORSCHEME, {replace: true});
     },
     toLectureDetailPage: ({
       timetableId,
