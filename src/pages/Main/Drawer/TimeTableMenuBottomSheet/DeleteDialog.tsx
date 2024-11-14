@@ -46,11 +46,11 @@ export const DeleteDialog = ({
 const useDeleteTimeTable = ({
   handleClose,
   selectedTimetableId,
-  setTimetableId,
+  handleClickSetTimetableId,
 }: {
   handleClose(): void;
   selectedTimetableId: string | null;
-  setTimetableId: (timetableId: string | null) => void;
+  handleClickSetTimetableId: (timetableId: string | null) => void;
 }) => {
   const { timeTableService } = useGuardContext(ServiceContext);
   const { token } = useGuardContext(TokenAuthContext);
@@ -63,7 +63,7 @@ const useDeleteTimeTable = ({
         throw new Error('토큰이 존재하지 않습니다.');
       }
       if (timetableId === selectedTimetableId) {
-        setTimetableId(null);
+        handleClickSetTimetableId(null);
       }
       return await timeTableService.deleteTimeTableById({
         token,
