@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
@@ -12,7 +13,6 @@ import { TokenManageContext } from '@/context/TokenManageContext.ts';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog.ts';
-import toast from 'react-hot-toast';
 
 export const MyPage = () => {
   const { clearToken } = useGuardContext(TokenManageContext);
