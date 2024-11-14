@@ -35,7 +35,7 @@ export const useRouteNavigation = () => {
       navigate(MYPAGE_CHANGENICKNAME, { replace: true });
     },
     toColorScheme: () => {
-      navigate(MYPAGE_COLORSCHEME, {replace: true});
+      navigate(MYPAGE_COLORSCHEME, { replace: true });
     },
     toLectureDetailPage: ({
       timetableId,

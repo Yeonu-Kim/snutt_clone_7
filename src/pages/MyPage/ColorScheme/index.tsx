@@ -16,7 +16,7 @@ export const ColorSchemePage = () => {
   const { userService } = useGuardContext(ServiceContext);
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
-  const { toMypage, toChangeNickname } = useRouteNavigation();
+  const { toMypage } = useRouteNavigation();
 
   const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,
@@ -53,7 +53,7 @@ export const ColorSchemePage = () => {
             >
               <span onClick={toMypage}>&larr; 뒤로</span>
             </div>
-            <p className="font-bold">내 계정</p>
+            <p className="font-bold">색상 모드</p>
           </div>
           <div
             id="Main-Container"
@@ -62,17 +62,22 @@ export const ColorSchemePage = () => {
           >
             <div className="flex flex-col items-center justify-between">
               <WhiteButtonBox
-                onClick={toChangeNickname}
                 className="flex items-center justify-between rounded-b-[0]
                 border-b border-gray-300"
               >
-                <span className="m-4">닉네임 변경</span>
-                <div className="m-4">
-                  <span className="text-gray-400 ">
-                    {userData.data.nickname.nickname}#
-                    {userData.data.nickname.tag} {'>'}
-                  </span>
-                </div>
+                <span className="m-4">자동</span>
+              </WhiteButtonBox>
+              <WhiteButtonBox
+                className="flex items-center justify-between rounded-b-[0] rounded-t-[0]
+                border-b border-gray-300"
+              >
+                <span className="m-4">라이트 모드</span>
+              </WhiteButtonBox>
+              <WhiteButtonBox
+                className="flex items-center justify-between rounded-t-[0]
+                border-b border-gray-300"
+              >
+                <span className="m-4">다크 모드</span>
               </WhiteButtonBox>
             </div>
           </div>
