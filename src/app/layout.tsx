@@ -1,10 +1,3 @@
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'SNUTT 7조',
-  description: 'SNUTT 시간표 복제하기',
-};
-
 export default function RootLayout({
   children,
 }: {
