@@ -22,12 +22,12 @@ import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { TokenManageContext } from '@/context/TokenManageContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { impleAuthRepository } from '@/infrastructure/impleAuthRepository';
-import { impleColorSchemeRepository } from '@/infrastructure/impleColorSchemeRepository.ts';
 import { implCourseBookRepository } from '@/infrastructure/impleCourseBookRepository';
 import {
   implTimetableStorageRepository,
   implTokenSessionStorageRepository,
 } from '@/infrastructure/impleStorageRepository';
+import { impleColorSchemeRepository } from '@/infrastructure/impleStorageRepository.ts';
 import { impleTimeTableRepository } from '@/infrastructure/impleTimeTableRespository';
 import { impleUserRepository } from '@/infrastructure/impleUserRepository';
 import { NotFoundPage } from '@/pages/Error';

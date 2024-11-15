@@ -4,6 +4,7 @@ import type { getTimeTableService } from '@/usecases/timeTableService.ts';
 const storageKey = {
   snuttToken: 'snutt_token',
   selectedTimetableId: 'selectedTimetableId',
+  colorScheme: 'colorScheme',
 };
 
 type TokenRepository = Parameters<typeof getAuthService>[0]['tokenRepository'];
@@ -36,3 +37,18 @@ export const implTimetableStorageRepository = (): TimetableRepository => {
     },
   };
 };
+
+export const impleColorSchemeRepository = () => {
+  return {
+    getStorageColorScheme: () => {
+      return localStorage.getItem(storageKey.colorScheme);
+    },
+    saveStorageColorScheme: (colorScheme: string) => {
+      localStorage.setItem(storageKey.colorScheme, colorScheme);
+    },
+    clearStorageColorScheme: () => {
+      localStorage.removeItem(storageKey.colorScheme);
+    },
+  };
+};
+
