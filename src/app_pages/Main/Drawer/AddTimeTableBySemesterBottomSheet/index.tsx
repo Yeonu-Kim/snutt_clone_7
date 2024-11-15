@@ -111,5 +111,3 @@ const useCreateTimeTableBySemester = ({
 
   return { createTimeTableBySemester, isPending };
 };
-
-export default AddTimeTableBySemesterBottomSheet;

@@ -7,5 +7,3 @@ export const SignUpPage = () => {
     </Layout>
   );
 };
-
-export default SignUpPage;

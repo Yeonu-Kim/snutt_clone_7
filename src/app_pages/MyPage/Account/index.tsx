@@ -142,5 +142,3 @@ export const AccountPage = () => {
   showErrorDialog(userData.message);
   return null;
 };
-
-export default AccountPage;

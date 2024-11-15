@@ -174,5 +174,3 @@ export const MyPage = () => {
   showErrorDialog(userData.message);
   return null;
 };
-
-export default MyPage;

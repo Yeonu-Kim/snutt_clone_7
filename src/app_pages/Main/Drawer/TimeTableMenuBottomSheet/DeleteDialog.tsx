@@ -87,5 +87,3 @@ const useDeleteTimeTable = ({
 
   return { deleteTimeTable, isPending };
 };
-
-export default DeleteDialog;

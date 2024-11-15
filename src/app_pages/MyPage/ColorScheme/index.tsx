@@ -94,5 +94,3 @@ export const ColorSchemePage = () => {
   showErrorDialog(userData.message);
   return null;
 };
-
-export default ColorSchemePage;

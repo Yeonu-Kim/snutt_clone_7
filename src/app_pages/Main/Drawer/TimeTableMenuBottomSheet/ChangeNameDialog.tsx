@@ -99,5 +99,3 @@ const useChangeTimeTableName = ({ handleClose }: { handleClose(): void }) => {
 
   return { changeTimeTableName, isPending };
 };
-
-export default ChangeNameDialog;

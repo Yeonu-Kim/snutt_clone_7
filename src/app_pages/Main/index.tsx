@@ -63,5 +63,3 @@ export const MainPage = () => {
     </Layout>
   );
 };
-
-export default Drawer;

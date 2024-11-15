@@ -82,5 +82,3 @@ const useDeleteTimeTable = ({ handleClose }: { handleClose(): void }) => {
 
   return { deleteLecture, isPending };
 };
-
-export default DeleteLectureDialog;

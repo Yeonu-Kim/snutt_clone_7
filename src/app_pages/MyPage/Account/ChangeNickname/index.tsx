@@ -160,5 +160,3 @@ export const ChangeNicknamePage = () => {
   showErrorDialog(userData.message);
   return null;
 };
-
-export default ChangeNicknamePage;

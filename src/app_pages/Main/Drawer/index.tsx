@@ -414,5 +414,3 @@ const AddTimeTableBySemesterMenuBar = ({
     </p>
   );
 };
-
-export default TimeTableMenuBottomSheet;

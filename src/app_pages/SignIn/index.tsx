@@ -130,5 +130,3 @@ export const SignInPage = () => {
     </Layout>
   );
 };
-
-export default SignInPage;

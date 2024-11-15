@@ -148,5 +148,3 @@ const useCreateTimeTable = ({ handleClose }: { handleClose(): void }) => {
 
   return { createTimeTable, isPending };
 };
-
-export default AddTimeTableBottomSheet;

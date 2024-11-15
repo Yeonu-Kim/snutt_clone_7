@@ -105,5 +105,3 @@ export const TimeTableMenuBottomSheet = ({
     </>
   );
 };
-
-export default TimeTableMenuBottomSheet;

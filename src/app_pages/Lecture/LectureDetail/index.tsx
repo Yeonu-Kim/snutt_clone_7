@@ -316,5 +316,3 @@ const renderContents = ({ currentLecture }: { currentLecture: Lecture }) => {
     showContent,
   };
 };
-
-export default LectureDetailPage;

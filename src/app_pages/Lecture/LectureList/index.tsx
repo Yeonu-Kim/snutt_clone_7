@@ -173,5 +173,3 @@ const useGetTimetableData = ({
 
   return { timetableData };
 };
-
-export default LectureListPage;
