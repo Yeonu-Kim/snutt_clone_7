@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "npx serve@latest ./build",
     "types:check": "tsc",
     "format:check": "prettier --check .",
     "format:fix": "prettier --write .",
