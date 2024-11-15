@@ -4,6 +4,7 @@ import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
 import { Layout } from '@/components/styles/Layout.tsx';
 import { WhiteButtonBox } from '@/components/styles/WhiteButtonBox.tsx';
+import { ColorSchemeContext } from '@/context/ColorSchemeContext.ts';
 import { ModalManageContext } from '@/context/ModalManageContext.ts';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
@@ -13,10 +14,16 @@ import { showDialog } from '@/utils/showDialog.ts';
 
 export const ColorSchemePage = () => {
   const { token } = useGuardContext(TokenAuthContext);
-  const { userService } = useGuardContext(ServiceContext);
+  const { userService, colorSchemeService } = useGuardContext(ServiceContext);
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
   const { toMypage } = useRouteNavigation();
+  const { colorScheme, toggleColorScheme } = useGuardContext(ColorSchemeContext);
+
+  const handleSetColorScheme = () => {
+    toggleColorScheme();
+    colorSchemeService.storeColorScheme({ scheme: colorScheme });
+  };
 
   const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,
@@ -68,16 +75,12 @@ export const ColorSchemePage = () => {
                 <span className="m-4">자동</span>
               </WhiteButtonBox>
               <WhiteButtonBox
-                className="flex items-center justify-between rounded-b-[0] rounded-t-[0]
-                border-b border-gray-300"
-              >
-                <span className="m-4">라이트 모드</span>
-              </WhiteButtonBox>
-              <WhiteButtonBox
                 className="flex items-center justify-between rounded-t-[0]
-                border-b border-gray-300"
+                border-b border-gray-300
+                dark:bg-gray-800"
+                onClick={handleSetColorScheme}
               >
-                <span className="m-4">다크 모드</span>
+                <span className="m-4">{colorScheme === 'light' ? '🌙 다크 모드' : '☀️ 라이트 모드'}</span>
               </WhiteButtonBox>
             </div>
           </div>

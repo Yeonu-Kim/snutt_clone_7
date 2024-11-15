@@ -5,6 +5,7 @@ import type { CourseBookService } from '@/usecases/courseBookService';
 import type { LectureService } from '@/usecases/lectureService';
 import type { TimeTableService } from '@/usecases/timeTableService';
 import type { UserService } from '@/usecases/userService';
+import type { ColorSchemeService } from '@/usecases/colorSchemeService.ts';
 
 export type ServiceContext = {
   authService: AuthService;
@@ -12,6 +13,7 @@ export type ServiceContext = {
   timeTableService: TimeTableService;
   courseBookService: CourseBookService;
   lectureService: LectureService;
+  colorSchemeService: ColorSchemeService;
 };
 
 export const ServiceContext = createContext<ServiceContext | null>(null);

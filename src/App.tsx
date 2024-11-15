@@ -2,7 +2,7 @@ import '@/reset.css';
 import '@/index.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ import {
   AuthProtectedSwitchRoute,
 } from '@/components/Auth';
 import { PATH } from '@/constants/route';
+import { ColorSchemeContext } from '@/context/ColorSchemeContext.ts';
 import { EnvContext } from '@/context/EnvContext';
 import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
@@ -21,6 +22,7 @@ import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { TokenManageContext } from '@/context/TokenManageContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { impleAuthRepository } from '@/infrastructure/impleAuthRepository';
+import { impleColorSchemeRepository } from '@/infrastructure/impleColorSchemeRepository.ts';
 import { implCourseBookRepository } from '@/infrastructure/impleCourseBookRepository';
 import {
   implTimetableStorageRepository,
@@ -40,6 +42,7 @@ import { MyPage } from '@/pages/MyPage/index.tsx';
 import { SignInPage } from '@/pages/SignIn';
 import { SignUpPage } from '@/pages/SignUp';
 import { getAuthService } from '@/usecases/authServices';
+import { getColorSchemeService } from '@/usecases/colorSchemeService.ts';
 import { getCourseBookService } from '@/usecases/courseBookService';
 import { getTimeTableService } from '@/usecases/timeTableService';
 import { getUserService } from '@/usecases/userService';
@@ -175,6 +178,7 @@ export const App = () => {
   const courseBookRepository = implCourseBookRepository({ snuttApi });
   const lectureRepository = implLectureRepository({ snuttApi });
   const timetableStorageRepository = implTimetableStorageRepository();
+  const colorSchemeRepository = impleColorSchemeRepository();
 
   const authService = getAuthService({
     authRepository,
@@ -187,6 +191,7 @@ export const App = () => {
   });
   const courseBookService = getCourseBookService({ courseBookRepository });
   const lectureService = getLecutureService({ lectureRepository });
+  const colorSchemeService = getColorSchemeService({ colorSchemeRepository });
 
   const services = {
     authService,
@@ -194,6 +199,7 @@ export const App = () => {
     timeTableService,
     courseBookService,
     lectureService,
+    colorSchemeService,
   };
 
   // 토큰과 관련된 context는 따로 저장
@@ -203,9 +209,26 @@ export const App = () => {
   // 인증 상태에 따라 캐싱된 데이터를 업데이트 or 삭제해줘야 함.
   const [token, setToken] = useState(temporaryStorageRepository.getToken());
 
-  const [timetableId, setTimetableId] = useState(
-    timetableStorageRepository.getStorageTimetableId,
-  );
+  const [timetableId, setTimetableId] = useState(timetableStorageRepository.getStorageTimetableId);
+
+  const [colorScheme, setColorScheme] = useState<string | null>(() => {
+    const savedColorScheme = colorSchemeRepository.getStorageColorScheme()
+
+    if (savedColorScheme !== null) return savedColorScheme;
+
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDarkMode ? 'dark' : 'light';
+  });
+
+  const toggleColorScheme = () => {
+    setColorScheme((prevColorScheme) => prevColorScheme === 'light' ? 'dark' : 'light');
+  };
+
+  const colorSchemeContextValue = {
+    colorScheme,
+    toggleColorScheme
+  };
+
 
   // token을 context api를 사용하여 관리하면 getToken을 사용할 이유가 없어짐.
   // saveToken과 clearToken만 생성
@@ -238,6 +261,14 @@ export const App = () => {
     setIsTokenError(isOpen);
   };
 
+  useEffect(() => {
+    if (colorScheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [colorScheme]);
+
   return (
     <QueryClientProvider key={token} client={queryClient}>
       <ServiceContext.Provider value={services}>
@@ -246,11 +277,13 @@ export const App = () => {
             value={{ isModalOpen: isTokenError, setOpen }}
           >
             <TokenAuthContext.Provider value={{ token }}>
-              <TimetableContext.Provider
-                value={{ timetableId, setTimetableId }}
-              >
-                <RouterProvider router={routers} />
-              </TimetableContext.Provider>
+              <ColorSchemeContext.Provider value={colorSchemeContextValue}>
+                <TimetableContext.Provider
+                  value={{ timetableId, setTimetableId }}
+                >
+                  <RouterProvider router={routers} />
+                </TimetableContext.Provider>
+              </ColorSchemeContext.Provider>
             </TokenAuthContext.Provider>
             <Toaster position="top-center" />
           </ModalManageContext.Provider>

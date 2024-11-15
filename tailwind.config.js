@@ -85,4 +85,5 @@ export default {
     },
   },
   plugins: [require('tailwind-scrollbar')],
+  darkMode: 'class',
 };

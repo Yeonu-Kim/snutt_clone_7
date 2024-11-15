@@ -7,7 +7,9 @@ const storageKey = {
 };
 
 type TokenRepository = Parameters<typeof getAuthService>[0]['tokenRepository'];
-type TimetableRepository = Parameters<typeof getTimeTableService>[0]['timetableStorageRepository'];
+type TimetableRepository = Parameters<
+  typeof getTimeTableService
+>[0]['timetableStorageRepository'];
 
 export const implTokenSessionStorageRepository = (): TokenRepository => {
   return {
@@ -24,11 +26,7 @@ export const implTokenSessionStorageRepository = (): TokenRepository => {
 export const implTimetableStorageRepository = (): TimetableRepository => {
   return {
     getStorageTimetableId: () => {
-      const savedTimetableId = localStorage.getItem(
-        storageKey.selectedTimetableId,
-      );
-      if (savedTimetableId == null) return null;
-      return savedTimetableId;
+      return localStorage.getItem(storageKey.selectedTimetableId);
     },
     saveStorageTimetableId: (timetableId: string) => {
       localStorage.setItem(storageKey.selectedTimetableId, timetableId);
