@@ -10,7 +10,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -20,7 +20,23 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "allowJs": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["src", "vite.config.ts"]
+  "include": [
+    ".next/types/**/*.ts",
+    "next.config.mjs",
+    "src",
+    "vite.config.ts",
+    "./build/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
 }

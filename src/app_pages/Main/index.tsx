@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
+import { Drawer } from '@/app_pages/Main/Drawer';
+import { Header } from '@/app_pages/Main/Header';
+import { TimeTable } from '@/app_pages/Main/TimeTable';
 import { Navbar } from '@/components/Navbar';
 import { Layout } from '@/components/styles/Layout';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TimetableContext } from '@/context/TimetableContext.ts';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
-import { Drawer } from '@/pages/Main/Drawer';
-import { Header } from '@/pages/Main/Header';
-import { TimeTable } from '@/pages/Main/TimeTable';
 
 export const MainPage = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);

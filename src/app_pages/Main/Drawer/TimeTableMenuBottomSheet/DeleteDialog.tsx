@@ -72,10 +72,10 @@ const useDeleteTimeTable = ({
     },
     onSuccess: async (response) => {
       if (response.type === 'success') {
+        handleClose();
         await queryClient.invalidateQueries({
           queryKey: ['TimeTableService'],
         });
-        handleClose();
       } else {
         showErrorDialog(response.message);
       }

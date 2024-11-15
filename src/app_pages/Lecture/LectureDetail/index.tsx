@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { DeleteLectureDialog } from '@/app_pages/Lecture/LectureDetail/DeleteLectureDialog';
 import { HeaderContainer } from '@/components/common/HeaderContainer';
 import { LoadingPage } from '@/components/Loading';
 import { Layout } from '@/components/styles/Layout';
@@ -12,7 +13,6 @@ import { TokenAuthContext } from '@/context/TokenAuthContext';
 import type { Lecture } from '@/entities/lecture';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation';
-import { DeleteLectureDialog } from '@/pages/Lecture/LectureDetail/DeleteLectureDialog';
 import { showDialog } from '@/utils/showDialog';
 
 export const LectureDetailPage = () => {

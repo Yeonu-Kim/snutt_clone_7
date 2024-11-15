@@ -46,63 +46,62 @@ export const AddTimeTableBottomSheet = ({
       setSemester(optionSemester);
     }
   };
+
   return (
-    <>
-      <BottomSheetContainer isVisible={isVisible} onClick={handleClose}>
-        {isPending && <SpinnerLoading />}
-        <div className="flex flex-col gap-6 dark:bg-gray-800 dark:text-gray-200">
-          <div className="flex flex-end justify-between">
-            <button onClick={handleClose}>취소</button>
-            <button onClick={onClickButton}>완료</button>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h1 className="text-sm text-gray-500 dark:text-gray-200">
-              새로운 시간표 만들기
-            </h1>
-            <input
-              type="text"
-              id="id"
-              value={timeTableName}
-              onChange={(e) => {
-                setTimeTableName(e.target.value);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && timeTableName !== '') {
-                  onClickButton();
-                }
-              }}
-              placeholder={'시간표 제목을 입력하세요'}
-              disabled={isPending}
-              className="w-full py-1 border-b-2 border-gray focus:outline-none focus:border-black"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <h1 className="text-sm text-gray-500 dark:text-gray-200">
-              학기 선택
-            </h1>
-            <select
-              onChange={(e) => {
-                clickOption(e.target.value);
-              }}
-              className="py-1 border-b-2 border-gray focus:outline-none focus:border-black"
-              disabled={isPending}
-            >
-              <option value="">학기를 선택하세요</option>
-              {courseBookList.map((courseBook) => {
-                return (
-                  <option
-                    key={`${courseBook.year}-${courseBook.semester}`}
-                    value={`${courseBook.year}-${courseBook.semester}`}
-                  >
-                    {`${courseBook.year}년 ${formatSemester(Number(courseBook.semester))}`}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+    <BottomSheetContainer isVisible={isVisible} onClick={handleClose}>
+      {isPending && <SpinnerLoading />}
+      <div className="flex flex-col gap-6 dark:bg-gray-800 dark:text-gray-200">
+        <div className="flex flex-end justify-between">
+          <button onClick={handleClose}>취소</button>
+          <button onClick={onClickButton}>완료</button>
         </div>
-      </BottomSheetContainer>
-    </>
+        <div className="flex flex-col gap-2">
+          <h1 className="text-sm text-gray-500 dark:text-gray-200">
+            새로운 시간표 만들기
+          </h1>
+          <input
+            type="text"
+            id="id"
+            value={timeTableName}
+            onChange={(e) => {
+              setTimeTableName(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && timeTableName !== '') {
+                onClickButton();
+              }
+            }}
+            placeholder={'시간표 제목을 입력하세요'}
+            disabled={isPending}
+            className="w-full py-1 border-b-2 border-gray focus:outline-none focus:border-black"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <h1 className="text-sm text-gray-500 dark:text-gray-200">
+            학기 선택
+          </h1>
+          <select
+            onChange={(e) => {
+              clickOption(e.target.value);
+            }}
+            className="py-1 border-b-2 border-gray focus:outline-none focus:border-black"
+            disabled={isPending}
+          >
+            <option value="">학기를 선택하세요</option>
+            {courseBookList.map((courseBook) => {
+              return (
+                <option
+                  key={`${courseBook.year}-${courseBook.semester}`}
+                  value={`${courseBook.year}-${courseBook.semester}`}
+                >
+                  {`${courseBook.year}년 ${formatSemester(Number(courseBook.semester))}`}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+      </div>
+    </BottomSheetContainer>
   );
 };
 
@@ -134,10 +133,10 @@ const useCreateTimeTable = ({ handleClose }: { handleClose(): void }) => {
     },
     onSuccess: async (response) => {
       if (response.type === 'success') {
+        handleClose();
         await queryClient.invalidateQueries({
           queryKey: ['TimeTableService'],
         });
-        handleClose();
       } else {
         showErrorDialog(response.message);
       }
