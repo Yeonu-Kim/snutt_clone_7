@@ -23,6 +23,8 @@ type Drawer = {
 
 type BottomSheetItem = Pick<TimeTableBrief, '_id' | 'title'>;
 
+type BottomSheetSelect = 'ADD' | 'RECENT_ADD' | 'MENU' | 'NONE';
+
 export const Drawer = ({
   isOpen,
   onClose,
@@ -38,19 +40,16 @@ export const Drawer = ({
   };
 
   const {
-    showAddTimeTableBottomSheet,
-    showAddTimeTableBySemesterBottomSheet,
+    showBottomSheet,
     openDropdowns,
     bottomSheetTimeTableInfo,
     selectedYear,
     selectedSemester,
     toggleDropdown,
     openAddTimeTable,
-    closeAddTimeTable,
     openTimeTableMenu,
-    closeTimeTableMenu,
     openAddTimeTableBySemester,
-    closeAddTimeTableBySemester,
+    closeBottomSheet,
   } = useDrawer();
 
   const { timeTableListData } = useGetTimeTable();
@@ -75,6 +74,42 @@ export const Drawer = ({
     timetableItems,
     coursebookItems,
   });
+
+  const BottomSheet = () => {
+    switch (showBottomSheet) {
+      case 'ADD':
+        return (
+          <AddTimeTableBottomSheet
+            onClose={closeBottomSheet}
+            courseBookList={coursebookItems}
+          />
+        );
+      case 'RECENT_ADD':
+        return (
+          selectedYear !== null &&
+          selectedSemester !== null && (
+            <AddTimeTableBySemesterBottomSheet
+              year={selectedYear}
+              semester={selectedSemester}
+              onClose={closeBottomSheet}
+            />
+          )
+        );
+      case 'MENU':
+        return (
+          bottomSheetTimeTableInfo !== null && (
+            <TimeTableMenuBottomSheet
+              timetable={bottomSheetTimeTableInfo}
+              onClose={closeBottomSheet}
+              selectedTimetableId={selectedTimetableId}
+              handleClickSetTimetableId={handleClickSetTimetableId}
+            />
+          )
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -155,29 +190,7 @@ export const Drawer = ({
       </div>
 
       {/* 바텀시트 부분 */}
-      {showAddTimeTableBottomSheet ? (
-        <AddTimeTableBottomSheet
-          onClose={closeAddTimeTable}
-          courseBookList={coursebookItems}
-        />
-      ) : null}
-      {bottomSheetTimeTableInfo !== null ? (
-        <TimeTableMenuBottomSheet
-          timetable={bottomSheetTimeTableInfo}
-          onClose={closeTimeTableMenu}
-          selectedTimetableId={selectedTimetableId}
-          handleClickSetTimetableId={handleClickSetTimetableId}
-        />
-      ) : null}
-      {showAddTimeTableBySemesterBottomSheet &&
-      selectedYear !== null &&
-      selectedSemester !== null ? (
-        <AddTimeTableBySemesterBottomSheet
-          year={selectedYear}
-          semester={selectedSemester}
-          onClose={closeAddTimeTableBySemester}
-        />
-      ) : null}
+      <BottomSheet />
     </>
   );
 };
@@ -219,12 +232,8 @@ const useGetCouseBook = () => {
 };
 
 const useDrawer = () => {
-  const [showAddTimeTableBottomSheet, setShowAddTimeTableBottomSheet] =
-    useState(false);
-  const [
-    showAddTimeTableBySemesterBottomSheet,
-    setShowAddTimeTableBySemesterBottomSheet,
-  ] = useState(false);
+  const [showBottomSheet, setShowBottomSheet] =
+    useState<BottomSheetSelect>('NONE');
   const [openDropdowns, setOpenDropdowns] = useState<{
     [key: string]: boolean;
   }>({});
@@ -234,8 +243,7 @@ const useDrawer = () => {
   const [selectedSemester, setSelectedSemester] = useState<number | null>(null);
 
   return {
-    showAddTimeTableBottomSheet,
-    showAddTimeTableBySemesterBottomSheet,
+    showBottomSheet,
     openDropdowns,
     bottomSheetTimeTableInfo,
     selectedYear,
@@ -247,24 +255,19 @@ const useDrawer = () => {
       }));
     },
     openAddTimeTable: () => {
-      setShowAddTimeTableBottomSheet(true);
-    },
-    closeAddTimeTable: () => {
-      setShowAddTimeTableBottomSheet(false);
-    },
-    openTimeTableMenu: (timetable: BottomSheetItem) => {
-      setBottomSheetTimeTableInfo(timetable);
-    },
-    closeTimeTableMenu: () => {
-      setBottomSheetTimeTableInfo(null);
+      setShowBottomSheet('ADD');
     },
     openAddTimeTableBySemester: (year: number, semester: number) => {
       setSelectedYear(year);
       setSelectedSemester(semester);
-      setShowAddTimeTableBySemesterBottomSheet(true);
+      setShowBottomSheet('RECENT_ADD');
     },
-    closeAddTimeTableBySemester: () => {
-      setShowAddTimeTableBySemesterBottomSheet(false);
+    openTimeTableMenu: (timetable: BottomSheetItem) => {
+      setBottomSheetTimeTableInfo(timetable);
+      setShowBottomSheet('MENU');
+    },
+    closeBottomSheet: () => {
+      setShowBottomSheet('NONE');
     },
   };
 };
