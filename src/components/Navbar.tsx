@@ -73,7 +73,10 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
   ];
 
   return (
-    <div className="flex justify-between w-full px-[30px] py-[10px] mb-[34px] border-t-[1px] border-solid  border-t-lineLight">
+    <div
+      className="flex justify-between w-full px-[30px] py-[10px] mb-[34px] border-t-[1px] border-solid  border-t-lineLight
+    dark:bg-gray-800 dark:text-gray-200 dark:border-t-gray-800"
+    >
       {navMenuList.map((navMenu, index) => {
         return navMenu.to !== null ? (
           <div
@@ -84,7 +87,8 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
             className="flex justify-center align-center w-[30px] h-[30px] p-[4px]"
           >
             <img
-              className="max-w-full"
+              className="max-w-full
+              dark:filter dark:brightness-0 dark:invert"
               src={
                 navMenu.menu === selectedMenu ? navMenu.onSrc : navMenu.offSrc
               }
@@ -102,6 +106,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
                 navMenu.menu === selectedMenu ? navMenu.onSrc : navMenu.offSrc
               }
               alt={navMenu.alt}
+              className="dark:filter dark:brightness-0 dark:invert"
             />
           </div>
         );

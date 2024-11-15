@@ -61,7 +61,7 @@ export const TimeTableMenuBottomSheet = ({
         {menuOptions.map((option, index) => (
           <div
             key={index}
-            className="flex items-center py-2 cursor-pointer hover:bg-gray-100"
+            className="flex items-center py-2 cursor-pointer hover:bg-gray-100 dark:text-gray-200"
             onClick={(e) => {
               e.stopPropagation();
               option.action();

@@ -82,7 +82,8 @@ export const Drawer = ({
       <div
         className={`absolute top-0 left-0 h-full w-[330px] px-4 bg-white border-r border-gray-300 transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out z-50`}
+        } transition-transform duration-300 ease-in-out z-50
+        dark:bg-gray-950 dark:text-gray-200 dark:border-gray-600`}
       >
         <DrawerHeader onClose={onClose} />
         <ul className="drawer-content">
@@ -117,7 +118,10 @@ export const Drawer = ({
                       }}
                     >
                       <TimeTableMenuIcon onClick={showTBDDialog}>
-                        <img src={ICON_SRC.COPY} className="w-18 h-18" />
+                        <img
+                          src={ICON_SRC.COPY}
+                          className="w-18 h-18 dark:invert"
+                        />
                       </TimeTableMenuIcon>
                       <TimeTableMenuIcon
                         onClick={() => {
@@ -129,7 +133,7 @@ export const Drawer = ({
                       >
                         <img
                           src={ICON_SRC.MORE}
-                          className="w-18 h-18 rotate-90"
+                          className="w-18 h-18 rotate-90 dark:invert"
                         />
                       </TimeTableMenuIcon>
                     </TimeTableMenuBar>
@@ -267,17 +271,23 @@ const useDrawer = () => {
 
 const DrawerHeader = ({ onClose }: { onClose(): void }) => {
   return (
-    <div className="flex justify-between items-center py-4 border-b border-solid border-gray-300">
+    <div className="flex justify-between items-center py-4 border-b border-solid border-gray-300 dark:border-gray-600">
       <div className="flex items-center gap-2">
-        <img src={ICON_SRC.LOGO} className="w-5 h-5" />
+        <img
+          src={ICON_SRC.LOGO}
+          className="w-5 h-5 dark:filter dark:brightness-150"
+        />
         <h1 className="text-lg font-semibold">SNUTT</h1>
       </div>
       <button
-        className="text-xl focus:outline-none"
+        className="text-xl focus:outline-none dark:bg-gray-600"
         onClick={onClose}
         aria-label="Close Menu"
       >
-        <img src={ICON_SRC.CLOSE} />
+        <img
+          src={ICON_SRC.CLOSE}
+          className="dark:filter dark:brightness-0 dark:invert"
+        />
       </button>
     </div>
   );
@@ -286,9 +296,14 @@ const DrawerHeader = ({ onClose }: { onClose(): void }) => {
 const AddTimeTableMenuBar = ({ onClick }: { onClick(): void }) => {
   return (
     <li className="flex justify-between items-center pt-4 pb-4">
-      <span className="text-sm text-gray-400">나의 시간표</span>
+      <span className="text-sm text-gray-400 dark:text-gray-200">
+        나의 시간표
+      </span>
       <span className="font-bold text-gray-400" onClick={onClick}>
-        <img src={ICON_SRC.ADD} />
+        <img
+          src={ICON_SRC.ADD}
+          className="dark:filter dark:brightness-0 dark:invert"
+        />
       </span>
     </li>
   );
@@ -309,13 +324,14 @@ const CourseBookMenuBar = ({
 }) => {
   return (
     <div className="flex justify-between items-center py-2 text-gray-700">
-      <div className="flex gap-2">
+      <div className="flex gap-2 dark:text-gray-400">
         <span className="font-bold">
           {courseBook.year}년 {formatSemester(courseBook.semester)}
         </span>
         <img
           src={ICON_SRC.ARROW.DOWN}
-          className={`w-6 h-6 cursor-pointer transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
+          className={`w-6 h-6 cursor-pointer transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}
+          dark:invert`}
           onClick={onClick}
           aria-expanded={isOpen}
         />

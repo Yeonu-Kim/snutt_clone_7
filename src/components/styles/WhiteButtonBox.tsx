@@ -14,7 +14,8 @@ export const WhiteButtonBox = ({
   return (
     <button
       className={`bg-white w-[335px] h-10 rounded-lg flex items-center
-              cursor-pointer hover:bg-gray-100 transition-colors duration-200 ${className}`}
+              cursor-pointer hover:bg-gray-100 transition-colors duration-200 
+              dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 ${className}`}
       onClick={onClick}
     >
       {children}

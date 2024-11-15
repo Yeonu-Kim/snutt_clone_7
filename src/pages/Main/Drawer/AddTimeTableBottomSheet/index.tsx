@@ -50,13 +50,15 @@ export const AddTimeTableBottomSheet = ({
     <>
       <BottomSheetContainer isVisible={isVisible} onClick={handleClose}>
         {isPending && <SpinnerLoading />}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 dark:bg-gray-800 dark:text-gray-200">
           <div className="flex flex-end justify-between">
             <button onClick={handleClose}>취소</button>
             <button onClick={onClickButton}>완료</button>
           </div>
           <div className="flex flex-col gap-2">
-            <h1 className="text-sm text-gray-500">새로운 시간표 만들기</h1>
+            <h1 className="text-sm text-gray-500 dark:text-gray-200">
+              새로운 시간표 만들기
+            </h1>
             <input
               type="text"
               id="id"
@@ -75,7 +77,9 @@ export const AddTimeTableBottomSheet = ({
             />
           </div>
           <div className="flex flex-col gap-2">
-            <h1 className="text-sm text-gray-500">학기 선택</h1>
+            <h1 className="text-sm text-gray-500 dark:text-gray-200">
+              학기 선택
+            </h1>
             <select
               onChange={(e) => {
                 clickOption(e.target.value);

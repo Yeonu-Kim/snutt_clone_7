@@ -27,7 +27,7 @@ export const LoadingPage = () => {
   }, [tips.length]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen text-center gap-3 p-3">
+    <div className="flex flex-col items-center justify-center min-h-screen text-center gap-3 p-3 dark:bg-gray-800">
       <div className="relative h-20 flex items-center justify-center space-x-2 text-6xl font-bold">
         <h1 className="flex space-x-1">
           <span className="animate-updown-1 text-blue">S</span>
@@ -37,12 +37,14 @@ export const LoadingPage = () => {
           <span className="animate-updown-5 text-orange">T</span>
         </h1>
       </div>
-      <p className="mt-4 text-lg text-gray-700">
+      <p className="mt-4 text-lg text-gray-700  dark:text-gray-400">
         로딩중... 잠시만 기다려주세요.
       </p>
       <div className="flex-col">
-        <p className="mt-2 text-sm text-gray-500">😀 SNUTT의 숨은 꿀팁</p>
-        <p className="mt-2 text-sm text-gray-500 animate-slide-up">
+        <p className="mt-2 text-sm text-gray-500 dark:text-gray-200">
+          😀 SNUTT의 숨은 꿀팁
+        </p>
+        <p className="mt-2 text-sm text-gray-500 animate-slide-up dark:text-gray-200">
           {tips[currentTip]}
         </p>
       </div>

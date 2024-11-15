@@ -20,20 +20,33 @@ export const Header = ({
           onClick={onMenuClick}
           aria-label="Open Menu"
         >
-          <img src={ICON_SRC.HAMBURGER} />
+          <img
+            src={ICON_SRC.HAMBURGER}
+            className="dark:filter dark:brightness-0 dark:invert"
+          />
         </button>
         <h1 className="text-base font-semibold">{title}</h1>
         <span className="text-xs text-gray-400">{`(${totalCredit} 학점)`}</span>
       </div>
       <div className="flex gap-2 items-center">
         <button onClick={onLectureListClick}>
-          <img src={ICON_SRC.LIST_BULLET} />
+          <img
+            src={ICON_SRC.LIST_BULLET}
+            className="dark:filter dark:brightness-0 dark:invert"
+          />
         </button>
         <span>
-          <img src={ICON_SRC.SHARE} />
+          <img
+            src={ICON_SRC.SHARE}
+            className="dark:filter dark:brightness-0 dark:invert"
+          />
         </span>
         <span>
-          <img src={ICON_SRC.BELL} className="w-6 h-6" />
+          <img
+            src={ICON_SRC.BELL}
+            className="w-6 h-6
+               dark:filter dark:brightness-0 dark:invert"
+          />
         </span>
       </div>
     </HeaderContainer>

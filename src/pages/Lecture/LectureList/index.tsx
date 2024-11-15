@@ -30,16 +30,19 @@ export const LectureListPage = () => {
       <Layout>
         <div
           id="Wrapper-Container"
-          className="flex flex-col items-center w-full min-h-screen"
+          className="flex flex-col items-center w-full min-h-screen
+          dark:bg-gray-950"
         >
           <div
             id="upper-bar"
             className="w-full py-4 px-6 top-0 bg-white border-b-[1px]
-            flex justify-center items-center fixed max-w-375"
+            flex justify-center items-center fixed max-w-375
+            dark:bg-gray-800 dark:text-gray-200 dark:border-gray-800"
           >
             <div
               className="BackButtonWrapper absolute left-3 rounded-lg flex items-center
-            cursor-pointer text-gray-500 hover:text-orange"
+            cursor-pointer text-gray-500 hover:text-orange
+            dark:text-gray-200"
             >
               <span onClick={toMain}>&larr; 뒤로</span>
             </div>
@@ -49,7 +52,8 @@ export const LectureListPage = () => {
           <div
             id="Main-Container"
             className="h-lvh flex flex-col justify-start items-start overflow-y-auto overflow-x-hidden
-            p-5 pt-2 w-full mt-[60px] mb-[80px]"
+            p-5 pt-2 w-full mt-[60px] mb-[80px]
+            dark:bg-gray-950 dark:text-gray-200"
           >
             <div>
               {timetableData.data.lecture_list.map((lecture, index) => {
@@ -62,21 +66,27 @@ export const LectureListPage = () => {
                 return (
                   <div
                     key={index}
-                    className="w-[335px] pt-0 gap-0.5
+                    className="w-[440px] pt-0 gap-0.5
                        flex flex-col items-start border-b-[1px] border-b-gray-200 mt-2 pb-3"
                   >
                     <div className="flex justify-between w-full items-center">
                       <span className="font-bold text-[14px]">
                         {lecture.course_title}
                       </span>
-                      <span className="text-gray-400 text-[12px]">
+                      <span
+                        className="text-gray-400 text-[12px]
+                      dark:text-gray-200"
+                      >
                         {lecture.instructor !== ''
                           ? `${lecture.instructor} / ${lecture.credit}학점`
                           : `${lecture.credit}학점`}
                       </span>
                     </div>
 
-                    <span className="text-[12px] text-gray-700">
+                    <span
+                      className="text-[12px] text-gray-700
+                    dark:text-gray-200"
+                    >
                       {lecture.department !== undefined &&
                       lecture.academic_year !== undefined
                         ? `${lecture.department}, ${lecture.academic_year}`
@@ -109,14 +119,18 @@ export const LectureListPage = () => {
                         return (
                           <span
                             key={timeIndex}
-                            className="text-[12px] text-gray-700"
+                            className="text-[12px] text-gray-700
+                            dark:text-gray-200"
                           >
                             {`${times.day}(${times.startTime}~${times.endTime})${timeIndex < lecture.class_time_json.length - 1 ? ', ' : ''} `}
                           </span>
                         );
                       })}
                     </span>
-                    <span className="text-[12px] text-gray-700">
+                    <span
+                      className="text-[12px] text-gray-700
+                    dark:text-gray-200"
+                    >
                       {uniqueArray.at(0) !== '' ? uniqueArray.join(', ') : '-'}
                     </span>
                   </div>

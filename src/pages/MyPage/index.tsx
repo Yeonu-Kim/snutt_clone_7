@@ -61,17 +61,20 @@ export const MyPage = () => {
       <Layout>
         <div
           id="Wrapper-Container"
-          className="flex flex-col items-center w-full min-h-screen"
+          className="flex flex-col items-center w-full min-h-screen
+          dark:bg-gray-950"
         >
           <div
             id="upper-bar"
-            className="w-full py-4 px-6 top-0 bg-white flex justify-center items-center fixed max-w-375"
+            className="w-full py-4 px-6 top-0 bg-white flex justify-center items-center fixed max-w-375
+            dark:bg-gray-800 dark:text-gray-200"
           >
             <p className="font-bold">마이페이지</p>
           </div>
           <div
             id="Main-Container"
-            className="h-lvh  flex flex-col justify-center items-center w-full mt-[60px] mb-[80px] bg-gray-200 gap-5"
+            className="h-lvh  flex flex-col justify-center items-center w-full mt-[60px] mb-[80px] bg-gray-200 gap-5
+            dark:bg-gray-950 dark:text-gray-200"
           >
             <WhiteButtonBox
               className="flex items-center justify-between h-12"

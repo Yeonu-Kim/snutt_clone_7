@@ -17,7 +17,7 @@ export const BottomSheetContainer = ({
       <div
         className={`w-full bg-white rounded-t-lg p-6 pb-10 transform transition-transform duration-300 ${
           isVisible ? 'translate-y-0' : 'translate-y-full'
-        }`}
+        } dark:bg-gray-800`}
         onClick={(e) => {
           e.stopPropagation();
         }}

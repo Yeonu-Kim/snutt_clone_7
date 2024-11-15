@@ -54,20 +54,35 @@ export const LectureDetailPage = () => {
   return (
     <>
       <Layout>
-        <div className="h-full bg-gray-200 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+        <div
+          className="h-full bg-gray-200 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100
+        dark:bg-gray-950"
+        >
           <HeaderContainer>
             <div className="flex gap-2">
               <div
                 className="BackButtonWrapper flex items-center cursor-pointer"
                 onClick={toMain}
               >
-                <img src={ICON_SRC.ARROW.DOWN} className="w-6 h-6 rotate-90" />
+                <img
+                  src={ICON_SRC.ARROW.DOWN}
+                  className="w-6 h-6 rotate-90
+                dark:invert"
+                />
               </div>
               <span>강의 상세 보기</span>
             </div>
             <div className="flex gap-2 items-center">
-              <img src={ICON_SRC.BELL} className="w-6 h-6" />
-              <img src={ICON_SRC.BOOKMARK} className="w-6 h-6" />
+              <img
+                src={ICON_SRC.BELL}
+                className="w-6 h-6
+              dark:invert"
+              />
+              <img
+                src={ICON_SRC.BOOKMARK}
+                className="w-6 h-6
+              dark:invert"
+              />
               <span>편집</span>
             </div>
           </HeaderContainer>
@@ -75,7 +90,7 @@ export const LectureDetailPage = () => {
             {lectureInfoSectionList.map((lectureInfoSection, sectionIndex) => (
               <div
                 key={`section-${sectionIndex}`}
-                className="flex flex-col bg-white py-1 gap-1"
+                className="flex flex-col bg-white py-1 gap-1 dark:bg-gray-800 dark:text-gray-200"
               >
                 {lectureInfoSection.title !== null && (
                   <div className="px-4 py-1 text-gray-400 text-sm">
@@ -90,7 +105,10 @@ export const LectureDetailPage = () => {
                 })}
               </div>
             ))}
-            <div className="flex flex-col bg-white gap-1">
+            <div
+              className="flex flex-col bg-white gap-1
+            dark:bg-gray-800 dark:text-gray-200"
+            >
               <div
                 className="flex justify-center p-2 cursor-pointer transition-all hover:bg-gray"
                 onClick={showTBDDialog}
@@ -104,7 +122,10 @@ export const LectureDetailPage = () => {
                 강의평
               </div>
             </div>
-            <div className="flex flex-col bg-white gap-1">
+            <div
+              className="flex flex-col bg-white gap-1
+            dark:bg-gray-800"
+            >
               <div
                 className="flex justify-center p-2 cursor-pointer text-red transition-all hover:bg-gray"
                 onClick={clickDeleteButton}
