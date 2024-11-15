@@ -74,7 +74,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
 
   return (
     <div
-      className="flex justify-between w-full px-[30px] py-[10px] mb-[34px] border-t-[1px] border-solid  border-t-lineLight
+      className="flex justify-between w-full px-3.5 py-2.5 pb-5 border-t-0.5 border-solid  border-t-lineLight
     dark:bg-gray-800 dark:text-gray-200 dark:border-t-gray-800"
     >
       {navMenuList.map((navMenu, index) => {
@@ -84,7 +84,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
             onClick={() => {
               handleClickMenu(navMenu.menu);
             }}
-            className="flex justify-center align-center w-[30px] h-[30px] p-[4px]"
+            className="flex justify-center align-center w-8 h-8 p-1"
           >
             <img
               className="max-w-full
@@ -99,7 +99,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
           <div
             key={index}
             onClick={onClickTBD}
-            className="flex justify-center align-center w-[30px] h-[30px] p-[4px]"
+            className="flex justify-center align-center w-8 h-8 p-1"
           >
             <img
               src={
