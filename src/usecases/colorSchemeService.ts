@@ -6,20 +6,18 @@ type colorSchemeRepository = {
 
 export type ColorSchemeService = {
   storeColorScheme(_: { scheme: string | null }): void;
-}
+};
 
 export const getColorSchemeService = ({
-  colorSchemeRepository
-} : {
-  colorSchemeRepository: colorSchemeRepository
+  colorSchemeRepository,
+}: {
+  colorSchemeRepository: colorSchemeRepository;
 }): ColorSchemeService => ({
-  storeColorScheme: ({ scheme,}: {
-    scheme: string | null;
-  }) => {
+  storeColorScheme: ({ scheme }: { scheme: string | null }) => {
     if (scheme !== null) {
       colorSchemeRepository.saveStorageColorScheme(scheme);
     } else {
       colorSchemeRepository.clearStorageColorScheme();
     }
   },
-})
+});

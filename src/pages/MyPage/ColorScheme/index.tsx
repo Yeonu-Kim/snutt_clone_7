@@ -18,7 +18,8 @@ export const ColorSchemePage = () => {
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
   const { toMypage } = useRouteNavigation();
-  const { colorScheme, toggleColorScheme } = useGuardContext(ColorSchemeContext);
+  const { colorScheme, toggleColorScheme } =
+    useGuardContext(ColorSchemeContext);
 
   const handleSetColorScheme = () => {
     toggleColorScheme();
@@ -80,7 +81,9 @@ export const ColorSchemePage = () => {
                 dark:bg-gray-800"
                 onClick={handleSetColorScheme}
               >
-                <span className="m-4">{colorScheme === 'light' ? '🌙 다크 모드' : '☀️ 라이트 모드'}</span>
+                <span className="m-4">
+                  {colorScheme === 'light' ? '🌙 다크 모드' : '☀️ 라이트 모드'}
+                </span>
               </WhiteButtonBox>
             </div>
           </div>

@@ -1,9 +1,8 @@
 export const storageKey = {
-  colorScheme: "colorScheme",
+  colorScheme: 'colorScheme',
 };
 
 export const impleColorSchemeRepository = () => {
-
   return {
     getStorageColorScheme: () => {
       return localStorage.getItem(storageKey.colorScheme);
@@ -15,4 +14,4 @@ export const impleColorSchemeRepository = () => {
       localStorage.removeItem(storageKey.colorScheme);
     },
   };
-}
+};

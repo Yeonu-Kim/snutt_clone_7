@@ -209,26 +209,31 @@ export const App = () => {
   // 인증 상태에 따라 캐싱된 데이터를 업데이트 or 삭제해줘야 함.
   const [token, setToken] = useState(temporaryStorageRepository.getToken());
 
-  const [timetableId, setTimetableId] = useState(timetableStorageRepository.getStorageTimetableId);
+  const [timetableId, setTimetableId] = useState(
+    timetableStorageRepository.getStorageTimetableId,
+  );
 
   const [colorScheme, setColorScheme] = useState<string | null>(() => {
-    const savedColorScheme = colorSchemeRepository.getStorageColorScheme()
+    const savedColorScheme = colorSchemeRepository.getStorageColorScheme();
 
     if (savedColorScheme !== null) return savedColorScheme;
 
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDarkMode = window.matchMedia(
+      '(prefers-color-scheme: dark)',
+    ).matches;
     return prefersDarkMode ? 'dark' : 'light';
   });
 
   const toggleColorScheme = () => {
-    setColorScheme((prevColorScheme) => prevColorScheme === 'light' ? 'dark' : 'light');
+    setColorScheme((prevColorScheme) =>
+      prevColorScheme === 'light' ? 'dark' : 'light',
+    );
   };
 
   const colorSchemeContextValue = {
     colorScheme,
-    toggleColorScheme
+    toggleColorScheme,
   };
-
 
   // token을 context api를 사용하여 관리하면 getToken을 사용할 이유가 없어짐.
   // saveToken과 clearToken만 생성
