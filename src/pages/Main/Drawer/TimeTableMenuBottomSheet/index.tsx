@@ -16,6 +16,8 @@ type TimeTableMenuBottomSheet = {
   handleClickSetTimetableId: (timetableId: string | null) => void;
 };
 
+type DialogMenu = 'NAME' | 'DELETE' | 'NONE';
+
 export const TimeTableMenuBottomSheet = ({
   timetable,
   onClose,
@@ -23,8 +25,7 @@ export const TimeTableMenuBottomSheet = ({
   selectedTimetableId,
 }: TimeTableMenuBottomSheet) => {
   const { isVisible, handleClose } = useBottomSheet({ onClose });
-  const [showChangeNameDialog, setShowChangeNameDialog] = useState(false);
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [dialogMenu, setDialogMenu] = useState<DialogMenu>('NONE');
 
   const { showTBDDialog } = showDialog();
 
@@ -32,7 +33,7 @@ export const TimeTableMenuBottomSheet = ({
     {
       label: '이름 변경',
       action: () => {
-        setShowChangeNameDialog(true);
+        setDialogMenu('NAME');
       },
     },
     {
@@ -50,10 +51,39 @@ export const TimeTableMenuBottomSheet = ({
     {
       label: '시간표 삭제',
       action: () => {
-        setShowDeleteDialog(true);
+        setDialogMenu('DELETE');
       },
     },
   ];
+
+  const onCloseDialog = () => {
+    handleClose();
+    setDialogMenu('NONE');
+  };
+
+  const Dialog = () => {
+    switch (dialogMenu) {
+      case 'NAME':
+        return (
+          <ChangeNameDialog
+            timetableId={timetable._id}
+            onClose={onCloseDialog}
+            prevTimeTableName={timetable.title}
+          />
+        );
+      case 'DELETE':
+        return (
+          <DeleteDialog
+            onClose={onCloseDialog}
+            timetableId={timetable._id}
+            selectedTimetableId={selectedTimetableId}
+            handleClickSetTimetableId={handleClickSetTimetableId}
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -71,21 +101,7 @@ export const TimeTableMenuBottomSheet = ({
           </div>
         ))}
       </BottomSheetContainer>
-      {showChangeNameDialog && (
-        <ChangeNameDialog
-          timetableId={timetable._id}
-          onClose={handleClose}
-          prevTimeTableName={timetable.title}
-        />
-      )}
-      {showDeleteDialog && (
-        <DeleteDialog
-          onClose={handleClose}
-          timetableId={timetable._id}
-          selectedTimetableId={selectedTimetableId}
-          handleClickSetTimetableId={handleClickSetTimetableId}
-        />
-      )}
+      <Dialog />
     </>
   );
 };
