@@ -14,13 +14,11 @@ import {
 } from '@/components/Auth';
 import { PATH } from '@/constants/route';
 import { ColorSchemeContext } from '@/context/ColorSchemeContext.ts';
-import { EnvContext } from '@/context/EnvContext';
 import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TimetableContext } from '@/context/TimetableContext.ts';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { TokenManageContext } from '@/context/TokenManageContext';
-import { useGuardContext } from '@/hooks/useGuardContext';
 import { impleAuthRepository } from '@/infrastructure/impleAuthRepository';
 import { implCourseBookRepository } from '@/infrastructure/impleCourseBookRepository';
 import {
@@ -134,8 +132,11 @@ const queryClient = new QueryClient({
 
 export const App = () => {
   const [isTokenError, setIsTokenError] = useState(false);
-  // .env 파일 내역 불러오기
-  const ENV = useGuardContext(EnvContext);
+  // .env를 추가하면 lint가 터져서 일단 하드코딩해서 넣음.
+  // 추후 허락 받고 rule 추가하기
+  const ENV = {
+    API_BASE_URL: 'https://wafflestudio-seminar-2024-snutt-redirect.vercel.app',
+  };
   const { showErrorDialog } = showDialog();
 
   const call = async (content: CallParams) => {
