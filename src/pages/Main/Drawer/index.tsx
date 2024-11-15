@@ -105,7 +105,7 @@ export const Drawer = ({
                   className={`flex flex-col gap-4 duration-200 ease-in-out overflow-hidden ${
                     openDropdowns[key] === true
                       ? 'py-2 h-full opacity-100'
-                      : 'max-h-0 opacity-0 ww'
+                      : 'max-h-0 opacity-0'
                   }`}
                 >
                   {group.items.map((timeTable) => (
