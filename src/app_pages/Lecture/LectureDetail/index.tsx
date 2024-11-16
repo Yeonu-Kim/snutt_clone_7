@@ -149,7 +149,7 @@ export const LectureDetailPage = () => {
   );
 };
 
-const useGetTimetableData = ({
+export const useGetTimetableData = ({
   timetableId,
 }: {
   timetableId: string | undefined;

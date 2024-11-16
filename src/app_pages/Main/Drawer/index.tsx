@@ -14,11 +14,13 @@ import { useGuardContext } from '@/hooks/useGuardContext';
 import { formatSemester } from '@/utils/format';
 import { showDialog } from '@/utils/showDialog';
 
+import { useGetTimeTable } from '..';
+
 type Drawer = {
   isOpen: boolean;
   onClose: () => void;
-  selectedTimetableId: string | null;
-  handleClickSetTimetableId: (timetableId: string | null) => void;
+  selectedTimetableId: string | undefined;
+  handleClickSetTimetableId: (timetableId: string | undefined) => void;
 };
 
 type BottomSheetItem = Pick<TimeTableBrief, '_id' | 'title'>;
@@ -34,7 +36,7 @@ export const Drawer = ({
   const { showTBDDialog, showErrorDialog } = showDialog();
   const { timeTableService } = useGuardContext(ServiceContext);
 
-  const setSelectedTimeTableId = (timetableId: string | null) => {
+  const setSelectedTimeTableId = (timetableId: string | undefined) => {
     handleClickSetTimetableId(timetableId);
     onClose();
   };
@@ -195,24 +197,6 @@ export const Drawer = ({
   );
 };
 
-const useGetTimeTable = () => {
-  const { token } = useGuardContext(TokenAuthContext);
-  const { timeTableService } = useGuardContext(ServiceContext);
-
-  const { data: timeTableListData } = useQuery({
-    queryKey: ['TimeTableService', 'getTimeTableList', token] as const,
-    queryFn: ({ queryKey: [, , t] }) => {
-      if (t === null) {
-        throw new Error('토큰이 없습니다.');
-      }
-      return timeTableService.getTimeTableList({ token: t });
-    },
-    enabled: token !== null,
-  });
-
-  return { timeTableListData };
-};
-
 const useGetCouseBook = () => {
   const { token } = useGuardContext(TokenAuthContext);
   const { courseBookService } = useGuardContext(ServiceContext);
@@ -355,7 +339,7 @@ const TimeTableMenuBar = ({
   children,
 }: {
   timeTable: TimeTableBrief;
-  selectedTimeTableId: string | null;
+  selectedTimeTableId: string | undefined;
   onClick(): void;
   children: ReactNode;
 }) => {

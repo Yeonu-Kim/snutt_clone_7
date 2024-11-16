@@ -27,7 +27,8 @@ export const implTokenSessionStorageRepository = (): TokenRepository => {
 export const implTimetableStorageRepository = (): TimetableRepository => {
   return {
     getStorageTimetableId: () => {
-      return localStorage.getItem(storageKey.selectedTimetableId);
+      const timetableId = localStorage.getItem(storageKey.selectedTimetableId);
+      return timetableId !== null ? timetableId : undefined;
     },
     saveStorageTimetableId: (timetableId: string) => {
       localStorage.setItem(storageKey.selectedTimetableId, timetableId);

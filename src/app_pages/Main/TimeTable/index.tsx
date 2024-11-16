@@ -1,69 +1,22 @@
-import { useQuery } from '@tanstack/react-query';
-
-import { LoadingPage } from '@/components/Loading';
 import { DAY_LABEL_MAP } from '@/constants/dayLabel';
 import { ServiceContext } from '@/context/ServiceContext';
-import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { colorList } from '@/entities/color';
 import { dayList, hourList } from '@/entities/time';
+import type { TimeTable } from '@/entities/timetable';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation';
-import { showDialog } from '@/utils/showDialog';
 
-export const TimeTable = ({
-  timetableId,
-  setTotalCredit,
-  setTitle,
-  handleClickSetTimetableId,
+export const TimeTableView = ({
+  currentTimetable,
 }: {
-  timetableId: string | null;
-  setTotalCredit: (credit: number) => void;
-  setTitle: (title: string) => void;
-  handleClickSetTimetableId: (timetableId: string) => void;
+  currentTimetable: TimeTable;
 }) => {
   const { timeTableService } = useGuardContext(ServiceContext);
-  const { token } = useGuardContext(TokenAuthContext);
-  const { showErrorDialog } = showDialog();
   const { toLectureDetailPage } = useRouteNavigation();
-
-  const { data: timeTableData } = useQuery({
-    queryKey: [
-      'TimeTableService',
-      timetableId !== null && timetableId !== ''
-        ? 'getTimeTableById'
-        : 'getTimeTable',
-      token,
-      timetableId,
-    ] as const,
-    queryFn: ({ queryKey: [, , t, id] }) => {
-      if (t === null) {
-        throw new Error('토큰이 없습니다.');
-      }
-      if (id !== null && id !== '') {
-        return timeTableService.getTimeTableById({ token: t, timetableId: id });
-      } else {
-        return timeTableService.getTimeTable({ token: t });
-      }
-    },
-    enabled: token !== null,
-  });
-
-  if (timeTableData === undefined) return <LoadingPage />;
 
   // 241108 연우: 단순히 token 문제가 아닐 수 있음.
   // toast로 에러 메세지를 띄워줘야 할 거 같음.
-  if (timeTableData.type === 'error') {
-    showErrorDialog(timeTableData.message);
-    return null;
-  }
 
-  const totalCredit = timeTableData.data.lecture_list.reduce(
-    (acc, cur) => acc + cur.credit,
-    0,
-  );
-  setTotalCredit(totalCredit);
-  setTitle(timeTableData.data.title);
-  handleClickSetTimetableId(timeTableData.data._id);
   const columnCount = dayList.length - 2;
   const rowCount = hourList.length * 12;
   return (
@@ -136,7 +89,7 @@ export const TimeTable = ({
       ))}
 
       {/* 강의 item */}
-      {timeTableData.data.lecture_list.map((lecture) =>
+      {currentTimetable.lecture_list.map((lecture) =>
         lecture.class_time_json.map((time, i) => {
           const {
             col: [colStart, colEnd],
@@ -157,12 +110,10 @@ export const TimeTable = ({
                 gridRowEnd: rowEnd,
               }}
               onClick={() => {
-                if (timetableId !== null) {
-                  toLectureDetailPage({
-                    timetableId,
-                    lectureId: lecture._id,
-                  });
-                }
+                toLectureDetailPage({
+                  timetableId: currentTimetable._id,
+                  lectureId: lecture._id,
+                });
               }}
             >
               <span className="text-[10px] font-normal">
