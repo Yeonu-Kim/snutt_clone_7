@@ -14,7 +14,7 @@ import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog';
 
-import { useGetTimetableData } from '../Lecture/LectureDetail';
+import { useGetTimetableData } from '../Lecture/LectureList';
 
 export const MainPage = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
