@@ -5,6 +5,7 @@ import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
 import { Layout } from '@/components/styles/Layout.tsx';
 import { DAY_LABEL_MAP } from '@/constants/dayLabel.ts';
+import { ICON_SRC } from '@/constants/fileSource';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
@@ -47,7 +48,16 @@ export const LectureListPage = () => {
               <span onClick={toMain}>&larr; 뒤로</span>
             </div>
             <p>강의 목록</p>
-            <div className="absolute right-3 rounded-lg">+</div>
+
+            <div
+              className="absolute right-3 rounded-lg"
+              onClick={addCustomLecture}
+            >
+              <img
+                src={ICON_SRC.PLUS}
+                className="dark:filter dark:brightness-0 dark:invert"
+              />
+            </div>
           </div>
           <div
             id="Main-Container"

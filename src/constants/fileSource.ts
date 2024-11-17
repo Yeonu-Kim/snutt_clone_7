@@ -36,4 +36,5 @@ export const ICON_SRC = {
   COPY: '/drawer/Copy.svg',
   MORE: '/drawer/More.svg',
   BOOKMARK: '/header/bookmark.svg',
+  PLUS: '/header/plus.svg',
 };
