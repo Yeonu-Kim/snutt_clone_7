@@ -18,8 +18,7 @@ export const ColorSchemePage = () => {
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
   const { toMypage } = useRouteNavigation();
-  const { colorScheme, toggleColorScheme } =
-    useGuardContext(ColorSchemeContext);
+  const { colorScheme, toggleColorScheme } = useGuardContext(ColorSchemeContext);
 
   const handleSetColorScheme = () => {
     toggleColorScheme();
