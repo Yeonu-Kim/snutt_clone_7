@@ -133,6 +133,18 @@ export const getSnuttApis = ({
         path: `v1/tables/${params.timetableId}/lecture/${params.lectureId}`,
         token,
       }),
+    'POST /v1/tables/:timetableId/lecture': ({
+      token,
+      params,
+    }: {
+      token: string;
+      params: TimeTableIdParams;
+    }) =>
+      callWithToken<SuccessResponse<LectureResponse>>({
+        method: 'POST',
+        path: `v1/tables/${params.timetableId}/lecture`,
+        token,
+      }),
   }) satisfies Record<string, Api>;
 
 export type SnuttApi = ReturnType<typeof impleSnuttApi>;

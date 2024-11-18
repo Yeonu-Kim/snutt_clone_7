@@ -8,6 +8,10 @@ type LectureRepository = {
     timetableId: string;
     lectureId: string;
   }): RepositoryResponse<Lecture>;
+  createCustomLecture(_: {
+    token: string;
+    timetableId: string;
+  }): RepositoryResponse<Lecture>;
 };
 
 export type LectureService = {
@@ -15,6 +19,10 @@ export type LectureService = {
     token: string;
     timetableId: string;
     lectureId: string;
+  }): UsecaseResponse<Lecture>;
+  createCustomLecture(_: {
+    token: string;
+    timetableId: string;
   }): UsecaseResponse<Lecture>;
 };
 
@@ -32,6 +40,17 @@ export const getLecutureService = ({
     if (data.type === 'success') {
       const deletedLecture = data.data;
       return { type: 'success', data: deletedLecture };
+    }
+    return { type: 'error', message: getErrorMessage(data) };
+  },
+  createCustomLecture: async ({ token, timetableId }) => {
+    const data = await lectureRepository.createCustomLecture({
+      token,
+      timetableId,
+    });
+    if (data.type === 'success') {
+      const lectureList = data.data;
+      return { type: 'success', data: lectureList };
     }
     return { type: 'error', message: getErrorMessage(data) };
   },

@@ -61,6 +61,7 @@ const errors = [
   { code: 16389, message: '서버에서 색깔 테마를 찾을 수 없습니다' },
   { code: 16390, message: '등록된 이메일이 없습니다' },
   { code: 40010, message: '하나 남은 시간표는 삭제할 수 없습니다.' },
+  { code: 12300, message: '강의 시간이 겹칩니다.' },
 ];
 
 export const getErrorMessage = ({ errcode }: { errcode: number }): string => {
