@@ -48,7 +48,11 @@ export const AddTimeTableBottomSheet = ({
   };
 
   return (
-    <BottomSheetContainer isVisible={isVisible} onClick={handleClose}>
+    <BottomSheetContainer
+      isVisible={isVisible}
+      onClick={handleClose}
+      padding="p-6"
+    >
       {isPending && <SpinnerLoading />}
       <div className="flex flex-col gap-6 dark:bg-gray-800 dark:text-gray-200">
         <div className="flex flex-end justify-between">

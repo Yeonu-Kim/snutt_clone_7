@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { LoadingPage } from '@/components/Loading.tsx';
@@ -12,13 +13,21 @@ import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog.ts';
 
+import { AddCustomTimeTable } from '../CreateLecture';
+
 export const LectureListPage = () => {
   const { timetableId } = useParams();
   const { showErrorDialog } = showDialog();
   const { toMain } = useRouteNavigation();
-
   const { timetableData } = useGetTimetableData({ timetableId });
+  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
+  const openBottomSheet = () => {
+    setIsBottomSheetVisible(true);
+  };
+  const closeBottomSheet = () => {
+    setIsBottomSheetVisible(false);
+  };
   if (timetableData === undefined) return <LoadingPage />;
 
   if (timetableData.type === 'error') {
@@ -50,11 +59,11 @@ export const LectureListPage = () => {
             <p>강의 목록</p>
 
             <div
-              className="absolute right-3 rounded-lg"
-              onClick={addCustomLecture}
+              className="font-bold text-gray-400 absolute right-3 rounded-lg"
+              onClick={openBottomSheet}
             >
               <img
-                src={ICON_SRC.PLUS}
+                src={ICON_SRC.ADD}
                 className="dark:filter dark:brightness-0 dark:invert"
               />
             </div>
@@ -153,6 +162,9 @@ export const LectureListPage = () => {
           </div>
         </div>
       </Layout>
+      {isBottomSheetVisible && (
+        <AddCustomTimeTable onClose={closeBottomSheet} />
+      )}
     </>
   );
 };

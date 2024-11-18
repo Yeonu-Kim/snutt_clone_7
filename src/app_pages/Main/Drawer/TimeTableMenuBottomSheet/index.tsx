@@ -87,7 +87,11 @@ export const TimeTableMenuBottomSheet = ({
 
   return (
     <>
-      <BottomSheetContainer isVisible={isVisible} onClick={handleClose}>
+      <BottomSheetContainer
+        isVisible={isVisible}
+        onClick={handleClose}
+        padding="p-6"
+      >
         {menuOptions.map((option, index) => (
           <div
             key={index}
