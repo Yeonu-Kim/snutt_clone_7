@@ -4,6 +4,7 @@ import type { Api, GetApiSpecsParameter } from '.';
 import type {
   ChangeNicknameRequest,
   CourseBookResponse,
+  CustomLectureRequest,
   DeleteLecutreParams,
   LectureResponse,
   LocalLoginRequest,
@@ -136,14 +137,17 @@ export const getSnuttApis = ({
     'POST /v1/tables/:timetableId/lecture': ({
       token,
       params,
+      body,
     }: {
       token: string;
       params: TimeTableIdParams;
+      body: CustomLectureRequest;
     }) =>
-      callWithToken<SuccessResponse<LectureResponse>>({
+      callWithToken<SuccessResponse<TimeTableResponse>>({
         method: 'POST',
         path: `v1/tables/${params.timetableId}/lecture`,
         token,
+        body,
       }),
   }) satisfies Record<string, Api>;
 

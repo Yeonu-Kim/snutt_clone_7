@@ -16,6 +16,16 @@ export type TimeTableRequest = {
   title: string;
 };
 
+export type CustomLectureRequest = {
+  course_title: string;
+  instructor: string;
+  credit: number;
+  class_time_json: ClassTimeResponse[];
+  remark: string;
+  colorIndex: number;
+  is_forced: boolean;
+};
+
 // Params
 export type TimeTableIdParams = {
   timetableId: string;
