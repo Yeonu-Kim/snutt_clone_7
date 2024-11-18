@@ -204,14 +204,17 @@ const useCreateCustomLecture = ({
       if (response.type === 'success') {
         handleClose();
         await queryClient.invalidateQueries({
-          queryKey: ['LectureService'],
+          queryKey: ['TimeTableService', 'getTimeTableById'],
+        });
+        await queryClient.invalidateQueries({
+          queryKey: ['TimeTableService', 'getTimeTableList'],
         });
       } else {
         showErrorDialog(response.message);
       }
     },
-    onError: () => {
-      showErrorDialog('강의 생성 중 문제가 발생했습니다.');
+    onError: (error) => {
+      showErrorDialog(error.message);
     },
   });
   return { createCustomLecture, isPending };
