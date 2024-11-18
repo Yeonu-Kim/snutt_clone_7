@@ -1,6 +1,7 @@
 import { getErrorMessage } from '@/entities/error';
-import type { Lecture } from '@/entities/lecture';
+import type { CustomLecture, Lecture } from '@/entities/lecture';
 import type { RepositoryResponse, UsecaseResponse } from '@/entities/response';
+import type { TimeTable } from '@/entities/timetable';
 
 type LectureRepository = {
   deleteLecture(_: {
@@ -11,7 +12,8 @@ type LectureRepository = {
   createCustomLecture(_: {
     token: string;
     timetableId: string;
-  }): RepositoryResponse<Lecture>;
+    lectureDetails: CustomLecture;
+  }): RepositoryResponse<TimeTable>;
 };
 
 export type LectureService = {
@@ -23,7 +25,8 @@ export type LectureService = {
   createCustomLecture(_: {
     token: string;
     timetableId: string;
-  }): UsecaseResponse<Lecture>;
+    lectureDetails: CustomLecture;
+  }): UsecaseResponse<TimeTable>;
 };
 
 export const getLecutureService = ({
@@ -43,10 +46,11 @@ export const getLecutureService = ({
     }
     return { type: 'error', message: getErrorMessage(data) };
   },
-  createCustomLecture: async ({ token, timetableId }) => {
+  createCustomLecture: async ({ token, timetableId, lectureDetails }) => {
     const data = await lectureRepository.createCustomLecture({
       token,
       timetableId,
+      lectureDetails,
     });
     if (data.type === 'success') {
       const lectureList = data.data;

@@ -25,3 +25,13 @@ type ClassTime = {
   start_time: string;
   end_time: string;
 };
+
+export type CustomLecture = {
+  course_title: string;
+  instructor: string;
+  credit: number;
+  class_time_json: ClassTime[];
+  remark: string;
+  colorIndex: number;
+  is_forced: boolean;
+};
