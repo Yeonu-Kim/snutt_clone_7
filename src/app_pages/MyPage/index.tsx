@@ -24,7 +24,6 @@ export const MyPage = () => {
   const { toMain, toAccount, toColorScheme } = useRouteNavigation();
   const { colorScheme } = useGuardContext(ColorSchemeContext);
 
-
   const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,
     queryFn: ({ queryKey: [, , t] }) => {
