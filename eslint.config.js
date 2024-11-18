@@ -3,7 +3,7 @@ import nextPlugin from '@next/eslint-plugin-next';
 
 export default [
   {
-    ignores: ['.yarn', '*.js'],
+    ignores: ['.yarn', '*.js', '.next', 'build', 'next-env.d.ts'],
   },
   {
     plugins: {
