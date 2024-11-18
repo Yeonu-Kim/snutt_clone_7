@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -64,8 +65,9 @@ export const LectureDetailPage = () => {
                 className="BackButtonWrapper flex items-center cursor-pointer"
                 onClick={toMain}
               >
-                <img
+                <Image
                   src={ICON_SRC.ARROW.DOWN}
+                  alt="뒤로가기 버튼"
                   className="w-6 h-6 rotate-90
                 dark:invert"
                 />
@@ -73,13 +75,15 @@ export const LectureDetailPage = () => {
               <span>강의 상세 보기</span>
             </div>
             <div className="flex gap-2 items-center">
-              <img
+              <Image
                 src={ICON_SRC.BELL}
+                alt="알림 버튼"
                 className="w-6 h-6
               dark:invert"
               />
-              <img
+              <Image
                 src={ICON_SRC.BOOKMARK}
+                alt="관심강좌 보기 버튼"
                 className="w-6 h-6
               dark:invert"
               />

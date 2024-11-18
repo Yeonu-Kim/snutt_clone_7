@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import toast from 'react-hot-toast';
 
 import { ICON_SRC } from '@/constants/fileSource';
@@ -86,7 +87,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
             }}
             className="flex justify-center align-center w-8 h-8 p-1"
           >
-            <img
+            <Image
               className="max-w-full
               dark:filter dark:brightness-0 dark:invert"
               src={
@@ -101,7 +102,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
             onClick={onClickTBD}
             className="flex justify-center align-center w-8 h-8 p-1"
           >
-            <img
+            <Image
               src={
                 navMenu.menu === selectedMenu ? navMenu.onSrc : navMenu.offSrc
               }

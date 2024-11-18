@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+import Image from 'next/image';
 import { useState } from 'react';
 
 import { LoadingPage } from '@/components/Loading';
@@ -67,7 +68,11 @@ export const SignInPage = () => {
       <div className="LoginWrapper flex flex-col items-center w-full min-h-screen px-[20px] psm:px-2 lg:px:8">
         <div className="LoginHeaderWrapper relative flex w-full mt-4 pb-6">
           <div className="BackButtonWrapper absolute flex top-0.5 left-0 items-center cursor-pointer ">
-            <img src={ICON_SRC.ARROW.DOWN} className="w-6 h-6 rotate-90" />
+            <Image
+              src={ICON_SRC.ARROW.DOWN}
+              className="w-6 h-6 rotate-90"
+              alt="화살표 아이콘"
+            />
             <span className="text-gray-500 hover:text-orange" onClick={toMain}>
               뒤로
             </span>
