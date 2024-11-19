@@ -16,14 +16,14 @@ export const DeleteDialog = ({
 }: {
   onClose(): void;
   timetableId: string;
-  selectedTimetableId: string | undefined;
-  handleClickSetTimetableId: (timetableId: string | undefined) => void;
+  selectedTimetableId: string | null;
+  handleClickSetTimetableId: (timetableId: string | null) => void;
 }) => {
   const { isVisible, handleClose } = useDialog({ onClose });
   const { deleteTimeTable, isPending } = useDeleteTimeTable({
     handleClose,
     selectedTimetableId,
-    handleClickSetTimetableId: handleClickSetTimetableId,
+    handleClickSetTimetableId,
   });
 
   const onClickButton = () => {
@@ -49,8 +49,8 @@ const useDeleteTimeTable = ({
   handleClickSetTimetableId,
 }: {
   handleClose(): void;
-  selectedTimetableId: string | undefined;
-  handleClickSetTimetableId: (timetableId: string | undefined) => void;
+  selectedTimetableId: string | null;
+  handleClickSetTimetableId: (timetableId: string | null) => void;
 }) => {
   const { timeTableService } = useGuardContext(ServiceContext);
   const { token } = useGuardContext(TokenAuthContext);
@@ -63,7 +63,7 @@ const useDeleteTimeTable = ({
         throw new Error('토큰이 존재하지 않습니다.');
       }
       if (timetableId === selectedTimetableId) {
-        handleClickSetTimetableId(undefined);
+        handleClickSetTimetableId(null);
       }
       return await timeTableService.deleteTimeTableById({
         token,

@@ -12,8 +12,8 @@ type TimeTableMenuBottomSheet = {
     title: string;
   };
   onClose(): void;
-  selectedTimetableId: string | undefined;
-  handleClickSetTimetableId: (timetableId: string | undefined) => void;
+  selectedTimetableId: string | null;
+  handleClickSetTimetableId: (timetableId: string | null) => void;
 };
 
 type DialogMenu = 'NAME' | 'DELETE' | 'NONE';

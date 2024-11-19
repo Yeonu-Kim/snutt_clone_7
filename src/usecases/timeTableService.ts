@@ -30,7 +30,7 @@ type TimeTableRepository = {
 type LectureTime = Lecture['class_time_json'][number];
 
 type TimetableStorageRepository = {
-  getStorageTimetableId: () => string | undefined;
+  getStorageTimetableId: () => string | null;
   saveStorageTimetableId: (id: string) => void;
   clearStorageTimetableId: () => void;
 };
@@ -72,9 +72,8 @@ export type TimeTableService = {
       items: TimeTableBrief[];
     }
   >;
-  storeSelectedTimetableId(_: {
-    selectedTimetableId: string | undefined;
-  }): void;
+  storeSelectedTimetableId(_: { selectedTimetableId: string | null }): void;
+  resetSelectedTimetableId(): void;
 };
 
 export const getTimeTableService = ({
@@ -226,15 +225,14 @@ export const getTimeTableService = ({
     return groupedTimetables;
   },
 
-  storeSelectedTimetableId: ({
-    selectedTimetableId,
-  }: {
-    selectedTimetableId: string | undefined;
-  }) => {
-    if (selectedTimetableId !== undefined) {
+  storeSelectedTimetableId: ({ selectedTimetableId }) => {
+    if (selectedTimetableId !== null) {
       timetableStorageRepository.saveStorageTimetableId(selectedTimetableId);
     } else {
       timetableStorageRepository.clearStorageTimetableId();
     }
+  },
+  resetSelectedTimetableId: () => {
+    timetableStorageRepository.clearStorageTimetableId();
   },
 });
