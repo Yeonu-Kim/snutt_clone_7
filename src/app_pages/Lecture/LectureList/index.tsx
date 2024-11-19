@@ -52,7 +52,7 @@ export const LectureListPage = () => {
           <div
             id="Main-Container"
             className="h-lvh flex flex-col justify-start items-start overflow-y-auto overflow-x-hidden
-            p-5 pt-2 w-full mt-[60px] mb-[80px]
+            p-5 pt-2 w-full mt-16 mb-20
             dark:bg-gray-950 dark:text-gray-200"
           >
             <div>
@@ -66,15 +66,15 @@ export const LectureListPage = () => {
                 return (
                   <div
                     key={index}
-                    className="w-[440px] pt-0 gap-0.5
-                       flex flex-col items-start border-b-[1px] border-b-gray-200 mt-2 pb-3"
+                    className="w-full pt-0 gap-0.5
+                       flex flex-col items-start border-b-2 border-b-gray-200 mt-2 pb-3"
                   >
                     <div className="flex justify-between w-full items-center">
-                      <span className="font-bold text-[14px]">
+                      <span className="font-bold text-base">
                         {lecture.course_title}
                       </span>
                       <span
-                        className="text-gray-400 text-[12px]
+                        className="text-gray-400 text-[0.75rem]
                       dark:text-gray-200"
                       >
                         {lecture.instructor !== ''
@@ -84,7 +84,7 @@ export const LectureListPage = () => {
                     </div>
 
                     <span
-                      className="text-[12px] text-gray-700
+                      className="text-[0.75rem] text-gray-700
                     dark:text-gray-200"
                     >
                       {lecture.department !== undefined &&
@@ -92,7 +92,7 @@ export const LectureListPage = () => {
                         ? `${lecture.department}, ${lecture.academic_year}`
                         : `-`}
                     </span>
-                    <span className="text-[12px] text-gray-700">
+                    <span className="text-[0.75rem] text-gray-700">
                       {lecture.class_time_json.map((classTime, timeIndex) => {
                         const times = {
                           startTime: classTime.start_time,
@@ -108,7 +108,7 @@ export const LectureListPage = () => {
                           return (
                             <span
                               key={timeIndex}
-                              className="text-[12px] text-gray-700"
+                              className="text-[0.75rem] text-gray-700"
                             >
                               {' '}
                               -{' '}
@@ -119,7 +119,7 @@ export const LectureListPage = () => {
                         return (
                           <span
                             key={timeIndex}
-                            className="text-[12px] text-gray-700
+                            className="text-[0.75rem] text-gray-700
                             dark:text-gray-200"
                           >
                             {`${times.day}(${times.startTime}~${times.endTime})${timeIndex < lecture.class_time_json.length - 1 ? ', ' : ''} `}
@@ -128,7 +128,7 @@ export const LectureListPage = () => {
                       })}
                     </span>
                     <span
-                      className="text-[12px] text-gray-700
+                      className="text-[0.75rem] text-gray-700
                     dark:text-gray-200"
                     >
                       {uniqueArray.at(0) !== '' ? uniqueArray.join(', ') : '-'}
