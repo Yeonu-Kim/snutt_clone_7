@@ -8,13 +8,14 @@ import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { colorList } from '@/entities/color';
 import { type CustomLecture } from '@/entities/lecture';
-import { dayMap, minToTime } from '@/entities/time';
+import { type Day, minToTime } from '@/entities/time';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { useBottomSheet } from '@/hooks/useVisible';
 import { showDialog } from '@/utils/showDialog';
 
 import { ColorDropdown } from './ColorDropdown';
 import { ForceLectureDialog } from './ForceLectureDialog';
+import { TimeInput } from './TimeInput';
 
 export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
   const { timetableId } = useParams();
@@ -31,6 +32,22 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
   const [color, setColor] = useState(0);
   const [remark, setRemark] = useState('');
   const [place, setPlace] = useState('');
+  const [classTime, setClassTime] = useState({
+    day: 2 as Day,
+    startMinute: 1140,
+    endMinute: 1230,
+  });
+  const handleTimeChange = ({
+    day,
+    startMinute,
+    endMinute,
+  }: {
+    day: Day;
+    startMinute: number;
+    endMinute: number;
+  }) => {
+    setClassTime({ day, startMinute, endMinute });
+  };
 
   const getLectureDetails = (): CustomLecture => ({
     course_title: courseTitle,
@@ -38,12 +55,12 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
     credit: credit === '' ? 0 : credit,
     class_time_json: [
       {
-        day: dayMap['Wed'] ?? 2,
-        startMinute: 1140,
-        endMinute: 1230,
+        day: classTime.day,
+        startMinute: classTime.startMinute,
+        endMinute: classTime.endMinute,
         place,
-        start_time: minToTime(1140),
-        end_time: minToTime(1230),
+        start_time: minToTime(classTime.startMinute),
+        end_time: minToTime(classTime.endMinute),
       },
     ],
     remark,
@@ -169,12 +186,12 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
               시간 및 장소
             </div>
             <div className="Time_Place_Input">
-              <div className="Time  grid grid-cols-12 gap-2 items-center">
-                <label className="Time_Label col-span-3 text-gray-600 text-sm ">
-                  시간
-                </label>
-                <div className="Time_Input col-span-9">Wed 19:00 ~ 20:30</div>
-              </div>
+              <TimeInput
+                onChange={(time) => {
+                  handleTimeChange(time);
+                }}
+              />
+
               <div className="Place grid grid-cols-12 gap-2 items-center">
                 <label className="Place_Label col-span-3 text-gray-600 text-sm ">
                   장소
