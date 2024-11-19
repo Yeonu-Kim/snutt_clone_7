@@ -17,10 +17,12 @@ import { ForceLectureDialog } from './ForceLectureDialog';
 export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
   const { timetableId } = useParams();
   const { isVisible, handleClose } = useBottomSheet({ onClose });
-  const { createCustomLecture, isPending, isForced, setIsForced } =
-    useCreateCustomLecture({
-      handleClose,
-    });
+  const [isForced, setIsForced] = useState(false);
+
+  const { createCustomLecture, isPending } = useCreateCustomLecture({
+    handleClose,
+    setIsForced,
+  });
   const [courseTitle, setCourseTitle] = useState('새로운 강의');
   const [instructor, setInstructor] = useState('');
   const [credit, setCredit] = useState(0);
@@ -28,10 +30,10 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
   const [remark, setRemark] = useState('');
   const [place, setPlace] = useState('');
 
-  const getLectureDetails = (isForced: boolean): CustomLecture => ({
+  const getLectureDetails = (): CustomLecture => ({
     course_title: courseTitle,
     instructor,
-    credit,
+    credit: credit,
     class_time_json: [
       {
         day: dayMap['Wed'] ?? 2,
@@ -49,25 +51,25 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!timetableId) {
+    if (timetableId === undefined) {
       throw new Error('시간표 아이디가 존재하지 않습니다.');
     }
 
     createCustomLecture({
       timetableId,
-      lectureDetails: getLectureDetails(false),
+      lectureDetails: getLectureDetails(),
     });
   };
 
   const handleForceSubmit = () => {
-    if (!timetableId) {
+    if (timetableId === undefined) {
       throw new Error('시간표 아이디가 존재하지 않습니다.');
     }
 
-    setIsForced(false); // Reset the forced state
+    setIsForced(true);
     createCustomLecture({
       timetableId,
-      lectureDetails: getLectureDetails(true),
+      lectureDetails: getLectureDetails(),
     });
   };
 
@@ -119,8 +121,7 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
               </label>
               <input
                 type="number"
-                className="Credit_Input col-span-9 "
-                value={credit}
+                className="Credit_Input col-span-9 focus:outline-none focus:ring-0"
                 placeholder="(없음)"
                 onChange={(e) => {
                   setCredit(Number(e.target.value));
@@ -202,14 +203,15 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
 
 export const useCreateCustomLecture = ({
   handleClose,
+  setIsForced,
 }: {
   handleClose: () => void;
+  setIsForced: (value: boolean) => void;
 }) => {
   const { lectureService } = useGuardContext(ServiceContext);
   const { token } = useGuardContext(TokenAuthContext);
   const { showErrorDialog } = showDialog();
   const queryClient = useQueryClient();
-  const [isForced, setIsForced] = useState(false);
 
   const { mutate: createCustomLecture, isPending } = useMutation({
     mutationFn: async ({
@@ -247,5 +249,5 @@ export const useCreateCustomLecture = ({
       showErrorDialog('강의 추가 중 문제가 발생했습니다.');
     },
   });
-  return { createCustomLecture, isPending, isForced, setIsForced };
+  return { createCustomLecture, isPending };
 };
