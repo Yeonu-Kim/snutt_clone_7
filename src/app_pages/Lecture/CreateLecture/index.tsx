@@ -6,12 +6,14 @@ import { BottomSheetContainer } from '@/components/BottomeSheetContainer';
 import { SpinnerLoading } from '@/components/Loading';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
+import { colorList } from '@/entities/color';
 import { type CustomLecture } from '@/entities/lecture';
 import { dayMap, minToTime } from '@/entities/time';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { useBottomSheet } from '@/hooks/useVisible';
 import { showDialog } from '@/utils/showDialog';
 
+import { ColorDropdown } from './ColorDropdown';
 import { ForceLectureDialog } from './ForceLectureDialog';
 
 export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
@@ -133,15 +135,17 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
               />
             </div>
             <div className="grid grid-cols-12 gap-2 items-center">
-              <label className="Color_Label col-span-3 text-gray-600 text-sm ">
+              <label
+                htmlFor="colorDropdown"
+                className="Color_Label col-span-3 text-gray-600 text-sm "
+              >
                 색
               </label>
-              <input
-                type="color"
-                className="Color_Input col-span-9"
-                value={color}
-                onChange={(e) => {
-                  setColor(Number(e.target.value));
+              <ColorDropdown
+                colors={colorList}
+                selectedColorIndex={color}
+                onSelectColor={(index) => {
+                  setColor(index);
                 }}
               />
             </div>
