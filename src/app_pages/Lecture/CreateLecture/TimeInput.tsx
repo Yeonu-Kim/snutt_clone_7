@@ -15,9 +15,9 @@ export const TimeInput = ({
     endMinute: number;
   }) => void;
 }) => {
-  const [day, setDay] = useState<Day>(2);
-  const [startMinute, setStartMinute] = useState<number>(1140);
-  const [endMinute, setEndMinute] = useState<number>(1230);
+  const [day, setDay] = useState<Day>(0);
+  const [startMinute, setStartMinute] = useState<number>(540);
+  const [endMinute, setEndMinute] = useState<number>(600);
 
   const timeOptions = Array.from(
     { length: 13 * 4 + 1 },

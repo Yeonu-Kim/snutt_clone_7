@@ -34,7 +34,7 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
   const [remark, setRemark] = useState('');
   const [place, setPlace] = useState('');
   const [classTimes, setClassTimes] = useState([
-    { day: 2 as Day, startMinute: 540, endMinute: 600 },
+    { day: 0 as Day, startMinute: 540, endMinute: 600 },
   ]);
 
   const handleTimeChange = (
@@ -51,7 +51,7 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
   const addClassTime = () => {
     setClassTimes((prev) => [
       ...prev,
-      { day: 2 as Day, startMinute: 540, endMinute: 600 },
+      { day: 0 as Day, startMinute: 540, endMinute: 600 },
     ]);
   };
 
