@@ -22,8 +22,8 @@ import { showDialog } from '@/utils/showDialog';
 type Drawer = {
   isOpen: boolean;
   onClose: () => void;
-  selectedTimetableId: string | undefined;
-  handleClickSetTimetableId: (timetableId: string | undefined) => void;
+  selectedTimetableId: string | null;
+  handleClickSetTimetableId: (timetableId: string | null) => void;
 };
 
 type BottomSheetItem = Pick<TimeTableBrief, '_id' | 'title'>;
@@ -39,7 +39,7 @@ export const Drawer = ({
   const { showTBDDialog, showErrorDialog } = showDialog();
   const { timeTableService } = useGuardContext(ServiceContext);
 
-  const setSelectedTimeTableId = (timetableId: string | undefined) => {
+  const setSelectedTimeTableId = (timetableId: string) => {
     handleClickSetTimetableId(timetableId);
     onClose();
   };
@@ -349,7 +349,7 @@ const TimeTableMenuBar = ({
   children,
 }: {
   timeTable: TimeTableBrief;
-  selectedTimeTableId: string | undefined;
+  selectedTimeTableId: string | null;
   onClick(): void;
   children: ReactNode;
 }) => {

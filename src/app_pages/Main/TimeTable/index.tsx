@@ -14,9 +14,6 @@ export const TimeTableView = ({
   const { timeTableService } = useGuardContext(ServiceContext);
   const { toLectureDetailPage } = useRouteNavigation();
 
-  // 241108 연우: 단순히 token 문제가 아닐 수 있음.
-  // toast로 에러 메세지를 띄워줘야 할 거 같음.
-
   const columnCount = dayList.length - 2;
   const rowCount = hourList.length * 12;
   return (

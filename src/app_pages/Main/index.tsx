@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Drawer } from '@/app_pages/Main/Drawer';
 import { Header } from '@/app_pages/Main/Header';
@@ -8,7 +8,7 @@ import { LoadingPage } from '@/components/Loading';
 import { Navbar } from '@/components/Navbar';
 import { Layout } from '@/components/styles/Layout';
 import { ServiceContext } from '@/context/ServiceContext.ts';
-import { TimetableContext } from '@/context/TimetableContext.ts';
+import { TimetableContext } from '@/context/TimetableContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
@@ -19,34 +19,52 @@ import { useGetTimetableData } from '../Lecture/LectureList';
 export const MainPage = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const { toLectureList } = useRouteNavigation();
+  const { timetableId, setTimetableId } = useGuardContext(TimetableContext);
   const { timeTableService } = useGuardContext(ServiceContext);
   const { timeTableListData } = useGetTimeTable();
-  const { timetableId, setTimetableId } = useGuardContext(TimetableContext);
   const { showErrorDialog } = showDialog();
+
   const currentTimetable = (() => {
     if (timeTableListData === undefined || timeTableListData.type === 'error') {
-      return undefined;
+      return null;
     }
-    return timetableId !== undefined
+    return timetableId !== null
       ? timeTableListData.data.find((tt) => tt._id === timetableId)
       : timeTableListData.data[0];
   })();
+
   const { timetableData } = useGetTimetableData({
     timetableId: currentTimetable?._id,
   });
 
+  useEffect(() => {
+    if (
+      timetableData !== undefined &&
+      timetableData.type !== 'error' &&
+      timetableId !== timetableData.data._id
+    ) {
+      timeTableService.storeSelectedTimetableId({
+        selectedTimetableId: timetableData.data._id,
+      });
+      setTimetableId(timetableData.data._id);
+    }
+  }, [timetableData, timetableId, timeTableService, setTimetableId]);
+
   if (timetableData === undefined) return <LoadingPage />;
+
   if (timetableData.type === 'error') {
     showErrorDialog(timetableData.message);
     return null;
   }
 
-  const handleClickSetTimetableId = (
-    selectedTimetableId: string | undefined,
-  ) => {
+  const handleClickSetTimetableId = (selectedTimetableId: string | null) => {
     setTimetableId(selectedTimetableId);
+    if (selectedTimetableId === null) {
+      timeTableService.resetSelectedTimetableId();
+      return;
+    }
     timeTableService.storeSelectedTimetableId({
-      selectedTimetableId: selectedTimetableId,
+      selectedTimetableId,
     });
   };
 
@@ -69,7 +87,7 @@ export const MainPage = () => {
       <Header
         onMenuClick={toggleDrawer}
         onLectureListClick={() => {
-          if (timetableId !== undefined) {
+          if (timetableId !== null) {
             toLectureList({ timetableId });
           }
         }}
@@ -89,6 +107,7 @@ export const MainPage = () => {
     </Layout>
   );
 };
+
 export const useGetTimeTable = () => {
   const { token } = useGuardContext(TokenAuthContext);
   const { timeTableService } = useGuardContext(ServiceContext);
