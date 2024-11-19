@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import toast from 'react-hot-toast';
 
+import { IconContainer } from '@/components/common/IconContainer';
 import { ICON_SRC } from '@/constants/fileSource';
 import { PATH } from '@/constants/route';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
@@ -87,9 +87,8 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
             }}
             className="flex justify-center align-center w-8 h-8 p-1"
           >
-            <Image
-              className="max-w-full
-              dark:filter dark:brightness-0 dark:invert"
+            <IconContainer
+              className="dark:filter dark:brightness-0 dark:invert"
               src={
                 navMenu.menu === selectedMenu ? navMenu.onSrc : navMenu.offSrc
               }
@@ -102,7 +101,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
             onClick={onClickTBD}
             className="flex justify-center align-center w-8 h-8 p-1"
           >
-            <Image
+            <IconContainer
               src={
                 navMenu.menu === selectedMenu ? navMenu.onSrc : navMenu.offSrc
               }
