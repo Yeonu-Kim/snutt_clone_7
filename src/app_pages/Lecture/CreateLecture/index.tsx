@@ -84,7 +84,9 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
         {isPending && <SpinnerLoading />}
         <form onSubmit={handleSubmit}>
           <div className="rounded-t-xl bg-white flex justify-between items-center px-4 py-3 border-b mb-4 ">
-            <button onClick={handleClose}>취소</button>
+            <button type="button" onClick={handleClose}>
+              취소
+            </button>
             <button type="submit">저장</button>
           </div>
           <div className="Class_Info bg-white p-4 space-y-4 mb-4">
@@ -184,7 +186,10 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
                 />
               </div>
             </div>
-            <button className="Add_Button items-center justify-center">
+            <button
+              type="button"
+              className="Add_Button items-center justify-center"
+            >
               + 시간 추가
             </button>
           </div>
