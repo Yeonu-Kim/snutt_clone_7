@@ -6,6 +6,7 @@ import { Navbar } from '@/components/Navbar.tsx';
 import { Layout } from '@/components/styles/Layout.tsx';
 import { PTagOnTheWhiteBox } from '@/components/styles/PTagOnTheWhiteBox.tsx';
 import { WhiteButtonBox } from '@/components/styles/WhiteButtonBox.tsx';
+import { ColorSchemeContext } from '@/context/ColorSchemeContext.ts';
 import { ModalManageContext } from '@/context/ModalManageContext.ts';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
@@ -21,6 +22,7 @@ export const MyPage = () => {
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
   const { toMain, toAccount, toColorScheme } = useRouteNavigation();
+  const { colorScheme } = useGuardContext(ColorSchemeContext);
 
   const { data: userData, isError } = useQuery({
     queryKey: ['UserService', 'getUserInfo', token] as const,
@@ -98,7 +100,9 @@ export const MyPage = () => {
                 onClick={toColorScheme}
               >
                 <span className="m-4">색상모드</span>
-                <span className="m-4 text-gray-400">라이트모드 {'>'}</span>
+                <span className="m-4 text-gray-400">
+                  {colorScheme === 'light' ? '☀️ 라이트 모드' : '🌙 다크 모드'}
+                </span>
               </WhiteButtonBox>
               <WhiteButtonBox
                 className="justify-between rounded-b-[0] rounded-t-[0]

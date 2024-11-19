@@ -2,9 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 
+import { useGetTimeTable } from '@/app_pages/Main';
 import { AddTimeTableBottomSheet } from '@/app_pages/Main/Drawer/AddTimeTableBottomSheet';
 import { AddTimeTableBySemesterBottomSheet } from '@/app_pages/Main/Drawer/AddTimeTableBySemesterBottomSheet';
 import { TimeTableMenuBottomSheet } from '@/app_pages/Main/Drawer/TimeTableMenuBottomSheet';
+import {
+  IconContainer,
+  SmallIconContainer,
+} from '@/components/common/IconContainer';
 import { LoadingPage } from '@/components/Loading';
 import { ICON_SRC } from '@/constants/fileSource';
 import { ServiceContext } from '@/context/ServiceContext';
@@ -13,8 +18,6 @@ import type { TimeTableBrief } from '@/entities/timetable';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { formatSemester } from '@/utils/format';
 import { showDialog } from '@/utils/showDialog';
-
-import { useGetTimeTable } from '..';
 
 type Drawer = {
   isOpen: boolean;
@@ -155,9 +158,10 @@ export const Drawer = ({
                       }}
                     >
                       <TimeTableMenuIcon onClick={showTBDDialog}>
-                        <img
+                        <IconContainer
                           src={ICON_SRC.COPY}
-                          className="w-18 h-18 dark:invert"
+                          className="dark:invert"
+                          alt="복사 아이콘"
                         />
                       </TimeTableMenuIcon>
                       <TimeTableMenuIcon
@@ -168,9 +172,10 @@ export const Drawer = ({
                           });
                         }}
                       >
-                        <img
+                        <IconContainer
                           src={ICON_SRC.MORE}
-                          className="w-18 h-18 rotate-90 dark:invert"
+                          className="rotate-90 dark:invert"
+                          alt="더보기 아이콘"
                         />
                       </TimeTableMenuIcon>
                     </TimeTableMenuBar>
@@ -260,9 +265,10 @@ const DrawerHeader = ({ onClose }: { onClose(): void }) => {
   return (
     <div className="flex justify-between items-center py-4 border-b border-solid border-gray-300 dark:border-gray-600">
       <div className="flex items-center gap-2">
-        <img
+        <IconContainer
           src={ICON_SRC.LOGO}
-          className="w-5 h-5 dark:filter dark:brightness-150"
+          alt="SNUTT 로고"
+          className="dark:filter dark:brightness-150"
         />
         <h1 className="text-lg font-semibold">SNUTT</h1>
       </div>
@@ -271,8 +277,9 @@ const DrawerHeader = ({ onClose }: { onClose(): void }) => {
         onClick={onClose}
         aria-label="Close Menu"
       >
-        <img
+        <IconContainer
           src={ICON_SRC.CLOSE}
+          alt="서랍 닫기 버튼"
           className="dark:filter dark:brightness-0 dark:invert"
         />
       </button>
@@ -287,8 +294,9 @@ const AddTimeTableMenuBar = ({ onClick }: { onClick(): void }) => {
         나의 시간표
       </span>
       <span className="font-bold text-gray-400" onClick={onClick}>
-        <img
+        <IconContainer
           src={ICON_SRC.ADD}
+          alt="시간표 추가하기 버튼"
           className="dark:filter dark:brightness-0 dark:invert"
         />
       </span>
@@ -315,13 +323,15 @@ const CourseBookMenuBar = ({
         <span className="font-bold">
           {courseBook.year}년 {formatSemester(courseBook.semester)}
         </span>
-        <img
-          src={ICON_SRC.ARROW.DOWN}
-          className={`w-6 h-6 cursor-pointer transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}
+        <button onClick={onClick}>
+          <IconContainer
+            src={ICON_SRC.ARROW.DOWN}
+            alt="학기별 시간표 열기 버튼"
+            className={`cursor-pointer transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}
           dark:invert`}
-          onClick={onClick}
-          aria-expanded={isOpen}
-        />
+            aria-expanded={isOpen}
+          />
+        </button>
         {courseBook.items.length === 0 ? (
           <div className="flex items-center">
             <div className="w-1.5 h-1.5 rounded-[50%] bg-red"></div>
@@ -351,7 +361,10 @@ const TimeTableMenuBar = ({
       <div className="flex items-center gap-1 cursor-pointer" onClick={onClick}>
         {timeTable._id === selectedTimeTableId ? (
           <div className="flex items-center">
-            <img src={ICON_SRC.CHECK_BOX.CIRCLE} className="w-4 h-4" />
+            <SmallIconContainer
+              src={ICON_SRC.CHECK_BOX.CIRCLE}
+              alt="선택된 시칸표 아이콘"
+            />
           </div>
         ) : (
           <div className="flex items-center">
@@ -363,7 +376,10 @@ const TimeTableMenuBar = ({
           ({timeTable.total_credit}학점)
         </span>
         {timeTable.isPrimary && (
-          <img src={ICON_SRC.PRIMARY} className="w-4 h-4" />
+          <SmallIconContainer
+            src={ICON_SRC.PRIMARY}
+            alt="학기 대표 시간표 아이콘"
+          />
         )}
       </div>
       <div className="flex gap-2">{children}</div>

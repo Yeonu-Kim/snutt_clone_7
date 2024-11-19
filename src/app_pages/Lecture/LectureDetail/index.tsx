@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { DeleteLectureDialog } from '@/app_pages/Lecture/LectureDetail/DeleteLectureDialog';
 import { HeaderContainer } from '@/components/common/HeaderContainer';
+import { IconContainer } from '@/components/common/IconContainer';
 import { LoadingPage } from '@/components/Loading';
 import { Layout } from '@/components/styles/Layout';
 import { DAY_LABEL_MAP } from '@/constants/dayLabel.ts';
@@ -64,24 +65,24 @@ export const LectureDetailPage = () => {
                 className="BackButtonWrapper flex items-center cursor-pointer"
                 onClick={toMain}
               >
-                <img
+                <IconContainer
                   src={ICON_SRC.ARROW.DOWN}
-                  className="w-6 h-6 rotate-90
-                dark:invert"
+                  alt="뒤로가기 버튼"
+                  className="rotate-90 dark:invert"
                 />
               </div>
               <span>강의 상세 보기</span>
             </div>
             <div className="flex gap-2 items-center">
-              <img
+              <IconContainer
                 src={ICON_SRC.BELL}
-                className="w-6 h-6
-              dark:invert"
+                alt="알림 버튼"
+                className="dark:invert"
               />
-              <img
+              <IconContainer
                 src={ICON_SRC.BOOKMARK}
-                className="w-6 h-6
-              dark:invert"
+                alt="관심강좌 보기 버튼"
+                className="dark:invert"
               />
               <span>편집</span>
             </div>

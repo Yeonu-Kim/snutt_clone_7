@@ -1,4 +1,5 @@
 import { HeaderContainer } from '@/components/common/HeaderContainer';
+import { IconContainer } from '@/components/common/IconContainer';
 import { ICON_SRC } from '@/constants/fileSource';
 
 export const Header = ({
@@ -20,8 +21,9 @@ export const Header = ({
           onClick={onMenuClick}
           aria-label="Open Menu"
         >
-          <img
+          <IconContainer
             src={ICON_SRC.HAMBURGER}
+            alt="서랍 열기 버튼"
             className="dark:filter dark:brightness-0 dark:invert"
           />
         </button>
@@ -30,22 +32,24 @@ export const Header = ({
       </div>
       <div className="flex gap-2 items-center">
         <button onClick={onLectureListClick}>
-          <img
+          <IconContainer
             src={ICON_SRC.LIST_BULLET}
+            alt="강의 목록 보기 버튼"
             className="dark:filter dark:brightness-0 dark:invert"
           />
         </button>
         <span>
-          <img
+          <IconContainer
             src={ICON_SRC.SHARE}
+            alt="공유하기 버튼"
             className="dark:filter dark:brightness-0 dark:invert"
           />
         </span>
         <span>
-          <img
+          <IconContainer
             src={ICON_SRC.BELL}
-            className="w-6 h-6
-               dark:filter dark:brightness-0 dark:invert"
+            alt="알림 버튼"
+            className="dark:filter dark:brightness-0 dark:invert"
           />
         </span>
       </div>

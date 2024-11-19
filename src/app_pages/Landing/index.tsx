@@ -1,5 +1,9 @@
+import Image from 'next/image';
+
+import { SocialSignInIconContainer } from '@/components/common/IconContainer';
 import { Button } from '@/components/styles/Button';
 import { Layout } from '@/components/styles/Layout';
+import { ICON_SRC } from '@/constants/fileSource';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 
 export const LandingPage = () => {
@@ -13,12 +17,7 @@ export const LandingPage = () => {
           className="flex flex-auto w-full h-full flex-col items-center justify-center"
         >
           <div className="imageWrapper flex flex-col flex-auto justify-center items-center gap-4">
-            <img
-              id="image-TimeTable"
-              src="/logo/snutt_logo.svg"
-              alt="timetable"
-              className="w-[60px] h-[60px] "
-            ></img>
+            <Image src={ICON_SRC.LOGO} alt="timetable" width={60} height={60} />
             <h1 className="title font-eng font-extrabold  text-2xl">
               TimeTable
             </h1>
@@ -53,10 +52,22 @@ export const LandingPage = () => {
                 id="SNS-icon"
                 className="h-[44px] gap-[12px] flex justify-center"
               >
-                <img src="/landing/kakaotalkid.png" alt="kakaotalk" />
-                <img src="/landing/googleid.png" alt="google" />
-                <img src="/landing/facebookid.png" alt="facebook" />
-                <img src="/landing/appleid.png" alt="apple" />
+                <SocialSignInIconContainer
+                  src="/landing/kakaotalkid.png"
+                  alt="kakaotalk"
+                />
+                <SocialSignInIconContainer
+                  src="/landing/googleid.png"
+                  alt="google"
+                />
+                <SocialSignInIconContainer
+                  src="/landing/facebookid.png"
+                  alt="facebook"
+                />
+                <SocialSignInIconContainer
+                  src="/landing/appleid.png"
+                  alt="apple"
+                />
               </div>
             </div>
           </div>
