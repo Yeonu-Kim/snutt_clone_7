@@ -28,7 +28,7 @@ export const implTimetableStorageRepository = (): TimetableRepository => {
   return {
     getStorageTimetableId: () => {
       const timetableId = localStorage.getItem(storageKey.selectedTimetableId);
-      return timetableId !== null ? timetableId : undefined;
+      return timetableId;
     },
     saveStorageTimetableId: (timetableId: string) => {
       localStorage.setItem(storageKey.selectedTimetableId, timetableId);
