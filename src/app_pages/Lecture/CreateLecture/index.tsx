@@ -233,7 +233,7 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
   );
 };
 
-export const useCreateCustomLecture = ({
+const useCreateCustomLecture = ({
   handleClose,
   setIsForced,
 }: {
