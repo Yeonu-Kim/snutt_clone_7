@@ -26,43 +26,47 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
     handleClose,
     setIsForced,
   });
+
   const [courseTitle, setCourseTitle] = useState('새로운 강의');
   const [instructor, setInstructor] = useState('');
   const [credit, setCredit] = useState<number | ''>(0);
   const [color, setColor] = useState(0);
   const [remark, setRemark] = useState('');
   const [place, setPlace] = useState('');
-  const [classTime, setClassTime] = useState({
-    day: 2 as Day,
-    startMinute: 1140,
-    endMinute: 1230,
-  });
-  const handleTimeChange = ({
-    day,
-    startMinute,
-    endMinute,
-  }: {
-    day: Day;
-    startMinute: number;
-    endMinute: number;
-  }) => {
-    setClassTime({ day, startMinute, endMinute });
+  const [classTimes, setClassTimes] = useState([
+    { day: 2 as Day, startMinute: 540, endMinute: 600 },
+  ]);
+
+  const handleTimeChange = (
+    index: number,
+    time: { day: Day; startMinute: number; endMinute: number },
+  ) => {
+    setClassTimes((prev) => {
+      const newClassTimes = [...prev];
+      newClassTimes[index] = time;
+      return newClassTimes;
+    });
+  };
+
+  const addClassTime = () => {
+    setClassTimes((prev) => [
+      ...prev,
+      { day: 2 as Day, startMinute: 540, endMinute: 600 },
+    ]);
   };
 
   const getLectureDetails = (): CustomLecture => ({
     course_title: courseTitle,
     instructor,
     credit: credit === '' ? 0 : credit,
-    class_time_json: [
-      {
-        day: classTime.day,
-        startMinute: classTime.startMinute,
-        endMinute: classTime.endMinute,
-        place,
-        start_time: minToTime(classTime.startMinute),
-        end_time: minToTime(classTime.endMinute),
-      },
-    ],
+    class_time_json: classTimes.map((time) => ({
+      day: time.day,
+      startMinute: time.startMinute,
+      endMinute: time.endMinute,
+      place,
+      start_time: minToTime(time.startMinute),
+      end_time: minToTime(time.endMinute),
+    })),
     remark,
     colorIndex: color,
     is_forced: isForced,
@@ -79,7 +83,6 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
       lectureDetails: getLectureDetails(),
     });
   };
-
   const handleForceSubmit = () => {
     if (timetableId === undefined) {
       throw new Error('시간표 아이디가 존재하지 않습니다.');
@@ -91,7 +94,6 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
       lectureDetails: getLectureDetails(),
     });
   };
-
   return (
     <>
       <BottomSheetContainer
@@ -185,31 +187,33 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
             <div className="Time_Place_Label text-gray-600 text-sm ">
               시간 및 장소
             </div>
-            <div className="Time_Place_Input">
-              <TimeInput
-                onChange={(time) => {
-                  handleTimeChange(time);
-                }}
-              />
-
-              <div className="Place grid grid-cols-12 gap-2 items-center">
-                <label className="Place_Label col-span-3 text-gray-600 text-sm ">
-                  장소
-                </label>
-                <input
-                  type="text"
-                  className="Place_Input col-span-9 focus:outline-none focus:ring-0"
-                  placeholder="(없음)"
-                  value={place}
-                  onChange={(e) => {
-                    setPlace(e.target.value);
+            {classTimes.map((_, index) => (
+              <div key={index} className="Time_Place_Input">
+                <TimeInput
+                  onChange={(updatedTime) => {
+                    handleTimeChange(index, updatedTime);
                   }}
                 />
+                <div className="Place grid grid-cols-12 gap-2 items-center">
+                  <label className="Place_Label col-span-3 text-gray-600 text-sm ">
+                    장소
+                  </label>
+                  <input
+                    type="text"
+                    className="Place_Input col-span-9 focus:outline-none focus:ring-0"
+                    placeholder="(없음)"
+                    value={place}
+                    onChange={(e) => {
+                      setPlace(e.target.value);
+                    }}
+                  />
+                </div>
               </div>
-            </div>
+            ))}
             <button
               type="button"
               className="Add_Button items-center justify-center"
+              onClick={addClassTime}
             >
               + 시간 추가
             </button>
