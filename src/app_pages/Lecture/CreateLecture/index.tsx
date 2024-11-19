@@ -25,7 +25,7 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
   });
   const [courseTitle, setCourseTitle] = useState('새로운 강의');
   const [instructor, setInstructor] = useState('');
-  const [credit, setCredit] = useState(0);
+  const [credit, setCredit] = useState<number | ''>(0);
   const [color, setColor] = useState(0);
   const [remark, setRemark] = useState('');
   const [place, setPlace] = useState('');
@@ -33,7 +33,7 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
   const getLectureDetails = (): CustomLecture => ({
     course_title: courseTitle,
     instructor,
-    credit: credit,
+    credit: credit === '' ? 0 : credit,
     class_time_json: [
       {
         day: dayMap['Wed'] ?? 2,
@@ -123,8 +123,10 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
                 type="number"
                 className="Credit_Input col-span-9 focus:outline-none focus:ring-0"
                 placeholder="(없음)"
+                value={credit}
                 onChange={(e) => {
-                  setCredit(Number(e.target.value));
+                  const value = e.target.value;
+                  setCredit(value === '' ? '' : Number(value));
                 }}
               />
             </div>
