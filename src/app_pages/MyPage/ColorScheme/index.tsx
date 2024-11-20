@@ -23,7 +23,9 @@ export const ColorSchemePage = () => {
 
   const handleSetColorScheme = () => {
     toggleColorScheme();
-    colorSchemeService.storeColorScheme({ scheme: colorScheme });
+    colorSchemeService.storeColorScheme({
+      scheme: colorScheme === 'light' ? 'dark' : 'light',
+    });
   };
 
   const { data: userData, isError } = useQuery({
