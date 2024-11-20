@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -62,8 +63,11 @@ export const LectureListPage = () => {
               className="font-bold text-gray-400 absolute right-3 rounded-lg"
               onClick={openBottomSheet}
             >
-              <img
+              <Image
+                alt="add"
                 src={ICON_SRC.ADD}
+                width={18}
+                height={18}
                 className="dark:filter dark:brightness-0 dark:invert"
               />
             </div>
@@ -74,7 +78,7 @@ export const LectureListPage = () => {
             p-5 pt-2 w-full mt-16 mb-20
             dark:bg-gray-950 dark:text-gray-200"
           >
-            <div>
+            <div className="w-full">
               {timetableData.data.lecture_list.map((lecture, index) => {
                 const uniqueArray = [
                   ...new Set(
