@@ -1,3 +1,6 @@
+import '@/reset.css';
+import '@/index.css';
+
 export default function RootLayout({
   children,
 }: {
