@@ -208,7 +208,7 @@ export const App = () => {
   const [token, setToken] = useState(temporaryStorageRepository.getToken());
 
   const [timetableId, setTimetableId] = useState(
-    timetableStorageRepository.getStorageTimetableId(),
+    timetableStorageRepository.getStorageTimetableId,
   );
 
   const [colorScheme, setColorScheme] = useState<string | null>(() => {
