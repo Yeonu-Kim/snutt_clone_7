@@ -97,7 +97,8 @@ export const MainPage = () => {
       <div className="flex-1 w-full overflow-hidden">
         <Drawer
           isOpen={isDrawerOpen}
-          onClose={closeDrawer}
+          onClose={closeDrawer}ev
+          
           selectedTimetableId={timetableId}
           handleClickSetTimetableId={handleClickSetTimetableId}
         />

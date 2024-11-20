@@ -162,7 +162,7 @@ export const LectureListPage = () => {
             </div>
           </div>
           <div className="bottom-0 w-full bg-white fixed max-w-375">
-            <Navbar selectedMenu="mypage" />
+            <Navbar selectedMenu="timetable" />
           </div>
         </div>
       </Layout>
