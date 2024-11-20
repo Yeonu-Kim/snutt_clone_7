@@ -34,13 +34,13 @@ export const AddTimeTableBySemesterBottomSheet = ({
     <>
       <BottomSheetContainer isVisible={isVisible} onClick={handleClose}>
         {isPending && <SpinnerLoading />}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 dark:bg-gray-800 dark:text-gray-200">
           <div className="flex flex-end justify-between">
             <button onClick={handleClose}>취소</button>
             <button onClick={onClickButton}>완료</button>
           </div>
           <div className="flex flex-col gap-2">
-            <h1 className="text-sm text-gray-500">새로운 시간표 만들기</h1>
+            <h1 className="text-sm text-gray-500 dark:text-gray-200">새로운 시간표 만들기</h1>
             <input
               type="text"
               id="id"
@@ -55,7 +55,7 @@ export const AddTimeTableBySemesterBottomSheet = ({
               }}
               placeholder={'시간표 제목을 입력하세요'}
               disabled={isPending}
-              className="w-full py-1 border-b-2 border-gray focus:outline-none focus:border-black"
+              className="w-full py-1 border-b-2 border-gray focus:outline-none focus:border-black dark:bg-gray-600"
             />
           </div>
         </div>
