@@ -179,9 +179,7 @@ const useGetTimetableData = ({
 };
 
 const renderContents = ({ currentLecture }: { currentLecture: Lecture }) => {
-  const colorClass = colorList[
-    currentLecture.colorIndex % colorList.length
-  ] as string;
+  const colorClass = colorList(currentLecture.colorIndex);
   const lectureInfoSectionList = [
     {
       title: null,
