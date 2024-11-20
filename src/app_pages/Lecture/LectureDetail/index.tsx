@@ -11,6 +11,7 @@ import { DAY_LABEL_MAP } from '@/constants/dayLabel.ts';
 import { ICON_SRC } from '@/constants/fileSource';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
+import { colorList } from '@/entities/color';
 import type { Lecture } from '@/entities/lecture';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation';
@@ -178,6 +179,9 @@ const useGetTimetableData = ({
 };
 
 const renderContents = ({ currentLecture }: { currentLecture: Lecture }) => {
+  const colorClass = colorList[
+    currentLecture.colorIndex % colorList.length
+  ] as string;
   const lectureInfoSectionList = [
     {
       title: null,
@@ -192,7 +196,12 @@ const renderContents = ({ currentLecture }: { currentLecture: Lecture }) => {
         },
         {
           name: '색상',
-          content: <div>{currentLecture.colorIndex}</div>,
+          content: (
+            <div className="flex">
+              <div className={`w-4 h-4 bg-white`}></div>
+              <div className={`w-4 h-4 ${colorClass}`}></div>
+            </div>
+          ),
         },
       ],
     },

@@ -1,6 +1,3 @@
-import '@/reset.css';
-import '@/index.css';
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
