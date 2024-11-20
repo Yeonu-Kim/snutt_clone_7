@@ -92,9 +92,7 @@ export const TimeTableView = ({
             col: [colStart, colEnd],
             row: [rowStart, rowEnd],
           } = timeTableService.getGridPos(time);
-          const colorClass = colorList[
-            lecture.colorIndex % colorList.length
-          ] as string;
+          const colorClass = colorList(lecture.colorIndex);
 
           return (
             <div

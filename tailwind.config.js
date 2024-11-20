@@ -13,6 +13,9 @@ export default {
         red: '#E54459',
         lime: '#A6D930',
         green: '#2BC267',
+        cusYellow: '#ffb703',
+        cusPurple: '#b249fc',
+        cusPink: '#fc49db',
         gray: {
           DEFAULT: '#C4C4C4',
           50: '#f9fafb',

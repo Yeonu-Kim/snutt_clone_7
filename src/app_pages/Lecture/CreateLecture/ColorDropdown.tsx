@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
+import { colorList } from '@/entities/color';
+
 export const ColorDropdown = ({
-  colors,
   selectedColorIndex,
   onSelectColor,
 }: {
-  colors: string[];
   selectedColorIndex: number;
   onSelectColor: (index: number) => void;
 }) => {
@@ -15,12 +15,8 @@ export const ColorDropdown = ({
     onSelectColor(index);
     setIsOpen(false);
   };
-  const validColorClass =
-    selectedColorIndex >= 0 &&
-    selectedColorIndex < colors.length &&
-    colors[selectedColorIndex] !== undefined
-      ? colors[selectedColorIndex]
-      : 'bg-orange';
+
+  const validColorClass = colorList(selectedColorIndex);
 
   return (
     <div className="relative inline-block">
@@ -39,7 +35,7 @@ export const ColorDropdown = ({
 
       {isOpen && (
         <div className="absolute mt-1 w-32 bg-white border rounded shadow-lg z-10">
-          {colors.map((colorClass, index) => (
+          {Array.from({ length: 9 }).map((_, index) => (
             <div
               key={index}
               className={`flex items-center px-2 py-1 cursor-pointer hover:bg-gray-100 ${
@@ -50,7 +46,7 @@ export const ColorDropdown = ({
               }}
             >
               <div
-                className={`h-4 w-4 ${colorClass} rounded`}
+                className={`h-4 w-4 ${colorList(index)} rounded`}
                 style={{ display: 'inline-block' }}
               />
             </div>

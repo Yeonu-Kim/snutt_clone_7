@@ -6,7 +6,6 @@ import { BottomSheetContainer } from '@/components/BottomeSheetContainer';
 import { SpinnerLoading } from '@/components/Loading';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
-import { colorList } from '@/entities/color';
 import { type CustomLecture } from '@/entities/lecture';
 import { type Day, minToTime } from '@/entities/time';
 import { useGuardContext } from '@/hooks/useGuardContext';
@@ -161,7 +160,6 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
                 색
               </label>
               <ColorDropdown
-                colors={colorList}
                 selectedColorIndex={color}
                 onSelectColor={(index) => {
                   setColor(index);
