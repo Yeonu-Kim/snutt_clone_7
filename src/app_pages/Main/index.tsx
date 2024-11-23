@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Drawer } from '@/app_pages/Main/Drawer';
 import { Header } from '@/app_pages/Main/Header';
@@ -36,19 +36,6 @@ export const MainPage = () => {
   const { timetableData } = useGetTimetableData({
     timetableId: currentTimetable?._id,
   });
-
-  useEffect(() => {
-    if (
-      timetableData !== undefined &&
-      timetableData.type !== 'error' &&
-      timetableId !== timetableData.data._id
-    ) {
-      timeTableService.storeSelectedTimetableId({
-        selectedTimetableId: timetableData.data._id,
-      });
-      setTimetableId(timetableData.data._id);
-    }
-  }, [timetableData, timetableId, timeTableService, setTimetableId]);
 
   if (timetableData === undefined) return <LoadingPage />;
 
@@ -98,7 +85,7 @@ export const MainPage = () => {
         <Drawer
           isOpen={isDrawerOpen}
           onClose={closeDrawer}
-          selectedTimetableId={timetableId}
+          selectedTimetableId={currentTimetable?._id ?? null}
           handleClickSetTimetableId={handleClickSetTimetableId}
         />
         <TimeTableView currentTimetable={timetableData.data} />
