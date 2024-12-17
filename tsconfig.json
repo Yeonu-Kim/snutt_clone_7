@@ -20,23 +20,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    },
-    "allowJs": true,
-    "incremental": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    }
   },
-  "include": [
-    ".next/types/**/*.ts",
-    "next.config.mjs",
-    "src",
-    "vite.config.ts",
-    "./build/types/**/*.ts"
-  ],
+  "include": ["src", "vite.config.ts"],
   "exclude": ["node_modules"]
 }

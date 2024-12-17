@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 export const SocialSignInIconContainer = ({
   src,
   alt,
@@ -10,7 +8,7 @@ export const SocialSignInIconContainer = ({
   className?: string;
 }) => {
   return (
-    <Image src={src} alt={alt} width={44} height={44} className={className} />
+    <img src={src} alt={alt} width={44} height={44} className={className} />
   );
 };
 
@@ -24,7 +22,7 @@ export const IconContainer = ({
   className?: string;
 }) => {
   return (
-    <Image src={src} alt={alt} width={24} height={24} className={className} />
+    <img src={src} alt={alt} width={24} height={24} className={className} />
   );
 };
 
@@ -38,6 +36,6 @@ export const SmallIconContainer = ({
   className?: string;
 }) => {
   return (
-    <Image src={src} alt={alt} width={16} height={16} className={className} />
+    <img src={src} alt={alt} width={16} height={16} className={className} />
   );
 };

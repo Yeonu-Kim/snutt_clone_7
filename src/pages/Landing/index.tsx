@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import { SocialSignInIconContainer } from '@/components/common/IconContainer';
 import { Button } from '@/components/styles/Button';
 import { Layout } from '@/components/styles/Layout';
@@ -17,7 +15,7 @@ export const LandingPage = () => {
           className="flex flex-auto w-full h-full flex-col items-center justify-center"
         >
           <div className="imageWrapper flex flex-col flex-auto justify-center items-center gap-4">
-            <Image src={ICON_SRC.LOGO} alt="timetable" width={60} height={60} />
+            <img src={ICON_SRC.LOGO} alt="timetable" />
             <h1 className="title font-eng font-extrabold  text-2xl">
               TimeTable
             </h1>

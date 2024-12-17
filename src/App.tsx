@@ -1,3 +1,6 @@
+import '@/reset.css';
+import '@/index.css';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
@@ -5,17 +8,6 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 
 import type { CallParams } from '@/api';
 import { impleSnuttApi } from '@/api';
-import { NotFoundPage } from '@/app_pages/Error';
-import { LandingPage } from '@/app_pages/Landing';
-import { LectureDetailPage } from '@/app_pages/Lecture/LectureDetail';
-import { LectureListPage } from '@/app_pages/Lecture/LectureList';
-import { MainPage } from '@/app_pages/Main';
-import { AccountPage } from '@/app_pages/MyPage/Account';
-import { ChangeNicknamePage } from '@/app_pages/MyPage/Account/ChangeNickname';
-import { ColorSchemePage } from '@/app_pages/MyPage/ColorScheme';
-import { MyPage } from '@/app_pages/MyPage/index.tsx';
-import { SignInPage } from '@/app_pages/SignIn';
-import { SignUpPage } from '@/app_pages/SignUp';
 import {
   AuthProtectedRoute,
   AuthProtectedSwitchRoute,
@@ -36,6 +28,17 @@ import {
 import { impleColorSchemeRepository } from '@/infrastructure/impleStorageRepository.ts';
 import { impleTimeTableRepository } from '@/infrastructure/impleTimeTableRespository';
 import { impleUserRepository } from '@/infrastructure/impleUserRepository';
+import { NotFoundPage } from '@/pages/Error';
+import { LandingPage } from '@/pages/Landing';
+import { LectureDetailPage } from '@/pages/Lecture/LectureDetail';
+import { LectureListPage } from '@/pages/Lecture/LectureList';
+import { MainPage } from '@/pages/Main';
+import { AccountPage } from '@/pages/MyPage/Account';
+import { ChangeNicknamePage } from '@/pages/MyPage/Account/ChangeNickname';
+import { ColorSchemePage } from '@/pages/MyPage/ColorScheme';
+import { MyPage } from '@/pages/MyPage/index.tsx';
+import { SignInPage } from '@/pages/SignIn';
+import { SignUpPage } from '@/pages/SignUp';
 import { getAuthService } from '@/usecases/authServices';
 import { getColorSchemeService } from '@/usecases/colorSchemeService.ts';
 import { getCourseBookService } from '@/usecases/courseBookService';

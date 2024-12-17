@@ -1,9 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { Drawer } from '@/app_pages/Main/Drawer';
-import { Header } from '@/app_pages/Main/Header';
-import { TimeTableView } from '@/app_pages/Main/TimeTable';
 import { LoadingPage } from '@/components/Loading';
 import { Navbar } from '@/components/Navbar';
 import { Layout } from '@/components/styles/Layout';
@@ -12,6 +9,9 @@ import { TimetableContext } from '@/context/TimetableContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
+import { Drawer } from '@/pages/Main/Drawer';
+import { Header } from '@/pages/Main/Header';
+import { TimeTableView } from '@/pages/Main/TimeTable';
 import { showDialog } from '@/utils/showDialog';
 
 import { useGetTimetableData } from '../Lecture/LectureList';

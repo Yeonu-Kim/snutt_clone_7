@@ -3,16 +3,7 @@ import nextPlugin from '@next/eslint-plugin-next';
 
 export default [
   {
-    ignores: ['.yarn', '*.js', '.next', 'build', 'next-env.d.ts'],
-  },
-  {
-    plugins: {
-      '@next/next': nextPlugin,
-    },
-    rules: {
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs['core-web-vitals'].rules,
-    },
+    ignores: ['.yarn', '*.js'],
   },
   ...react({
     tsconfigRootDir: import.meta.dirname,

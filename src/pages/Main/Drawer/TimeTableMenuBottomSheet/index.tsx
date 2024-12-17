@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { ChangeNameDialog } from '@/app_pages/Main/Drawer/TimeTableMenuBottomSheet/ChangeNameDialog';
-import { DeleteDialog } from '@/app_pages/Main/Drawer/TimeTableMenuBottomSheet/DeleteDialog';
 import { BottomSheetContainer } from '@/components/BottomeSheetContainer';
 import { useBottomSheet } from '@/hooks/useVisible';
+import { ChangeNameDialog } from '@/pages/Main/Drawer/TimeTableMenuBottomSheet/ChangeNameDialog';
+import { DeleteDialog } from '@/pages/Main/Drawer/TimeTableMenuBottomSheet/DeleteDialog';
 import { showDialog } from '@/utils/showDialog';
 
 type TimeTableMenuBottomSheet = {
