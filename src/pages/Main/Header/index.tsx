@@ -15,7 +15,7 @@ export const Header = ({
 }) => {
   return (
     <HeaderContainer>
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <button
           className="text-xl focus:outline-none"
           onClick={onMenuClick}
@@ -24,32 +24,32 @@ export const Header = ({
           <IconContainer
             src={ICON_SRC.HAMBURGER}
             alt="서랍 열기 버튼"
-            className="dark:filter dark:brightness-0 dark:invert"
+            className="dark:brightness-0 dark:invert dark:filter"
           />
         </button>
         <h1 className="text-base font-semibold">{title}</h1>
         <span className="text-xs text-gray-400">{`(${totalCredit} 학점)`}</span>
       </div>
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <button onClick={onLectureListClick}>
           <IconContainer
             src={ICON_SRC.LIST_BULLET}
             alt="강의 목록 보기 버튼"
-            className="dark:filter dark:brightness-0 dark:invert"
+            className="dark:brightness-0 dark:invert dark:filter"
           />
         </button>
         <span>
           <IconContainer
             src={ICON_SRC.SHARE}
             alt="공유하기 버튼"
-            className="dark:filter dark:brightness-0 dark:invert"
+            className="dark:brightness-0 dark:invert dark:filter"
           />
         </span>
         <span>
           <IconContainer
             src={ICON_SRC.BELL}
             alt="알림 버튼"
-            className="dark:filter dark:brightness-0 dark:invert"
+            className="dark:brightness-0 dark:invert dark:filter"
           />
         </span>
       </div>

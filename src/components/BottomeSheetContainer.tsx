@@ -21,7 +21,7 @@ export const BottomSheetContainer = ({
       onClick={onClick}
     >
       <div
-        className={`w-full ${bgColor} ${heightClass} rounded-t-lg ${padding} pb-10 transform transition-transform duration-300 ${
+        className={`w-full ${bgColor} ${heightClass} rounded-t-lg ${padding} transform pb-10 transition-transform duration-300 ${
           isVisible ? 'translate-y-0' : 'translate-y-full'
         } dark:bg-gray-800`}
         onClick={(e) => {

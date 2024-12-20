@@ -32,7 +32,7 @@ export const DeleteLectureDialog = ({
       {isPending && <SpinnerLoading />}
       <h1 className="text-lg font-semibold">강의 삭제</h1>
       <p className="text-sm">강의를 삭제하시겠습니까?</p>
-      <div className="flex justify-end flex-end gap-4">
+      <div className="flex-end flex justify-end gap-4">
         <button onClick={handleClose}>취소</button>
         <button onClick={onClickButton}>확인</button>
       </div>

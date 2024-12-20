@@ -12,24 +12,24 @@ export const LandingPage = () => {
       <div id="container" className="h-full bg-white">
         <div
           id="wrapper-feature"
-          className="flex flex-auto w-full h-full flex-col items-center justify-center"
+          className="flex h-full w-full flex-auto flex-col items-center justify-center"
         >
-          <div className="imageWrapper flex flex-col flex-auto justify-center items-center gap-4">
+          <div className="imageWrapper flex flex-auto flex-col items-center justify-center gap-4">
             <img src={ICON_SRC.LOGO} alt="timetable" />
-            <h1 className="title font-eng font-extrabold  text-2xl">
+            <h1 className="title font-eng text-2xl font-extrabold">
               TimeTable
             </h1>
           </div>
           <div className="bottomWrapper flex-col">
             <div
               id="wrapper-button"
-              className="w-full h-[72px] mb-[40px] gap-[15px] flex flex-col justify-center items-center"
+              className="mb-[40px] flex h-[72px] w-full flex-col items-center justify-center gap-[15px]"
             >
               <Button onClick={toSignIn}>로그인</Button>
 
               <button
                 id="signup"
-                className="w-[311px] h-[17px] hover:text-orange transition-colors duration-300"
+                className="h-[17px] w-[311px] transition-colors duration-300 hover:text-orange"
                 onClick={toSignUp}
               >
                 회원가입
@@ -37,18 +37,18 @@ export const LandingPage = () => {
             </div>
             <div
               id="wrapper-SNS"
-              className="w-full h-[85px] flex flex-col justify-center items-center gap-[24px] mb-12"
+              className="mb-12 flex h-[85px] w-full flex-col items-center justify-center gap-[24px]"
             >
-              <div className="flex justify-center items-center w-[320px]">
-                <div className="flex-grow border-t border-gray mr-2" />
-                <p className="text-gray text-sm flex items-center">
+              <div className="flex w-[320px] items-center justify-center">
+                <div className="mr-2 flex-grow border-t border-gray" />
+                <p className="flex items-center text-sm text-gray">
                   SNS 계정으로 계속하기
                 </p>
-                <div className="flex-grow border-t border-gray ml-2" />
+                <div className="ml-2 flex-grow border-t border-gray" />
               </div>
               <div
                 id="SNS-icon"
-                className="h-[44px] gap-[12px] flex justify-center"
+                className="flex h-[44px] justify-center gap-[12px]"
               >
                 <SocialSignInIconContainer
                   src="/landing/kakaotalkid.png"

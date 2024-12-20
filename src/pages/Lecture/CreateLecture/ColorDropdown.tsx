@@ -21,7 +21,7 @@ export const ColorDropdown = ({
   return (
     <div className="relative inline-block">
       <div
-        className="flex items-center justify-between w-32 px-2 py-1 border rounded cursor-pointer"
+        className="flex w-32 cursor-pointer items-center justify-between rounded border px-2 py-1"
         onClick={() => {
           setIsOpen(!isOpen);
         }}
@@ -30,15 +30,15 @@ export const ColorDropdown = ({
           className={`h-4 w-4 ${validColorClass} rounded`}
           style={{ display: 'inline-block' }}
         />
-        <span className="text-sm text-gray-600 ml-2">▼</span>
+        <span className="ml-2 text-sm text-gray-600">▼</span>
       </div>
 
       {isOpen && (
-        <div className="absolute mt-1 w-32 bg-white border rounded shadow-lg z-10">
+        <div className="absolute z-10 mt-1 w-32 rounded border bg-white shadow-lg">
           {Array.from({ length: 9 }).map((_, index) => (
             <div
               key={index}
-              className={`flex items-center px-2 py-1 cursor-pointer hover:bg-gray-100 ${
+              className={`flex cursor-pointer items-center px-2 py-1 hover:bg-gray-100 ${
                 index === selectedColorIndex ? 'bg-gray-200' : ''
               }`}
               onClick={() => {

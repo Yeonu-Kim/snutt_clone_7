@@ -63,28 +63,25 @@ export const MyPage = () => {
       <Layout>
         <div
           id="Wrapper-Container"
-          className="flex flex-col items-center w-full min-h-screen
-          dark:bg-gray-950"
+          className="flex min-h-screen w-full flex-col items-center dark:bg-gray-950"
         >
           <div
             id="upper-bar"
-            className="w-full py-4 px-6 top-0 bg-white flex justify-center items-center fixed max-w-375
-            dark:bg-gray-800 dark:text-gray-200"
+            className="fixed top-0 flex w-full max-w-375 items-center justify-center bg-white px-6 py-4 dark:bg-gray-800 dark:text-gray-200"
           >
             <p className="font-bold">마이페이지</p>
           </div>
           <div
             id="Main-Container"
-            className="h-lvh  flex flex-col justify-center items-center w-full mt-[60px] mb-[80px] bg-gray-200 gap-5
-            dark:bg-gray-950 dark:text-gray-200"
+            className="mb-[80px] mt-[60px] flex h-lvh w-full flex-col items-center justify-center gap-5 bg-gray-200 dark:bg-gray-950 dark:text-gray-200"
           >
             <WhiteButtonBox
-              className="flex items-center justify-between h-12"
+              className="flex h-12 items-center justify-between"
               onClick={handleClickInformationButton}
             >
               <div className="m-4">내 계정</div>
               <div className="m-4">
-                <span className="text-gray-400 ">
+                <span className="text-gray-400">
                   {userData.data.nickname.nickname}#{userData.data.nickname.tag}{' '}
                   {'>'}
                 </span>
@@ -95,8 +92,7 @@ export const MyPage = () => {
                 <span>디스플레이</span>
               </PTagOnTheWhiteBox>
               <WhiteButtonBox
-                className="justify-between rounded-t-lg rounded-b-[0]
-              border-b border-gray-300"
+                className="justify-between rounded-b-[0] rounded-t-lg border-b border-gray-300"
                 onClick={toColorScheme}
               >
                 <span className="m-4">색상모드</span>
@@ -105,8 +101,7 @@ export const MyPage = () => {
                 </span>
               </WhiteButtonBox>
               <WhiteButtonBox
-                className="justify-between rounded-b-[0] rounded-t-[0]
-              border-b border-gray-300"
+                className="justify-between rounded-b-[0] rounded-t-[0] border-b border-gray-300"
                 onClick={onClickTBD}
               >
                 <span className="m-4">시간표 설정</span>
@@ -137,10 +132,7 @@ export const MyPage = () => {
               <PTagOnTheWhiteBox>
                 <span>정보 및 제안</span>
               </PTagOnTheWhiteBox>
-              <WhiteButtonBox
-                className="justify-between rounded-b-[0]
-              border-b border-gray-300"
-              >
+              <WhiteButtonBox className="justify-between rounded-b-[0] border-b border-gray-300">
                 <span className="m-4">버전 정보</span>
                 <span className="m-4 text-gray-400">Waffle team07</span>
               </WhiteButtonBox>
@@ -164,10 +156,10 @@ export const MyPage = () => {
               className="justify-between"
               onClick={handleClickLogoutButton}
             >
-              <span className="text-red m-4">로그아웃</span>
+              <span className="m-4 text-red">로그아웃</span>
             </WhiteButtonBox>
           </div>
-          <div className="bottom-0 w-full bg-white fixed max-w-375">
+          <div className="fixed bottom-0 w-full max-w-375 bg-white">
             <Navbar selectedMenu="mypage" />
           </div>
         </div>

@@ -27,8 +27,8 @@ export const LoadingPage = () => {
   }, [tips.length]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen text-center gap-3 p-3 dark:bg-gray-800">
-      <div className="relative h-20 flex items-center justify-center space-x-2 text-6xl font-bold">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-3 p-3 text-center dark:bg-gray-800">
+      <div className="relative flex h-20 items-center justify-center space-x-2 text-6xl font-bold">
         <h1 className="flex space-x-1">
           <span className="animate-updown-1 text-blue">S</span>
           <span className="animate-updown-2 text-mint">N</span>
@@ -37,14 +37,14 @@ export const LoadingPage = () => {
           <span className="animate-updown-5 text-orange">T</span>
         </h1>
       </div>
-      <p className="mt-4 text-lg text-gray-700  dark:text-gray-400">
+      <p className="mt-4 text-lg text-gray-700 dark:text-gray-400">
         로딩중... 잠시만 기다려주세요.
       </p>
       <div className="flex-col">
         <p className="mt-2 text-sm text-gray-500 dark:text-gray-200">
           😀 SNUTT의 숨은 꿀팁
         </p>
-        <p className="mt-2 text-sm text-gray-500 animate-slide-up dark:text-gray-200">
+        <p className="animate-slide-up mt-2 text-sm text-gray-500 dark:text-gray-200">
           {tips[currentTip]}
         </p>
       </div>
@@ -54,8 +54,8 @@ export const LoadingPage = () => {
 
 export const SpinnerLoading = () => {
   return (
-    <div className="absolute inset-0 z-10 flex items-center justify-center bg-white bg-opacity-75 rounded-lg">
-      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-mint"></div>
+    <div className="absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-white bg-opacity-75">
+      <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-t-2 border-mint"></div>
     </div>
   );
 };

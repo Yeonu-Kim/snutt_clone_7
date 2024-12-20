@@ -81,7 +81,7 @@ export const MainPage = () => {
         totalCredit={totalCredit}
         title={title}
       />
-      <div className="flex-1 w-full overflow-hidden">
+      <div className="w-full flex-1 overflow-hidden">
         <Drawer
           isOpen={isDrawerOpen}
           onClose={closeDrawer}

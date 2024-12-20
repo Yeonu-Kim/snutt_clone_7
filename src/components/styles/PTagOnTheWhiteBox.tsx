@@ -11,7 +11,7 @@ export const PTagOnTheWhiteBox = ({
 }: ChangeNicknamePTagProps) => {
   return (
     <p
-      className={`text-gray-500 text-[12px] text-left w-full pl-3.5 ${className}`}
+      className={`w-full pl-3.5 text-left text-[12px] text-gray-500 ${className}`}
     >
       {children}
     </p>

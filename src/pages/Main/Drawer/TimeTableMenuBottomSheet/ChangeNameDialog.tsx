@@ -49,9 +49,9 @@ export const ChangeNameDialog = ({
         }}
         placeholder={'시간표 제목을 입력하세요'}
         disabled={isPending}
-        className="py-1 border-b-2 border-gray focus:outline-none focus:border-black"
+        className="border-b-2 border-gray py-1 focus:border-black focus:outline-none"
       />
-      <div className="flex flex-end justify-end gap-4">
+      <div className="flex-end flex justify-end gap-4">
         <button onClick={handleClose}>취소</button>
         <button onClick={onClickButton}>확인</button>
       </div>

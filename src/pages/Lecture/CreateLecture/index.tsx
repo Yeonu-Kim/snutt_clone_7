@@ -103,15 +103,15 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
       >
         {isPending && <SpinnerLoading />}
         <form onSubmit={handleSubmit}>
-          <div className="rounded-t-xl bg-white flex justify-between items-center px-4 py-3 border-b mb-4 ">
+          <div className="mb-4 flex items-center justify-between rounded-t-xl border-b bg-white px-4 py-3">
             <button type="button" onClick={handleClose}>
               취소
             </button>
             <button type="submit">저장</button>
           </div>
-          <div className="Class_Info bg-white p-4 space-y-4 mb-4">
-            <div className="grid grid-cols-12 gap-2 items-center">
-              <label className="Class_Name_Label col-span-3 text-gray-600 text-sm ">
+          <div className="Class_Info mb-4 space-y-4 bg-white p-4">
+            <div className="grid grid-cols-12 items-center gap-2">
+              <label className="Class_Name_Label col-span-3 text-sm text-gray-600">
                 강의명
               </label>
               <input
@@ -123,8 +123,8 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
                 }}
               />
             </div>
-            <div className="grid grid-cols-12 gap-2 items-center">
-              <label className="Professor_Label col-span-3 text-gray-600 text-sm ">
+            <div className="grid grid-cols-12 items-center gap-2">
+              <label className="Professor_Label col-span-3 text-sm text-gray-600">
                 교수
               </label>
               <input
@@ -137,8 +137,8 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
                 }}
               />
             </div>
-            <div className="grid grid-cols-12 gap-2 items-center">
-              <label className="Credit_Label col-span-3 text-gray-600 text-sm ">
+            <div className="grid grid-cols-12 items-center gap-2">
+              <label className="Credit_Label col-span-3 text-sm text-gray-600">
                 학점
               </label>
               <input
@@ -152,10 +152,10 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
                 }}
               />
             </div>
-            <div className="grid grid-cols-12 gap-2 items-center">
+            <div className="grid grid-cols-12 items-center gap-2">
               <label
                 htmlFor="colorDropdown"
-                className="Color_Label col-span-3 text-gray-600 text-sm "
+                className="Color_Label col-span-3 text-sm text-gray-600"
               >
                 색
               </label>
@@ -167,8 +167,8 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
               />
             </div>
           </div>
-          <div className="Notes bg-white p-4 grid grid-cols-12 gap-2 items-center mb-4">
-            <label className="Notes_Label col-span-3 text-gray-600 text-sm ">
+          <div className="Notes mb-4 grid grid-cols-12 items-center gap-2 bg-white p-4">
+            <label className="Notes_Label col-span-3 text-sm text-gray-600">
               비고
             </label>
             <input
@@ -181,8 +181,8 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
               }}
             />
           </div>
-          <div className="Time_Place flex flex-col bg-white p-4 space-y-4">
-            <div className="Time_Place_Label text-gray-600 text-sm ">
+          <div className="Time_Place flex flex-col space-y-4 bg-white p-4">
+            <div className="Time_Place_Label text-sm text-gray-600">
               시간 및 장소
             </div>
             {classTimes.map((_, index) => (
@@ -192,8 +192,8 @@ export const AddCustomTimeTable = ({ onClose }: { onClose: () => void }) => {
                     handleTimeChange(index, updatedTime);
                   }}
                 />
-                <div className="Place grid grid-cols-12 gap-2 items-center">
-                  <label className="Place_Label col-span-3 text-gray-600 text-sm ">
+                <div className="Place grid grid-cols-12 items-center gap-2">
+                  <label className="Place_Label col-span-3 text-sm text-gray-600">
                     장소
                   </label>
                   <input

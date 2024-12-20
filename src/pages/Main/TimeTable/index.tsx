@@ -18,8 +18,7 @@ export const TimeTableView = ({
   const rowCount = hourList.length * 12;
   return (
     <div
-      className="grid h-full
-      dark:bg-gray-800 dark:text-gray-100"
+      className="grid h-full dark:bg-gray-800 dark:text-gray-100"
       style={{
         gridTemplateColumns: `16px repeat(${columnCount}, 1fr)`,
         gridTemplateRows: `40px repeat(${rowCount}, 1fr)`,
@@ -29,7 +28,7 @@ export const TimeTableView = ({
       {dayList.slice(0, 5).map((day, i) => (
         <div
           key={day}
-          className="row-start-1 row-end-2 flex justify-center items-end p-2 text-xs text-textAlternative "
+          className="row-start-1 row-end-2 flex items-end justify-center p-2 text-xs text-textAlternative"
           style={{
             gridColumnStart: i + 2,
             gridColumnEnd: i + 2 + 1,
@@ -42,7 +41,7 @@ export const TimeTableView = ({
       {hourList.map((hour, i) => (
         <div
           key={hour}
-          className="col-start-1 col-end-2 text-right text-xs text-textALternative opacity-40 pl-1 pt-1"
+          className="text-textALternative col-start-1 col-end-2 pl-1 pt-1 text-right text-xs opacity-40"
           style={{
             gridRowStart: i * 12 + 2,
             gridRowEnd: i * 12 + 2 + 6,
@@ -55,7 +54,7 @@ export const TimeTableView = ({
       {hourList.map((_, i) => (
         <div
           key={_}
-          className="col-start-1 -col-end-1 border-t-[1px] border-solid  border-t-lineLight dark:border-gray-600"
+          className="col-start-1 -col-end-1 border-t-[1px] border-solid border-t-lineLight dark:border-gray-600"
           style={{
             gridRowStart: i * 12 + 2,
             gridRowEnd: i * 12 + 2 + 6,
@@ -66,7 +65,7 @@ export const TimeTableView = ({
       {hourList.map((_, i) => (
         <div
           key={_}
-          className="col-start-2 -col-end-1 border-b-[1px] border-solid  border-b-lineLightest dark:border-gray-600"
+          className="col-start-2 -col-end-1 border-b-[1px] border-solid border-b-lineLightest dark:border-gray-600"
           style={{
             gridRowStart: i * 12 + 2,
             gridRowEnd: i * 12 + 2 + 6,
@@ -97,7 +96,7 @@ export const TimeTableView = ({
           return (
             <div
               key={`${lecture._id}-${i}`}
-              className={`text-white flex flex-col items-center justify-center p-2 text-center ${colorClass} col-start-${colStart} col-end-${colEnd} row-start-${rowStart} row-end-${rowEnd}`}
+              className={`flex flex-col items-center justify-center p-2 text-center text-white ${colorClass} col-start-${colStart} col-end-${colEnd} row-start-${rowStart} row-end-${rowEnd}`}
               style={{
                 gridColumnStart: colStart,
                 gridColumnEnd: colEnd,

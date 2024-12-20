@@ -77,26 +77,16 @@ export const ChangeNicknamePage = () => {
         {isPending && <SpinnerLoading />}
         <div
           id="Wrapper-Container"
-          className="flex flex-col items-center w-full min-h-screen
-          dark:bg-gray-950"
+          className="flex min-h-screen w-full flex-col items-center dark:bg-gray-950"
         >
           <div
             id="upper-bar"
-            className="w-full py-4 px-6 top-0 bg-white flex justify-center items-center fixed max-w-375
-            dark:bg-gray-800 dark:text-gray-200"
+            className="fixed top-0 flex w-full max-w-375 items-center justify-center bg-white px-6 py-4 dark:bg-gray-800 dark:text-gray-200"
           >
-            <div
-              className="BackButtonWrapper absolute left-3 rounded-lg flex items-center
-            cursor-pointer text-gray-500 hover:text-orange
-            dark:text-gray-200"
-            >
+            <div className="BackButtonWrapper absolute left-3 flex cursor-pointer items-center rounded-lg text-gray-500 hover:text-orange dark:text-gray-200">
               <span onClick={toAccount}>&larr; 뒤로</span>
             </div>
-            <div
-              className="BackButtonWrapper absolute right-3 rounded-lg flex items-center
-            cursor-pointer text-gray-500 hover:text-orange
-            dark:text-gray-200"
-            >
+            <div className="BackButtonWrapper absolute right-3 flex cursor-pointer items-center rounded-lg text-gray-500 hover:text-orange dark:text-gray-200">
               <button type="submit" form="changeNicknameForm">
                 저장
               </button>
@@ -105,9 +95,7 @@ export const ChangeNicknamePage = () => {
           </div>
           <div
             id="Main-Container"
-            className="h-lvh flex flex-col justify-start items-center
-            p-5 w-full mt-[60px] mb-[80px] bg-gray-200
-            dark:bg-gray-950 dark:text-gray-200"
+            className="mb-[80px] mt-[60px] flex h-lvh w-full flex-col items-center justify-start bg-gray-200 p-5 dark:bg-gray-950 dark:text-gray-200"
           >
             <PTagOnTheWhiteBox>
               <span>닉네임 (공백 포함 한/영/숫자 10자 이내)</span>
@@ -122,8 +110,7 @@ export const ChangeNicknamePage = () => {
                 }}
                 disabled={isPending}
                 placeholder={userData.data.nickname.nickname}
-                className="bg-white w-[335px] h-10 rounded-lg pl-4 mb-3 m-1
-                dark:bg-gray-800 dark:text-gray-200"
+                className="m-1 mb-3 h-10 w-[335px] rounded-lg bg-white pl-4 dark:bg-gray-800 dark:text-gray-200"
               />
             </form>
             <PTagOnTheWhiteBox>
@@ -149,7 +136,7 @@ export const ChangeNicknamePage = () => {
               </span>
             </PTagOnTheWhiteBox>
           </div>
-          <div className="bottom-0 w-full bg-white fixed max-w-375">
+          <div className="fixed bottom-0 w-full max-w-375 bg-white">
             <Navbar selectedMenu="mypage" />
           </div>
         </div>

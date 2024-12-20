@@ -55,7 +55,7 @@ export const AddTimeTableBottomSheet = ({
     >
       {isPending && <SpinnerLoading />}
       <div className="flex flex-col gap-6 dark:bg-gray-800 dark:text-gray-200">
-        <div className="flex flex-end justify-between">
+        <div className="flex-end flex justify-between">
           <button onClick={handleClose}>취소</button>
           <button onClick={onClickButton}>완료</button>
         </div>
@@ -77,7 +77,7 @@ export const AddTimeTableBottomSheet = ({
             }}
             placeholder={'시간표 제목을 입력하세요'}
             disabled={isPending}
-            className="w-full py-1 border-b-2 border-gray focus:outline-none focus:border-black dark:bg-gray-600 dark:text-gray-200"
+            className="w-full border-b-2 border-gray py-1 focus:border-black focus:outline-none dark:bg-gray-600 dark:text-gray-200"
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -88,7 +88,7 @@ export const AddTimeTableBottomSheet = ({
             onChange={(e) => {
               clickOption(e.target.value);
             }}
-            className="py-1 border-b-2 border-gray focus:outline-none focus:border-black dark:bg-gray-600 dark:text-gray-200"
+            className="border-b-2 border-gray py-1 focus:border-black focus:outline-none dark:bg-gray-600 dark:text-gray-200"
             disabled={isPending}
           >
             <option value="">학기를 선택하세요</option>

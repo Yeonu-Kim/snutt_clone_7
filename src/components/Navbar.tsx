@@ -74,10 +74,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
   ];
 
   return (
-    <div
-      className="flex justify-between w-full px-3.5 py-2.5 pb-5 border-t-0.5 border-solid  border-t-lineLight
-    dark:bg-gray-800 dark:text-gray-200 dark:border-t-gray-800"
-    >
+    <div className="border-t-0.5 flex w-full justify-between border-solid border-t-lineLight px-3.5 py-2.5 pb-5 dark:border-t-gray-800 dark:bg-gray-800 dark:text-gray-200">
       {navMenuList.map((navMenu, index) => {
         return navMenu.to !== null ? (
           <div
@@ -85,10 +82,10 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
             onClick={() => {
               handleClickMenu(navMenu.menu);
             }}
-            className="flex justify-center align-center w-8 h-8 p-1"
+            className="align-center flex h-8 w-8 justify-center p-1"
           >
             <IconContainer
-              className="dark:filter dark:brightness-0 dark:invert"
+              className="dark:brightness-0 dark:invert dark:filter"
               src={
                 navMenu.menu === selectedMenu ? navMenu.onSrc : navMenu.offSrc
               }
@@ -99,14 +96,14 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
           <div
             key={index}
             onClick={onClickTBD}
-            className="flex justify-center align-center w-8 h-8 p-1"
+            className="align-center flex h-8 w-8 justify-center p-1"
           >
             <IconContainer
               src={
                 navMenu.menu === selectedMenu ? navMenu.onSrc : navMenu.offSrc
               }
               alt={navMenu.alt}
-              className="dark:filter dark:brightness-0 dark:invert"
+              className="dark:brightness-0 dark:invert dark:filter"
             />
           </div>
         );

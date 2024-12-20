@@ -40,40 +40,31 @@ export const LectureListPage = () => {
       <Layout>
         <div
           id="Wrapper-Container"
-          className="flex flex-col items-center w-full min-h-screen
-          dark:bg-gray-950"
+          className="flex min-h-screen w-full flex-col items-center dark:bg-gray-950"
         >
           <div
             id="upper-bar"
-            className="w-full py-4 px-6 top-0 bg-white border-b-[1px]
-            flex justify-center items-center fixed max-w-375
-            dark:bg-gray-800 dark:text-gray-200 dark:border-gray-800"
+            className="fixed top-0 flex w-full max-w-375 items-center justify-center border-b-[1px] bg-white px-6 py-4 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-200"
           >
-            <div
-              className="BackButtonWrapper absolute left-3 rounded-lg flex items-center
-            cursor-pointer text-gray-500 hover:text-orange
-            dark:text-gray-200"
-            >
+            <div className="BackButtonWrapper absolute left-3 flex cursor-pointer items-center rounded-lg text-gray-500 hover:text-orange dark:text-gray-200">
               <span onClick={toMain}>&larr; 뒤로</span>
             </div>
             <p>강의 목록</p>
 
             <div
-              className="font-bold text-gray-400 absolute right-3 rounded-lg"
+              className="absolute right-3 rounded-lg font-bold text-gray-400"
               onClick={openBottomSheet}
             >
               <img
                 alt="add"
                 src={ICON_SRC.ADD}
-                className="dark:filter dark:brightness-0 dark:invert"
+                className="dark:brightness-0 dark:invert dark:filter"
               />
             </div>
           </div>
           <div
             id="Main-Container"
-            className="h-lvh flex flex-col justify-start items-start overflow-y-auto overflow-x-hidden
-            p-5 pt-2 w-full mt-16 mb-20
-            dark:bg-gray-950 dark:text-gray-200"
+            className="mb-20 mt-16 flex h-lvh w-full flex-col items-start justify-start overflow-y-auto overflow-x-hidden p-5 pt-2 dark:bg-gray-950 dark:text-gray-200"
           >
             <div className="w-full">
               {timetableData.data.lecture_list.map((lecture, index) => {
@@ -86,27 +77,20 @@ export const LectureListPage = () => {
                 return (
                   <div
                     key={index}
-                    className="w-full pt-0 gap-0.5
-                       flex flex-col items-start border-b-2 border-b-gray-200 mt-2 pb-3"
+                    className="mt-2 flex w-full flex-col items-start gap-0.5 border-b-2 border-b-gray-200 pb-3 pt-0"
                   >
-                    <div className="flex justify-between w-full items-center">
-                      <span className="font-bold text-base">
+                    <div className="flex w-full items-center justify-between">
+                      <span className="text-base font-bold">
                         {lecture.course_title}
                       </span>
-                      <span
-                        className="text-gray-400 text-[0.75rem]
-                      dark:text-gray-200"
-                      >
+                      <span className="text-[0.75rem] text-gray-400 dark:text-gray-200">
                         {lecture.instructor !== ''
                           ? `${lecture.instructor} / ${lecture.credit}학점`
                           : `${lecture.credit}학점`}
                       </span>
                     </div>
 
-                    <span
-                      className="text-[0.75rem] text-gray-700
-                    dark:text-gray-200"
-                    >
+                    <span className="text-[0.75rem] text-gray-700 dark:text-gray-200">
                       {lecture.department !== undefined &&
                       lecture.academic_year !== undefined
                         ? `${lecture.department}, ${lecture.academic_year}`
@@ -139,18 +123,14 @@ export const LectureListPage = () => {
                         return (
                           <span
                             key={timeIndex}
-                            className="text-[0.75rem] text-gray-700
-                            dark:text-gray-200"
+                            className="text-[0.75rem] text-gray-700 dark:text-gray-200"
                           >
                             {`${times.day}(${times.startTime}~${times.endTime})${timeIndex < lecture.class_time_json.length - 1 ? ', ' : ''} `}
                           </span>
                         );
                       })}
                     </span>
-                    <span
-                      className="text-[0.75rem] text-gray-700
-                    dark:text-gray-200"
-                    >
+                    <span className="text-[0.75rem] text-gray-700 dark:text-gray-200">
                       {uniqueArray.at(0) !== '' ? uniqueArray.join(', ') : '-'}
                     </span>
                   </div>
@@ -158,7 +138,7 @@ export const LectureListPage = () => {
               })}
             </div>
           </div>
-          <div className="bottom-0 w-full bg-white fixed max-w-375">
+          <div className="fixed bottom-0 w-full max-w-375 bg-white">
             <Navbar selectedMenu="timetable" />
           </div>
         </div>

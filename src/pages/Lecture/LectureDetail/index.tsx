@@ -56,14 +56,11 @@ export const LectureDetailPage = () => {
   return (
     <>
       <Layout>
-        <div
-          className="h-full bg-gray-200 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100
-        dark:bg-gray-950"
-        >
+        <div className="h-full overflow-y-scroll bg-gray-200 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-400 dark:bg-gray-950">
           <HeaderContainer>
             <div className="flex gap-2">
               <div
-                className="BackButtonWrapper flex items-center cursor-pointer"
+                className="BackButtonWrapper flex cursor-pointer items-center"
                 onClick={toMain}
               >
                 <IconContainer
@@ -74,7 +71,7 @@ export const LectureDetailPage = () => {
               </div>
               <span>강의 상세 보기</span>
             </div>
-            <div className="flex gap-2 items-center">
+            <div className="flex items-center gap-2">
               <IconContainer
                 src={ICON_SRC.BELL}
                 alt="알림 버튼"
@@ -88,14 +85,14 @@ export const LectureDetailPage = () => {
               <span>편집</span>
             </div>
           </HeaderContainer>
-          <div className="flex flex-col gap-2 mt-12 mb-10">
+          <div className="mb-10 mt-12 flex flex-col gap-2">
             {lectureInfoSectionList.map((lectureInfoSection, sectionIndex) => (
               <div
                 key={`section-${sectionIndex}`}
-                className="flex flex-col bg-white py-1 gap-1 dark:bg-gray-800 dark:text-gray-200"
+                className="flex flex-col gap-1 bg-white py-1 dark:bg-gray-800 dark:text-gray-200"
               >
                 {lectureInfoSection.title !== null && (
-                  <div className="px-4 py-1 text-gray-400 text-sm">
+                  <div className="px-4 py-1 text-sm text-gray-400">
                     {lectureInfoSection.title}
                   </div>
                 )}
@@ -107,29 +104,23 @@ export const LectureDetailPage = () => {
                 })}
               </div>
             ))}
-            <div
-              className="flex flex-col bg-white gap-1
-            dark:bg-gray-800 dark:text-gray-200"
-            >
+            <div className="flex flex-col gap-1 bg-white dark:bg-gray-800 dark:text-gray-200">
               <div
-                className="flex justify-center p-2 cursor-pointer transition-all hover:bg-gray"
+                className="flex cursor-pointer justify-center p-2 transition-all hover:bg-gray"
                 onClick={showTBDDialog}
               >
                 강의계획서
               </div>
               <div
-                className="flex justify-center p-2 cursor-pointer transition-all hover:bg-gray"
+                className="flex cursor-pointer justify-center p-2 transition-all hover:bg-gray"
                 onClick={showTBDDialog}
               >
                 강의평
               </div>
             </div>
-            <div
-              className="flex flex-col bg-white gap-1
-            dark:bg-gray-800"
-            >
+            <div className="flex flex-col gap-1 bg-white dark:bg-gray-800">
               <div
-                className="flex justify-center p-2 cursor-pointer text-red transition-all hover:bg-gray"
+                className="flex cursor-pointer justify-center p-2 text-red transition-all hover:bg-gray"
                 onClick={clickDeleteButton}
               >
                 삭제
@@ -196,8 +187,8 @@ const renderContents = ({ currentLecture }: { currentLecture: Lecture }) => {
           name: '색상',
           content: (
             <div className="flex">
-              <div className={`w-4 h-4 bg-white`}></div>
-              <div className={`w-4 h-4 ${colorClass}`}></div>
+              <div className={`h-4 w-4 bg-white`}></div>
+              <div className={`h-4 w-4 ${colorClass}`}></div>
             </div>
           ),
         },
@@ -287,7 +278,7 @@ const renderContents = ({ currentLecture }: { currentLecture: Lecture }) => {
     if (infoContent.name === '구분') {
       return (
         <div key={`info-${infoIndex}`} className="flex items-center px-4 py-2">
-          <div className="w-20 text-gray-400 text-sm">{infoContent.name}</div>
+          <div className="w-20 text-sm text-gray-400">{infoContent.name}</div>
 
           {infoContent.content !== ' ' && infoContent.content !== '' ? (
             <div>{infoContent.content}</div>
@@ -300,7 +291,7 @@ const renderContents = ({ currentLecture }: { currentLecture: Lecture }) => {
     if (infoContent.name === '시간' || infoContent.name === '장소') {
       return (
         <div key={`info-${infoIndex}`} className="flex items-center px-4">
-          <div className="w-20 text-gray-400 text-sm">{infoContent.name}</div>
+          <div className="w-20 text-sm text-gray-400">{infoContent.name}</div>
           <div>
             {infoContent.content !== ' ' && infoContent.content !== '' ? (
               <div>{infoContent.content}</div>
@@ -313,7 +304,7 @@ const renderContents = ({ currentLecture }: { currentLecture: Lecture }) => {
     }
     return (
       <div key={`info-${infoIndex}`} className="flex items-center px-4 py-2">
-        <div className="w-20 text-gray-400 text-sm">{infoContent.name}</div>
+        <div className="w-20 text-sm text-gray-400">{infoContent.name}</div>
         <div>{infoContent.content}</div>
       </div>
     );

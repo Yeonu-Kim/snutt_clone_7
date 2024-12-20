@@ -120,16 +120,15 @@ export const Drawer = ({
     <>
       {/* 서랍 부분 */}
       <div
-        className={`absolute top-0 left-0 h-full w-[330px] px-4 bg-white border-r border-gray-300 transform ${
+        className={`absolute left-0 top-0 h-full w-[330px] transform border-r border-gray-300 bg-white px-4 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out z-50
-        dark:bg-gray-950 dark:text-gray-200 dark:border-gray-600`}
+        } z-50 transition-transform duration-300 ease-in-out dark:border-gray-600 dark:bg-gray-950 dark:text-gray-200`}
       >
         <DrawerHeader onClose={onClose} />
         <ul className="drawer-content">
           <AddTimeTableMenuBar onClick={openAddTimeTable} />
           <div
-            className="overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+            className="overflow-y-scroll scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-400"
             style={{ maxHeight: `calc(100dvh - 9rem)` }}
           >
             {Object.entries(groupedTimetables).map(([key, group]) => (
@@ -142,9 +141,9 @@ export const Drawer = ({
                   }}
                 />
                 <div
-                  className={`flex flex-col gap-4 duration-200 ease-in-out overflow-hidden ${
+                  className={`flex flex-col gap-4 overflow-hidden duration-200 ease-in-out ${
                     openDropdowns[key] === true
-                      ? 'py-2 h-full opacity-100'
+                      ? 'h-full py-2 opacity-100'
                       : 'max-h-0 opacity-0'
                   }`}
                 >
@@ -263,12 +262,12 @@ const useDrawer = () => {
 
 const DrawerHeader = ({ onClose }: { onClose(): void }) => {
   return (
-    <div className="flex justify-between items-center py-4 border-b border-solid border-gray-300 dark:border-gray-600">
+    <div className="flex items-center justify-between border-b border-solid border-gray-300 py-4 dark:border-gray-600">
       <div className="flex items-center gap-2">
         <IconContainer
           src={ICON_SRC.LOGO}
           alt="SNUTT 로고"
-          className="dark:filter dark:brightness-150"
+          className="dark:brightness-150 dark:filter"
         />
         <h1 className="text-lg font-semibold">SNUTT</h1>
       </div>
@@ -280,7 +279,7 @@ const DrawerHeader = ({ onClose }: { onClose(): void }) => {
         <IconContainer
           src={ICON_SRC.CLOSE}
           alt="서랍 닫기 버튼"
-          className="dark:filter dark:brightness-0 dark:invert"
+          className="dark:brightness-0 dark:invert dark:filter"
         />
       </button>
     </div>
@@ -289,7 +288,7 @@ const DrawerHeader = ({ onClose }: { onClose(): void }) => {
 
 const AddTimeTableMenuBar = ({ onClick }: { onClick(): void }) => {
   return (
-    <li className="flex justify-between items-center pt-4 pb-4">
+    <li className="flex items-center justify-between pb-4 pt-4">
       <span className="text-sm text-gray-400 dark:text-gray-200">
         나의 시간표
       </span>
@@ -297,7 +296,7 @@ const AddTimeTableMenuBar = ({ onClick }: { onClick(): void }) => {
         <IconContainer
           src={ICON_SRC.ADD}
           alt="시간표 추가하기 버튼"
-          className="dark:filter dark:brightness-0 dark:invert"
+          className="dark:brightness-0 dark:invert dark:filter"
         />
       </span>
     </li>
@@ -318,7 +317,7 @@ const CourseBookMenuBar = ({
   onClick(): void;
 }) => {
   return (
-    <div className="flex justify-between items-center py-2 text-gray-700">
+    <div className="flex items-center justify-between py-2 text-gray-700">
       <div className="flex gap-2 dark:text-gray-400">
         <span className="font-bold">
           {courseBook.year}년 {formatSemester(courseBook.semester)}
@@ -327,14 +326,13 @@ const CourseBookMenuBar = ({
           <IconContainer
             src={ICON_SRC.ARROW.DOWN}
             alt="학기별 시간표 열기 버튼"
-            className={`cursor-pointer transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}
-          dark:invert`}
+            className={`cursor-pointer transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'} dark:invert`}
             aria-expanded={isOpen}
           />
         </button>
         {courseBook.items.length === 0 ? (
           <div className="flex items-center">
-            <div className="w-1.5 h-1.5 rounded-[50%] bg-red"></div>
+            <div className="h-1.5 w-1.5 rounded-[50%] bg-red"></div>
           </div>
         ) : null}
       </div>
@@ -355,10 +353,10 @@ const TimeTableMenuBar = ({
 }) => {
   return (
     <div
-      className="flex justify-between items-center transition-all mr-4"
+      className="mr-4 flex items-center justify-between transition-all"
       key={timeTable._id}
     >
-      <div className="flex items-center gap-1 cursor-pointer" onClick={onClick}>
+      <div className="flex cursor-pointer items-center gap-1" onClick={onClick}>
         {timeTable._id === selectedTimeTableId ? (
           <div className="flex items-center">
             <SmallIconContainer
@@ -368,7 +366,7 @@ const TimeTableMenuBar = ({
           </div>
         ) : (
           <div className="flex items-center">
-            <div className="w-2 h-2 rounded-[50%] mr-2"></div>
+            <div className="mr-2 h-2 w-2 rounded-[50%]"></div>
           </div>
         )}
         <span className="text-sm">{timeTable.title}</span>
@@ -395,7 +393,7 @@ const TimeTableMenuIcon = ({
   children: ReactNode;
 }) => {
   return (
-    <span className="text-sm text-gray-400 cursor-pointer" onClick={onClick}>
+    <span className="cursor-pointer text-sm text-gray-400" onClick={onClick}>
       {children}
     </span>
   );
@@ -409,7 +407,7 @@ const AddTimeTableBySemesterMenuBar = ({
   children: ReactNode;
 }) => {
   return (
-    <p className="text-sm cursor-pointer ml-4" onClick={onClick}>
+    <p className="ml-4 cursor-pointer text-sm" onClick={onClick}>
       {children}
     </p>
   );

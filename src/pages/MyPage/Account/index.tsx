@@ -58,38 +58,29 @@ export const AccountPage = () => {
       <Layout>
         <div
           id="Wrapper-Container"
-          className="flex flex-col items-center w-full min-h-screen
-          dark:bg-gray-950"
+          className="flex min-h-screen w-full flex-col items-center dark:bg-gray-950"
         >
           <div
             id="upper-bar"
-            className="w-full py-4 px-6 top-0 bg-white flex justify-center items-center fixed max-w-375
-            dark:bg-gray-800 dark:text-gray-200"
+            className="fixed top-0 flex w-full max-w-375 items-center justify-center bg-white px-6 py-4 dark:bg-gray-800 dark:text-gray-200"
           >
-            <div
-              className="BackButtonWrapper absolute left-3 rounded-lg flex items-center
-            cursor-pointer text-gray-500 hover:text-orange
-            dark:text-gray-200"
-            >
+            <div className="BackButtonWrapper absolute left-3 flex cursor-pointer items-center rounded-lg text-gray-500 hover:text-orange dark:text-gray-200">
               <span onClick={toMypage}>&larr; 뒤로</span>
             </div>
             <p className="font-bold">내 계정</p>
           </div>
           <div
             id="Main-Container"
-            className="h-lvh  flex flex-col justify-start items-center
-            p-5 w-full mt-[60px] mb-[80px] bg-gray-200 gap-5
-            dark:bg-gray-950 dark:text-gray-200"
+            className="mb-[80px] mt-[60px] flex h-lvh w-full flex-col items-center justify-start gap-5 bg-gray-200 p-5 dark:bg-gray-950 dark:text-gray-200"
           >
             <div className="flex flex-col items-center justify-between">
               <WhiteButtonBox
                 onClick={toChangeNickname}
-                className="flex items-center justify-between rounded-b-[0]
-                border-b border-gray-300"
+                className="flex items-center justify-between rounded-b-[0] border-b border-gray-300"
               >
                 <span className="m-4">닉네임 변경</span>
                 <div className="m-4">
-                  <span className="text-gray-400 ">
+                  <span className="text-gray-400">
                     {userData.data.nickname.nickname}#
                     {userData.data.nickname.tag} {'>'}
                   </span>
@@ -100,28 +91,28 @@ export const AccountPage = () => {
                 className="flex items-center justify-between rounded-t-[0]"
               >
                 <span className="m-4">닉네임 복사하기</span>
-                <span className="text-gray-400 m-4"></span>
+                <span className="m-4 text-gray-400"></span>
               </WhiteButtonBox>
             </div>
 
             <div className="flex flex-col items-center justify-between">
               <WhiteButtonBox className="flex items-center justify-between">
                 <span className="m-4">아이디 / 비밀번호 추가</span>
-                <span className="text-gray-400 m-4">{'>'}</span>
+                <span className="m-4 text-gray-400">{'>'}</span>
               </WhiteButtonBox>
             </div>
 
             <div className="flex flex-col items-center justify-between">
               <WhiteButtonBox className="flex items-center justify-between">
                 <span className="m-4">SNS 계정 연동 및 해제</span>
-                <span className="text-gray-400 m-4">{'>'}</span>
+                <span className="m-4 text-gray-400">{'>'}</span>
               </WhiteButtonBox>
             </div>
 
             <div className="flex flex-col items-center justify-between">
               <WhiteButtonBox className="flex items-center justify-between">
                 <span className="m-4">이메일</span>
-                <span className="text-gray-400 m-4">{userData.data.email}</span>
+                <span className="m-4 text-gray-400">{userData.data.email}</span>
               </WhiteButtonBox>
             </div>
 
@@ -131,7 +122,7 @@ export const AccountPage = () => {
               </WhiteButtonBox>
             </div>
           </div>
-          <div className="bottom-0 w-full bg-white fixed max-w-375">
+          <div className="fixed bottom-0 w-full max-w-375 bg-white">
             <Navbar selectedMenu="mypage" />
           </div>
         </div>

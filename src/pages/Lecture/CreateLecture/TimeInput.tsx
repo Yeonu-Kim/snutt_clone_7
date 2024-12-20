@@ -53,13 +53,13 @@ export const TimeInput = ({
   };
 
   return (
-    <div className="grid grid-cols-12 gap-2 items-center pb-2">
-      <label className="col-span-3 text-gray-600 text-sm">시간</label>
+    <div className="grid grid-cols-12 items-center gap-2 pb-2">
+      <label className="col-span-3 text-sm text-gray-600">시간</label>
       <div className="col-span-9 flex gap-2">
         <select
           value={day}
           onChange={handleDayChange}
-          className="border p-1 rounded focus:outline-none w-20 text-sm"
+          className="w-20 rounded border p-1 text-sm focus:outline-none"
         >
           {weekdays.map((dayName) => (
             <option key={dayMap[dayName]} value={dayMap[dayName]}>
@@ -71,7 +71,7 @@ export const TimeInput = ({
         <select
           value={startMinute}
           onChange={handleStartMinuteChange}
-          className="border p-1 rounded focus:outline-none w-28 text-sm"
+          className="w-28 rounded border p-1 text-sm focus:outline-none"
         >
           {timeOptions
             .filter((minutes) => minutes < 1320)
@@ -85,7 +85,7 @@ export const TimeInput = ({
         <select
           value={endMinute}
           onChange={handleEndMinuteChange}
-          className="border p-1 rounded focus:outline-none w-28 text-sm"
+          className="w-28 rounded border p-1 text-sm focus:outline-none"
         >
           {timeOptions
             .filter((minutes) => minutes > startMinute)
