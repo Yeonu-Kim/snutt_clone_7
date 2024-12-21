@@ -1,4 +1,4 @@
-import { HeaderContainer } from '@/components/common/Header';
+import { HeaderContainer } from '@/components/header/TimetableHeader';
 import { Icon } from '@/components/common/Icon';
 import { ICON_SRC } from '@/constants/fileSource';
 

@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { HeaderContainer } from '@/components/common/Header';
 import { Icon } from '@/components/common/Icon';
 import { Layout } from '@/components/common/Layout';
+import { HeaderContainer } from '@/components/header/TimetableHeader';
 import { LoadingPage } from '@/components/Loading';
 import { DAY_LABEL_MAP } from '@/constants/dayLabel.ts';
 import { ICON_SRC } from '@/constants/fileSource';
