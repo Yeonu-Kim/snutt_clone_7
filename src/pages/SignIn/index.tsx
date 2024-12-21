@@ -5,6 +5,7 @@ import { Button } from '@/components/common/Button';
 import { Layout } from '@/components/common/Layout';
 import { NavigationHeader } from '@/components/header';
 import { TextInput } from '@/components/input/Input';
+import { LabelContainer } from '@/components/input/LabelContainer';
 import { LoadingPage } from '@/components/Loading';
 import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
@@ -49,10 +50,7 @@ export const SignInPage = () => {
         />
         <div className="flex h-full w-full flex-auto flex-col justify-between pb-8">
           <div className="w-full space-y-4">
-            <div className="flex flex-col">
-              <label htmlFor="id" className="mb-1">
-                아이디
-              </label>
+            <LabelContainer id="id" label="아이디">
               <TextInput
                 id="id"
                 value={id}
@@ -62,11 +60,8 @@ export const SignInPage = () => {
                 onKeyDown={handleKeyDown}
                 placeholder="아이디를 입력하세요"
               />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="password" className="mb-1">
-                비밀번호
-              </label>
+            </LabelContainer>
+            <LabelContainer id="password" label="비밀번호">
               <TextInput
                 id="password"
                 type="password"
@@ -77,7 +72,7 @@ export const SignInPage = () => {
                 onKeyDown={handleKeyDown}
                 placeholder="비밀번호를 입력하세요"
               />
-            </div>
+            </LabelContainer>
             <div className="justify-left flex gap-2 py-4 text-sm text-gray-500">
               <a onClick={onClickTBD} className="underline hover:text-orange">
                 아이디 찾기
