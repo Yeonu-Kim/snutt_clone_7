@@ -14,36 +14,12 @@ import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog';
 
 export const SignInPage = () => {
-  const { setOpen } = useGuardContext(ModalManageContext);
-  const [id, setId] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+
+  const { showTBDDialog } = showDialog();
+  const { signIn, isPending } = useSignIn();
   const { toMain } = useRouteNavigation();
-
-  const { authService } = useGuardContext(ServiceContext);
-  const { saveToken } = useGuardContext(TokenManageContext);
-  const { showErrorDialog, showTBDDialog } = showDialog();
-
-  const { mutate: signIn, isPending } = useMutation({
-    mutationFn: ({
-      inputId,
-      inputPassword,
-    }: {
-      inputId: string;
-      inputPassword: string;
-    }) => authService.signIn({ id: inputId, password: inputPassword }),
-    onSuccess: (response) => {
-      if (response.type === 'success') {
-        saveToken(response.data.token);
-        setOpen(false);
-        toMain();
-      } else {
-        showErrorDialog(response.message);
-      }
-    },
-    onError: () => {
-      showErrorDialog('로그인 중 문제가 발생했습니다.');
-    },
-  });
 
   const onClickButton = () => {
     if (id !== '' && password !== '') {
@@ -134,4 +110,36 @@ export const SignInPage = () => {
       </div>
     </Layout>
   );
+};
+
+const useSignIn = () => {
+  const { setOpen } = useGuardContext(ModalManageContext);
+  const { authService } = useGuardContext(ServiceContext);
+  const { saveToken } = useGuardContext(TokenManageContext);
+  const { showErrorDialog } = showDialog();
+  const { toMain } = useRouteNavigation();
+
+  const { mutate: signIn, isPending } = useMutation({
+    mutationFn: ({
+      inputId,
+      inputPassword,
+    }: {
+      inputId: string;
+      inputPassword: string;
+    }) => authService.signIn({ id: inputId, password: inputPassword }),
+    onSuccess: (response) => {
+      if (response.type === 'success') {
+        saveToken(response.data.token);
+        setOpen(false);
+        toMain();
+      } else {
+        showErrorDialog(response.message);
+      }
+    },
+    onError: () => {
+      showErrorDialog('로그인 중 문제가 발생했습니다.');
+    },
+  });
+
+  return { signIn, isPending };
 };
