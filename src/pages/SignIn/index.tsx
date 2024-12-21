@@ -22,14 +22,16 @@ export const SignInPage = () => {
   const { signIn, isPending } = useSignIn();
   const { toMain } = useRouteNavigation();
 
+  const canSubmit = id !== '' && password !== '';
+
   const onClickButton = () => {
-    if (id !== '' && password !== '') {
+    if (canSubmit) {
       signIn({ inputId: id, inputPassword: password });
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && id !== '' && password !== '') {
+    if (e.key === 'Enter' && canSubmit) {
       onClickButton();
     }
   };
@@ -84,9 +86,8 @@ export const SignInPage = () => {
             </div>
           </div>
           <Button
-            className={` ${id !== '' && password !== '' ? '' : 'disable'}`}
+            variant={canSubmit ? 'default' : 'disable'}
             onClick={onClickButton}
-            disabled={!(id !== '' && password !== '')}
           >
             로그인
           </Button>

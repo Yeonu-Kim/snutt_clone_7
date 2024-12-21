@@ -8,19 +8,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'text-white bg-orange hover:bg-orange-dark',
-        mint: 'text-white bg-mint hover:bg-mint-dark',
-        white: 'text-black bg-white hover:text-orange',
-        gray: 'bg-gray-100 text-gray-500',
-      },
-      active: {
-        default: 'cursor-pointer',
-        disabled: 'cursor-not-allowed',
+        default: 'text-white bg-orange hover:bg-orange-dark cursor-pointer',
+        mint: 'text-white bg-mint hover:bg-mint-dark cursor-pointer',
+        white: 'text-black bg-white hover:text-orange cursor-pointer',
+        disable: 'bg-gray-100 text-gray-500 cursor-not-allowed',
       },
     },
     defaultVariants: {
       variant: 'default',
-      active: 'default',
     },
   },
 );
@@ -36,12 +31,11 @@ export const Button = ({
   onClick,
   className,
   variant,
-  active,
 }: ButtonProps) => {
-  const disabled = active === 'disabled' ? true : false;
+  const disabled = variant === 'disable' ? true : false;
   return (
     <button
-      className={cn(buttonVariants({ variant, active, className }))}
+      className={cn(buttonVariants({ variant, className }))}
       onClick={onClick}
       disabled={disabled}
     >
