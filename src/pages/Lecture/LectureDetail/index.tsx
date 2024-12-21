@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { HeaderContainer } from '@/components/common/HeaderContainer';
+import { HeaderContainer } from '@/components/common/Header';
 import { Icon } from '@/components/common/Icon';
 import { Layout } from '@/components/common/Layout';
 import { LoadingPage } from '@/components/Loading';

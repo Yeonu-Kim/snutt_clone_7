@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority';
 
 import { cn } from '@/utils/designSystem';
 
-const iconVariants = cva('', {
+const iconVariants = cva('flex justify-center items-center', {
   variants: {
     size: {
       default: 'w-6 h-6',
@@ -40,7 +40,7 @@ export const Icon = ({
       onClick={onClick}
       className={cn(iconVariants({ size, darkModeInvert, className }))}
     >
-      <img src={src} alt={alt} className="object-cover" />
+      <img src={src} alt={alt} className="w-full object-cover" />
     </button>
   );
 };
