@@ -41,9 +41,9 @@ export const SignInPage = () => {
 
   return (
     <Layout>
-      <div className="LoginWrapper psm:px-2 lg:px:8 flex min-h-screen w-full flex-col items-center px-[20px]">
-        <div className="LoginHeaderWrapper relative mt-4 flex w-full pb-6">
-          <div className="BackButtonWrapper absolute left-0 top-0.5 flex cursor-pointer items-center">
+      <div className="psm:px-2 lg:px:8 flex min-h-screen w-full flex-col items-center px-[20px]">
+        <div className="relative mt-4 flex w-full pb-6">
+          <div className="absolute left-0 top-0.5 flex cursor-pointer items-center">
             <Icon
               src={ICON_SRC.ARROW.DOWN}
               className="rotate-90"
@@ -55,9 +55,9 @@ export const SignInPage = () => {
           </div>
           <h1 className="w-full text-center text-xl font-semibold">로그인</h1>
         </div>
-        <div className="LoginWrapper flex h-full w-full flex-auto flex-col justify-between pb-8">
-          <div className="LoginFormWrapper w-full space-y-4">
-            <div className="IDWrapper flex flex-col">
+        <div className="flex h-full w-full flex-auto flex-col justify-between pb-8">
+          <div className="w-full space-y-4">
+            <div className="flex flex-col">
               <label htmlFor="id" className="mb-1">
                 아이디
               </label>
@@ -73,7 +73,7 @@ export const SignInPage = () => {
                 className="border-b-2 border-gray py-1 text-sm focus:border-orange focus:outline-none"
               />
             </div>
-            <div className="PasswordWrapper flex flex-col">
+            <div className="flex flex-col">
               <label htmlFor="password" className="mb-1">
                 비밀번호
               </label>
@@ -89,7 +89,7 @@ export const SignInPage = () => {
                 className="border-b-2 border-gray py-1 text-sm focus:border-orange focus:outline-none"
               />
             </div>
-            <div className="FindIdPwWrapper justify-left flex gap-2 py-4 text-sm text-gray-500">
+            <div className="justify-left flex gap-2 py-4 text-sm text-gray-500">
               <a onClick={onClickTBD} className="underline hover:text-orange">
                 아이디 찾기
               </a>
