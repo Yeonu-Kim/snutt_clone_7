@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
+import { Layout } from '@/components/common/Layout';
+import { OptionLabel } from '@/components/common/OptionLabel';
+import { WhiteButtonBox } from '@/components/common/WhiteButtonBox';
 import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
-import { Layout } from '@/components/styles/Layout.tsx';
-import { PTagOnTheWhiteBox } from '@/components/styles/PTagOnTheWhiteBox.tsx';
-import { WhiteButtonBox } from '@/components/styles/WhiteButtonBox.tsx';
 import { ColorSchemeContext } from '@/context/ColorSchemeContext.ts';
 import { ModalManageContext } from '@/context/ModalManageContext.ts';
 import { ServiceContext } from '@/context/ServiceContext.ts';
@@ -88,9 +88,9 @@ export const MyPage = () => {
               </div>
             </WhiteButtonBox>
             <div className="flex flex-col items-center justify-between">
-              <PTagOnTheWhiteBox>
+              <OptionLabel>
                 <span>디스플레이</span>
-              </PTagOnTheWhiteBox>
+              </OptionLabel>
               <WhiteButtonBox
                 className="justify-between rounded-b-[0] rounded-t-lg border-b border-gray-300"
                 onClick={toColorScheme}
@@ -117,9 +117,9 @@ export const MyPage = () => {
             </div>
 
             <div className="flex flex-col items-center justify-between">
-              <PTagOnTheWhiteBox>
+              <OptionLabel>
                 <span>서비스</span>
-              </PTagOnTheWhiteBox>
+              </OptionLabel>
               <WhiteButtonBox className="justify-between">
                 <span className="m-4" onClick={onClickTBD}>
                   빈자리 알림
@@ -129,9 +129,9 @@ export const MyPage = () => {
             </div>
 
             <div className="flex flex-col items-center justify-between">
-              <PTagOnTheWhiteBox>
+              <OptionLabel>
                 <span>정보 및 제안</span>
-              </PTagOnTheWhiteBox>
+              </OptionLabel>
               <WhiteButtonBox className="justify-between rounded-b-[0] border-b border-gray-300">
                 <span className="m-4">버전 정보</span>
                 <span className="m-4 text-gray-400">Waffle team07</span>

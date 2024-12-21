@@ -5,7 +5,7 @@ type ChangeNicknamePTagProps = {
   className?: string;
 };
 
-export const PTagOnTheWhiteBox = ({
+export const OptionLabel = ({
   children,
   className = '',
 }: ChangeNicknamePTagProps) => {

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
+import { Layout } from '@/components/common/Layout';
+import { WhiteButtonBox } from '@/components/common/WhiteButtonBox';
 import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
-import { Layout } from '@/components/styles/Layout.tsx';
-import { WhiteButtonBox } from '@/components/styles/WhiteButtonBox.tsx';
 import { ModalManageContext } from '@/context/ModalManageContext.ts';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TokenAuthContext } from '@/context/TokenAuthContext.ts';

@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 
-import { IconContainer } from '@/components/common/IconContainer';
+import { Icon } from '@/components/common/Icon';
 import { ICON_SRC } from '@/constants/fileSource';
 import { PATH } from '@/constants/route';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
@@ -84,8 +84,8 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
             }}
             className="align-center flex h-8 w-8 justify-center p-1"
           >
-            <IconContainer
-              className="dark:brightness-0 dark:invert dark:filter"
+            <Icon
+              className=""
               src={
                 navMenu.menu === selectedMenu ? navMenu.onSrc : navMenu.offSrc
               }
@@ -98,7 +98,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
             onClick={onClickTBD}
             className="align-center flex h-8 w-8 justify-center p-1"
           >
-            <IconContainer
+            <Icon
               src={
                 navMenu.menu === selectedMenu ? navMenu.onSrc : navMenu.offSrc
               }

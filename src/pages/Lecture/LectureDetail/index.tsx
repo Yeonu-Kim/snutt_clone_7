@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { HeaderContainer } from '@/components/common/HeaderContainer';
-import { IconContainer } from '@/components/common/IconContainer';
+import { Icon } from '@/components/common/Icon';
+import { Layout } from '@/components/common/Layout';
 import { LoadingPage } from '@/components/Loading';
-import { Layout } from '@/components/styles/Layout';
 import { DAY_LABEL_MAP } from '@/constants/dayLabel.ts';
 import { ICON_SRC } from '@/constants/fileSource';
 import { ServiceContext } from '@/context/ServiceContext';
@@ -63,7 +63,7 @@ export const LectureDetailPage = () => {
                 className="BackButtonWrapper flex cursor-pointer items-center"
                 onClick={toMain}
               >
-                <IconContainer
+                <Icon
                   src={ICON_SRC.ARROW.DOWN}
                   alt="뒤로가기 버튼"
                   className="rotate-90 dark:invert"
@@ -72,12 +72,12 @@ export const LectureDetailPage = () => {
               <span>강의 상세 보기</span>
             </div>
             <div className="flex items-center gap-2">
-              <IconContainer
+              <Icon
                 src={ICON_SRC.BELL}
                 alt="알림 버튼"
                 className="dark:invert"
               />
-              <IconContainer
+              <Icon
                 src={ICON_SRC.BOOKMARK}
                 alt="관심강좌 보기 버튼"
                 className="dark:invert"

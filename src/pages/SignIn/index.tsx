@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { IconContainer } from '@/components/common/IconContainer';
+import { Button } from '@/components/common/Button';
+import { Icon } from '@/components/common/Icon';
+import { Layout } from '@/components/common/Layout';
 import { LoadingPage } from '@/components/Loading';
-import { Button } from '@/components/styles/Button';
-import { Layout } from '@/components/styles/Layout';
 import { ICON_SRC } from '@/constants/fileSource';
 import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
@@ -68,7 +68,7 @@ export const SignInPage = () => {
       <div className="LoginWrapper psm:px-2 lg:px:8 flex min-h-screen w-full flex-col items-center px-[20px]">
         <div className="LoginHeaderWrapper relative mt-4 flex w-full pb-6">
           <div className="BackButtonWrapper absolute left-0 top-0.5 flex cursor-pointer items-center">
-            <IconContainer
+            <Icon
               src={ICON_SRC.ARROW.DOWN}
               className="rotate-90"
               alt="화살표 아이콘"

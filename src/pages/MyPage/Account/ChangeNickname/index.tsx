@@ -1,10 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import { Layout } from '@/components/common/Layout';
+import { OptionLabel } from '@/components/common/OptionLabel';
 import { LoadingPage, SpinnerLoading } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
-import { Layout } from '@/components/styles/Layout.tsx';
-import { PTagOnTheWhiteBox } from '@/components/styles/PTagOnTheWhiteBox.tsx';
 import { ModalManageContext } from '@/context/ModalManageContext.ts';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
@@ -97,9 +97,9 @@ export const ChangeNicknamePage = () => {
             id="Main-Container"
             className="mb-[80px] mt-[60px] flex h-lvh w-full flex-col items-center justify-start bg-gray-200 p-5 dark:bg-gray-950 dark:text-gray-200"
           >
-            <PTagOnTheWhiteBox>
+            <OptionLabel>
               <span>닉네임 (공백 포함 한/영/숫자 10자 이내)</span>
-            </PTagOnTheWhiteBox>
+            </OptionLabel>
             <form id="changeNicknameForm" onSubmit={onSubmit}>
               <input
                 type="text"
@@ -113,28 +113,28 @@ export const ChangeNicknamePage = () => {
                 className="m-1 mb-3 h-10 w-[335px] rounded-lg bg-white pl-4 dark:bg-gray-800 dark:text-gray-200"
               />
             </form>
-            <PTagOnTheWhiteBox>
+            <OptionLabel>
               <span>최초 닉네임은 가입 시 임의 부여된 닉네임으로,</span>
-            </PTagOnTheWhiteBox>
-            <PTagOnTheWhiteBox className="mb-3">
+            </OptionLabel>
+            <OptionLabel className="mb-3">
               <span>
                 앞의 이름을 변경할 시 4자리 숫자 태그는 자동 변경됩니다.
               </span>
-            </PTagOnTheWhiteBox>
-            <PTagOnTheWhiteBox className="mb-5">
+            </OptionLabel>
+            <OptionLabel className="mb-5">
               <span>변경된 닉네임은 나의 모든 친구에게 반영됩니다.</span>
-            </PTagOnTheWhiteBox>
-            <PTagOnTheWhiteBox className="font-bold">
+            </OptionLabel>
+            <OptionLabel className="font-bold">
               <span>닉네임 조건</span>
-            </PTagOnTheWhiteBox>
-            <PTagOnTheWhiteBox>
+            </OptionLabel>
+            <OptionLabel>
               <span>- 불완전한 한글(예: ㄱ, ㅏ)은 포함될 수 없습니다.</span>
               <span>- 영문 대/소문자는 구분됩니다.</span>
               <span>
                 - 상대에게 불쾌감을 주는 등 부적절한 닉네임은 관리자에 의해
                 안내없이 수정될 수 있습니다.
               </span>
-            </PTagOnTheWhiteBox>
+            </OptionLabel>
           </div>
           <div className="fixed bottom-0 w-full max-w-375 bg-white">
             <Navbar selectedMenu="mypage" />

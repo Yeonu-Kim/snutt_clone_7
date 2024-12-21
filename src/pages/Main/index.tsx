@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import { Layout } from '@/components/common/Layout';
 import { LoadingPage } from '@/components/Loading';
 import { Navbar } from '@/components/Navbar';
-import { Layout } from '@/components/styles/Layout';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TimetableContext } from '@/context/TimetableContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';

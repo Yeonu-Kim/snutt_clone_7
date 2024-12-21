@@ -37,4 +37,10 @@ export const ICON_SRC = {
   MORE: '/drawer/More.svg',
   BOOKMARK: '/header/bookmark.svg',
   PLUS: '/header/plus.svg',
+  SOCIAL: {
+    KAKAO: '/landing/kakaotalkid.png',
+    GOOGLE: '/landing/googleid.png',
+    FACEBOOK: '/landing/facebookid.png',
+    APPLE: '/landing/appleid.png',
+  },
 };

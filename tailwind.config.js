@@ -7,8 +7,14 @@ export default {
         primary: {
           DEFAULT: '#2bca43',
         },
-        orange: '#F58D3D',
-        mint: '#1BD0C8',
+        orange: {
+          DEFAULT: '#F58D3D',
+          dark: '#E07C2C',
+        },
+        mint: {
+          DEFAULT: '#1BD0C8',
+          dark: '#00A896',
+        },
         blue: '#1D99E8',
         red: '#E54459',
         lime: '#A6D930',
